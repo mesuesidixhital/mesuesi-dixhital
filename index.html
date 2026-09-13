@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mësuesi Dixhital</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        header {
+            background: #173b72;
+            color: white;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 16px;
+        }
+
+        nav a:hover {
+            color: #7dd3fc;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #173b72, #2563eb);
+            color: white;
+            text-align: center;
+            padding: 90px 20px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 35px;
+        }
+
+        .button {
+            display: inline-block;
+            background: white;
+            color: #173b72;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .section {
+            padding: 60px 8%;
+            text-align: center;
+        }
+
+        .section h2 {
+            font-size: 32px;
+            margin-bottom: 35px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            color: #173b72;
+        }
+
+        .card p {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 700px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin: 0 8px;
+                font-size: 14px;
+            }
+
+            .hero h1 {
+                font-size: 35px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">📚 Mësuesi Dixhital</div>
+
+    <nav>
+        <a href="#">Ballina</a>
+        <a href="#lendët">Lëndët</a>
+        <a href="#kuize">Kuize</a>
+        <a href="#teste">Teste</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Mësuesi Dixhital</h1>
+
+    <p>
+        Platformë digjitale për mësues dhe nxënës
+    </p>
+
+    <a href="#lendët" class="button">
+        Fillo tani
+    </a>
+</section>
+
+<section class="section" id="lendët">
+
+    <h2>📚 Lëndët</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>⚛️ Fizikë</h3>
+            <p>
+                Pyetje, teste, projekte dhe materiale mësimore
+                për fizikën.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🧪 Kimi</h3>
+            <p>
+                Kuize dhe pyetje nga kimia për nxënësit.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>📐 Matematikë</h3>
+            <p>
+                Ushtrime dhe teste për nivele të ndryshme.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🌍 Gjeografi</h3>
+            <p>
+                Materiale dhe pyetje për gjeografinë.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="kuize">
+
+    <h2>🎯 Kuize</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Kuize interaktive</h3>
+            <p>
+                Krijo dhe zhvillo kuize për nxënësit.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Pyetje me alternativa</h3>
+            <p>
+                Pyetje A, B, C dhe D për kontrollimin
+                e njohurive.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="teste">
+
+    <h2>📝 Teste</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Teste për nxënës</h3>
+            <p>
+                Përgatitje për teste dhe vlerësime.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Teste të arritshmërisë</h3>
+            <p>
+                Materiale të strukturuara për përgatitje.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<section class="section">
+
+    <h2>👨‍🏫 Për mësues</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>📝 Gjenero pyetje</h3>
+            <p>
+                Në versionet e ardhshme do të shtojmë
+                gjenerimin automatik të pyetjeve me AI.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>📋 Banka e pyetjeve</h3>
+            <p>
+                Ruaj dhe organizo pyetjet sipas lëndës,
+                klasës dhe temës.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>📊 Rezultatet</h3>
+            <p>
+                Analizo rezultatet e nxënësve dhe progresin.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    © 2026 Mësuesi Dixhital — Platformë për mësues dhe nxënës
+</footer>
+
+</body>
+</html>
