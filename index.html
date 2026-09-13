@@ -4,36 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Mësuesi Dixhital | Platformë për Mësues dhe Nxënës</title>
+<title>Mësuesi Dixhital</title>
 
 <style>
+
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
 }
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: #f5f7fb;
+    background: #f4f7fb;
     color: #172033;
 }
 
-/* =========================
-   NAVBAR
-========================= */
+/* NAVBAR */
 
 .navbar {
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(255,255,255,0.96);
-    border-bottom: 1px solid #e5e7eb;
-    backdrop-filter: blur(10px);
 }
 
 .nav-container {
@@ -41,8 +35,8 @@ body {
     margin: auto;
     padding: 16px 24px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
 }
 
 .logo {
@@ -58,8 +52,8 @@ body {
 
 .nav-links {
     display: flex;
+    gap: 25px;
     align-items: center;
-    gap: 28px;
 }
 
 .nav-links a {
@@ -69,31 +63,31 @@ body {
     cursor: pointer;
 }
 
-.nav-links a:hover {
-    color: #2563eb;
-}
-
-.login-btn {
+.login-button {
     background: #2563eb;
     color: white !important;
     padding: 11px 18px;
-    border-radius: 10px;
+    border-radius: 9px;
 }
 
-.login-btn:hover {
-    background: #1d4ed8;
+/* PAGES */
+
+.page {
+    display: none;
 }
 
-/* =========================
-   HERO
-========================= */
+.page.active {
+    display: block;
+}
+
+/* HOME */
 
 .hero {
     max-width: 1200px;
     margin: auto;
-    padding: 90px 24px 70px;
+    padding: 90px 24px;
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-columns: 1fr 1fr;
     gap: 50px;
     align-items: center;
 }
@@ -105,14 +99,14 @@ body {
     padding: 8px 14px;
     border-radius: 30px;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: bold;
     margin-bottom: 20px;
 }
 
 .hero h1 {
-    font-size: 54px;
-    line-height: 1.08;
-    margin-bottom: 22px;
+    font-size: 55px;
+    line-height: 1.1;
+    margin-bottom: 20px;
 }
 
 .hero h1 span {
@@ -126,121 +120,69 @@ body {
     margin-bottom: 30px;
 }
 
-.hero-buttons {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-}
-
-.primary-btn,
-.secondary-btn {
-    padding: 14px 22px;
-    border-radius: 11px;
-    text-decoration: none;
-    font-weight: 700;
-    cursor: pointer;
+.primary-button {
     border: none;
-    font-size: 15px;
-}
-
-.primary-btn {
     background: #2563eb;
     color: white;
+    padding: 14px 22px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-.primary-btn:hover {
+.primary-button:hover {
     background: #1d4ed8;
 }
 
-.secondary-btn {
+.secondary-button {
+    border: 1px solid #d1d5db;
     background: white;
     color: #2563eb;
-    border: 1px solid #dbe3ef;
+    padding: 13px 22px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-/* =========================
-   DASHBOARD MOCKUP
-========================= */
-
-.dashboard-preview {
-    background: white;
-    border-radius: 22px;
-    padding: 22px;
-    box-shadow: 0 20px 50px rgba(15,23,42,0.12);
-    border: 1px solid #e5e7eb;
-}
-
-.preview-top {
+.hero-buttons {
     display: flex;
-    justify-content: space-between;
+    gap: 12px;
+}
+
+.hero-card {
+    background: white;
+    padding: 25px;
+    border-radius: 22px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+
+.hero-card-title {
+    font-size: 20px;
+    font-weight: bold;
     margin-bottom: 20px;
 }
 
-.preview-title {
-    font-weight: 800;
-}
-
-.preview-user {
-    background: #dbeafe;
-    color: #2563eb;
-    padding: 7px 12px;
-    border-radius: 20px;
-    font-size: 13px;
-}
-
-.preview-cards {
+.preview-grid {
     display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 14px;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
 }
 
-.preview-card {
-    padding: 18px;
-    border-radius: 14px;
+.preview-box {
     background: #f8fafc;
+    padding: 20px;
+    border-radius: 12px;
 }
 
-.preview-card strong {
+.preview-box strong {
     display: block;
-    font-size: 25px;
+    font-size: 27px;
     margin-top: 8px;
-}
-
-/* =========================
-   STATS
-========================= */
-
-.stats {
-    max-width: 1100px;
-    margin: 20px auto 70px;
-    padding: 0 24px;
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 18px;
-}
-
-.stat {
-    background: white;
-    padding: 25px;
-    border-radius: 16px;
-    text-align: center;
-    border: 1px solid #e5e7eb;
-}
-
-.stat strong {
-    font-size: 30px;
     color: #2563eb;
-    display: block;
-    margin-bottom: 7px;
 }
 
-.stat span {
-    color: #667085;
-}
-
-/* =========================
-   SECTIONS
-========================= */
+/* SECTIONS */
 
 .section {
     max-width: 1200px;
@@ -248,63 +190,21 @@ body {
     padding: 70px 24px;
 }
 
-.section-header {
+.section-title {
     text-align: center;
-    max-width: 700px;
-    margin: auto auto 45px;
+    margin-bottom: 40px;
 }
 
-.section-header h2 {
+.section-title h2 {
     font-size: 38px;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
 }
 
-.section-header p {
+.section-title p {
     color: #667085;
-    font-size: 17px;
-    line-height: 1.6;
 }
 
-/* =========================
-   SUBJECTS
-========================= */
-
-.subjects {
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 18px;
-}
-
-.subject {
-    background: white;
-    padding: 28px;
-    border-radius: 18px;
-    border: 1px solid #e5e7eb;
-    transition: 0.25s;
-}
-
-.subject:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(15,23,42,0.09);
-}
-
-.subject-icon {
-    font-size: 36px;
-    margin-bottom: 18px;
-}
-
-.subject h3 {
-    margin-bottom: 8px;
-}
-
-.subject p {
-    color: #667085;
-    line-height: 1.5;
-}
-
-/* =========================
-   FEATURES
-========================= */
+/* FEATURES */
 
 .features {
     display: grid;
@@ -314,18 +214,18 @@ body {
 
 .feature {
     background: white;
-    padding: 27px;
-    border-radius: 18px;
+    padding: 25px;
+    border-radius: 17px;
     border: 1px solid #e5e7eb;
 }
 
 .feature-icon {
-    font-size: 32px;
+    font-size: 34px;
     margin-bottom: 15px;
 }
 
 .feature h3 {
-    margin-bottom: 9px;
+    margin-bottom: 10px;
 }
 
 .feature p {
@@ -333,141 +233,9 @@ body {
     line-height: 1.5;
 }
 
-/* =========================
-   AI SECTION
-========================= */
+/* LOGIN */
 
-.ai-section {
-    background: #111827;
-    color: white;
-    border-radius: 25px;
-    padding: 55px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: center;
-}
-
-.ai-section p {
-    color: #cbd5e1;
-    line-height: 1.7;
-    margin: 18px 0 25px;
-}
-
-.ai-box {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    padding: 25px;
-    border-radius: 18px;
-}
-
-.ai-question {
-    background: white;
-    color: #111827;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 12px;
-}
-
-/* =========================
-   TEACHER SECTION
-========================= */
-
-.teacher-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    align-items: center;
-}
-
-.teacher-section h2 {
-    font-size: 38px;
-    margin-bottom: 18px;
-}
-
-.teacher-section p {
-    color: #667085;
-    line-height: 1.7;
-    margin-bottom: 22px;
-}
-
-.teacher-list {
-    list-style: none;
-}
-
-.teacher-list li {
-    margin-bottom: 13px;
-    font-weight: 600;
-}
-
-.teacher-panel {
-    background: white;
-    padding: 28px;
-    border-radius: 20px;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 15px 40px rgba(15,23,42,0.08);
-}
-
-.panel-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 16px 0;
-    border-bottom: 1px solid #edf0f5;
-}
-
-.panel-row:last-child {
-    border-bottom: none;
-}
-
-/* =========================
-   CTA
-========================= */
-
-.cta {
-    max-width: 1100px;
-    margin: 60px auto;
-    padding: 60px 30px;
-    background: #2563eb;
-    color: white;
-    border-radius: 25px;
-    text-align: center;
-}
-
-.cta h2 {
-    font-size: 38px;
-    margin-bottom: 15px;
-}
-
-.cta p {
-    margin-bottom: 25px;
-    color: #dbeafe;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer {
-    background: #111827;
-    color: white;
-    padding: 45px 24px;
-    text-align: center;
-}
-
-footer p {
-    color: #94a3b8;
-    margin-top: 10px;
-}
-
-/* =========================
-   LOGIN PAGE
-========================= */
-
-.page {
-    display: none;
-}
-
-.login-page {
+.login-container {
     min-height: calc(100vh - 75px);
     display: flex;
     justify-content: center;
@@ -477,22 +245,20 @@ footer p {
 
 .login-box {
     width: 100%;
-    max-width: 440px;
+    max-width: 430px;
     background: white;
-    padding: 38px;
-    border-radius: 22px;
-    box-shadow: 0 20px 60px rgba(15,23,42,0.12);
-    border: 1px solid #e5e7eb;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
 }
 
 .login-box h1 {
-    font-size: 30px;
     margin-bottom: 10px;
 }
 
 .login-box > p {
     color: #667085;
-    margin-bottom: 28px;
+    margin-bottom: 25px;
 }
 
 .form-group {
@@ -501,76 +267,53 @@ footer p {
 
 .form-group label {
     display: block;
-    font-weight: 700;
-    margin-bottom: 8px;
+    font-weight: bold;
+    margin-bottom: 7px;
 }
 
-.form-group input {
+.form-group input,
+.generator-form select,
+.generator-form input {
     width: 100%;
-    padding: 14px;
+    padding: 13px;
     border: 1px solid #d1d5db;
-    border-radius: 10px;
+    border-radius: 9px;
     font-size: 15px;
-    outline: none;
 }
 
-.form-group input:focus {
-    border-color: #2563eb;
-}
-
-.full-btn {
+.full-button {
     width: 100%;
     padding: 14px;
     border: none;
-    border-radius: 10px;
+    border-radius: 9px;
     background: #2563eb;
     color: white;
-    font-size: 16px;
-    font-weight: 700;
+    font-weight: bold;
     cursor: pointer;
+    font-size: 16px;
 }
 
-.full-btn:hover {
-    background: #1d4ed8;
-}
-
-.login-error {
+.error {
     display: none;
     margin-top: 15px;
-    padding: 12px;
     background: #fee2e2;
     color: #b91c1c;
-    border-radius: 9px;
-    font-size: 14px;
+    padding: 12px;
+    border-radius: 8px;
 }
 
-.demo-info {
+.demo {
     margin-top: 20px;
-    background: #eff6ff;
     padding: 14px;
-    border-radius: 10px;
+    background: #eff6ff;
+    border-radius: 9px;
+    color: #1d4ed8;
     font-size: 13px;
-    color: #1e40af;
 }
 
-.back-home {
-    display: block;
-    text-align: center;
-    margin-top: 20px;
-    color: #2563eb;
-    cursor: pointer;
-    font-weight: 600;
-}
+/* DASHBOARD */
 
-/* =========================
-   TEACHER DASHBOARD
-========================= */
-
-.dashboard-page {
-    display: none;
-}
-
-.dashboard-layout {
+.dashboard {
     min-height: calc(100vh - 75px);
     display: flex;
 }
@@ -579,66 +322,53 @@ footer p {
     width: 250px;
     background: #111827;
     color: white;
-    padding: 25px 16px;
+    padding: 25px 15px;
 }
 
 .sidebar-logo {
-    font-size: 22px;
-    font-weight: 800;
-    padding: 0 12px 30px;
+    font-size: 21px;
+    font-weight: bold;
+    padding: 0 12px 25px;
 }
 
-.sidebar-menu {
-    list-style: none;
-}
-
-.sidebar-menu li {
-    margin-bottom: 6px;
-}
-
-.sidebar-menu button {
+.sidebar button {
     width: 100%;
-    border: none;
     background: transparent;
     color: #cbd5e1;
-    text-align: left;
+    border: none;
     padding: 13px 12px;
-    border-radius: 9px;
+    text-align: left;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 14px;
+    margin-bottom: 5px;
 }
 
-.sidebar-menu button:hover,
-.sidebar-menu button.active {
-    background: #1d4ed8;
+.sidebar button:hover,
+.sidebar button.active {
+    background: #2563eb;
     color: white;
 }
 
 .dashboard-main {
     flex: 1;
     padding: 35px;
-    overflow-x: auto;
 }
 
 .dashboard-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
-.dashboard-header h1 {
-    font-size: 30px;
-}
-
-.logout-btn {
-    border: none;
+.logout {
     background: #fee2e2;
     color: #b91c1c;
+    border: none;
     padding: 10px 16px;
-    border-radius: 9px;
+    border-radius: 8px;
     cursor: pointer;
-    font-weight: 700;
+    font-weight: bold;
 }
 
 .welcome {
@@ -649,11 +379,8 @@ footer p {
     margin-bottom: 25px;
 }
 
-.welcome h2 {
-    margin-bottom: 8px;
-}
-
 .welcome p {
+    margin-top: 8px;
     color: #dbeafe;
 }
 
@@ -661,140 +388,208 @@ footer p {
     display: grid;
     grid-template-columns: repeat(4,1fr);
     gap: 18px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
-.dash-card {
+.dashboard-card {
     background: white;
     padding: 22px;
-    border-radius: 15px;
+    border-radius: 14px;
     border: 1px solid #e5e7eb;
 }
 
-.dash-card span {
+.dashboard-card span {
     color: #667085;
-    font-size: 14px;
 }
 
-.dash-card strong {
+.dashboard-card strong {
     display: block;
     font-size: 28px;
     margin-top: 10px;
 }
 
+/* DASHBOARD CONTENT */
+
 .dashboard-content {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 20px;
-}
-
-.content-box {
     background: white;
-    border: 1px solid #e5e7eb;
+    padding: 25px;
     border-radius: 16px;
-    padding: 24px;
+    border: 1px solid #e5e7eb;
 }
 
-.content-box h3 {
+.dashboard-content h2 {
     margin-bottom: 20px;
 }
 
-.action-grid {
+.quick-actions {
     display: grid;
     grid-template-columns: repeat(2,1fr);
-    gap: 14px;
+    gap: 15px;
 }
 
-.action-btn {
-    border: 1px solid #e5e7eb;
+.quick-action {
     background: #f8fafc;
-    padding: 20px;
+    border: 1px solid #e5e7eb;
+    padding: 22px;
     border-radius: 12px;
-    text-align: left;
     cursor: pointer;
+    text-align: left;
 }
 
-.action-btn:hover {
+.quick-action:hover {
     border-color: #2563eb;
     background: #eff6ff;
 }
 
-.action-btn strong {
+.quick-action strong {
     display: block;
     margin-bottom: 7px;
 }
 
-.action-btn span {
-    font-size: 13px;
+.quick-action span {
     color: #667085;
+    font-size: 13px;
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* GENERATOR */
 
-@media (max-width: 900px) {
+.generator-container {
+    max-width: 1000px;
+}
 
-    .hero,
-    .ai-section,
-    .teacher-section {
+.generator-form {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    border: 1px solid #e5e7eb;
+}
+
+.generator-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.generator-group {
+    margin-bottom: 5px;
+}
+
+.generator-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.generate-button {
+    margin-top: 25px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 14px 25px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+/* QUESTIONS */
+
+.questions-area {
+    margin-top: 30px;
+}
+
+.question-card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 15px;
+}
+
+.question-number {
+    color: #2563eb;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.question-text {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.answers {
+    display: grid;
+    gap: 8px;
+}
+
+.answer {
+    padding: 10px;
+    background: #f8fafc;
+    border-radius: 7px;
+}
+
+.correct {
+    background: #dcfce7;
+    color: #166534;
+    font-weight: bold;
+}
+
+.question-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.small-button {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.save-button {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.delete-button {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px) {
+
+    .hero {
         grid-template-columns: 1fr;
     }
 
-    .subjects,
     .features {
-        grid-template-columns: repeat(2,1fr);
-    }
-
-    .stats {
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: 1fr 1fr;
     }
 
     .dashboard-cards {
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: 1fr 1fr;
     }
 
-    .dashboard-content {
-        grid-template-columns: 1fr;
-    }
-
-    .sidebar {
-        width: 210px;
-    }
 }
 
-@media (max-width: 650px) {
+@media(max-width:650px) {
 
     .nav-links {
         display: none;
-    }
-
-    .hero {
-        padding-top: 55px;
     }
 
     .hero h1 {
         font-size: 40px;
     }
 
-    .subjects,
-    .features,
-    .stats,
-    .dashboard-cards {
+    .features {
         grid-template-columns: 1fr;
     }
 
-    .ai-section {
-        padding: 30px;
-    }
-
-    .teacher-section h2,
-    .section-header h2,
-    .cta h2 {
-        font-size: 30px;
-    }
-
-    .dashboard-layout {
+    .dashboard {
         flex-direction: column;
     }
 
@@ -802,391 +597,204 @@ footer p {
         width: 100%;
     }
 
-    .sidebar-menu {
-        display: flex;
-        overflow-x: auto;
-        gap: 5px;
+    .dashboard-cards {
+        grid-template-columns: 1fr;
     }
 
-    .sidebar-menu button {
-        white-space: nowrap;
+    .generator-grid {
+        grid-template-columns: 1fr;
     }
 
-    .dashboard-main {
-        padding: 20px;
+    .quick-actions {
+        grid-template-columns: 1fr;
     }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     NAVBAR
-========================= -->
+<!-- NAVBAR -->
 
 <nav class="navbar">
-    <div class="nav-container">
 
-        <div class="logo" onclick="showHome()">
-            Mësuesi <span>Dixhital</span>
-        </div>
+<div class="nav-container">
 
-        <div class="nav-links">
-            <a onclick="showHome()">Ballina</a>
-            <a href="#subjects">Lëndët</a>
-            <a href="#features">Mjetet</a>
-            <a onclick="showLogin()" class="login-btn">Hyr për mësues</a>
-        </div>
+<div class="logo" onclick="showPage('home')">
+Mësuesi <span>Dixhital</span>
+</div>
 
-    </div>
+<div class="nav-links">
+
+<a onclick="showPage('home')">
+Ballina
+</a>
+
+<a onclick="showPage('dashboard')">
+Paneli
+</a>
+
+<a onclick="showPage('login')" class="login-button">
+Hyr për mësues
+</a>
+
+</div>
+
+</div>
+
 </nav>
 
 
 <!-- =========================
-     HOME PAGE
+HOME
 ========================= -->
 
-<div id="homePage" class="page" style="display:block;">
+<div id="home" class="page active">
 
 <section class="hero">
 
-    <div>
+<div>
 
-        <div class="badge">
-            🚀 Platformë moderne për arsimin
-        </div>
+<div class="badge">
+🚀 Platformë për mësues
+</div>
 
-        <h1>
-            Mësimdhënia bëhet
-            <span>më e zgjuar.</span>
-        </h1>
+<h1>
+Mësimdhënia bëhet
+<span>më e zgjuar.</span>
+</h1>
 
-        <p>
-            Mësuesi Dixhital ju ndihmon të krijoni pyetje,
-            teste, kuize dhe materiale mësimore më shpejt
-            dhe më lehtë.
-        </p>
+<p>
+Mësuesi Dixhital ju ndihmon të krijoni
+pyetje, teste, kuize dhe materiale
+mësimore më shpejt.
+</p>
 
-        <div class="hero-buttons">
+<div class="hero-buttons">
 
-            <button class="primary-btn" onclick="showLogin()">
-                👨‍🏫 Hyr për mësues
-            </button>
+<button class="primary-button"
+onclick="showPage('login')">
+👨‍🏫 Hyr për mësues
+</button>
 
-            <a href="#features" class="secondary-btn">
-                Zbulo platformën
-            </a>
+<button class="secondary-button"
+onclick="showPage('dashboard')">
+Shiko panelin
+</button>
 
-        </div>
+</div>
 
-    </div>
+</div>
 
 
-    <div class="dashboard-preview">
+<div class="hero-card">
 
-        <div class="preview-top">
-            <div class="preview-title">
-                Paneli i Mësuesit
-            </div>
+<div class="hero-card-title">
+📊 Paneli i Mësuesit
+</div>
 
-            <div class="preview-user">
-                Mësues
-            </div>
-        </div>
+<div class="preview-grid">
 
-        <div class="preview-cards">
+<div class="preview-box">
+📚 Pyetje
+<strong>250+</strong>
+</div>
 
-            <div class="preview-card">
-                📚 Pyetje
-                <strong>250+</strong>
-            </div>
+<div class="preview-box">
+📝 Teste
+<strong>35</strong>
+</div>
 
-            <div class="preview-card">
-                📝 Teste
-                <strong>35</strong>
-            </div>
+<div class="preview-box">
+🎯 Kuize
+<strong>48</strong>
+</div>
 
-            <div class="preview-card">
-                🎯 Kuize
-                <strong>48</strong>
-            </div>
+<div class="preview-box">
+👨‍🎓 Nxënës
+<strong>120</strong>
+</div>
 
-            <div class="preview-card">
-                📊 Rezultate
-                <strong>120</strong>
-            </div>
+</div>
 
-        </div>
-
-    </div>
+</div>
 
 </section>
 
-
-<section class="stats">
-
-    <div class="stat">
-        <strong>4+</strong>
-        <span>Lëndë</span>
-    </div>
-
-    <div class="stat">
-        <strong>250+</strong>
-        <span>Pyetje</span>
-    </div>
-
-    <div class="stat">
-        <strong>35+</strong>
-        <span>Teste</span>
-    </div>
-
-    <div class="stat">
-        <strong>24/7</strong>
-        <span>Qasje</span>
-    </div>
-
-</section>
-
-
-<!-- SUBJECTS -->
-
-<section class="section" id="subjects">
-
-    <div class="section-header">
-
-        <h2>Lëndët mësimore</h2>
-
-        <p>
-            Organizoni materialet tuaja sipas lëndëve
-            dhe krijoni aktivitete për nxënësit.
-        </p>
-
-    </div>
-
-
-    <div class="subjects">
-
-        <div class="subject">
-            <div class="subject-icon">⚛️</div>
-            <h3>Fizikë</h3>
-            <p>Pyetje, teste dhe projekte nga fizika.</p>
-        </div>
-
-        <div class="subject">
-            <div class="subject-icon">🧪</div>
-            <h3>Kimi</h3>
-            <p>Kuize dhe pyetje për kiminë.</p>
-        </div>
-
-        <div class="subject">
-            <div class="subject-icon">📐</div>
-            <h3>Matematikë</h3>
-            <p>Detyra dhe ushtrime matematikore.</p>
-        </div>
-
-        <div class="subject">
-            <div class="subject-icon">🌍</div>
-            <h3>Gjeografi</h3>
-            <p>Pyetje dhe materiale për gjeografinë.</p>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- FEATURES -->
-
-<section class="section" id="features">
-
-    <div class="section-header">
-
-        <h2>Gjithçka që i nevojitet mësuesit</h2>
-
-        <p>
-            Një vend i vetëm për përgatitjen dhe
-            organizimin e materialeve mësimore.
-        </p>
-
-    </div>
-
-
-    <div class="features">
-
-        <div class="feature">
-            <div class="feature-icon">🤖</div>
-            <h3>Gjenero pyetje</h3>
-            <p>
-                Krijo pyetje sipas lëndës, klasës
-                dhe nivelit të vështirësisë.
-            </p>
-        </div>
-
-        <div class="feature">
-            <div class="feature-icon">📚</div>
-            <h3>Bankë pyetjesh</h3>
-            <p>
-                Ruaj dhe organizo pyetjet tuaja
-                në një bankë personale.
-            </p>
-        </div>
-
-        <div class="feature">
-            <div class="feature-icon">📝</div>
-            <h3>Krijo teste</h3>
-            <p>
-                Përgatit teste dhe kuize
-                për nxënësit tuaj.
-            </p>
-        </div>
-
-        <div class="feature">
-            <div class="feature-icon">📊</div>
-            <h3>Rezultatet</h3>
-            <p>
-                Ndiq rezultatet dhe progresin
-                e nxënësve.
-            </p>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- AI -->
 
 <section class="section">
 
-    <div class="ai-section">
+<div class="section-title">
 
-        <div>
+<h2>Çfarë mund të bëjë mësuesi?</h2>
 
-            <div class="badge">
-                🤖 Inteligjencë Artificiale
-            </div>
+<p>
+Mjetet kryesore të platformës.
+</p>
 
-            <h2>
-                Pyetje të reja në pak sekonda.
-            </h2>
-
-            <p>
-                Në versionin e ardhshëm, mësuesi do të mund
-                të zgjedhë lëndën, klasën, temën dhe nivelin
-                e vështirësisë dhe platforma do të gjenerojë
-                pyetje automatikisht.
-            </p>
-
-            <button class="primary-btn" onclick="showLogin()">
-                Provo panelin
-            </button>
-
-        </div>
+</div>
 
 
-        <div class="ai-box">
+<div class="features">
 
-            <div class="ai-question">
-                ❓ Cila është njësia SI e forcës?
-            </div>
+<div class="feature">
 
-            <div class="ai-question">
-                A) Joule
-            </div>
+<div class="feature-icon">🤖</div>
 
-            <div class="ai-question">
-                B) Newton
-            </div>
+<h3>Gjenero pyetje</h3>
 
-            <div class="ai-question">
-                C) Watt
-            </div>
+<p>
+Krijo pyetje sipas lëndës,
+klasës dhe nivelit.
+</p>
 
-        </div>
-
-    </div>
-
-</section>
+</div>
 
 
-<!-- TEACHERS -->
+<div class="feature">
 
-<section class="section">
+<div class="feature-icon">📚</div>
 
-    <div class="teacher-section">
+<h3>Bankë pyetjesh</h3>
 
-        <div>
+<p>
+Ruaj dhe organizo pyetjet
+tuaja.
+</p>
 
-            <h2>
-                Mësuesi në qendër të platformës
-            </h2>
-
-            <p>
-                Platforma është menduar për t'ia
-                lehtësuar mësuesit punën e përditshme
-                dhe për të kursyer kohë në përgatitjen
-                e materialeve.
-            </p>
-
-            <ul class="teacher-list">
-
-                <li>✅ Krijoni pyetje</li>
-                <li>✅ Përgatitni teste</li>
-                <li>✅ Organizoni materialet</li>
-                <li>✅ Ndiqni rezultatet</li>
-                <li>✅ Përdorni AI</li>
-
-            </ul>
-
-        </div>
+</div>
 
 
-        <div class="teacher-panel">
+<div class="feature">
 
-            <div class="panel-row">
-                <span>Pyetje të krijuara</span>
-                <strong>250</strong>
-            </div>
+<div class="feature-icon">📝</div>
 
-            <div class="panel-row">
-                <span>Teste</span>
-                <strong>35</strong>
-            </div>
+<h3>Krijo teste</h3>
 
-            <div class="panel-row">
-                <span>Kuize</span>
-                <strong>48</strong>
-            </div>
+<p>
+Përgatit teste dhe kuize
+për nxënësit.
+</p>
 
-            <div class="panel-row">
-                <span>Nxënës</span>
-                <strong>120</strong>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
+</div>
 
 
-<!-- CTA -->
+<div class="feature">
 
-<section class="cta">
+<div class="feature-icon">📊</div>
 
-    <h2>
-        Filloni me Mësuesi Dixhital
-    </h2>
+<h3>Rezultatet</h3>
 
-    <p>
-        Hyni në panelin tuaj dhe filloni të
-        përgatitni materialet mësimore.
-    </p>
+<p>
+Ndiq progresin dhe rezultatet
+e nxënësve.
+</p>
 
-    <button class="primary-btn" onclick="showLogin()">
-        👨‍🏫 Hyr për mësues
-    </button>
+</div>
+
+</div>
 
 </section>
 
@@ -1194,347 +802,1031 @@ footer p {
 
 
 <!-- =========================
-     LOGIN PAGE
+LOGIN
 ========================= -->
 
-<div id="loginPage" class="page">
+<div id="login" class="page">
 
-    <div class="login-page">
+<div class="login-container">
 
-        <div class="login-box">
+<div class="login-box">
 
-            <div class="badge">
-                👨‍🏫 Mësuesi Dixhital
-            </div>
+<div class="badge">
+👨‍🏫 Mësuesi Dixhital
+</div>
 
-            <h1>
-                Hyr për mësues
-            </h1>
+<h1>
+Hyr për mësues
+</h1>
 
-            <p>
-                Hyni në panelin tuaj të mësuesit.
-            </p>
-
-
-            <form onsubmit="login(event)">
-
-                <div class="form-group">
-
-                    <label for="email">
-                        Email
-                    </label>
-
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="Shkruani email-in"
-                        required
-                    >
-
-                </div>
+<p>
+Hyni në panelin tuaj personal.
+</p>
 
 
-                <div class="form-group">
+<form onsubmit="login(event)">
 
-                    <label for="password">
-                        Fjalëkalimi
-                    </label>
+<div class="form-group">
 
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="Shkruani fjalëkalimin"
-                        required
-                    >
+<label>
+Email
+</label>
 
-                </div>
+<input
+type="email"
+id="email"
+placeholder="Shkruani email-in"
+required
+>
 
-
-                <button class="full-btn" type="submit">
-                    Hyr në panel
-                </button>
+</div>
 
 
-                <div id="loginError" class="login-error">
-                    Email ose fjalëkalim i pasaktë.
-                </div>
+<div class="form-group">
 
-            </form>
+<label>
+Fjalëkalimi
+</label>
 
+<input
+type="password"
+id="password"
+placeholder="Shkruani fjalëkalimin"
+required
+>
 
-            <div class="demo-info">
-
-                <strong>Hyrje demo:</strong><br><br>
-
-                Email:
-                mesues@mesuesidixhital.com
-                <br>
-
-                Fjalëkalimi:
-                123456
-
-            </div>
+</div>
 
 
-            <div class="back-home" onclick="showHome()">
-                ← Kthehu në ballinë
-            </div>
+<button class="full-button">
+Hyr në platformë
+</button>
 
-        </div>
+</form>
 
-    </div>
+
+<div id="loginError" class="error">
+Email ose fjalëkalim i pasaktë.
+</div>
+
+
+<div class="demo">
+
+<strong>Hyrje demo</strong><br><br>
+
+Email:
+mesues@mesuesidixhital.com
+
+<br>
+
+Fjalëkalimi:
+123456
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 
 
 <!-- =========================
-     TEACHER DASHBOARD
+DASHBOARD
 ========================= -->
 
-<div id="dashboardPage" class="dashboard-page">
+<div id="dashboard" class="page">
+
+<div class="dashboard">
+
+<aside class="sidebar">
+
+<div class="sidebar-logo">
+Mësuesi Dixhital
+</div>
+
+
+<button
+class="active"
+onclick="openDashboard()">
+🏠 Dashboard
+</button>
+
+
+<button
+onclick="openGenerator()">
+🤖 Gjenero pyetje
+</button>
+
+
+<button
+onclick="comingSoon('Banka e pyetjeve')">
+📚 Banka e pyetjeve
+</button>
+
+
+<button
+onclick="comingSoon('Krijo test')">
+📝 Krijo test
+</button>
+
+
+<button
+onclick="comingSoon('Kuize')">
+🎯 Kuize
+</button>
+
+
+<button
+onclick="comingSoon('Rezultatet')">
+📊 Rezultatet
+</button>
+
+
+<button onclick="logout()">
+🚪 Dil
+</button>
+
+</aside>
+
+
+<main class="dashboard-main">
+
+<!-- DASHBOARD HOME -->
+
+<div id="dashboardHome">
+
+<div class="dashboard-header">
+
+<div>
+
+<h1>
+Paneli i Mësuesit
+</h1>
+
+<p>
+Menaxhoni materialet tuaja.
+</p>
+
+</div>
+
+<button class="logout"
+onclick="logout()">
+Dil
+</button>
+
+</div>
+
+
+<div class="welcome">
+
+<h2>
+Mirë se vini! 👋
+</h2>
+
+<p>
+Krijoni pyetje dhe materiale
+mësimore në pak minuta.
+</p>
+
+</div>
+
+
+<div class="dashboard-cards">
+
+<div class="dashboard-card">
+<span>📚 Pyetje</span>
+<strong>250</strong>
+</div>
+
+<div class="dashboard-card">
+<span>📝 Teste</span>
+<strong>35</strong>
+</div>
+
+<div class="dashboard-card">
+<span>🎯 Kuize</span>
+<strong>48</strong>
+</div>
+
+<div class="dashboard-card">
+<span>👨‍🎓 Nxënës</span>
+<strong>120</strong>
+</div>
+
+</div>
+
+
+<div class="dashboard-content">
+
+<h2>
+Veprime të shpejta
+</h2>
+
+
+<div class="quick-actions">
+
+<button
+class="quick-action"
+onclick="openGenerator()">
+
+<strong>
+🤖 Gjenero pyetje
+</strong>
+
+<span>
+Krijoni pyetje të reja.
+</span>
+
+</button>
+
+
+<button
+class="quick-action"
+onclick="comingSoon('Krijo test')">
+
+<strong>
+📝 Krijo test
+</strong>
+
+<span>
+Përgatitni një test.
+</span>
+
+</button>
+
+
+<button
+class="quick-action"
+onclick="comingSoon('Banka e pyetjeve')">
+
+<strong>
+📚 Banka e pyetjeve
+</strong>
+
+<span>
+Shikoni pyetjet e ruajtura.
+</span>
+
+</button>
+
+
+<button
+class="quick-action"
+onclick="comingSoon('Rezultatet')">
+
+<strong>
+📊 Rezultatet
+</strong>
+
+<span>
+Analizoni rezultatet.
+</span>
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+QUESTION GENERATOR
+========================= -->
+
+<div id="generatorPage" style="display:none">
+
+<div class="dashboard-header">
+
+<div>
+
+<h1>
+🤖 Gjenero pyetje
+</h1>
+
+<p>
+Zgjidhni parametrat e pyetjeve.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="generator-container">
+
+<div class="generator-form">
+
+<div class="generator-grid">
+
+
+<div class="generator-group">
+
+<label>
+Lënda
+</label>
+
+<select id="subject">
+
+<option value="Fizikë">
+Fizikë
+</option>
+
+<option value="Kimi">
+Kimi
+</option>
+
+<option value="Matematikë">
+Matematikë
+</option>
+
+<option value="Gjeografi">
+Gjeografi
+</option>
+
+</select>
+
+</div>
+
+
+<div class="generator-group">
+
+<label>
+Klasa
+</label>
+
+<select id="grade">
+
+<option value="6">
+Klasa 6
+</option>
+
+<option value="7">
+Klasa 7
+</option>
+
+<option value="8">
+Klasa 8
+</option>
+
+<option value="9">
+Klasa 9
+</option>
+
+</select>
+
+</div>
+
+
+<div class="generator-group">
+
+<label>
+Tema
+</label>
+
+<input
+type="text"
+id="topic"
+placeholder="p.sh. Forca dhe lëvizja"
+>
+
+</div>
+
+
+<div class="generator-group">
+
+<label>
+Niveli
+</label>
+
+<select id="difficulty">
+
+<option value="I lehtë">
+I lehtë
+</option>
+
+<option value="Mesatar" selected>
+Mesatar
+</option>
+
+<option value="I vështirë">
+I vështirë
+</option>
+
+<option value="Shumë i vështirë">
+Shumë i vështirë
+</option>
+
+</select>
+
+</div>
+
+
+<div class="generator-group">
+
+<label>
+Lloji i pyetjes
+</label>
+
+<select id="questionType">
+
+<option value="alternative">
+Me alternativa
+</option>
+
+<option value="e hapur">
+Pyetje e hapur
+</option>
+
+<option value="sakte">
+E vërtetë / E gabuar
+</option>
+
+</select>
+
+</div>
+
+
+<div class="generator-group">
+
+<label>
+Numri i pyetjeve
+</label>
+
+<select id="questionCount">
+
+<option value="5">
+5 pyetje
+</option>
+
+<option value="10">
+10 pyetje
+</option>
+
+<option value="15">
+15 pyetje
+</option>
+
+<option value="20">
+20 pyetje
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<button
+class="generate-button"
+onclick="generateQuestions()">
+
+🤖 Gjenero pyetjet
+
+</button>
+
+</div>
+
+
+<div id="questionsArea"
+class="questions-area">
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================
+PAGE NAVIGATION
+========================= */
+
+function showPage(page) {
+
+document.querySelectorAll(".page")
+.forEach(function(p) {
+p.classList.remove("active");
+});
+
+document.getElementById(page)
+.classList.add("active");
+
+window.scrollTo(0,0);
+
+}
+
+
+/* =========================
+LOGIN
+========================= */
+
+function login(event) {
+
+event.preventDefault();
+
+const email =
+document.getElementById("email").value;
+
+const password =
+document.getElementById("password").value;
+
+if(
+email === "mesues@mesuesidixhital.com"
+&&
+password === "123456"
+) {
+
+document.getElementById("loginError")
+.style.display = "none";
+
+showPage("dashboard");
+
+} else {
+
+document.getElementById("loginError")
+.style.display = "block";
+
+}
+
+}
+
+
+/* =========================
+DASHBOARD
+========================= */
+
+function openDashboard() {
+
+document.getElementById("dashboardHome")
+.style.display = "block";
+
+document.getElementById("generatorPage")
+.style.display = "none";
+
+}
+
+
+function openGenerator() {
+
+document.getElementById("dashboardHome")
+.style.display = "none";
+
+document.getElementById("generatorPage")
+.style.display = "block";
+
+}
+
+
+/* =========================
+OTHER BUTTONS
+========================= */
+
+function comingSoon(name) {
+
+alert(
+name +
+" do të ndërtohet në hapin tjetër."
+);
+
+}
+
+
+/* =========================
+LOGOUT
+========================= */
+
+function logout() {
+
+showPage("home");
+
+document.getElementById("email").value = "";
+
+document.getElementById("password").value = "";
+
+}
+
+
+/* =========================
+QUESTION GENERATOR
+========================= */
+
+function generateQuestions() {
+
+const subject =
+document.getElementById("subject").value;
+
+const grade =
+document.getElementById("grade").value;
+
+const topic =
+document.getElementById("topic").value;
+
+const difficulty =
+document.getElementById("difficulty").value;
+
+const type =
+document.getElementById("questionType").value;
+
+const count =
+parseInt(
+document.getElementById("questionCount").value
+);
+
+
+if(topic.trim() === "") {
+
+alert("Ju lutem shkruani temën.");
+
+return;
+
+}
+
+
+const area =
+document.getElementById("questionsArea");
+
+area.innerHTML = "";
+
+
+for(let i = 1; i <= count; i++) {
+
+let questionText = "";
+
+let answers = "";
+
+
+/*
+PYETJE DEMO
+*/
+
+if(subject === "Fizikë") {
+
+questionText =
+`Në temën "${topic}", cila nga pohimet e mëposhtme është e saktë?`;
+
+answers = `
+<div class="answer">
+A) Pohimi i parë
+</div>
+
+<div class="answer correct">
+B) Përgjigjja e saktë
+</div>
+
+<div class="answer">
+C) Pohimi i tretë
+</div>
+
+<div class="answer">
+D) Pohimi i katërt
+</div>
+`;
+
+}
+
+else if(subject === "Kimi") {
+
+questionText =
+`Cili është një koncept i rëndësishëm që lidhet me temën "${topic}"?`;
+
+answers = `
+<div class="answer">
+A) Opsioni i parë
+</div>
+
+<div class="answer correct">
+B) Përgjigjja e saktë
+</div>
+
+<div class="answer">
+C) Opsioni i tretë
+</div>
+
+<div class="answer">
+D) Opsioni i katërt
+</div>
+`;
+
+}
+
+else {
+
+questionText =
+`Cila është përgjigjja më e saktë për temën "${topic}"?`;
+
+answers = `
+<div class="answer">
+A) Opsioni A
+</div>
+
+<div class="answer correct">
+B) Përgjigjja e saktë
+</div>
+
+<div class="answer">
+C) Opsioni C
+</div>
+
+<div class="answer">
+D) Opsioni D
+</div>
+`;
+
+}
+
+
+const card =
+document.createElement("div");
+
+card.className =
+"question-card";
+
+
+card.innerHTML = `
+
+<div class="question-number">
+Pyetja ${i}
+</div>
+
+<div class="question-text">
+${questionText}
+</div>
+
+<div class="answers">
+${answers}
+</div>
+
+<div class="question-actions">
+
+<button
+class="small-button save-button"
+onclick="saveQuestion(this)">
+💾 Ruaj
+</button>
+
+<button
+class="small-button delete-button"
+onclick="deleteQuestion(this)">
+🗑 Fshi
+</button>
+
+</div>
+
+`;
+
+
+area.appendChild(card);
+
+}
+
+}
+
+
+/* =========================
+SAVE QUESTION
+========================= */
+
+function saveQuestion(button) {
+
+button.innerHTML = "✅ U ruajt";
+
+button.disabled = true;
+
+}
+
+
+/* =========================
+DELETE QUESTION
+========================= */
+
+function deleteQuestion(button) {
+
+const card =
+button.closest(".question-card");
+
+card.remove();
+
+}
+
+</script>
+
+</body>
+</html>
+<!-- PJESA 2 - vazhdimi i kodit -->
+
+<section id="ai-generator" class="page">
 
     <div class="dashboard-layout">
-
-
-        <!-- SIDEBAR -->
 
         <aside class="sidebar">
 
             <div class="sidebar-logo">
-                Mësuesi Dixhital
+                📚 Mësuesi Dixhital
             </div>
 
+            <button onclick="openDashboard()">
+                🏠 Dashboard
+            </button>
 
-            <ul class="sidebar-menu">
+            <button class="active" onclick="openAIGenerator()">
+                🤖 Gjenero pyetje
+            </button>
 
-                <li>
-                    <button class="active">
-                        🏠 Dashboard
-                    </button>
-                </li>
+            <button onclick="comingSoon('Banka e pyetjeve')">
+                📚 Banka e pyetjeve
+            </button>
 
-                <li>
-                    <button onclick="comingSoon('Gjenero pyetje')">
-                        🤖 Gjenero pyetje
-                    </button>
-                </li>
+            <button onclick="comingSoon('Krijo test')">
+                📝 Krijo test
+            </button>
 
-                <li>
-                    <button onclick="comingSoon('Banka e pyetjeve')">
-                        📚 Banka e pyetjeve
-                    </button>
-                </li>
+            <button onclick="comingSoon('Kuize')">
+                🎯 Kuize
+            </button>
 
-                <li>
-                    <button onclick="comingSoon('Krijo test')">
-                        📝 Krijo test
-                    </button>
-                </li>
+            <button onclick="comingSoon('Rezultatet')">
+                📊 Rezultatet
+            </button>
 
-                <li>
-                    <button onclick="comingSoon('Kuize')">
-                        🎯 Kuize
-                    </button>
-                </li>
-
-                <li>
-                    <button onclick="comingSoon('Rezultatet')">
-                        📊 Rezultatet
-                    </button>
-                </li>
-
-            </ul>
+            <button onclick="logout()">
+                🚪 Dil
+            </button>
 
         </aside>
 
 
-        <!-- MAIN -->
+        <main class="main-content">
 
-        <main class="dashboard-main">
-
-
-            <div class="dashboard-header">
+            <div class="topbar">
 
                 <div>
+                    <h1>🤖 Gjeneruesi i pyetjeve me AI</h1>
+                    <p>Krijo pyetje të përshtatura për nxënësit tuaj.</p>
+                </div>
 
-                    <h1>
-                        Paneli i Mësuesit
-                    </h1>
+                <div class="teacher-badge">
+                    👨‍🏫 Mësues
+                </div>
 
-                    <p>
-                        Menaxhoni aktivitetet tuaja mësimore.
+            </div>
+
+
+            <div class="generator-container">
+
+                <div class="generator-card">
+
+                    <h2>⚙️ Parametrat e pyetjeve</h2>
+
+                    <p class="description">
+                        Zgjidh parametrat dhe krijo pyetje sipas nevojave të tua.
                     </p>
 
-                </div>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>Lënda</label>
+
+                            <select id="aiSubject">
+
+                                <option value="Fizikë">Fizikë</option>
+                                <option value="Kimi">Kimi</option>
+                                <option value="Matematikë">Matematikë</option>
+                                <option value="Biologji">Biologji</option>
+                                <option value="Gjeografi">Gjeografi</option>
+
+                            </select>
+
+                        </div>
 
 
-                <button class="logout-btn" onclick="logout()">
-                    Dil
-                </button>
+                        <div class="form-group">
 
-            </div>
+                            <label>Klasa</label>
 
+                            <select id="aiGrade">
 
-            <div class="welcome">
+                                <option value="6">Klasa 6</option>
+                                <option value="7">Klasa 7</option>
+                                <option value="8">Klasa 8</option>
+                                <option value="9">Klasa 9</option>
 
-                <h2>
-                    Mirë se vini! 👋
-                </h2>
+                            </select>
 
-                <p>
-                    Ky është paneli juaj personal në
-                    Mësuesi Dixhital.
-                </p>
-
-            </div>
+                        </div>
 
 
-            <!-- CARDS -->
+                        <div class="form-group">
 
-            <div class="dashboard-cards">
+                            <label>Tema</label>
 
-                <div class="dash-card">
+                            <input
+                                type="text"
+                                id="aiTopic"
+                                placeholder="p.sh. Forca dhe lëvizja"
+                            >
 
-                    <span>📚 Pyetje</span>
-
-                    <strong>250</strong>
-
-                </div>
-
-
-                <div class="dash-card">
-
-                    <span>📝 Teste</span>
-
-                    <strong>35</strong>
-
-                </div>
+                        </div>
 
 
-                <div class="dash-card">
+                        <div class="form-group">
 
-                    <span>🎯 Kuize</span>
+                            <label>Niveli</label>
 
-                    <strong>48</strong>
+                            <select id="aiDifficulty">
 
-                </div>
+                                <option value="I lehtë">I lehtë</option>
+                                <option value="Mesatar" selected>Mesatar</option>
+                                <option value="I vështirë">I vështirë</option>
+                                <option value="Olimpiadë">Olimpiadë</option>
 
+                            </select>
 
-                <div class="dash-card">
-
-                    <span>👨‍🎓 Nxënës</span>
-
-                    <strong>120</strong>
-
-                </div>
-
-            </div>
+                        </div>
 
 
-            <div class="dashboard-content">
+                        <div class="form-group">
+
+                            <label>Lloji i pyetjes</label>
+
+                            <select id="aiQuestionType">
+
+                                <option value="Me alternativa">
+                                    Me alternativa
+                                </option>
+
+                                <option value="E hapur">
+                                    Pyetje e hapur
+                                </option>
+
+                                <option value="E vërtetë / E gabuar">
+                                    E vërtetë / E gabuar
+                                </option>
+
+                                <option value="Me llogaritje">
+                                    Me llogaritje
+                                </option>
+
+                            </select>
+
+                        </div>
 
 
-                <div class="content-box">
+                        <div class="form-group">
 
-                    <h3>
-                        Veprime të shpejta
-                    </h3>
+                            <label>Numri i pyetjeve</label>
 
+                            <select id="aiQuestionCount">
 
-                    <div class="action-grid">
+                                <option value="5">5 pyetje</option>
+                                <option value="10">10 pyetje</option>
+                                <option value="15">15 pyetje</option>
+                                <option value="20">20 pyetje</option>
 
-                        <button
-                            class="action-btn"
-                            onclick="comingSoon('Gjenero pyetje')"
-                        >
+                            </select>
 
-                            <strong>
-                                🤖 Gjenero pyetje
-                            </strong>
-
-                            <span>
-                                Krijo pyetje me AI
-                            </span>
-
-                        </button>
-
-
-                        <button
-                            class="action-btn"
-                            onclick="comingSoon('Krijo test')"
-                        >
-
-                            <strong>
-                                📝 Krijo test
-                            </strong>
-
-                            <span>
-                                Përgatit një test të ri
-                            </span>
-
-                        </button>
-
-
-                        <button
-                            class="action-btn"
-                            onclick="comingSoon('Banka e pyetjeve')"
-                        >
-
-                            <strong>
-                                📚 Banka e pyetjeve
-                            </strong>
-
-                            <span>
-                                Shiko pyetjet e ruajtura
-                            </span>
-
-                        </button>
-
-
-                        <button
-                            class="action-btn"
-                            onclick="comingSoon('Rezultatet')"
-                        >
-
-                            <strong>
-                                📊 Rezultatet
-                            </strong>
-
-                            <span>
-                                Analizo rezultatet
-                            </span>
-
-                        </button>
+                        </div>
 
                     </div>
 
+
+                    <button
+                        class="generate-button"
+                        onclick="generateAIQuestions()"
+                    >
+
+                        🤖 GJENERO PYETJET
+
+                    </button>
+
                 </div>
 
 
-                <div class="content-box">
+                <div id="aiResults" class="ai-results">
 
-                    <h3>
-                        Aktiviteti i fundit
-                    </h3>
+                    <div class="empty-results">
 
-                    <div class="panel-row">
-                        <span>Pyetje të krijuara</span>
-                        <strong>24</strong>
-                    </div>
+                        <div class="empty-icon">🧠</div>
 
-                    <div class="panel-row">
-                        <span>Teste të krijuara</span>
-                        <strong>3</strong>
-                    </div>
+                        <h3>Pyetjet do të shfaqen këtu</h3>
 
-                    <div class="panel-row">
-                        <span>Kuize</span>
-                        <strong>5</strong>
-                    </div>
+                        <p>
+                            Zgjidh temën dhe parametrat, pastaj kliko
+                            "Gjenero pyetjet".
+                        </p>
 
-                    <div class="panel-row">
-                        <span>Nxënës aktivë</span>
-                        <strong>18</strong>
                     </div>
 
                 </div>
@@ -1545,116 +1837,256 @@ footer p {
 
     </div>
 
-</div>
+</section>
 
 
-<!-- =========================
-     JAVASCRIPT
-========================= -->
+<style>
+
+.ai-results {
+    margin-top: 25px;
+}
+
+.empty-results {
+    background: white;
+    border-radius: 18px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+
+.empty-icon {
+    font-size: 55px;
+    margin-bottom: 15px;
+}
+
+.empty-results h3 {
+    margin-bottom: 8px;
+    color: #1f2937;
+}
+
+.empty-results p {
+    color: #6b7280;
+}
+
+.question-card {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    margin-bottom: 18px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+
+.question-number {
+    font-weight: bold;
+    color: #2563eb;
+    margin-bottom: 10px;
+}
+
+.question-text {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 18px;
+}
+
+.answer-option {
+    padding: 10px 14px;
+    margin: 7px 0;
+    background: #f3f4f6;
+    border-radius: 10px;
+}
+
+.correct-answer {
+    margin-top: 15px;
+    padding: 12px;
+    background: #ecfdf5;
+    border-radius: 10px;
+    color: #047857;
+}
+
+.question-actions {
+    margin-top: 18px;
+    display: flex;
+    gap: 10px;
+}
+
+.question-actions button {
+    border: none;
+    padding: 9px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.save-btn {
+    background: #2563eb;
+    color: white;
+}
+
+.delete-btn {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+</style>
+
 
 <script>
 
-/*
-    SHFAQ BALLINËN
-*/
+function openAIGenerator() {
 
-function showHome() {
+    document.querySelectorAll('.page').forEach(function(page) {
+        page.classList.remove('active');
+    });
 
-    document.getElementById("homePage").style.display = "block";
-    document.getElementById("loginPage").style.display = "none";
-    document.getElementById("dashboardPage").style.display = "none";
+    const generator = document.getElementById('ai-generator');
 
-    window.scrollTo(0, 0);
+    if (generator) {
+        generator.classList.add('active');
+    }
 }
 
 
-/*
-    SHFAQ LOGIN
-*/
+function generateAIQuestions() {
 
-function showLogin() {
+    const subject =
+        document.getElementById('aiSubject').value;
 
-    document.getElementById("homePage").style.display = "none";
-    document.getElementById("loginPage").style.display = "block";
-    document.getElementById("dashboardPage").style.display = "none";
+    const grade =
+        document.getElementById('aiGrade').value;
 
-    window.scrollTo(0, 0);
-}
+    const topic =
+        document.getElementById('aiTopic').value.trim();
 
+    const difficulty =
+        document.getElementById('aiDifficulty').value;
 
-/*
-    LOGIN DEMO
-*/
+    const type =
+        document.getElementById('aiQuestionType').value;
 
-function login(event) {
-
-    event.preventDefault();
-
-    const email =
-        document.getElementById("email").value.trim();
-
-    const password =
-        document.getElementById("password").value;
-
-    const error =
-        document.getElementById("loginError");
+    const count =
+        parseInt(
+            document.getElementById('aiQuestionCount').value
+        );
 
 
-    /*
-        KREDENCIALET DEMO
-    */
+    if (!topic) {
 
-    if (
-        email === "mesues@mesuesidixhital.com"
-        &&
-        password === "123456"
-    ) {
+        alert("Ju lutem shkruani temën e pyetjeve.");
 
-        error.style.display = "none";
+        return;
+    }
 
-        document.getElementById("homePage").style.display = "none";
-        document.getElementById("loginPage").style.display = "none";
-        document.getElementById("dashboardPage").style.display = "block";
 
-        window.scrollTo(0, 0);
+    const results =
+        document.getElementById('aiResults');
 
-    } else {
 
-        error.style.display = "block";
+    results.innerHTML = "";
+
+
+    for (let i = 1; i <= count; i++) {
+
+        let questionText =
+            `Pyetja ${i}: Cili është koncepti kryesor që lidhet me "${topic}" në lëndën ${subject}, për klasën ${grade}?`;
+
+
+        if (type === "Me llogaritje") {
+
+            questionText =
+                `Pyetja ${i}: Zgjidh ushtrimin e mëposhtëm që lidhet me "${topic}" dhe shpjego hapat e zgjidhjes.`;
+
+        }
+
+
+        if (type === "E hapur") {
+
+            questionText =
+                `Pyetja ${i}: Shpjego me fjalët e tua rëndësinë e "${topic}" në ${subject}.`;
+
+        }
+
+
+        if (type === "E vërtetë / E gabuar") {
+
+            questionText =
+                `Pyetja ${i}: "${topic}" është një koncept i rëndësishëm në ${subject}. E vërtetë apo e gabuar?`;
+
+        }
+
+
+        const card =
+            document.createElement("div");
+
+        card.className = "question-card";
+
+
+        card.innerHTML = `
+
+            <div class="question-number">
+                Pyetja ${i} • ${difficulty}
+            </div>
+
+            <div class="question-text">
+                ${questionText}
+            </div>
+
+            <div class="answer-option">
+                A) Opsioni i parë
+            </div>
+
+            <div class="answer-option">
+                B) Opsioni i dytë
+            </div>
+
+            <div class="answer-option">
+                C) Opsioni i tretë
+            </div>
+
+            <div class="answer-option">
+                D) Opsioni i katërt
+            </div>
+
+            <div class="correct-answer">
+                <strong>Përgjigjja:</strong>
+                A
+            </div>
+
+            <div class="question-actions">
+
+                <button
+                    class="save-btn"
+                    onclick="saveAIQuestion(this)"
+                >
+                    💾 Ruaj
+                </button>
+
+                <button
+                    class="delete-btn"
+                    onclick="this.closest('.question-card').remove()"
+                >
+                    🗑 Fshi
+                </button>
+
+            </div>
+
+        `;
+
+
+        results.appendChild(card);
 
     }
 
 }
 
 
-/*
-    LOGOUT
-*/
+function saveAIQuestion(button) {
 
-function logout() {
+    button.innerHTML = "✅ U ruajt";
 
-    document.getElementById("dashboardPage").style.display = "none";
+    button.disabled = true;
 
-    showHome();
+    button.style.opacity = "0.7";
 
 }
 
-
-/*
-    FUNKSIONE QË DO TË NDËRTOHEN
-    NË HAPAT E ARDHSHËM
-*/
-
-function comingSoon(name) {
-
-    alert(
-        name +
-        " do të ndërtohet në hapin tjetër të platformës."
-    );
-
-}
 
 </script>
-
-</body>
-</html>
