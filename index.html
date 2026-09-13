@@ -1,893 +1,920 @@
 <!DOCTYPE html>
 <html lang="sq">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Mësuesi Dixhital | Platformë për Mësues dhe Nxënës</title>
-
-    <meta name="description"
-          content="Mësuesi Dixhital - platformë moderne për mësues dhe nxënës. Pyetje, kuize, teste, projekte dhe mjete të inteligjencës artificiale.">
-
-    <style>
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f6f8fc;
-            color: #172033;
-            line-height: 1.6;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        /* =========================
-           NAVBAR
-        ========================= */
-
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(255,255,255,0.96);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #e8ecf3;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: auto;
-            height: 76px;
-            padding: 0 25px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 12px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            background: linear-gradient(135deg,#2563eb,#7c3aed);
-            color: white;
-            font-size: 23px;
-        }
-
-        .logo-text {
-            font-size: 20px;
-            font-weight: 800;
-            color: #172033;
-        }
-
-        .logo-text span {
-            color: #2563eb;
-        }
-
-        .nav-menu {
-            display: flex;
-            align-items: center;
-            gap: 28px;
-        }
-
-        .nav-menu a {
-            color: #4b5563;
-            font-size: 15px;
-            font-weight: 600;
-            transition: 0.2s;
-        }
-
-        .nav-menu a:hover {
-            color: #2563eb;
-        }
-
-        .nav-button {
-            background: #2563eb !important;
-            color: white !important;
-            padding: 11px 19px;
-            border-radius: 9px;
-        }
-
-        .nav-button:hover {
-            background: #1d4ed8 !important;
-        }
-
-        /* =========================
-           HERO
-        ========================= */
-
-        .hero {
-            position: relative;
-            overflow: hidden;
-
-            background:
-                radial-gradient(circle at 10% 20%, rgba(59,130,246,0.18), transparent 30%),
-                radial-gradient(circle at 90% 20%, rgba(124,58,237,0.18), transparent 30%),
-                linear-gradient(135deg,#eef4ff,#f7f5ff);
-
-            padding: 100px 25px 90px;
-        }
-
-        .hero-container {
-            max-width: 1200px;
-            margin: auto;
-
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            align-items: center;
-            gap: 70px;
-        }
-
-        .badge {
-            display: inline-block;
-            background: #e0eaff;
-            color: #2455a4;
-
-            padding: 8px 14px;
-            border-radius: 30px;
-
-            font-size: 14px;
-            font-weight: 700;
-
-            margin-bottom: 22px;
-        }
-
-        .hero h1 {
-            font-size: 58px;
-            line-height: 1.08;
-            letter-spacing: -2px;
-            margin-bottom: 25px;
-            color: #111827;
-        }
-
-        .hero h1 span {
-            color: #2563eb;
-        }
-
-        .hero-text {
-            font-size: 19px;
-            color: #596579;
-            max-width: 620px;
-            margin-bottom: 35px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-
-        .primary-btn {
-            background: #2563eb;
-            color: white;
-
-            padding: 15px 25px;
-            border-radius: 10px;
-
-            font-weight: 700;
-            display: inline-block;
-
-            box-shadow: 0 8px 20px rgba(37,99,235,0.25);
-            transition: 0.2s;
-        }
-
-        .primary-btn:hover {
-            transform: translateY(-2px);
-            background: #1d4ed8;
-        }
-
-        .secondary-btn {
-            background: white;
-            color: #1f2937;
-
-            padding: 15px 25px;
-            border-radius: 10px;
-
-            font-weight: 700;
-            display: inline-block;
-
-            border: 1px solid #dfe5ef;
-        }
-
-        /* =========================
-           HERO CARD
-        ========================= */
-
-        .dashboard-card {
-            background: white;
-            border-radius: 22px;
-            padding: 24px;
-
-            box-shadow:
-                0 25px 60px rgba(30,50,90,0.15);
-
-            border: 1px solid #edf0f6;
-        }
-
-        .dashboard-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            margin-bottom: 22px;
-        }
-
-        .dashboard-title {
-            font-weight: 800;
-            font-size: 18px;
-        }
-
-        .online {
-            color: #16a34a;
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-        }
-
-        .mini-card {
-            padding: 20px;
-            border-radius: 14px;
-            background: #f7f9fd;
-        }
-
-        .mini-icon {
-            font-size: 27px;
-            margin-bottom: 10px;
-        }
-
-        .mini-card h3 {
-            font-size: 16px;
-            margin-bottom: 4px;
-        }
-
-        .mini-card p {
-            color: #7a8495;
-            font-size: 13px;
-        }
-
-        /* =========================
-           STATS
-        ========================= */
-
-        .stats {
-            background: white;
-            border-bottom: 1px solid #e9edf4;
-        }
-
-        .stats-container {
-            max-width: 1100px;
-            margin: auto;
-
-            display: grid;
-            grid-template-columns: repeat(4,1fr);
-            padding: 30px 25px;
-        }
-
-        .stat {
-            text-align: center;
-            border-right: 1px solid #e5e9f0;
-        }
-
-        .stat:last-child {
-            border-right: none;
-        }
-
-        .stat h3 {
-            color: #2563eb;
-            font-size: 28px;
-        }
-
-        .stat p {
-            color: #6b7280;
-            font-size: 14px;
-        }
-
-        /* =========================
-           GENERAL SECTION
-        ========================= */
-
-        .section {
-            max-width: 1200px;
-            margin: auto;
-            padding: 90px 25px;
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 700px;
-            margin: auto auto 50px;
-        }
-
-        .section-label {
-            color: #2563eb;
-            font-weight: 800;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-
-        .section-header h2 {
-            font-size: 38px;
-            margin-bottom: 15px;
-            color: #111827;
-        }
-
-        .section-header p {
-            color: #697386;
-            font-size: 17px;
-        }
-
-        /* =========================
-           SUBJECTS
-        ========================= */
-
-        .subjects {
-            display: grid;
-            grid-template-columns: repeat(4,1fr);
-            gap: 20px;
-        }
-
-        .subject-card {
-            background: white;
-            padding: 28px;
-
-            border-radius: 16px;
-            border: 1px solid #e8edf5;
-
-            transition: 0.25s;
-        }
-
-        .subject-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(30,50,90,0.10);
-        }
-
-        .subject-icon {
-            width: 52px;
-            height: 52px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 14px;
-            background: #eef4ff;
-
-            font-size: 27px;
-            margin-bottom: 18px;
-        }
-
-        .subject-card h3 {
-            margin-bottom: 8px;
-            font-size: 18px;
-        }
-
-        .subject-card p {
-            color: #70798a;
-            font-size: 14px;
-        }
-
-        /* =========================
-           FEATURES
-        ========================= */
-
-        .features-section {
-            background: #111d35;
-            color: white;
-        }
-
-        .features-section .section {
-            max-width: 1200px;
-        }
-
-        .features-section .section-label {
-            color: #8db6ff;
-        }
-
-        .features-section .section-header h2 {
-            color: white;
-        }
-
-        .features-section .section-header p {
-            color: #b7c1d4;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(4,1fr);
-            gap: 20px;
-        }
-
-        .feature {
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.09);
-
-            padding: 28px;
-            border-radius: 16px;
-        }
-
-        .feature-icon {
-            font-size: 30px;
-            margin-bottom: 18px;
-        }
-
-        .feature h3 {
-            margin-bottom: 10px;
-        }
-
-        .feature p {
-            color: #b8c2d3;
-            font-size: 14px;
-        }
-
-        /* =========================
-           AI SECTION
-        ========================= */
-
-        .ai-section {
-            background: #f0f5ff;
-        }
-
-        .ai-box {
-            max-width: 1100px;
-            margin: auto;
-
-            background: linear-gradient(135deg,#2563eb,#6339d6);
-            color: white;
-
-            padding: 55px;
-            border-radius: 25px;
-
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-
-            box-shadow: 0 20px 50px rgba(37,99,235,0.20);
-        }
-
-        .ai-box h2 {
-            font-size: 38px;
-            line-height: 1.15;
-            margin-bottom: 18px;
-        }
-
-        .ai-box p {
-            color: #dce7ff;
-            margin-bottom: 25px;
-        }
-
-        .ai-list {
-            display: grid;
-            gap: 12px;
-        }
-
-        .ai-list div {
-            background: rgba(255,255,255,0.10);
-            padding: 13px 16px;
-            border-radius: 9px;
-        }
-
-        .ai-button {
-            display: inline-block;
-            background: white;
-            color: #2563eb;
-
-            padding: 13px 20px;
-            border-radius: 9px;
-
-            font-weight: 800;
-        }
-
-        /* =========================
-           TEACHER SECTION
-        ========================= */
-
-        .teacher-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .teacher-text h2 {
-            font-size: 40px;
-            margin-bottom: 20px;
-        }
-
-        .teacher-text p {
-            color: #697386;
-            font-size: 17px;
-            margin-bottom: 25px;
-        }
-
-        .check-list {
-            display: grid;
-            gap: 12px;
-            margin-bottom: 28px;
-        }
-
-        .check-list div {
-            font-weight: 600;
-        }
-
-        .teacher-card {
-            background: white;
-            border: 1px solid #e5eaf2;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(30,50,90,0.08);
-        }
-
-        .teacher-card h3 {
-            margin-bottom: 20px;
-        }
-
-        .progress {
-            height: 9px;
-            background: #e8edf5;
-            border-radius: 20px;
-            overflow: hidden;
-            margin: 8px 0 20px;
-        }
-
-        .progress span {
-            display: block;
-            height: 100%;
-            background: #2563eb;
-            width: 82%;
-        }
-
-        /* =========================
-           CTA
-        ========================= */
-
-        .cta {
-            background: linear-gradient(135deg,#2563eb,#4f46e5);
-            color: white;
-            text-align: center;
-            padding: 80px 25px;
-        }
-
-        .cta h2 {
-            font-size: 40px;
-            margin-bottom: 15px;
-        }
-
-        .cta p {
-            color: #dce7ff;
-            margin-bottom: 30px;
-            font-size: 17px;
-        }
-
-        .cta a {
-            display: inline-block;
-            background: white;
-            color: #2563eb;
-
-            padding: 15px 28px;
-            border-radius: 10px;
-
-            font-weight: 800;
-        }
-
-        /* =========================
-           FOOTER
-        ========================= */
-
-        footer {
-            background: #0b1220;
-            color: #aeb8ca;
-            padding: 50px 25px 25px;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: auto;
-
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 40px;
-        }
-
-        .footer-brand {
-            max-width: 330px;
-        }
-
-        .footer-brand h3 {
-            color: white;
-            font-size: 20px;
-            margin-bottom: 12px;
-        }
-
-        .footer-brand p {
-            font-size: 14px;
-        }
-
-        footer h4 {
-            color: white;
-            margin-bottom: 15px;
-        }
-
-        footer a {
-            color: #aeb8ca;
-            display: block;
-            margin-bottom: 9px;
-            font-size: 14px;
-        }
-
-        footer a:hover {
-            color: white;
-        }
-
-        .copyright {
-            max-width: 1200px;
-            margin: 40px auto 0;
-            padding-top: 20px;
-            border-top: 1px solid #202a3c;
-            font-size: 13px;
-        }
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media (max-width: 900px) {
-
-            .nav-menu {
-                display: none;
-            }
-
-            .hero-container {
-                grid-template-columns: 1fr;
-            }
-
-            .hero h1 {
-                font-size: 45px;
-            }
-
-            .subjects,
-            .features {
-                grid-template-columns: repeat(2,1fr);
-            }
-
-            .stats-container {
-                grid-template-columns: repeat(2,1fr);
-                gap: 25px;
-            }
-
-            .stat:nth-child(2) {
-                border-right: none;
-            }
-
-            .ai-box,
-            .teacher-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-container {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 600px) {
-
-            .hero {
-                padding-top: 65px;
-            }
-
-            .hero h1 {
-                font-size: 37px;
-            }
-
-            .hero-text {
-                font-size: 17px;
-            }
-
-            .subjects,
-            .features,
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section-header h2,
-            .teacher-text h2,
-            .ai-box h2 {
-                font-size: 30px;
-            }
-
-            .ai-box {
-                padding: 30px;
-            }
-
-            .footer-container {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-container {
-                grid-template-columns: 1fr 1fr;
-            }
-
-        }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mësuesi Dixhital | Platformë për Mësues dhe Nxënës</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fb;
+    color: #172033;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255,255,255,0.96);
+    border-bottom: 1px solid #e5e7eb;
+    backdrop-filter: blur(10px);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    color: #2563eb;
+    cursor: pointer;
+}
+
+.logo span {
+    color: #111827;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #374151;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.nav-links a:hover {
+    color: #2563eb;
+}
+
+.login-btn {
+    background: #2563eb;
+    color: white !important;
+    padding: 11px 18px;
+    border-radius: 10px;
+}
+
+.login-btn:hover {
+    background: #1d4ed8;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    max-width: 1200px;
+    margin: auto;
+    padding: 90px 24px 70px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.badge {
+    display: inline-block;
+    background: #dbeafe;
+    color: #1d4ed8;
+    padding: 8px 14px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: 54px;
+    line-height: 1.08;
+    margin-bottom: 22px;
+}
+
+.hero h1 span {
+    color: #2563eb;
+}
+
+.hero p {
+    font-size: 19px;
+    line-height: 1.7;
+    color: #667085;
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.primary-btn,
+.secondary-btn {
+    padding: 14px 22px;
+    border-radius: 11px;
+    text-decoration: none;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    font-size: 15px;
+}
+
+.primary-btn {
+    background: #2563eb;
+    color: white;
+}
+
+.primary-btn:hover {
+    background: #1d4ed8;
+}
+
+.secondary-btn {
+    background: white;
+    color: #2563eb;
+    border: 1px solid #dbe3ef;
+}
+
+/* =========================
+   DASHBOARD MOCKUP
+========================= */
+
+.dashboard-preview {
+    background: white;
+    border-radius: 22px;
+    padding: 22px;
+    box-shadow: 0 20px 50px rgba(15,23,42,0.12);
+    border: 1px solid #e5e7eb;
+}
+
+.preview-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.preview-title {
+    font-weight: 800;
+}
+
+.preview-user {
+    background: #dbeafe;
+    color: #2563eb;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.preview-cards {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 14px;
+}
+
+.preview-card {
+    padding: 18px;
+    border-radius: 14px;
+    background: #f8fafc;
+}
+
+.preview-card strong {
+    display: block;
+    font-size: 25px;
+    margin-top: 8px;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats {
+    max-width: 1100px;
+    margin: 20px auto 70px;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 18px;
+}
+
+.stat {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+}
+
+.stat strong {
+    font-size: 30px;
+    color: #2563eb;
+    display: block;
+    margin-bottom: 7px;
+}
+
+.stat span {
+    color: #667085;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section {
+    max-width: 1200px;
+    margin: auto;
+    padding: 70px 24px;
+}
+
+.section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: auto auto 45px;
+}
+
+.section-header h2 {
+    font-size: 38px;
+    margin-bottom: 14px;
+}
+
+.section-header p {
+    color: #667085;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+/* =========================
+   SUBJECTS
+========================= */
+
+.subjects {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 18px;
+}
+
+.subject {
+    background: white;
+    padding: 28px;
+    border-radius: 18px;
+    border: 1px solid #e5e7eb;
+    transition: 0.25s;
+}
+
+.subject:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(15,23,42,0.09);
+}
+
+.subject-icon {
+    font-size: 36px;
+    margin-bottom: 18px;
+}
+
+.subject h3 {
+    margin-bottom: 8px;
+}
+
+.subject p {
+    color: #667085;
+    line-height: 1.5;
+}
+
+/* =========================
+   FEATURES
+========================= */
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 18px;
+}
+
+.feature {
+    background: white;
+    padding: 27px;
+    border-radius: 18px;
+    border: 1px solid #e5e7eb;
+}
+
+.feature-icon {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.feature h3 {
+    margin-bottom: 9px;
+}
+
+.feature p {
+    color: #667085;
+    line-height: 1.5;
+}
+
+/* =========================
+   AI SECTION
+========================= */
+
+.ai-section {
+    background: #111827;
+    color: white;
+    border-radius: 25px;
+    padding: 55px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.ai-section p {
+    color: #cbd5e1;
+    line-height: 1.7;
+    margin: 18px 0 25px;
+}
+
+.ai-box {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 25px;
+    border-radius: 18px;
+}
+
+.ai-question {
+    background: white;
+    color: #111827;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+/* =========================
+   TEACHER SECTION
+========================= */
+
+.teacher-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.teacher-section h2 {
+    font-size: 38px;
+    margin-bottom: 18px;
+}
+
+.teacher-section p {
+    color: #667085;
+    line-height: 1.7;
+    margin-bottom: 22px;
+}
+
+.teacher-list {
+    list-style: none;
+}
+
+.teacher-list li {
+    margin-bottom: 13px;
+    font-weight: 600;
+}
+
+.teacher-panel {
+    background: white;
+    padding: 28px;
+    border-radius: 20px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 15px 40px rgba(15,23,42,0.08);
+}
+
+.panel-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.panel-row:last-child {
+    border-bottom: none;
+}
+
+/* =========================
+   CTA
+========================= */
+
+.cta {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 60px 30px;
+    background: #2563eb;
+    color: white;
+    border-radius: 25px;
+    text-align: center;
+}
+
+.cta h2 {
+    font-size: 38px;
+    margin-bottom: 15px;
+}
+
+.cta p {
+    margin-bottom: 25px;
+    color: #dbeafe;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    background: #111827;
+    color: white;
+    padding: 45px 24px;
+    text-align: center;
+}
+
+footer p {
+    color: #94a3b8;
+    margin-top: 10px;
+}
+
+/* =========================
+   LOGIN PAGE
+========================= */
+
+.page {
+    display: none;
+}
+
+.login-page {
+    min-height: calc(100vh - 75px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 440px;
+    background: white;
+    padding: 38px;
+    border-radius: 22px;
+    box-shadow: 0 20px 60px rgba(15,23,42,0.12);
+    border: 1px solid #e5e7eb;
+}
+
+.login-box h1 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.login-box > p {
+    color: #667085;
+    margin-bottom: 28px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #2563eb;
+}
+
+.full-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.full-btn:hover {
+    background: #1d4ed8;
+}
+
+.login-error {
+    display: none;
+    margin-top: 15px;
+    padding: 12px;
+    background: #fee2e2;
+    color: #b91c1c;
+    border-radius: 9px;
+    font-size: 14px;
+}
+
+.demo-info {
+    margin-top: 20px;
+    background: #eff6ff;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    color: #1e40af;
+}
+
+.back-home {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #2563eb;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* =========================
+   TEACHER DASHBOARD
+========================= */
+
+.dashboard-page {
+    display: none;
+}
+
+.dashboard-layout {
+    min-height: calc(100vh - 75px);
+    display: flex;
+}
+
+.sidebar {
+    width: 250px;
+    background: #111827;
+    color: white;
+    padding: 25px 16px;
+}
+
+.sidebar-logo {
+    font-size: 22px;
+    font-weight: 800;
+    padding: 0 12px 30px;
+}
+
+.sidebar-menu {
+    list-style: none;
+}
+
+.sidebar-menu li {
+    margin-bottom: 6px;
+}
+
+.sidebar-menu button {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: #cbd5e1;
+    text-align: left;
+    padding: 13px 12px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.sidebar-menu button:hover,
+.sidebar-menu button.active {
+    background: #1d4ed8;
+    color: white;
+}
+
+.dashboard-main {
+    flex: 1;
+    padding: 35px;
+    overflow-x: auto;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.dashboard-header h1 {
+    font-size: 30px;
+}
+
+.logout-btn {
+    border: none;
+    background: #fee2e2;
+    color: #b91c1c;
+    padding: 10px 16px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.welcome {
+    background: linear-gradient(135deg,#2563eb,#1d4ed8);
+    color: white;
+    padding: 30px;
+    border-radius: 18px;
+    margin-bottom: 25px;
+}
+
+.welcome h2 {
+    margin-bottom: 8px;
+}
+
+.welcome p {
+    color: #dbeafe;
+}
+
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.dash-card {
+    background: white;
+    padding: 22px;
+    border-radius: 15px;
+    border: 1px solid #e5e7eb;
+}
+
+.dash-card span {
+    color: #667085;
+    font-size: 14px;
+}
+
+.dash-card strong {
+    display: block;
+    font-size: 28px;
+    margin-top: 10px;
+}
+
+.dashboard-content {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 20px;
+}
+
+.content-box {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.content-box h3 {
+    margin-bottom: 20px;
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 14px;
+}
+
+.action-btn {
+    border: 1px solid #e5e7eb;
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+
+.action-btn strong {
+    display: block;
+    margin-bottom: 7px;
+}
+
+.action-btn span {
+    font-size: 13px;
+    color: #667085;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 900px) {
+
+    .hero,
+    .ai-section,
+    .teacher-section {
+        grid-template-columns: 1fr;
+    }
+
+    .subjects,
+    .features {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .stats {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .dashboard-cards {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .dashboard-content {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        width: 210px;
+    }
+}
+
+@media (max-width: 650px) {
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero {
+        padding-top: 55px;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .subjects,
+    .features,
+    .stats,
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .ai-section {
+        padding: 30px;
+    }
+
+    .teacher-section h2,
+    .section-header h2,
+    .cta h2 {
+        font-size: 30px;
+    }
+
+    .dashboard-layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .sidebar-menu {
+        display: flex;
+        overflow-x: auto;
+        gap: 5px;
+    }
+
+    .sidebar-menu button {
+        white-space: nowrap;
+    }
+
+    .dashboard-main {
+        padding: 20px;
+    }
+}
+</style>
 </head>
 
 <body>
 
 <!-- =========================
-     NAVIGATION
+     NAVBAR
 ========================= -->
 
-<header class="navbar">
-
+<nav class="navbar">
     <div class="nav-container">
 
-        <a href="#" class="logo">
+        <div class="logo" onclick="showHome()">
+            Mësuesi <span>Dixhital</span>
+        </div>
 
-            <div class="logo-icon">
-                🎓
-            </div>
-
-            <div class="logo-text">
-                Mësuesi <span>Dixhital</span>
-            </div>
-
-        </a>
-
-        <nav class="nav-menu">
-
-            <a href="#">Ballina</a>
-            <a href="#lendet">Lëndët</a>
-            <a href="#mjetet">Mjetet</a>
-            <a href="#ai">AI</a>
-            <a href="#mesuesit">Për mësues</a>
-
-            <a href="#fillo" class="nav-button">
-                Fillo falas
-            </a>
-
-        </nav>
+        <div class="nav-links">
+            <a onclick="showHome()">Ballina</a>
+            <a href="#subjects">Lëndët</a>
+            <a href="#features">Mjetet</a>
+            <a onclick="showLogin()" class="login-btn">Hyr për mësues</a>
+        </div>
 
     </div>
-
-</header>
+</nav>
 
 
 <!-- =========================
-     HERO
+     HOME PAGE
 ========================= -->
+
+<div id="homePage" class="page" style="display:block;">
 
 <section class="hero">
 
-    <div class="hero-container">
+    <div>
 
-        <div>
+        <div class="badge">
+            🚀 Platformë moderne për arsimin
+        </div>
 
-            <div class="badge">
-                🚀 Platformë moderne për arsimin
-            </div>
+        <h1>
+            Mësimdhënia bëhet
+            <span>më e zgjuar.</span>
+        </h1>
 
-            <h1>
-                Mësimdhënia bëhet
-                <span>më e zgjuar.</span>
-            </h1>
+        <p>
+            Mësuesi Dixhital ju ndihmon të krijoni pyetje,
+            teste, kuize dhe materiale mësimore më shpejt
+            dhe më lehtë.
+        </p>
 
-            <p class="hero-text">
-                Mësuesi Dixhital ju ndihmon të krijoni pyetje,
-                kuize, teste dhe materiale mësimore më shpejt,
-                më lehtë dhe në mënyrë më profesionale.
-            </p>
+        <div class="hero-buttons">
 
-            <div class="hero-buttons">
+            <button class="primary-btn" onclick="showLogin()">
+                👨‍🏫 Hyr për mësues
+            </button>
 
-                <a href="#mjetet" class="primary-btn">
-                    🚀 Fillo tani
-                </a>
-
-                <a href="#lendet" class="secondary-btn">
-                    📚 Eksploro platformën
-                </a>
-
-            </div>
+            <a href="#features" class="secondary-btn">
+                Zbulo platformën
+            </a>
 
         </div>
 
+    </div>
 
-        <div class="dashboard-card">
 
-            <div class="dashboard-top">
+    <div class="dashboard-preview">
 
-                <div class="dashboard-title">
-                    Paneli i mësuesit
-                </div>
-
-                <div class="online">
-                    ● Online
-                </div>
-
+        <div class="preview-top">
+            <div class="preview-title">
+                Paneli i Mësuesit
             </div>
 
-            <div class="dashboard-grid">
+            <div class="preview-user">
+                Mësues
+            </div>
+        </div>
 
-                <div class="mini-card">
+        <div class="preview-cards">
 
-                    <div class="mini-icon">🤖</div>
+            <div class="preview-card">
+                📚 Pyetje
+                <strong>250+</strong>
+            </div>
 
-                    <h3>AI Pyetje</h3>
+            <div class="preview-card">
+                📝 Teste
+                <strong>35</strong>
+            </div>
 
-                    <p>
-                        Gjenero pyetje
-                        inteligjente
-                    </p>
+            <div class="preview-card">
+                🎯 Kuize
+                <strong>48</strong>
+            </div>
 
-                </div>
-
-                <div class="mini-card">
-
-                    <div class="mini-icon">📝</div>
-
-                    <h3>Teste</h3>
-
-                    <p>
-                        Krijo teste
-                        profesionale
-                    </p>
-
-                </div>
-
-                <div class="mini-card">
-
-                    <div class="mini-icon">🎯</div>
-
-                    <h3>Kuize</h3>
-
-                    <p>
-                        Krijo kuize
-                        interaktive
-                    </p>
-
-                </div>
-
-                <div class="mini-card">
-
-                    <div class="mini-icon">📊</div>
-
-                    <h3>Vlerësim</h3>
-
-                    <p>
-                        Analizo rezultatet
-                    </p>
-
-                </div>
-
+            <div class="preview-card">
+                📊 Rezultate
+                <strong>120</strong>
             </div>
 
         </div>
@@ -896,67 +923,43 @@
 
 </section>
 
-
-<!-- =========================
-     STATS
-========================= -->
 
 <section class="stats">
 
-    <div class="stats-container">
+    <div class="stat">
+        <strong>4+</strong>
+        <span>Lëndë</span>
+    </div>
 
-        <div class="stat">
+    <div class="stat">
+        <strong>250+</strong>
+        <span>Pyetje</span>
+    </div>
 
-            <h3>24/7</h3>
-            <p>Qasje në platformë</p>
+    <div class="stat">
+        <strong>35+</strong>
+        <span>Teste</span>
+    </div>
 
-        </div>
-
-        <div class="stat">
-
-            <h3>AI</h3>
-            <p>Gjenerim inteligjent</p>
-
-        </div>
-
-        <div class="stat">
-
-            <h3>100%</h3>
-            <p>Online</p>
-
-        </div>
-
-        <div class="stat">
-
-            <h3>📱</h3>
-            <p>Për telefon & kompjuter</p>
-
-        </div>
-
+    <div class="stat">
+        <strong>24/7</strong>
+        <span>Qasje</span>
     </div>
 
 </section>
 
 
-<!-- =========================
-     SUBJECTS
-========================= -->
+<!-- SUBJECTS -->
 
-<section class="section" id="lendet">
+<section class="section" id="subjects">
 
     <div class="section-header">
 
-        <div class="section-label">
-            Lëndët
-        </div>
-
-        <h2>
-            Mëso dhe përgatitu më mirë
-        </h2>
+        <h2>Lëndët mësimore</h2>
 
         <p>
-            Zgjidh lëndën dhe gjej materiale,
-            pyetje, teste dhe kuize.
+            Organizoni materialet tuaja sipas lëndëve
+            dhe krijoni aktivitete për nxënësit.
         </p>
 
     </div>
@@ -964,67 +967,28 @@
 
     <div class="subjects">
 
-        <div class="subject-card">
-
-            <div class="subject-icon">
-                ⚛️
-            </div>
-
+        <div class="subject">
+            <div class="subject-icon">⚛️</div>
             <h3>Fizikë</h3>
-
-            <p>
-                Pyetje, eksperimente, teste,
-                projekte dhe materiale mësimore.
-            </p>
-
+            <p>Pyetje, teste dhe projekte nga fizika.</p>
         </div>
 
-
-        <div class="subject-card">
-
-            <div class="subject-icon">
-                🧪
-            </div>
-
+        <div class="subject">
+            <div class="subject-icon">🧪</div>
             <h3>Kimi</h3>
-
-            <p>
-                Kuize, reaksione, pyetje
-                dhe materiale për kimi.
-            </p>
-
+            <p>Kuize dhe pyetje për kiminë.</p>
         </div>
 
-
-        <div class="subject-card">
-
-            <div class="subject-icon">
-                📐
-            </div>
-
+        <div class="subject">
+            <div class="subject-icon">📐</div>
             <h3>Matematikë</h3>
-
-            <p>
-                Ushtrime, teste dhe probleme
-                për nivele të ndryshme.
-            </p>
-
+            <p>Detyra dhe ushtrime matematikore.</p>
         </div>
 
-
-        <div class="subject-card">
-
-            <div class="subject-icon">
-                🌍
-            </div>
-
+        <div class="subject">
+            <div class="subject-icon">🌍</div>
             <h3>Gjeografi</h3>
-
-            <p>
-                Pyetje dhe materiale për
-                eksplorimin e botës.
-            </p>
-
+            <p>Pyetje dhe materiale për gjeografinë.</p>
         </div>
 
     </div>
@@ -1032,151 +996,111 @@
 </section>
 
 
-<!-- =========================
-     FEATURES
-========================= -->
+<!-- FEATURES -->
 
-<section class="features-section" id="mjetet">
+<section class="section" id="features">
 
-    <div class="section">
+    <div class="section-header">
 
-        <div class="section-header">
+        <h2>Gjithçka që i nevojitet mësuesit</h2>
 
-            <div class="section-label">
-                Mjetet
+        <p>
+            Një vend i vetëm për përgatitjen dhe
+            organizimin e materialeve mësimore.
+        </p>
+
+    </div>
+
+
+    <div class="features">
+
+        <div class="feature">
+            <div class="feature-icon">🤖</div>
+            <h3>Gjenero pyetje</h3>
+            <p>
+                Krijo pyetje sipas lëndës, klasës
+                dhe nivelit të vështirësisë.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">📚</div>
+            <h3>Bankë pyetjesh</h3>
+            <p>
+                Ruaj dhe organizo pyetjet tuaja
+                në një bankë personale.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">📝</div>
+            <h3>Krijo teste</h3>
+            <p>
+                Përgatit teste dhe kuize
+                për nxënësit tuaj.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">📊</div>
+            <h3>Rezultatet</h3>
+            <p>
+                Ndiq rezultatet dhe progresin
+                e nxënësve.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- AI -->
+
+<section class="section">
+
+    <div class="ai-section">
+
+        <div>
+
+            <div class="badge">
+                🤖 Inteligjencë Artificiale
             </div>
 
             <h2>
-                Gjithçka që i duhet një mësuesi
+                Pyetje të reja në pak sekonda.
             </h2>
 
             <p>
-                Një platformë e vetme për përgatitjen,
-                organizimin dhe vlerësimin e nxënësve.
+                Në versionin e ardhshëm, mësuesi do të mund
+                të zgjedhë lëndën, klasën, temën dhe nivelin
+                e vështirësisë dhe platforma do të gjenerojë
+                pyetje automatikisht.
             </p>
 
-        </div>
-
-
-        <div class="features">
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    🤖
-                </div>
-
-                <h3>Gjenerim me AI</h3>
-
-                <p>
-                    Krijo pyetje dhe materiale
-                    në mënyrë inteligjente.
-                </p>
-
-            </div>
-
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    📚
-                </div>
-
-                <h3>Bankë pyetjesh</h3>
-
-                <p>
-                    Organizo pyetjet sipas
-                    lëndës, klasës dhe temës.
-                </p>
-
-            </div>
-
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    🎯
-                </div>
-
-                <h3>Kuize</h3>
-
-                <p>
-                    Krijo kuize interesante
-                    dhe interaktive.
-                </p>
-
-            </div>
-
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    📊
-                </div>
-
-                <h3>Vlerësim</h3>
-
-                <p>
-                    Ndiq rezultatet dhe
-                    progresin e nxënësve.
-                </p>
-
-            </div>
+            <button class="primary-btn" onclick="showLogin()">
+                Provo panelin
+            </button>
 
         </div>
 
-    </div>
-
-</section>
-
-
-<!-- =========================
-     AI
-========================= -->
-
-<section class="ai-section" id="ai">
-
-    <div class="section">
 
         <div class="ai-box">
 
-            <div>
-
-                <div class="section-label">
-                    Inteligjenca Artificiale
-                </div>
-
-                <h2>
-                    Përgatit materiale
-                    në pak minuta.
-                </h2>
-
-                <p>
-                    Në versionin e ardhshëm,
-                    Mësuesi Dixhital do të përdorë
-                    inteligjencën artificiale për
-                    krijimin automatik të materialeve.
-                </p>
-
-                <a href="#fillo" class="ai-button">
-                    Mëso më shumë
-                </a>
-
+            <div class="ai-question">
+                ❓ Cila është njësia SI e forcës?
             </div>
 
+            <div class="ai-question">
+                A) Joule
+            </div>
 
-            <div class="ai-list">
+            <div class="ai-question">
+                B) Newton
+            </div>
 
-                <div>✓ Gjenero pyetje sipas klasës</div>
-
-                <div>✓ Zgjidh nivelin e vështirësisë</div>
-
-                <div>✓ Krijo alternativa A, B, C, D</div>
-
-                <div>✓ Krijo teste automatikisht</div>
-
-                <div>✓ Shmang përsëritjen e pyetjeve</div>
-
+            <div class="ai-question">
+                C) Watt
             </div>
 
         </div>
@@ -1186,86 +1110,58 @@
 </section>
 
 
-<!-- =========================
-     TEACHERS
-========================= -->
+<!-- TEACHERS -->
 
-<section class="section" id="mesuesit">
+<section class="section">
 
-    <div class="teacher-grid">
+    <div class="teacher-section">
 
-        <div class="teacher-text">
-
-            <div class="section-label">
-                Për mësuesit
-            </div>
+        <div>
 
             <h2>
-                Më pak kohë duke përgatitur.
-                Më shumë kohë duke mësuar.
+                Mësuesi në qendër të platformës
             </h2>
 
             <p>
-                Mësuesi Dixhital synon të jetë
-                asistenti juaj digjital për përgatitjen
-                e orëve, testeve, kuizeve dhe projekteve.
+                Platforma është menduar për t'ia
+                lehtësuar mësuesit punën e përditshme
+                dhe për të kursyer kohë në përgatitjen
+                e materialeve.
             </p>
 
-            <div class="check-list">
+            <ul class="teacher-list">
 
-                <div>✓ Krijo pyetje më shpejt</div>
+                <li>✅ Krijoni pyetje</li>
+                <li>✅ Përgatitni teste</li>
+                <li>✅ Organizoni materialet</li>
+                <li>✅ Ndiqni rezultatet</li>
+                <li>✅ Përdorni AI</li>
 
-                <div>✓ Organizo materialet</div>
-
-                <div>✓ Krijo teste dhe kuize</div>
-
-                <div>✓ Përdor AI për përgatitje</div>
-
-            </div>
-
-            <a href="#fillo" class="primary-btn">
-                👨‍🏫 Fillo si mësues
-            </a>
+            </ul>
 
         </div>
 
 
-        <div class="teacher-card">
+        <div class="teacher-panel">
 
-            <h3>
-                Përgatitja e materialeve
-            </h3>
-
-            <p>
-                Pyetje
-            </p>
-
-            <div class="progress">
-                <span style="width:92%"></span>
+            <div class="panel-row">
+                <span>Pyetje të krijuara</span>
+                <strong>250</strong>
             </div>
 
-            <p>
-                Teste
-            </p>
-
-            <div class="progress">
-                <span style="width:82%"></span>
+            <div class="panel-row">
+                <span>Teste</span>
+                <strong>35</strong>
             </div>
 
-            <p>
-                Kuize
-            </p>
-
-            <div class="progress">
-                <span style="width:88%"></span>
+            <div class="panel-row">
+                <span>Kuize</span>
+                <strong>48</strong>
             </div>
 
-            <p>
-                Projekte
-            </p>
-
-            <div class="progress">
-                <span style="width:75%"></span>
+            <div class="panel-row">
+                <span>Nxënës</span>
+                <strong>120</strong>
             </div>
 
         </div>
@@ -1275,99 +1171,490 @@
 </section>
 
 
-<!-- =========================
-     CTA
-========================= -->
+<!-- CTA -->
 
-<section class="cta" id="fillo">
+<section class="cta">
 
     <h2>
-        Gati për mësimdhënie më moderne?
+        Filloni me Mësuesi Dixhital
     </h2>
 
     <p>
-        Mësuesi Dixhital po ndërtohet për
-        mësuesit dhe nxënësit e së ardhmes.
+        Hyni në panelin tuaj dhe filloni të
+        përgatitni materialet mësimore.
     </p>
 
-    <a href="#lendet">
-        🚀 Eksploro Mësuesi Dixhital
-    </a>
+    <button class="primary-btn" onclick="showLogin()">
+        👨‍🏫 Hyr për mësues
+    </button>
 
 </section>
 
+</div>
+
 
 <!-- =========================
-     FOOTER
+     LOGIN PAGE
 ========================= -->
 
-<footer>
+<div id="loginPage" class="page">
 
-    <div class="footer-container">
+    <div class="login-page">
 
-        <div class="footer-brand">
+        <div class="login-box">
 
-            <h3>
-                🎓 Mësuesi Dixhital
-            </h3>
+            <div class="badge">
+                👨‍🏫 Mësuesi Dixhital
+            </div>
+
+            <h1>
+                Hyr për mësues
+            </h1>
 
             <p>
-                Platformë digjitale për mësues
-                dhe nxënës, e krijuar për ta bërë
-                arsimin më të lehtë, më modern
-                dhe më të organizuar.
+                Hyni në panelin tuaj të mësuesit.
             </p>
 
-        </div>
+
+            <form onsubmit="login(event)">
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Shkruani email-in"
+                        required
+                    >
+
+                </div>
 
 
-        <div>
+                <div class="form-group">
 
-            <h4>Platforma</h4>
+                    <label for="password">
+                        Fjalëkalimi
+                    </label>
 
-            <a href="#lendet">Lëndët</a>
-            <a href="#mjetet">Mjetet</a>
-            <a href="#ai">AI</a>
-            <a href="#mesuesit">Për mësues</a>
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Shkruani fjalëkalimin"
+                        required
+                    >
 
-        </div>
-
-
-        <div>
-
-            <h4>Materiale</h4>
-
-            <a href="#">Pyetje</a>
-            <a href="#">Kuize</a>
-            <a href="#">Teste</a>
-            <a href="#">Projekte</a>
-
-        </div>
+                </div>
 
 
-        <div>
+                <button class="full-btn" type="submit">
+                    Hyr në panel
+                </button>
 
-            <h4>Informacion</h4>
 
-            <a href="#">Rreth nesh</a>
-            <a href="#">Kontakti</a>
-            <a href="#">Privatësia</a>
-            <a href="#">Kushtet</a>
+                <div id="loginError" class="login-error">
+                    Email ose fjalëkalim i pasaktë.
+                </div>
+
+            </form>
+
+
+            <div class="demo-info">
+
+                <strong>Hyrje demo:</strong><br><br>
+
+                Email:
+                mesues@mesuesidixhital.com
+                <br>
+
+                Fjalëkalimi:
+                123456
+
+            </div>
+
+
+            <div class="back-home" onclick="showHome()">
+                ← Kthehu në ballinë
+            </div>
 
         </div>
 
     </div>
 
+</div>
 
-    <div class="copyright">
 
-        © 2026 Mësuesi Dixhital.
-        Të gjitha të drejtat e rezervuara.
+<!-- =========================
+     TEACHER DASHBOARD
+========================= -->
+
+<div id="dashboardPage" class="dashboard-page">
+
+    <div class="dashboard-layout">
+
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-logo">
+                Mësuesi Dixhital
+            </div>
+
+
+            <ul class="sidebar-menu">
+
+                <li>
+                    <button class="active">
+                        🏠 Dashboard
+                    </button>
+                </li>
+
+                <li>
+                    <button onclick="comingSoon('Gjenero pyetje')">
+                        🤖 Gjenero pyetje
+                    </button>
+                </li>
+
+                <li>
+                    <button onclick="comingSoon('Banka e pyetjeve')">
+                        📚 Banka e pyetjeve
+                    </button>
+                </li>
+
+                <li>
+                    <button onclick="comingSoon('Krijo test')">
+                        📝 Krijo test
+                    </button>
+                </li>
+
+                <li>
+                    <button onclick="comingSoon('Kuize')">
+                        🎯 Kuize
+                    </button>
+                </li>
+
+                <li>
+                    <button onclick="comingSoon('Rezultatet')">
+                        📊 Rezultatet
+                    </button>
+                </li>
+
+            </ul>
+
+        </aside>
+
+
+        <!-- MAIN -->
+
+        <main class="dashboard-main">
+
+
+            <div class="dashboard-header">
+
+                <div>
+
+                    <h1>
+                        Paneli i Mësuesit
+                    </h1>
+
+                    <p>
+                        Menaxhoni aktivitetet tuaja mësimore.
+                    </p>
+
+                </div>
+
+
+                <button class="logout-btn" onclick="logout()">
+                    Dil
+                </button>
+
+            </div>
+
+
+            <div class="welcome">
+
+                <h2>
+                    Mirë se vini! 👋
+                </h2>
+
+                <p>
+                    Ky është paneli juaj personal në
+                    Mësuesi Dixhital.
+                </p>
+
+            </div>
+
+
+            <!-- CARDS -->
+
+            <div class="dashboard-cards">
+
+                <div class="dash-card">
+
+                    <span>📚 Pyetje</span>
+
+                    <strong>250</strong>
+
+                </div>
+
+
+                <div class="dash-card">
+
+                    <span>📝 Teste</span>
+
+                    <strong>35</strong>
+
+                </div>
+
+
+                <div class="dash-card">
+
+                    <span>🎯 Kuize</span>
+
+                    <strong>48</strong>
+
+                </div>
+
+
+                <div class="dash-card">
+
+                    <span>👨‍🎓 Nxënës</span>
+
+                    <strong>120</strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-content">
+
+
+                <div class="content-box">
+
+                    <h3>
+                        Veprime të shpejta
+                    </h3>
+
+
+                    <div class="action-grid">
+
+                        <button
+                            class="action-btn"
+                            onclick="comingSoon('Gjenero pyetje')"
+                        >
+
+                            <strong>
+                                🤖 Gjenero pyetje
+                            </strong>
+
+                            <span>
+                                Krijo pyetje me AI
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            class="action-btn"
+                            onclick="comingSoon('Krijo test')"
+                        >
+
+                            <strong>
+                                📝 Krijo test
+                            </strong>
+
+                            <span>
+                                Përgatit një test të ri
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            class="action-btn"
+                            onclick="comingSoon('Banka e pyetjeve')"
+                        >
+
+                            <strong>
+                                📚 Banka e pyetjeve
+                            </strong>
+
+                            <span>
+                                Shiko pyetjet e ruajtura
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            class="action-btn"
+                            onclick="comingSoon('Rezultatet')"
+                        >
+
+                            <strong>
+                                📊 Rezultatet
+                            </strong>
+
+                            <span>
+                                Analizo rezultatet
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-box">
+
+                    <h3>
+                        Aktiviteti i fundit
+                    </h3>
+
+                    <div class="panel-row">
+                        <span>Pyetje të krijuara</span>
+                        <strong>24</strong>
+                    </div>
+
+                    <div class="panel-row">
+                        <span>Teste të krijuara</span>
+                        <strong>3</strong>
+                    </div>
+
+                    <div class="panel-row">
+                        <span>Kuize</span>
+                        <strong>5</strong>
+                    </div>
+
+                    <div class="panel-row">
+                        <span>Nxënës aktivë</span>
+                        <strong>18</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
 
     </div>
 
-</footer>
+</div>
 
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+/*
+    SHFAQ BALLINËN
+*/
+
+function showHome() {
+
+    document.getElementById("homePage").style.display = "block";
+    document.getElementById("loginPage").style.display = "none";
+    document.getElementById("dashboardPage").style.display = "none";
+
+    window.scrollTo(0, 0);
+}
+
+
+/*
+    SHFAQ LOGIN
+*/
+
+function showLogin() {
+
+    document.getElementById("homePage").style.display = "none";
+    document.getElementById("loginPage").style.display = "block";
+    document.getElementById("dashboardPage").style.display = "none";
+
+    window.scrollTo(0, 0);
+}
+
+
+/*
+    LOGIN DEMO
+*/
+
+function login(event) {
+
+    event.preventDefault();
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    const error =
+        document.getElementById("loginError");
+
+
+    /*
+        KREDENCIALET DEMO
+    */
+
+    if (
+        email === "mesues@mesuesidixhital.com"
+        &&
+        password === "123456"
+    ) {
+
+        error.style.display = "none";
+
+        document.getElementById("homePage").style.display = "none";
+        document.getElementById("loginPage").style.display = "none";
+        document.getElementById("dashboardPage").style.display = "block";
+
+        window.scrollTo(0, 0);
+
+    } else {
+
+        error.style.display = "block";
+
+    }
+
+}
+
+
+/*
+    LOGOUT
+*/
+
+function logout() {
+
+    document.getElementById("dashboardPage").style.display = "none";
+
+    showHome();
+
+}
+
+
+/*
+    FUNKSIONE QË DO TË NDËRTOHEN
+    NË HAPAT E ARDHSHËM
+*/
+
+function comingSoon(name) {
+
+    alert(
+        name +
+        " do të ndërtohet në hapin tjetër të platformës."
+    );
+
+}
+
+</script>
 
 </body>
 </html>
