@@ -4418,6 +4418,143 @@ function displayGeneratedTest() {
         return;
     }
 
+    const container = document.getElementById('generatedTestContent');
+
+    if (!container) {
+        alert('⚠️ Nuk u gjet zona e testit.');
+        return;
+    }
+
+
+    let html = '';
+
+
+    /* HEADERI I TESTIT */
+
+    html += `
+        <div class="generated-test-header">
+
+            <div>
+                <h2>📝 Test</h2>
+
+                <p>
+                    ${escapeBankHTML(test.subject || 'Të gjitha lëndët')}
+                    •
+                    Klasa ${escapeBankHTML(test.grade || 'Të gjitha')}
+                </p>
+            </div>
+
+            <div class="generated-test-info">
+
+                <span>
+                    📊 ${test.questions.length} pyetje
+                </span>
+
+            </div>
+
+        </div>
+    `;
+
+
+    /* KONTAINERI I PYETJEVE */
+
+    html += `
+        <div class="generated-test-questions">
+    `;
+
+
+    /* PYETJET */
+
+    test.questions.forEach(function(question, index) {
+
+        html += `
+            <div class="generated-test-question">
+
+                <div class="generated-test-question-title">
+
+                    <span class="generated-test-number">
+                        ${index + 1}
+                    </span>
+
+                    <span>
+                        ${escapeBankHTML(question.question)}
+                    </span>
+
+                </div>
+
+
+                <div class="generated-test-options">
+
+                    <div class="generated-test-option">
+                        <strong>A)</strong>
+                        ${escapeBankHTML(question.options.A)}
+                    </div>
+
+                    <div class="generated-test-option">
+                        <strong>B)</strong>
+                        ${escapeBankHTML(question.options.B)}
+                    </div>
+
+                    <div class="generated-test-option">
+                        <strong>C)</strong>
+                        ${escapeBankHTML(question.options.C)}
+                    </div>
+
+                    <div class="generated-test-option">
+                        <strong>D)</strong>
+                        ${escapeBankHTML(question.options.D)}
+                    </div>
+
+                </div>
+
+            </div>
+        `;
+
+    });
+
+
+    /* MBYLL KONTAINERIN E PYETJEVE */
+
+    html += `
+        </div>
+    `;
+
+
+    /* BUTONAT */
+
+    html += `
+        <div class="generated-test-actions">
+
+            <button onclick="openCreateTest()">
+                ↩️ Kthehu
+            </button>
+
+            <button onclick="printGeneratedTest()">
+                🖨️ Printo Testin
+            </button>
+
+        </div>
+    `;
+
+
+    /* SHFAQ TESTIN */
+
+    container.innerHTML = container.innerHTML = `
+    <div style="
+        background:white;
+        padding:30px;
+        border:5px solid red;
+        font-size:24px;
+    ">
+        TEST PROVË
+    </div>
+`;
+    
+}
+
+</script> 
+    }
+
     const container =
         document.getElementById('generatedTestContent');
 
