@@ -4187,6 +4187,542 @@ function openCreateTest() {
     </div>
 
 </section>
+    <script>
+
+function generateTestFromBank() {
+
+    const subject = document.getElementById('testSubject').value;
+    const grade = document.getElementById('testGrade').value;
+    const topic = document.getElementById('testTopic').value.trim().toLowerCase();
+    const difficulty = document.getElementById('testDifficulty').value;
+
+    const questionCount =
+        parseInt(document.getElementById('testQuestionCount').value);
+
+    const shuffleQuestions =
+        document.getElementById('shuffleQuestions').checked;
+
+    const shuffleOptions =
+        document.getElementById('shuffleOptions').checked;
+
+
+    // Merr pyetjet nga Banka e Pyetjeve
+    let questions = getBankQuestions();
+
+
+    // Filtrimi
+    questions = questions.filter(function(question) {
+
+        const matchesSubject =
+            !subject || question.subject === subject;
+
+        const matchesGrade =
+            !grade || question.grade === grade;
+
+        const matchesTopic =
+            !topic ||
+            (question.topic || '').toLowerCase().includes(topic);
+
+        const matchesDifficulty =
+            !difficulty || question.difficulty === difficulty;
+
+        return (
+            matchesSubject &&
+            matchesGrade &&
+            matchesTopic &&
+            matchesDifficulty
+        );
+
+    });
+
+
+    // Kontrollo nëse ka mjaft pyetje
+    if (questions.length < questionCount) {
+
+        alert(
+            '⚠️ Nuk ka mjaft pyetje në Bankën e Pyetjeve për këto parametra.\n\n' +
+            'Pyetje të gjetura: ' + questions.length +
+            '\nPyetje të kërkuara: ' + questionCount
+        );
+
+        return;
+    }
+
+
+    // Përziej pyetjet
+    if (shuffleQuestions) {
+
+        questions.sort(function() {
+            return Math.random() - 0.5;
+        });
+
+    }
+
+
+    // Merr numrin e kërkuar
+    questions = questions.slice(0, questionCount);
+
+
+    // Përziej alternativat
+    if (shuffleOptions) {
+
+        questions = questions.map(function(question) {
+
+            const optionEntries =
+                Object.entries(question.options);
+
+            optionEntries.sort(function() {
+                return Math.random() - 0.5;
+            });
+
+            const newOptions = {};
+            const letters = ['A', 'B', 'C', 'D'];
+
+            let newCorrect = '';
+
+            optionEntries.forEach(function(entry, index) {
+
+                const oldLetter = entry[0];
+                const value = entry[1];
+
+                const newLetter = letters[index];
+
+                newOptions[newLetter] = value;
+
+                if (oldLetter === question.correct) {
+                    newCorrect = newLetter;
+                }
+
+            });
+
+            return {
+                ...question,
+                options: newOptions,
+                correct: newCorrect
+            };
+
+        });
+
+    }
+
+
+    // Ruaje testin e krijuar
+    window.generatedTest = {
+
+        subject: subject,
+        grade: grade,
+        topic: topic,
+        difficulty: difficulty,
+        questions: questions,
+        createdAt: new Date().toISOString()
+
+    };
+
+
+    alert(showPage('generatedTestPage');
+displayGeneratedTest();
+        '✅ Testi u krijua me sukses!\n\n' +
+        'Pyetje: ' + questions.length
+    );
+
+
+    console.log('Testi i krijuar:', window.generatedTest);
+
+}
+
+</script>
+    <section id="generatedTestPage" class="page">
+
+    <div class="dashboard-layout">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-logo">
+                📚 Mësuesi Dixhital
+            </div>
+
+            <button onclick="openDashboard()">
+                🏠 Dashboard
+            </button>
+
+            <button onclick="openAIGenerator()">
+                🤖 Gjenero pyetje
+            </button>
+
+            <button onclick="openQuestionBank()">
+                📚 Banka e pyetjeve
+            </button>
+
+            <button onclick="openCreateTest()">
+                📝 Krijo test
+            </button>
+
+            <button class="active">
+                📄 Testi i krijuar
+            </button>
+
+            <button onclick="comingSoon('Kuize')">
+                🎯 Kuize
+            </button>
+
+            <button onclick="comingSoon('Rezultatet')">
+                📊 Rezultatet
+            </button>
+
+            <button onclick="logout()">
+                🚪 Dil
+            </button>
+
+        </aside>
+
+
+        <main class="main-content">
+
+            <div class="topbar">
+
+                <div>
+                    <h1>📄 Testi i krijuar</h1>
+
+                    <p>
+                        Testi i krijuar nga Banka e Pyetjeve.
+                    </p>
+                </div>
+
+                <div class="teacher-badge">
+                    👨‍🏫 Mësues
+                </div>
+
+            </div>
+
+
+            <div id="generatedTestContent">
+
+                <!-- Testi do të shfaqet këtu -->
+
+            </div>
+
+
+        </main>
+
+    </div>
+
+</section>
+    <script>
+
+function displayGeneratedTest() {
+
+    const test = window.generatedTest;
+
+    if (!test || !test.questions || test.questions.length === 0) {
+        alert('⚠️ Nuk u gjet testi i krijuar.');
+        return;
+    }
+
+    const container =
+        document.getElementById('generatedTestContent');
+
+    if (!container) return;
+
+
+    let html = `
+
+        <div class="generated-test-header">
+
+            <div>
+                <h2>📝 Test</h2>
+
+                <p>
+                    ${escapeBankHTML(test.subject || 'Të gjitha lëndët')}
+                    •
+                    Klasa ${escapeBankHTML(test.grade || 'Të gjitha')}
+                </p>
+            </div>
+
+            <div class="generated-test-info">
+
+                <span>
+                    📊 ${test.questions.length} pyetje
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="generated-test-questions">
+    `;
+
+
+    test.questions.forEach(function(question, index) {
+
+        html += `
+
+            <div class="generated-test-question">
+
+                <div class="generated-test-question-title">
+
+                    <span class="generated-test-number">
+                        ${index + 1}
+                    </span>
+
+                    <span>
+                        ${escapeBankHTML(question.question)}
+                    </span>
+
+                </div>
+
+
+                <div class="generated-test-options">
+
+                    <div class="generated-test-option">
+                        <strong>A)</strong>
+                        ${escapeBankHTML(question.options.A)}
+                    </div>
+
+                    <div class="generated-test-option">
+                        <strong>B)</strong>
+                        ${escapeBankHTML(question.options.B)}
+                    </div>
+
+                    <div class="generated-test-option">
+                        <strong>C)</strong>
+                        ${escapeBankHTML(question.options.C)}
+                    </div>
+
+                    <div class="generated-test-option">
+                        <strong>D)</strong>
+                        ${escapeBankHTML(question.options.D)}
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    html += `
+
+        </div>
+
+        <div class="generated-test-actions">
+
+            <button onclick="openCreateTest()">
+                ↩️ Kthehu
+            </button>
+
+            <button onclick="printGeneratedTest()">
+                🖨️ Printo Testin
+            </button>
+
+        </div>
+
+    `;
+
+
+    container.innerHTML = html;
+
+}
+
+</script>
+    <style>
+
+#generatedTestPage {
+    background: #f5f7fb;
+}
+
+#generatedTestPage .main-content {
+    padding: 32px;
+}
+
+
+/* HEADER */
+
+#generatedTestPage .generated-test-header {
+    background: #ffffff;
+    border: 1px solid #e5eaf2;
+    border-radius: 20px;
+    padding: 26px 28px;
+    margin-bottom: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 6px 20px rgba(15,23,42,0.05);
+}
+
+#generatedTestPage .generated-test-header h2 {
+    margin: 0 0 7px;
+    color: #172033;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+#generatedTestPage .generated-test-header p {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* INFO */
+
+#generatedTestPage .generated-test-info span {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 10px;
+    background: #eef2ff;
+    color: #4338ca;
+    border: 1px solid #e0e7ff;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+
+/* QUESTIONS */
+
+#generatedTestPage .generated-test-question {
+    background: #ffffff;
+    border: 1px solid #e5eaf2;
+    border-radius: 18px;
+    padding: 22px;
+    margin-bottom: 16px;
+    box-shadow: 0 5px 18px rgba(15,23,42,0.04);
+    transition: all 0.2s ease;
+}
+
+#generatedTestPage .generated-test-question:hover {
+    border-color: #d7def0;
+    box-shadow: 0 10px 25px rgba(15,23,42,0.07);
+}
+
+
+/* QUESTION TITLE */
+
+#generatedTestPage .generated-test-question-title {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    color: #172033;
+    font-size: 16px;
+    font-weight: 750;
+    line-height: 1.55;
+    margin-bottom: 16px;
+}
+
+#generatedTestPage .generated-test-number {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: #eef2ff;
+    color: #4338ca;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+
+/* OPTIONS */
+
+#generatedTestPage .generated-test-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+#generatedTestPage .generated-test-option {
+    background: #f8fafc;
+    border: 1px solid #e8edf3;
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: #475569;
+    font-size: 14px;
+    line-height: 1.45;
+    transition: all 0.2s ease;
+}
+
+#generatedTestPage .generated-test-option:hover {
+    background: #f1f5f9;
+    border-color: #dbe2ea;
+}
+
+#generatedTestPage .generated-test-option strong {
+    color: #4338ca;
+    font-weight: 800;
+    margin-right: 6px;
+}
+
+
+/* ACTIONS */
+
+#generatedTestPage .generated-test-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+#generatedTestPage .generated-test-actions button {
+    border: 0;
+    border-radius: 11px;
+    padding: 12px 18px;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#generatedTestPage .generated-test-actions button:first-child {
+    background: #eef2ff;
+    color: #4338ca;
+    border: 1px solid #e0e7ff;
+}
+
+#generatedTestPage .generated-test-actions button:last-child {
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    color: #ffffff;
+    box-shadow: 0 7px 18px rgba(79,70,229,0.22);
+}
+
+#generatedTestPage .generated-test-actions button:hover {
+    transform: translateY(-2px);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    #generatedTestPage .main-content {
+        padding: 18px;
+    }
+
+    #generatedTestPage .generated-test-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    #generatedTestPage .generated-test-options {
+        grid-template-columns: 1fr;
+    }
+
+    #generatedTestPage .generated-test-actions {
+        flex-direction: column;
+    }
+
+    #generatedTestPage .generated-test-actions button {
+        width: 100%;
+    }
+
+}
+
+</style>
 </body>
 </html>
 <!-- PJESA 2 - vazhdimi i kodit -->
