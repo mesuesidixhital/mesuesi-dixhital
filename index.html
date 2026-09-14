@@ -3358,7 +3358,106 @@ document.addEventListener('DOMContentLoaded', function() {
 
 }
 
-</style> 
+</style>
+    <style>
+
+/* =====================================================
+   BANKA E PYETJEVE — PREMIUM TOOLBAR
+   ===================================================== */
+
+#questionBankPage .bank-toolbar {
+    position: relative;
+    overflow: hidden;
+    padding: 22px;
+    background: linear-gradient(145deg, #ffffff 0%, #f8faff 100%);
+    border: 1px solid #e4e9f2;
+}
+
+#questionBankPage .bank-toolbar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #4f46e5, #6366f1, #8b5cf6);
+}
+
+/* Titulli i toolbar-it */
+
+#questionBankPage .bank-toolbar::after {
+    content: "Kërko dhe filtro pyetjet";
+    display: block;
+    margin-bottom: 14px;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+/* Rreshti i kontrolleve */
+
+#questionBankPage .bank-toolbar-row {
+    position: relative;
+    z-index: 1;
+}
+
+/* Search */
+
+#questionBankPage #bankSearch {
+    height: 50px;
+    padding-left: 18px;
+    border-radius: 12px;
+    background: white;
+    border: 1px solid #dce3ee;
+    font-size: 14px;
+    box-shadow: 0 3px 10px rgba(15,23,42,0.025);
+}
+
+#questionBankPage #bankSearch:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 4px rgba(99,102,241,0.10);
+}
+
+/* Selects */
+
+#questionBankPage #bankSubject,
+#questionBankPage #bankGrade {
+    height: 50px;
+    border-radius: 12px;
+    background: white;
+    border: 1px solid #dce3ee;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#questionBankPage #bankSubject:focus,
+#questionBankPage #bankGrade:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 4px rgba(99,102,241,0.10);
+}
+
+/* Add button */
+
+#questionBankPage button[onclick="openAddQuestionForm()"] {
+    height: 50px;
+    min-width: 155px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+    box-shadow:
+        0 8px 20px rgba(79,70,229,0.22),
+        inset 0 1px 0 rgba(255,255,255,0.20);
+    font-size: 14px;
+    letter-spacing: 0.1px;
+}
+
+#questionBankPage button[onclick="openAddQuestionForm()"]:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 12px 25px rgba(79,70,229,0.28),
+        inset 0 1px 0 rgba(255,255,255,0.20);
+}
+
+</style>
 </body>
 </html>
 <!-- PJESA 2 - vazhdimi i kodit -->
