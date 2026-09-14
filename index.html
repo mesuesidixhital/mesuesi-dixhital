@@ -2531,107 +2531,111 @@ function displayQuestionBank() {
     list.innerHTML =
         filteredQuestions.map(function(question, index) {
 
-            return `
+           return `
 
-                <div class="bank-question">
+    <div class="bank-question">
 
-                    <div class="bank-question-header">
+        <div class="bank-question-header">
 
-                        <span class="bank-question-number">
+            <span class="bank-question-number">
+                Pyetja ${index + 1}
+            </span>
 
-                            Pyetja ${index + 1}
+            <div class="bank-badges">
 
-                        </span>
+                <span class="bank-badge bank-badge-subject">
+                    📚 ${escapeBankHTML(question.subject)}
+                </span>
 
-                       <div class="bank-badges">
+                <span class="bank-badge bank-badge-grade">
+                    🎓 Klasa ${escapeBankHTML(question.grade)}
+                </span>
 
-    <span class="bank-badge bank-badge-subject">
-        📚 ${escapeBankHTML(question.subject)}
-    </span>
+                <span class="bank-badge bank-badge-difficulty">
+                    ⭐ ${escapeBankHTML(question.difficulty)}
+                </span>
 
-    <span class="bank-badge bank-badge-grade">
-        🎓 Klasa ${escapeBankHTML(question.grade)}
-    </span>
+            </div>
 
-    <span class="bank-badge bank-badge-difficulty">
-        ⭐ ${escapeBankHTML(question.difficulty)}
-    </span>
-
-</div>
-
-                    <div class="bank-question-text">
-
-                        ${escapeBankHTML(question.question)}
-
-                    </div>
+        </div>
 
 
-                    <div class="bank-option">
+        <div class="bank-question-text">
 
-                        <strong>A)</strong>
-                        ${escapeBankHTML(question.options.A)}
+            ${escapeBankHTML(question.question)}
 
-                    </div>
-
-
-                    <div class="bank-option">
-
-                        <strong>B)</strong>
-                        ${escapeBankHTML(question.options.B)}
-
-                    </div>
+        </div>
 
 
-                    <div class="bank-option">
+        <div class="bank-option">
 
-                        <strong>C)</strong>
-                        ${escapeBankHTML(question.options.C)}
+            <strong>A)</strong>
+            ${escapeBankHTML(question.options.A)}
 
-                    </div>
-
-
-                    <div class="bank-option">
-
-                        <strong>D)</strong>
-                        ${escapeBankHTML(question.options.D)}
-
-                    </div>
+        </div>
 
 
-                    <div class="bank-correct">
+        <div class="bank-option">
 
-                        ✅ Përgjigjja e saktë:
-                        <strong>${question.correct}</strong>
+            <strong>B)</strong>
+            ${escapeBankHTML(question.options.B)}
 
-                    </div>
-
-
-                    <div class="bank-question-meta">
-
-                        📚 Tema:
-                        ${escapeBankHTML(question.topic || 'Pa temë')}
-
-                    </div>
+        </div>
 
 
-                   <div class="bank-actions">
-    <button
-        class="edit-bank-question"
-        onclick="editBankQuestion(${question.id})"
-    >
-        ✏️ Ndrysho
-    </button>
+        <div class="bank-option">
 
-    <button
-        class="delete-bank-question"
-        onclick="deleteBankQuestion(${question.id})"
-    >
-        🗑️ Fshi
-    </button>
-</div>
-                        
+            <strong>C)</strong>
+            ${escapeBankHTML(question.options.C)}
 
-            `;
+        </div>
+
+
+        <div class="bank-option">
+
+            <strong>D)</strong>
+            ${escapeBankHTML(question.options.D)}
+
+        </div>
+
+
+        <div class="bank-correct">
+
+            ✅ Përgjigjja e saktë:
+            <strong>${question.correct}</strong>
+
+        </div>
+
+
+        <div class="bank-question-meta">
+
+            📚 Tema:
+            ${escapeBankHTML(question.topic || 'Pa temë')}
+
+        </div>
+
+
+        <div class="bank-actions">
+
+            <button
+                class="edit-bank-question"
+                onclick="editBankQuestion(${question.id})"
+            >
+                ✏️ Ndrysho
+            </button>
+
+            <button
+                class="delete-bank-question"
+                onclick="deleteBankQuestion(${question.id})"
+            >
+                🗑️ Fshi
+            </button>
+
+        </div>
+
+    </div>
+
+`;
 
         }).join('');
 
