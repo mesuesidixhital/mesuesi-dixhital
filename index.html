@@ -925,9 +925,8 @@ onclick="openQuestionBank()"
 </button>
 
 
-<button
-onclick="comingSoon('Krijo test')">
-📝 Krijo test
+<button onclick="openCreateTest()">
+    📝 Krijo test
 </button>
 
 
@@ -3927,6 +3926,267 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 </style>
+    <script>
+
+function openCreateTest() {
+    showPage('createTestPage');
+}
+
+</script>
+    <section id="createTestPage" class="page">
+
+    <div class="dashboard-layout">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-logo">
+                📚 Mësuesi Dixhital
+            </div>
+
+            <button onclick="openDashboard()">
+                🏠 Dashboard
+            </button>
+
+            <button onclick="openAIGenerator()">
+                🤖 Gjenero pyetje
+            </button>
+
+            <button onclick="openQuestionBank()">
+                📚 Banka e pyetjeve
+            </button>
+
+            <button class="active" onclick="openCreateTest()">
+                📝 Krijo test
+            </button>
+
+            <button onclick="comingSoon('Kuize')">
+                🎯 Kuize
+            </button>
+
+            <button onclick="comingSoon('Rezultatet')">
+                📊 Rezultatet
+            </button>
+
+            <button onclick="logout()">
+                🚪 Dil
+            </button>
+
+        </aside>
+
+
+        <main class="main-content">
+
+            <div class="topbar">
+
+                <div>
+                    <h1>📝 Krijo Test</h1>
+
+                    <p>
+                        Krijo një test profesional nga Banka e Pyetjeve.
+                    </p>
+                </div>
+
+                <div class="teacher-badge">
+                    👨‍🏫 Mësues
+                </div>
+
+            </div>
+
+
+            <div class="create-test-card">
+
+                <div class="create-test-title">
+                    <h2>⚙️ Parametrat e testit</h2>
+
+                    <p>
+                        Zgjidh parametrat për testin që dëshiron të krijosh.
+                    </p>
+                </div>
+
+
+                <div class="create-test-grid">
+
+                    <div class="create-test-field">
+
+                        <label>📚 Lënda</label>
+
+                        <select id="testSubject">
+
+                            <option value="">
+                                Zgjidh lëndën
+                            </option>
+
+                            <option value="Fizikë">
+                                Fizikë
+                            </option>
+
+                            <option value="Kimi">
+                                Kimi
+                            </option>
+
+                            <option value="Matematikë">
+                                Matematikë
+                            </option>
+
+                            <option value="Biologji">
+                                Biologji
+                            </option>
+
+                            <option value="Gjeografi">
+                                Gjeografi
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="create-test-field">
+
+                        <label>🎓 Klasa</label>
+
+                        <select id="testGrade">
+
+                            <option value="">
+                                Zgjidh klasën
+                            </option>
+
+                            <option value="6">Klasa 6</option>
+                            <option value="7">Klasa 7</option>
+                            <option value="8">Klasa 8</option>
+                            <option value="9">Klasa 9</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="create-test-field">
+
+                        <label>📖 Tema</label>
+
+                        <input
+                            type="text"
+                            id="testTopic"
+                            placeholder="p.sh. Forca dhe lëvizja"
+                        >
+
+                    </div>
+
+
+                    <div class="create-test-field">
+
+                        <label>⭐ Vështirësia</label>
+
+                        <select id="testDifficulty">
+
+                            <option value="">
+                                Të gjitha nivelet
+                            </option>
+
+                            <option value="I lehtë">
+                                I lehtë
+                            </option>
+
+                            <option value="Mesatar">
+                                Mesatar
+                            </option>
+
+                            <option value="I vështirë">
+                                I vështirë
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="create-test-field">
+
+                        <label>🔢 Numri i pyetjeve</label>
+
+                        <select id="testQuestionCount">
+
+                            <option value="5">5 pyetje</option>
+                            <option value="10">10 pyetje</option>
+                            <option value="15">15 pyetje</option>
+                            <option value="20">20 pyetje</option>
+                            <option value="25">25 pyetje</option>
+                            <option value="30">30 pyetje</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="create-test-field">
+
+                        <label>🔘 Lloji i pyetjeve</label>
+
+                        <select id="testQuestionType">
+
+                            <option value="multiple-choice">
+                                Me alternativa A/B/C/D
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="create-test-options">
+
+                    <label class="create-test-checkbox">
+
+                        <input
+                            type="checkbox"
+                            id="shuffleQuestions"
+                            checked
+                        >
+
+                        <span>
+                            🔀 Përziej pyetjet
+                        </span>
+
+                    </label>
+
+
+                    <label class="create-test-checkbox">
+
+                        <input
+                            type="checkbox"
+                            id="shuffleOptions"
+                        >
+
+                        <span>
+                            🔀 Përziej alternativat
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="create-test-actions">
+
+                    <button
+                        class="create-test-primary"
+                        onclick="generateTestFromBank()"
+                    >
+                        📝 Krijo Testin
+                    </button>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</section>
 </body>
 </html>
 <!-- PJESA 2 - vazhdimi i kodit -->
