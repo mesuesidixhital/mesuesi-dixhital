@@ -2571,14 +2571,22 @@ function displayQuestionBank() {
                     </div>
 
 
-                    <div class="bank-actions">
+                   <div class="bank-actions">
+    <button
+        class="edit-bank-question"
+        onclick="editBankQuestion(${question.id})"
+    >
+        ✏️ Ndrysho
+    </button>
 
-                        <button
-                            class="delete-bank-question"
-                            onclick="deleteBankQuestion(${question.id})"
-                        >
-
-                            🗑️ Fshi
+    <button
+        class="delete-bank-question"
+        onclick="deleteBankQuestion(${question.id})"
+    >
+        🗑️ Fshi
+    </button>
+</div>
+                         🗑️ Fshi
 
                         </button>
 
@@ -2659,7 +2667,111 @@ document.addEventListener(
 
     }
 );
+function editBankQuestion(id) {
+    const questions = getBankQuestions();
 
+    const question = questions.find(function(item) {
+        return item.id === id;
+    });
+
+    if (!question) {
+        alert('Pyetja nuk u gjet.');
+        return;
+    }
+
+    document.getElementById('newQuestionText').value = question.question;
+    document.getElementById('newSubject').value = question.subject;
+    document.getElementById('newGrade').value = question.grade;
+    document.getElementById('newTopic').value = question.topic || '';
+    document.getElementById('newDifficulty').value = question.difficulty;
+
+    document.getElementById('optionA').value = question.options.A;
+    document.getElementById('optionB').value = question.options.B;
+    document.getElementById('optionC').value = question.options.C;
+    document.getElementById('optionD').value = question.options.D;
+    document.getElementById('correctOption').value = question.correct;
+
+    document.getElementById('addQuestionForm').style.display = 'block';
+
+    window.editingQuestionId = id;
+
+    document.getElementById('newQuestionText').focus();
+}
+</script>
+<script>
+function updateEditedQuestion() {
+    if (!window.editingQuestionId) return false;
+
+    const questions = getBankQuestions();
+
+    const index = questions.findIndex(function(question) {
+        return question.id === window.editingQuestionId;
+    });
+
+    if (index === -1) {
+        alert('Pyetja nuk u gjet.');
+        return true;
+    }
+
+    questions[index].question =
+        document.getElementById('newQuestionText').value.trim();
+
+    questions[index].subject =
+        document.getElementById('newSubject').value;
+
+    questions[index].grade =
+        document.getElementById('newGrade').value;
+
+    questions[index].topic =
+        document.getElementById('newTopic').value.trim();
+
+    questions[index].difficulty =
+        document.getElementById('newDifficulty').value;
+
+    questions[index].options.A =
+        document.getElementById('optionA').value.trim();
+
+    questions[index].options.B =
+        document.getElementById('optionB').value.trim();
+
+    questions[index].options.C =
+        document.getElementById('optionC').value.trim();
+
+    questions[index].options.D =
+        document.getElementById('optionD').value.trim();
+
+    questions[index].correct =
+        document.getElementById('correctOption').value;
+
+    saveBankQuestions(questions);
+
+    window.editingQuestionId = null;
+
+    document.getElementById('addQuestionForm').style.display = 'none';
+
+    displayQuestionBank();
+
+    alert('✅ Pyetja u ndryshua me sukses!');
+
+    return true;
+}
+</script>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+
+    const originalAddQuestion = window.addNewQuestion;
+
+    window.addNewQuestion = function() {
+
+        if (window.editingQuestionId) {
+            updateEditedQuestion();
+            return;
+        }
+
+        originalAddQuestion();
+    };
+
+});
 </script>
 </body>
 </html>
