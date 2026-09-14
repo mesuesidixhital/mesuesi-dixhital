@@ -2380,7 +2380,7 @@ function addNewQuestion() {
     /* Ruajmë */
 
     saveBankQuestions(questions);
-
+updateBankStatistics();
 
     /* Pastrojmë formularin */
 
@@ -2833,8 +2833,8 @@ function updateBankStatistics() {
     );
 
     const hardQuestions = questions.filter(function(question) {
-        return question.difficulty === 'E vështirë';
-    });
+    return question.difficulty === 'I vështirë';
+});
 
     const totalQuestionsElement =
         document.getElementById('totalBankQuestions');
