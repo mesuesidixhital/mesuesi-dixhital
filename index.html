@@ -3458,6 +3458,405 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 </style>
+    <style>
+
+/* =====================================================
+   BANKA E PYETJEVE — PREMIUM QUESTION FORM
+   ===================================================== */
+
+#questionBankPage #addQuestionForm {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, #ffffff 0%, #f8faff 100%);
+    border: 1px solid #e2e8f0;
+    border-radius: 22px;
+    padding: 30px;
+    box-shadow: 0 14px 40px rgba(15,23,42,0.07);
+}
+
+/* Vijë dekorative */
+
+#questionBankPage #addQuestionForm::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #4f46e5, #6366f1, #8b5cf6);
+}
+
+/* Titulli */
+
+#questionBankPage #addQuestionForm h2 {
+    font-size: 23px;
+    font-weight: 800;
+    color: #172033;
+    margin-bottom: 6px;
+    letter-spacing: -0.4px;
+}
+
+/* Përshkrimi */
+
+#questionBankPage #addQuestionForm::after {
+    content: "";
+    display: block;
+}
+
+/* Labels */
+
+#questionBankPage #addQuestionForm label {
+    display: block;
+    margin-bottom: 7px;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 750;
+}
+
+/* Të gjitha inputet */
+
+#questionBankPage #addQuestionForm input,
+#questionBankPage #addQuestionForm select,
+#questionBankPage #addQuestionForm textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #dbe3ed;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #172033;
+    font-size: 14px;
+    padding: 12px 14px;
+    transition: all 0.2s ease;
+}
+
+/* Focus */
+
+#questionBankPage #addQuestionForm input:focus,
+#questionBankPage #addQuestionForm select:focus,
+#questionBankPage #addQuestionForm textarea:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 4px rgba(99,102,241,0.09);
+}
+
+/* Pyetja */
+
+#questionBankPage #newQuestionText {
+    min-height: 105px;
+    resize: vertical;
+    line-height: 1.55;
+}
+
+/* Alternativat */
+
+#questionBankPage #optionA,
+#questionBankPage #optionB,
+#questionBankPage #optionC,
+#questionBankPage #optionD {
+    padding-left: 42px;
+}
+
+/* Ngjyra të lehta për alternativat */
+
+#questionBankPage #optionA {
+    border-left: 4px solid #4f46e5;
+}
+
+#questionBankPage #optionB {
+    border-left: 4px solid #6366f1;
+}
+
+#questionBankPage #optionC {
+    border-left: 4px solid #8b5cf6;
+}
+
+#questionBankPage #optionD {
+    border-left: 4px solid #a855f7;
+}
+
+/* Përgjigjja e saktë */
+
+#questionBankPage #correctOption {
+    border: 1px solid #bbf7d0;
+    background: #f0fdf4;
+    color: #166534;
+    font-weight: 700;
+}
+
+/* Butonat */
+
+#questionBankPage .question-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #e8edf4;
+}
+
+/* Ruaj */
+
+#questionBankPage .save-question-button {
+    border: 0;
+    border-radius: 11px;
+    padding: 12px 22px;
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    color: white;
+    font-size: 14px;
+    font-weight: 750;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(79,70,229,0.20);
+    transition: all 0.2s ease;
+}
+
+#questionBankPage .save-question-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(79,70,229,0.27);
+}
+
+/* Anulo */
+
+#questionBankPage .cancel-question-button {
+    border: 1px solid #dbe2ea;
+    border-radius: 11px;
+    padding: 12px 20px;
+    background: white;
+    color: #475569;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#questionBankPage .cancel-question-button:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+/* Telefon */
+
+@media (max-width: 600px) {
+
+    #questionBankPage #addQuestionForm {
+        padding: 20px;
+        border-radius: 18px;
+    }
+
+    #questionBankPage .question-form-actions {
+        flex-direction: column;
+    }
+
+    #questionBankPage .save-question-button,
+    #questionBankPage .cancel-question-button {
+        width: 100%;
+    }
+
+}
+
+</style>
+    <style>
+
+/* =====================================================
+   BANKA E PYETJEVE — PREMIUM QUESTION CARDS
+   ===================================================== */
+
+/* Karta */
+
+#questionBankPage .bank-question {
+    position: relative;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e5eaf2;
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 18px;
+    box-shadow: 0 6px 20px rgba(15,23,42,0.04);
+    transition: all 0.25s ease;
+}
+
+#questionBankPage .bank-question::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #4f46e5, #8b5cf6);
+}
+
+#questionBankPage .bank-question:hover {
+    transform: translateY(-3px);
+    border-color: #d8def0;
+    box-shadow: 0 14px 32px rgba(15,23,42,0.08);
+}
+
+/* Header i pyetjes */
+
+#questionBankPage .bank-question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+/* Numri */
+
+#questionBankPage .bank-question-number {
+    background: #eef2ff;
+    color: #4338ca;
+    border: 1px solid #e0e7ff;
+    padding: 7px 12px;
+    border-radius: 9px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+/* Informacioni */
+
+#questionBankPage .bank-question-meta {
+    display: inline-flex;
+    align-items: center;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 650;
+}
+
+/* Teksti */
+
+#questionBankPage .bank-question-text {
+    color: #172033;
+    font-size: 17px;
+    font-weight: 750;
+    line-height: 1.55;
+    margin-bottom: 18px;
+}
+
+/* Alternativat */
+
+#questionBankPage .bank-option {
+    position: relative;
+    background: #f8fafc;
+    border: 1px solid #e8edf3;
+    border-radius: 11px;
+    padding: 12px 15px;
+    margin: 8px 0;
+    color: #475569;
+    font-size: 14px;
+    line-height: 1.45;
+    transition: all 0.2s ease;
+}
+
+#questionBankPage .bank-option:hover {
+    background: #f1f5f9;
+    border-color: #dbe2ea;
+    transform: translateX(2px);
+}
+
+#questionBankPage .bank-option strong {
+    color: #4338ca;
+    font-weight: 800;
+    margin-right: 7px;
+}
+
+/* Përgjigjja e saktë */
+
+#questionBankPage .bank-correct {
+    margin-top: 17px;
+    padding: 12px 15px;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #ecfdf5, #f0fdf4);
+    border: 1px solid #bbf7d0;
+    color: #166534;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+#questionBankPage .bank-correct strong {
+    font-weight: 800;
+}
+
+/* Tema */
+
+#questionBankPage .bank-question > .bank-question-meta:last-of-type {
+    margin-top: 14px;
+    padding-top: 13px;
+    border-top: 1px solid #edf1f5;
+    width: 100%;
+    color: #64748b;
+}
+
+/* Butonat */
+
+#questionBankPage .bank-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 9px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid #edf1f5;
+}
+
+#questionBankPage .bank-actions button {
+    border: 0;
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-size: 12px;
+    font-weight: 750;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Ndrysho */
+
+#questionBankPage .edit-bank-question {
+    background: #eef2ff;
+    color: #4338ca;
+    border: 1px solid #e0e7ff;
+}
+
+#questionBankPage .edit-bank-question:hover {
+    background: #e0e7ff;
+    transform: translateY(-2px);
+}
+
+/* Fshi */
+
+#questionBankPage .delete-bank-question {
+    background: #fff1f2;
+    color: #be123c;
+    border: 1px solid #ffe4e6;
+}
+
+#questionBankPage .delete-bank-question:hover {
+    background: #ffe4e6;
+    transform: translateY(-2px);
+}
+
+/* Mobile */
+
+@media (max-width: 650px) {
+
+    #questionBankPage .bank-question {
+        padding: 20px;
+    }
+
+    #questionBankPage .bank-question-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    #questionBankPage .bank-actions {
+        justify-content: stretch;
+    }
+
+    #questionBankPage .bank-actions button {
+        flex: 1;
+    }
+
+}
+
+</style>
 </body>
 </html>
 <!-- PJESA 2 - vazhdimi i kodit -->
