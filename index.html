@@ -1620,7 +1620,1047 @@ card.remove();
 }
 
 </script>
+<!-- ============================= -->
+<!-- BANKA E PYETJEVE - PJESA 1 -->
+<!-- ============================= -->
 
+<section id="questionBankPage" class="page">
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="sidebar-logo">
+                📚 Mësuesi Dixhital
+            </div>
+
+            <button onclick="openDashboard()">
+                🏠 Dashboard
+            </button>
+
+            <button onclick="openAIGenerator()">
+                🤖 Gjenero pyetje
+            </button>
+
+            <button class="active" onclick="openQuestionBank()">
+                📚 Banka e pyetjeve
+            </button>
+
+            <button onclick="comingSoon('Krijo test')">
+                📝 Krijo test
+            </button>
+
+            <button onclick="comingSoon('Kuize')">
+                🎯 Kuize
+            </button>
+
+            <button onclick="comingSoon('Rezultatet')">
+                📊 Rezultatet
+            </button>
+
+            <button onclick="logout()">
+                🚪 Dil
+            </button>
+
+        </aside>
+
+
+        <!-- PËRMBAJTJA -->
+        <main class="main-content">
+
+            <div class="topbar">
+
+                <div>
+                    <h1>📚 Banka e Pyetjeve</h1>
+                    <p>
+                        Ruaj, kërko dhe menaxho pyetjet e tua.
+                    </p>
+                </div>
+
+                <div class="teacher-badge">
+                    👨‍🏫 Mësues
+                </div>
+
+            </div>
+
+
+            <!-- KËRKIMI DHE FILTRAT -->
+            <div class="bank-card">
+
+                <h2>🔎 Kërko dhe filtro pyetjet</h2>
+
+                <div class="bank-filters">
+
+                    <div class="bank-form-group">
+
+                        <label>Kërko pyetje</label>
+
+                        <input
+                            type="text"
+                            id="bankSearch"
+                            placeholder="Shkruaj për të kërkuar..."
+                            oninput="displayQuestionBank()"
+                        >
+
+                    </div>
+
+
+                    <div class="bank-form-group">
+
+                        <label>Lënda</label>
+
+                        <select
+                            id="bankSubject"
+                            onchange="displayQuestionBank()"
+                        >
+
+                            <option value="">
+                                Të gjitha
+                            </option>
+
+                            <option value="Fizikë">
+                                Fizikë
+                            </option>
+
+                            <option value="Kimi">
+                                Kimi
+                            </option>
+
+                            <option value="Matematikë">
+                                Matematikë
+                            </option>
+
+                            <option value="Biologji">
+                                Biologji
+                            </option>
+
+                            <option value="Gjeografi">
+                                Gjeografi
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="bank-form-group">
+
+                        <label>Klasa</label>
+
+                        <select
+                            id="bankGrade"
+                            onchange="displayQuestionBank()"
+                        >
+
+                            <option value="">
+                                Të gjitha
+                            </option>
+
+                            <option value="6">
+                                Klasa 6
+                            </option>
+
+                            <option value="7">
+                                Klasa 7
+                            </option>
+
+                            <option value="8">
+                                Klasa 8
+                            </option>
+
+                            <option value="9">
+                                Klasa 9
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="add-question-button"
+                    onclick="openAddQuestionForm()"
+                >
+                    ➕ Shto pyetje
+                </button>
+
+            </div>
+
+
+            <!-- FORMULARI PËR PYETJE TË RE -->
+            <div
+                id="addQuestionForm"
+                class="bank-card"
+                style="display:none;"
+            >
+
+                <h2>➕ Shto pyetje të re</h2>
+
+
+                <div class="bank-form-group">
+
+                    <label>Pyetja</label>
+
+                    <textarea
+                        id="newQuestionText"
+                        placeholder="Shkruani pyetjen..."
+                    ></textarea>
+
+                </div>
+
+
+                <div class="bank-grid">
+
+
+                    <div class="bank-form-group">
+
+                        <label>Lënda</label>
+
+                        <select id="newSubject">
+
+                            <option value="Fizikë">
+                                Fizikë
+                            </option>
+
+                            <option value="Kimi">
+                                Kimi
+                            </option>
+
+                            <option value="Matematikë">
+                                Matematikë
+                            </option>
+
+                            <option value="Biologji">
+                                Biologji
+                            </option>
+
+                            <option value="Gjeografi">
+                                Gjeografi
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="bank-form-group">
+
+                        <label>Klasa</label>
+
+                        <select id="newGrade">
+
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="bank-form-group">
+
+                        <label>Tema</label>
+
+                        <input
+                            type="text"
+                            id="newTopic"
+                            placeholder="p.sh. Forca dhe lëvizja"
+                        >
+
+                    </div>
+
+
+                    <div class="bank-form-group">
+
+                        <label>Niveli</label>
+
+                        <select id="newDifficulty">
+
+                            <option value="I lehtë">
+                                I lehtë
+                            </option>
+
+                            <option value="Mesatar">
+                                Mesatar
+                            </option>
+
+                            <option value="I vështirë">
+                                I vështirë
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <h3>Alternativat e përgjigjes</h3>
+
+
+                <div class="bank-grid">
+
+                    <input
+                        type="text"
+                        id="optionA"
+                        placeholder="A) Alternativa A"
+                    >
+
+                    <input
+                        type="text"
+                        id="optionB"
+                        placeholder="B) Alternativa B"
+                    >
+
+                    <input
+                        type="text"
+                        id="optionC"
+                        placeholder="C) Alternativa C"
+                    >
+
+                    <input
+                        type="text"
+                        id="optionD"
+                        placeholder="D) Alternativa D"
+                    >
+
+                </div>
+
+
+                <div class="bank-form-group">
+
+                    <label>Përgjigjja e saktë</label>
+
+                    <select id="correctOption">
+
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="question-form-actions">
+
+                    <button
+                        class="save-question-button"
+                        onclick="addNewQuestion()"
+                    >
+                        💾 Ruaj pyetjen
+                    </button>
+
+                    <button
+                        class="cancel-question-button"
+                        onclick="closeAddQuestionForm()"
+                    >
+                        Anulo
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- LISTA E PYETJEVE -->
+            <div id="questionBankList">
+
+                <!-- Pyetjet do të shfaqen këtu -->
+
+            </div>
+
+        </main>
+
+    </div>
+
+</section>
+
+
+<!-- ============================= -->
+<!-- STILIZIMI I BANKËS -->
+<!-- ============================= -->
+
+<style>
+
+.bank-card {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+
+.bank-card h2 {
+    margin-top: 0;
+    color: #1f2937;
+}
+
+.bank-form-group {
+    margin-bottom: 15px;
+}
+
+.bank-form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.bank-form-group input,
+.bank-form-group select,
+.bank-form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 9px;
+    font-size: 15px;
+}
+
+.bank-form-group textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.bank-filters {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.bank-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.bank-grid input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 9px;
+    font-size: 15px;
+}
+
+.add-question-button {
+    margin-top: 10px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.save-question-button {
+    background: #16a34a;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.cancel-question-button {
+    background: #e5e7eb;
+    color: #374151;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.question-form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.bank-question {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    margin-bottom: 18px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+
+.bank-question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.bank-question-number {
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.bank-question-meta {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.bank-question-text {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.bank-option {
+    padding: 9px 12px;
+    background: #f3f4f6;
+    border-radius: 8px;
+    margin: 6px 0;
+}
+
+.bank-correct {
+    margin-top: 12px;
+    padding: 10px;
+    background: #ecfdf5;
+    color: #047857;
+    border-radius: 8px;
+}
+
+.bank-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.bank-actions button {
+    border: none;
+    padding: 9px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.delete-bank-question {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+@media(max-width:800px) {
+
+    .bank-filters {
+        grid-template-columns: 1fr;
+    }
+
+    .bank-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+    <script>
+
+/* ================================
+   BANKA E PYETJEVE
+   FUNKSIONET
+================================ */
+
+function openQuestionBank() {
+
+    showPage('questionBankPage');
+
+    displayQuestionBank();
+}
+
+
+/* Hap formularin */
+
+function openAddQuestionForm() {
+
+    document.getElementById('addQuestionForm').style.display = 'block';
+
+    document.getElementById('newQuestionText').focus();
+}
+
+
+/* Mbyll formularin */
+
+function closeAddQuestionForm() {
+
+    document.getElementById('addQuestionForm').style.display = 'none';
+
+}
+
+
+/* Merr pyetjet nga localStorage */
+
+function getBankQuestions() {
+
+    const savedQuestions =
+        localStorage.getItem('mesuesiDixhitalQuestionBank');
+
+    if (!savedQuestions) {
+
+        return [];
+
+    }
+
+    try {
+
+        return JSON.parse(savedQuestions);
+
+    } catch (error) {
+
+        console.error('Gabim në leximin e pyetjeve:', error);
+
+        return [];
+
+    }
+
+}
+
+
+/* Ruaj pyetjet */
+
+function saveBankQuestions(questions) {
+
+    localStorage.setItem(
+        'mesuesiDixhitalQuestionBank',
+        JSON.stringify(questions)
+    );
+
+}
+
+
+/* Shto pyetje të re */
+
+function addNewQuestion() {
+
+    const questionText =
+        document.getElementById('newQuestionText').value.trim();
+
+    const subject =
+        document.getElementById('newSubject').value;
+
+    const grade =
+        document.getElementById('newGrade').value;
+
+    const topic =
+        document.getElementById('newTopic').value.trim();
+
+    const difficulty =
+        document.getElementById('newDifficulty').value;
+
+    const optionA =
+        document.getElementById('optionA').value.trim();
+
+    const optionB =
+        document.getElementById('optionB').value.trim();
+
+    const optionC =
+        document.getElementById('optionC').value.trim();
+
+    const optionD =
+        document.getElementById('optionD').value.trim();
+
+    const correctOption =
+        document.getElementById('correctOption').value;
+
+
+    /* Kontrolli */
+
+    if (!questionText) {
+
+        alert('Ju lutem shkruani pyetjen.');
+
+        return;
+
+    }
+
+    if (!optionA || !optionB || !optionC || !optionD) {
+
+        alert('Ju lutem plotësoni të gjitha alternativat.');
+
+        return;
+
+    }
+
+
+    /* Krijojmë pyetjen */
+
+    const newQuestion = {
+
+        id: Date.now(),
+
+        question: questionText,
+
+        subject: subject,
+
+        grade: grade,
+
+        topic: topic,
+
+        difficulty: difficulty,
+
+        options: {
+
+            A: optionA,
+
+            B: optionB,
+
+            C: optionC,
+
+            D: optionD
+
+        },
+
+        correct: correctOption,
+
+        createdAt: new Date().toISOString()
+
+    };
+
+
+    /* Marrim pyetjet ekzistuese */
+
+    const questions = getBankQuestions();
+
+
+    /* Shtojmë pyetjen */
+
+    questions.push(newQuestion);
+
+
+    /* Ruajmë */
+
+    saveBankQuestions(questions);
+
+
+    /* Pastrojmë formularin */
+
+    document.getElementById('newQuestionText').value = '';
+
+    document.getElementById('newTopic').value = '';
+
+    document.getElementById('optionA').value = '';
+
+    document.getElementById('optionB').value = '';
+
+    document.getElementById('optionC').value = '';
+
+    document.getElementById('optionD').value = '';
+
+
+    /* Mbyllim formularin */
+
+    closeAddQuestionForm();
+
+
+    /* Rifreskojmë listën */
+
+    displayQuestionBank();
+
+
+    alert('✅ Pyetja u ruajt me sukses!');
+
+}
+
+
+/* Shfaq pyetjet */
+
+function displayQuestionBank() {
+
+    const list =
+        document.getElementById('questionBankList');
+
+    if (!list) return;
+
+
+    const questions = getBankQuestions();
+
+
+    /* Kërkimi */
+
+    const searchElement =
+        document.getElementById('bankSearch');
+
+    const search =
+        searchElement
+            ? searchElement.value.toLowerCase().trim()
+            : '';
+
+
+    /* Filtri lëndës */
+
+    const subjectElement =
+        document.getElementById('bankSubject');
+
+    const selectedSubject =
+        subjectElement
+            ? subjectElement.value
+            : '';
+
+
+    /* Filtri klasës */
+
+    const gradeElement =
+        document.getElementById('bankGrade');
+
+    const selectedGrade =
+        gradeElement
+            ? gradeElement.value
+            : '';
+
+
+    /* Filtrimi */
+
+    const filteredQuestions =
+        questions.filter(function(question) {
+
+            const matchesSearch =
+
+                !search ||
+
+                question.question
+                    .toLowerCase()
+                    .includes(search) ||
+
+                (question.topic || '')
+                    .toLowerCase()
+                    .includes(search);
+
+
+            const matchesSubject =
+
+                !selectedSubject ||
+
+                question.subject === selectedSubject;
+
+
+            const matchesGrade =
+
+                !selectedGrade ||
+
+                question.grade === selectedGrade;
+
+
+            return (
+
+                matchesSearch &&
+                matchesSubject &&
+                matchesGrade
+
+            );
+
+        });
+
+
+    /* Nuk ka pyetje */
+
+    if (filteredQuestions.length === 0) {
+
+        list.innerHTML = `
+
+            <div class="bank-card">
+
+                <h3>📭 Nuk ka pyetje</h3>
+
+                <p>
+                    Nuk u gjet asnjë pyetje.
+                    Kliko "➕ Shto pyetje"
+                    për të krijuar pyetjen e parë.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /* Shfaq pyetjet */
+
+    list.innerHTML =
+        filteredQuestions.map(function(question, index) {
+
+            return `
+
+                <div class="bank-question">
+
+                    <div class="bank-question-header">
+
+                        <span class="bank-question-number">
+
+                            Pyetja ${index + 1}
+
+                        </span>
+
+                        <span class="bank-question-meta">
+
+                            ${question.subject}
+                            • Klasa ${question.grade}
+                            • ${question.difficulty}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="bank-question-text">
+
+                        ${escapeBankHTML(question.question)}
+
+                    </div>
+
+
+                    <div class="bank-option">
+
+                        <strong>A)</strong>
+                        ${escapeBankHTML(question.options.A)}
+
+                    </div>
+
+
+                    <div class="bank-option">
+
+                        <strong>B)</strong>
+                        ${escapeBankHTML(question.options.B)}
+
+                    </div>
+
+
+                    <div class="bank-option">
+
+                        <strong>C)</strong>
+                        ${escapeBankHTML(question.options.C)}
+
+                    </div>
+
+
+                    <div class="bank-option">
+
+                        <strong>D)</strong>
+                        ${escapeBankHTML(question.options.D)}
+
+                    </div>
+
+
+                    <div class="bank-correct">
+
+                        ✅ Përgjigjja e saktë:
+                        <strong>${question.correct}</strong>
+
+                    </div>
+
+
+                    <div class="bank-question-meta">
+
+                        📚 Tema:
+                        ${escapeBankHTML(question.topic || 'Pa temë')}
+
+                    </div>
+
+
+                    <div class="bank-actions">
+
+                        <button
+                            class="delete-bank-question"
+                            onclick="deleteBankQuestion(${question.id})"
+                        >
+
+                            🗑️ Fshi
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join('');
+
+}
+
+
+/* Fshi pyetje */
+
+function deleteBankQuestion(id) {
+
+    const confirmed =
+        confirm('A jeni i sigurt se dëshironi ta fshini këtë pyetje?');
+
+
+    if (!confirmed) {
+
+        return;
+
+    }
+
+
+    const questions = getBankQuestions();
+
+
+    const updatedQuestions =
+        questions.filter(function(question) {
+
+            return question.id !== id;
+
+        });
+
+
+    saveBankQuestions(updatedQuestions);
+
+
+    displayQuestionBank();
+
+
+    alert('🗑️ Pyetja u fshi.');
+
+}
+
+
+/* Mbrojtje për tekstin HTML */
+
+function escapeBankHTML(text) {
+
+    return String(text || '')
+
+        .replace(/&/g, '&amp;')
+
+        .replace(/</g, '&lt;')
+
+        .replace(/>/g, '&gt;')
+
+        .replace(/"/g, '&quot;')
+
+        .replace(/'/g, '&#039;');
+
+}
+
+
+/* Kur hapet faqja */
+
+document.addEventListener(
+    'DOMContentLoaded',
+    function() {
+
+        displayQuestionBank();
+
+    }
+);
+
+</script>
 </body>
 </html>
 <!-- PJESA 2 - vazhdimi i kodit -->
@@ -1643,9 +2683,9 @@ card.remove();
                 🤖 Gjenero pyetje
             </button>
 
-            <button onclick="comingSoon('Banka e pyetjeve')">
-                📚 Banka e pyetjeve
-            </button>
+           <button onclick="openQuestionBank()">
+    📚 Banka e pyetjeve
+</button>
 
             <button onclick="comingSoon('Krijo test')">
                 📝 Krijo test
