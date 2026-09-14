@@ -1968,7 +1968,45 @@ card.remove();
 
             </div>
 
+<!-- STATISTIKAT E BANKËS -->
 
+<div class="bank-statistics">
+
+    <div class="bank-stat-card">
+        <div class="bank-stat-icon">📚</div>
+        <div>
+            <div class="bank-stat-number" id="totalBankQuestions">0</div>
+            <div class="bank-stat-label">Gjithsej pyetje</div>
+        </div>
+    </div>
+
+    <div class="bank-stat-card">
+        <div class="bank-stat-icon">🧪</div>
+        <div>
+            <div class="bank-stat-number" id="totalBankSubjects">0</div>
+            <div class="bank-stat-label">Lëndë</div>
+        </div>
+    </div>
+
+    <div class="bank-stat-card">
+        <div class="bank-stat-icon">🎓</div>
+        <div>
+            <div class="bank-stat-number" id="totalBankGrades">0</div>
+            <div class="bank-stat-label">Klasa</div>
+        </div>
+    </div>
+
+    <div class="bank-stat-card">
+        <div class="bank-stat-icon">⭐</div>
+        <div>
+            <div class="bank-stat-number" id="totalHardQuestions">0</div>
+            <div class="bank-stat-label">Pyetje të vështira</div>
+        </div>
+    </div>
+
+</div>
+
+<!-- LISTA E PYETJEVE -->
             <!-- LISTA E PYETJEVE -->
             <div id="questionBankList">
 
@@ -2773,6 +2811,64 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 </script>
+   <script>
+function updateBankStatistics() {
+
+    const questions = getBankQuestions();
+
+    const subjects = new Set(
+        questions
+            .map(function(question) {
+                return question.subject;
+            })
+            .filter(Boolean)
+    );
+
+    const grades = new Set(
+        questions
+            .map(function(question) {
+                return question.grade;
+            })
+            .filter(Boolean)
+    );
+
+    const hardQuestions = questions.filter(function(question) {
+        return question.difficulty === 'E vështirë';
+    });
+
+    const totalQuestionsElement =
+        document.getElementById('totalBankQuestions');
+
+    const totalSubjectsElement =
+        document.getElementById('totalBankSubjects');
+
+    const totalGradesElement =
+        document.getElementById('totalBankGrades');
+
+    const totalHardElement =
+        document.getElementById('totalHardQuestions');
+
+    if (totalQuestionsElement) {
+        totalQuestionsElement.textContent = questions.length;
+    }
+
+    if (totalSubjectsElement) {
+        totalSubjectsElement.textContent = subjects.size;
+    }
+
+    if (totalGradesElement) {
+        totalGradesElement.textContent = grades.size;
+    }
+
+    if (totalHardElement) {
+        totalHardElement.textContent = hardQuestions.length;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    updateBankStatistics();
+});
+</script> 
 </body>
 </html>
 <!-- PJESA 2 - vazhdimi i kodit -->
