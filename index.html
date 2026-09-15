@@ -4587,7 +4587,17 @@ html += `
     container.innerHTML = html;
 
 }
+function printGeneratedTest() {
 
+    const test = window.generatedTest;
+
+    if (!test || !test.questions || test.questions.length === 0) {
+        alert('⚠️ Nuk u gjet testi për printim.');
+        return;
+    }
+
+    window.print();
+}
 </script>
     <style>
 
