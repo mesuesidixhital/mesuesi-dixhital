@@ -4910,7 +4910,142 @@ html += `
 #generatedTestPage .generated-test-actions button:last-child:hover {
     background: #4338ca;
 }
+/* HEADER PROFESIONAL I TESTIT */
 
+#generatedTestPage .generated-test-header {
+    background: #ffffff;
+    border: 1px solid #dfe4ec;
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+}
+
+
+/* LOGO + TITULLI */
+
+#generatedTestPage .generated-test-school {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+#generatedTestPage .generated-test-logo {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eef2ff;
+    border-radius: 12px;
+
+    font-size: 24px;
+}
+
+#generatedTestPage .generated-test-school h2 {
+    margin: 0 0 4px;
+
+    font-size: 23px;
+    font-weight: 800;
+
+    color: #172033;
+}
+
+#generatedTestPage .generated-test-school p {
+    margin: 0;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    color: #64748b;
+    letter-spacing: 0.5px;
+}
+
+
+/* INFORMACIONI I TESTIT */
+
+#generatedTestPage .generated-test-details {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+}
+
+#generatedTestPage .generated-test-detail {
+    min-width: 95px;
+
+    padding: 10px 14px;
+
+    background: #f8fafc;
+    border: 1px solid #e5e9f0;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#generatedTestPage .generated-test-detail .detail-label {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    color: #64748b;
+}
+
+#generatedTestPage .generated-test-detail strong {
+    font-size: 13px;
+    font-weight: 800;
+
+    color: #172033;
+}
+
+
+/* EMRI I NXËNËSIT + DATA */
+
+#generatedTestPage .generated-test-student {
+    grid-column: 1 / -1;
+
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 24px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid #e5e9f0;
+}
+
+#generatedTestPage .generated-test-student span {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    color: #475569;
+}
+
+#generatedTestPage .generated-test-student .student-line {
+    height: 1px;
+
+    background: #94a3b8;
+
+    width: 100%;
+}
+
+#generatedTestPage .generated-test-student .student-date-line {
+    width: 100%;
+}
 /* BUTONAT */
 
 #generatedTestPage .generated-test-actions {
