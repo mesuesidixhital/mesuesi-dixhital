@@ -1366,8 +1366,32 @@ DASHBOARD
 ========================= */
 
 function openDashboard() {
-    document.getElementById("dashboardHome").style.display = "block";
-    document.getElementById("generatorPage").style.display = "none";
+
+    document.querySelectorAll(".page").forEach(function(page) {
+        page.classList.remove("active");
+    });
+
+    const dashboard = document.getElementById("dashboard");
+
+    if (dashboard) {
+        dashboard.classList.add("active");
+    }
+
+    const dashboardHome =
+        document.getElementById("dashboardHome");
+
+    const generatorPage =
+        document.getElementById("generatorPage");
+
+    if (dashboardHome) {
+        dashboardHome.style.display = "block";
+    }
+
+    if (generatorPage) {
+        generatorPage.style.display = "none";
+    }
+
+    window.scrollTo(0, 0);
 }
 
 function openGenerator() {
