@@ -4594,7 +4594,81 @@ html += `
 #generatedTestPage {
     background: #f3f5f9;
 }
+/* =========================================
+   PRINTIM PROFESIONAL A4
+   ========================================= */
 
+@media print {
+
+    @page {
+        size: A4;
+        margin: 15mm;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background: #ffffff !important;
+    }
+
+    body * {
+        visibility: hidden;
+    }
+
+    #generatedTestPage,
+    #generatedTestPage * {
+        visibility: visible;
+    }
+
+    #generatedTestPage {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background: #ffffff !important;
+    }
+
+    #generatedTestPage .sidebar,
+    #generatedTestPage .topbar,
+    #generatedTestPage .generated-test-actions {
+        display: none !important;
+    }
+
+    #generatedTestPage .main-content {
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+
+    #generatedTestPage #generatedTestContent {
+        max-width: none !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    #generatedTestPage .generated-test-header {
+        box-shadow: none !important;
+        margin-bottom: 12mm !important;
+        border: 1px solid #999 !important;
+        page-break-inside: avoid;
+    }
+
+    #generatedTestPage .generated-test-question {
+        box-shadow: none !important;
+        page-break-inside: avoid;
+        break-inside: avoid;
+        margin-bottom: 7mm;
+    }
+
+    #generatedTestPage .generated-test-option {
+        break-inside: avoid;
+    }
+
+    #generatedTestPage .generated-test-question::before {
+        display: none !important;
+    }
+
+}
 #generatedTestPage .main-content {
     padding: 30px;
 }
@@ -4609,19 +4683,15 @@ html += `
 
 #generatedTestPage .generated-test-header {
     background: #ffffff;
-    border: 1px solid #e1e6ef;
-    border-radius: 16px;
-    padding: 28px 32px;
-    margin-bottom: 20px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-
-    box-shadow: 0 4px 15px rgba(15,23,42,0.05);
+    border: 1.5px solid #1e293b;
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 22px;
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.05);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 18px;
 }
-
 #generatedTestPage .generated-test-header h2 {
     margin: 0 0 8px;
     font-size: 26px;
@@ -4693,67 +4763,50 @@ html += `
 #generatedTestPage .generated-test-question-title {
     display: flex;
     align-items: flex-start;
-
-    gap: 12px;
-    margin-bottom: 16px;
-
+    gap: 10px;
+    margin-bottom: 12px;
     color: #172033;
-
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
-
-    line-height: 1.55;
+    line-height: 1.5;
 }
-
 
 /* NUMRAT */
 
 #generatedTestPage .generated-test-number {
     flex-shrink: 0;
-
-    width: 32px;
-    height: 32px;
-
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    background: #eef2ff;
-    color: #4338ca;
-
-    border-radius: 8px;
-
-    font-size: 12px;
+    background: #f1f5f9;
+    color: #1e293b;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    font-size: 11px;
     font-weight: 800;
 }
-
 
 /* ALTERNATIVAT */
 
 #generatedTestPage .generated-test-options {
     display: grid;
-
     grid-template-columns: 1fr 1fr;
-
-    gap: 9px;
-
-    padding-left: 44px;
+    gap: 8px 12px;
+    padding-left: 38px;
 }
 
 #generatedTestPage .generated-test-option {
-    background: #f8fafc;
-
-    border: 1px solid #e5e9f0;
-
-    border-radius: 9px;
-
-    padding: 11px 13px;
-
-    color: #475569;
-
-    font-size: 13px;
-
-    line-height: 1.45;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    padding: 9px 11px;
+    color: #334155;
+    font-size: 12px;
+    line-height: 1.4;
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
 
 #generatedTestPage .generated-test-option:hover {
@@ -4762,7 +4815,7 @@ html += `
 }
 
 #generatedTestPage .generated-test-option strong {
-    color: #4338ca;
+    color: #1e293b;
     font-weight: 800;
     margin-right: 5px;
 }
@@ -4848,22 +4901,18 @@ html += `
 }
 
 #generatedTestPage .generated-test-school h2 {
-    margin: 0 0 4px;
-
-    font-size: 23px;
+    margin: 0 0 3px;
+    font-size: 21px;
     font-weight: 800;
-
     color: #172033;
 }
 
 #generatedTestPage .generated-test-school p {
     margin: 0;
-
-    font-size: 12px;
-    font-weight: 700;
-
-    color: #64748b;
-    letter-spacing: 0.5px;
+    font-size: 11px;
+    font-weight: 800;
+    color: #475569;
+    letter-spacing: 0.8px;
 }
 
 
@@ -4912,32 +4961,28 @@ html += `
 
 #generatedTestPage .generated-test-student {
     grid-column: 1 / -1;
-
     display: grid;
-    grid-template-columns: 1fr 220px;
-    gap: 24px;
+    grid-template-columns: 1fr 180px;
+    gap: 18px;
+    padding-top: 16px;
+    border-top: 1px solid #cbd5e1;
+}
 
-    padding-top: 18px;
-
-    border-top: 1px solid #e5e9f0;
+#generatedTestPage .generated-test-student > div {
+    position: relative;
 }
 
 #generatedTestPage .generated-test-student span {
     display: block;
-
-    margin-bottom: 7px;
-
-    font-size: 12px;
+    margin-bottom: 8px;
+    font-size: 11px;
     font-weight: 700;
-
-    color: #475569;
+    color: #334155;
 }
 
 #generatedTestPage .generated-test-student .student-line {
     height: 1px;
-
-    background: #94a3b8;
-
+    background: #64748b;
     width: 100%;
 }
 
@@ -5025,11 +5070,16 @@ html += `
 }
 
 #generatedTestPage .generated-test-question {
-    background: lightblue !important;
-    border: 5px solid green !important;
-    padding: 25px !important;
+    position: relative;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+    box-shadow: none;
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
-
 #generatedTestPage .generated-test-option {
     background: white !important;
     border: 3px solid blue !important;
