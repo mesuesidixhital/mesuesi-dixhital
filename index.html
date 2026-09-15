@@ -953,7 +953,7 @@ onclick="comingSoon('Rezultatet')">
 
 <!-- DASHBOARD HOME -->
 
-<div id="dashboardHome" class="page">
+<div id="dashboardHome">
 
 <div class="dashboard-header">
 
@@ -1366,17 +1366,8 @@ DASHBOARD
 ========================= */
 
 function openDashboard() {
-
-    document.querySelectorAll(".page").forEach(function(page) {
-        page.classList.remove("active");
-    });
-
-    const dashboard = document.getElementById("dashboardHome");
-
-    if (dashboard) {
-        dashboard.classList.add("active");
-    }
-
+    document.getElementById("dashboardHome").style.display = "block";
+    document.getElementById("generatorPage").style.display = "none";
 }
 
 function openGenerator() {
