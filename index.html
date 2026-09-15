@@ -4441,30 +4441,70 @@ function displayGeneratedTest() {
 
     let html = '';
 
-    /* HEADERI I TESTIT */
+   /* HEADERI PROFESIONAL I TESTIT */
 
-    html += `
-        <div class="generated-test-header">
+html += `
+    <div class="generated-test-header">
+
+        <div class="generated-test-school">
+
+            <div class="generated-test-logo">
+                📚
+            </div>
 
             <div>
-                <h2>📝 Test</h2>
+                <h2>Mësuesi Dixhital</h2>
 
                 <p>
-                    ${escapeBankHTML(test.subject || 'Të gjitha lëndët')}
-                    •
-                    Klasa ${escapeBankHTML(test.grade || 'Të gjitha')}
+                    TEST I NJOHURIVE
                 </p>
             </div>
 
-            <div class="generated-test-info">
-                <span>
-                    📊 ${test.questions.length} pyetje
-                </span>
+        </div>
+
+
+        <div class="generated-test-details">
+
+            <div class="generated-test-detail">
+                <span class="detail-label">Lënda</span>
+                <strong>
+                    ${escapeBankHTML(test.subject || 'Të gjitha lëndët')}
+                </strong>
+            </div>
+
+            <div class="generated-test-detail">
+                <span class="detail-label">Klasa</span>
+                <strong>
+                    ${escapeBankHTML(test.grade || 'Të gjitha')}
+                </strong>
+            </div>
+
+            <div class="generated-test-detail">
+                <span class="detail-label">Pyetje</span>
+                <strong>
+                    ${test.questions.length}
+                </strong>
             </div>
 
         </div>
-    `;
 
+
+        <div class="generated-test-student">
+
+            <div>
+                <span>Emri dhe mbiemri:</span>
+                <div class="student-line"></div>
+            </div>
+
+            <div>
+                <span>Data:</span>
+                <div class="student-line student-date-line"></div>
+            </div>
+
+        </div>
+
+    </div>
+`;
 
     /* PYETJET */
 
