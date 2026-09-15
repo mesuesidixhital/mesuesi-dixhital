@@ -1367,7 +1367,15 @@ DASHBOARD
 
 function openDashboard() {
 
-    showPage('dashboardHome');
+    document.querySelectorAll(".page").forEach(function(page) {
+        page.classList.remove("active");
+    });
+
+    const dashboard = document.getElementById("dashboardHome");
+
+    if (dashboard) {
+        dashboard.classList.add("active");
+    }
 
 }
 
