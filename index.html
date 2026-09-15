@@ -4612,13 +4612,15 @@ function printGeneratedTest() {
 
     @page {
         size: A4;
-        margin: 15mm;
+        margin: 10mm 12mm;
     }
 
+    html,
     body {
-        margin: 0;
-        padding: 0;
+        margin: 0 !important;
+        padding: 0 !important;
         background: #ffffff !important;
+        font-size: 11px !important;
     }
 
     body * {
@@ -4631,10 +4633,11 @@ function printGeneratedTest() {
     }
 
     #generatedTestPage {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        min-height: 0 !important;
         background: #ffffff !important;
     }
 
@@ -4651,183 +4654,116 @@ function printGeneratedTest() {
     }
 
     #generatedTestPage #generatedTestContent {
-        max-width: none !important;
         width: 100% !important;
+        max-width: none !important;
         margin: 0 !important;
+        padding: 0 !important;
     }
+
+    /* KOKA E TESTIT */
 
     #generatedTestPage .generated-test-header {
+        padding: 10px 14px !important;
+        margin-bottom: 10px !important;
+        border: 1px solid #64748b !important;
+        border-radius: 6px !important;
         box-shadow: none !important;
-        margin-bottom: 12mm !important;
-        border: 1px solid #999 !important;
-        page-break-inside: avoid;
+        gap: 10px !important;
     }
+
+    #generatedTestPage .generated-test-school {
+        gap: 8px !important;
+    }
+
+    #generatedTestPage .generated-test-logo {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 16px !important;
+    }
+
+    #generatedTestPage .generated-test-school h2 {
+        font-size: 15px !important;
+        margin-bottom: 1px !important;
+    }
+
+    #generatedTestPage .generated-test-school p {
+        font-size: 8px !important;
+    }
+
+    #generatedTestPage .generated-test-details {
+        gap: 5px !important;
+    }
+
+    #generatedTestPage .generated-test-detail {
+        min-width: 65px !important;
+        padding: 5px 7px !important;
+        border-radius: 5px !important;
+    }
+
+    #generatedTestPage .generated-test-detail .detail-label {
+        font-size: 8px !important;
+        margin-bottom: 2px !important;
+    }
+
+    #generatedTestPage .generated-test-detail strong {
+        font-size: 9px !important;
+    }
+
+    #generatedTestPage .generated-test-student {
+        gap: 12px !important;
+        padding-top: 8px !important;
+    }
+
+    #generatedTestPage .generated-test-student span {
+        font-size: 9px !important;
+        margin-bottom: 4px !important;
+    }
+
+    /* PYETJET */
 
     #generatedTestPage .generated-test-question {
+        padding: 9px 11px !important;
+        margin-bottom: 7px !important;
+        border-radius: 5px !important;
         box-shadow: none !important;
-        page-break-inside: avoid;
-        break-inside: avoid;
-        margin-bottom: 7mm;
-    }
-
-    #generatedTestPage .generated-test-option {
-        break-inside: avoid;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
     }
 
     #generatedTestPage .generated-test-question::before {
         display: none !important;
     }
 
-}
-#generatedTestPage .main-content {
-    padding: 30px;
-}
+    #generatedTestPage .generated-test-question-title {
+        gap: 7px !important;
+        margin-bottom: 7px !important;
+        font-size: 11px !important;
+        line-height: 1.3 !important;
+    }
 
-#generatedTestPage #generatedTestContent {
-    max-width: 1000px;
-    margin: 0 auto;
-}
+    #generatedTestPage .generated-test-number {
+        width: 22px !important;
+        height: 22px !important;
+        font-size: 9px !important;
+        border-radius: 5px !important;
+    }
 
+    /* ALTERNATIVAT */
 
-/* HEADERI */
+    #generatedTestPage .generated-test-options {
+        gap: 5px 8px !important;
+        padding-left: 29px !important;
+    }
 
-#generatedTestPage .generated-test-header {
-    background: #ffffff;
-    border: 1.5px solid #1e293b;
-    border-radius: 12px;
-    padding: 20px 22px;
-    margin-bottom: 22px;
-    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.05);
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 18px;
-}
-#generatedTestPage .generated-test-header h2 {
-    margin: 0 0 8px;
-    font-size: 26px;
-    font-weight: 800;
-    color: #172033;
-}
+    #generatedTestPage .generated-test-option {
+        padding: 6px 8px !important;
+        border-radius: 4px !important;
+        font-size: 9.5px !important;
+        line-height: 1.25 !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
 
-#generatedTestPage .generated-test-header p {
-    margin: 0;
-    font-size: 14px;
-    color: #64748b;
-}
-
-
-/* NUMRI I PYETJEVE */
-
-#generatedTestPage .generated-test-info span {
-    display: inline-flex;
-    align-items: center;
-    padding: 10px 16px;
-
-    background: #eef2ff;
-    color: #4338ca;
-
-    border: 1px solid #dfe5ff;
-    border-radius: 10px;
-
-    font-size: 13px;
-    font-weight: 800;
-}
-
-
-/* PYETJET */
-
-#generatedTestPage .generated-test-question {
-    position: relative;
-
-    background: #ffffff;
-    border: 1px solid #e2e7ef;
-    border-radius: 15px;
-
-    padding: 22px 24px;
-    margin-bottom: 14px;
-
-    box-shadow: 0 3px 12px rgba(15,23,42,0.035);
-}
-
-
-/* VIJA ANËSORE */
-
-#generatedTestPage .generated-test-question::before {
-    content: "";
-
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-
-    width: 4px;
-
-    background: #4f46e5;
-
-    border-radius: 15px 0 0 15px;
-}
-
-
-/* TEKSTI I PYETJES */
-
-#generatedTestPage .generated-test-question-title {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin-bottom: 12px;
-    color: #172033;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 1.5;
-}
-
-/* NUMRAT */
-
-#generatedTestPage .generated-test-number {
-    flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #f1f5f9;
-    color: #1e293b;
-    border: 1px solid #cbd5e1;
-    border-radius: 7px;
-    font-size: 11px;
-    font-weight: 800;
-}
-
-/* ALTERNATIVAT */
-
-#generatedTestPage .generated-test-options {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px 12px;
-    padding-left: 38px;
-}
-
-#generatedTestPage .generated-test-option {
-    background: #ffffff;
-    border: 1px solid #cbd5e1;
-    border-radius: 7px;
-    padding: 9px 11px;
-    color: #334155;
-    font-size: 12px;
-    line-height: 1.4;
-    page-break-inside: avoid;
-    break-inside: avoid;
-}
-
-#generatedTestPage .generated-test-option:hover {
-    background: #f1f5f9;
-    border-color: #cbd5e1;
-}
-
-#generatedTestPage .generated-test-option strong {
-    color: #1e293b;
-    font-weight: 800;
-    margin-right: 5px;
 }
 /* VEPRIMET E TESTIT */
 
