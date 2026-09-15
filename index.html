@@ -4425,9 +4425,7 @@ function displayGeneratedTest() {
         return;
     }
 
-
     let html = '';
-
 
     /* HEADERI I TESTIT */
 
@@ -4445,25 +4443,20 @@ function displayGeneratedTest() {
             </div>
 
             <div class="generated-test-info">
-
                 <span>
                     📊 ${test.questions.length} pyetje
                 </span>
-
             </div>
 
         </div>
     `;
 
 
-    /* KONTAINERI I PYETJEVE */
+    /* PYETJET */
 
     html += `
         <div class="generated-test-questions">
     `;
-
-
-    /* PYETJET */
 
     test.questions.forEach(function(question, index) {
 
@@ -4481,7 +4474,6 @@ function displayGeneratedTest() {
                     </span>
 
                 </div>
-
 
                 <div class="generated-test-options">
 
@@ -4512,7 +4504,6 @@ function displayGeneratedTest() {
 
     });
 
-
     /* MBYLL KONTAINERIN E PYETJEVE */
 
     html += `
@@ -4539,27 +4530,9 @@ function displayGeneratedTest() {
 
     /* SHFAQ TESTIN */
 
-    container.innerHTML = container.innerHTML = `
-    <div style="
-        background:white;
-        padding:30px;
-        border:5px solid red;
-        font-size:24px;
-    ">
-        TEST PROVË
-    </div>
-`;
-    
+    container.innerHTML = html;
+
 }
-
-</script> 
-    }
-
-    const container =
-        document.getElementById('generatedTestContent');
-
-    if (!container) return;
-
 
     let html = `
 
