@@ -4612,7 +4612,7 @@ function printGeneratedTest() {
 
     @page {
         size: A4;
-        margin: 10mm 12mm;
+        margin: 8mm 10mm;
     }
 
     html,
@@ -4620,7 +4620,7 @@ function printGeneratedTest() {
         margin: 0 !important;
         padding: 0 !important;
         background: #ffffff !important;
-        font-size: 11px !important;
+        font-family: Arial, sans-serif !important;
     }
 
     body * {
@@ -4637,9 +4637,10 @@ function printGeneratedTest() {
         left: 0 !important;
         top: 0 !important;
         width: 100% !important;
-        min-height: 0 !important;
         background: #ffffff !important;
     }
+
+    /* FSHEH ELEMENTET E FAQES */
 
     #generatedTestPage .sidebar,
     #generatedTestPage .topbar,
@@ -4648,9 +4649,9 @@ function printGeneratedTest() {
     }
 
     #generatedTestPage .main-content {
+        width: 100% !important;
         padding: 0 !important;
         margin: 0 !important;
-        width: 100% !important;
     }
 
     #generatedTestPage #generatedTestContent {
@@ -4663,69 +4664,96 @@ function printGeneratedTest() {
     /* KOKA E TESTIT */
 
     #generatedTestPage .generated-test-header {
-        padding: 10px 14px !important;
-        margin-bottom: 10px !important;
-        border: 1px solid #64748b !important;
-        border-radius: 6px !important;
+        display: grid !important;
+        grid-template-columns: 1fr auto !important;
+
+        padding: 7px 9px !important;
+        margin: 0 0 7px 0 !important;
+
+        border: 1px solid #333 !important;
+        border-radius: 0 !important;
         box-shadow: none !important;
-        gap: 10px !important;
+
+        gap: 7px !important;
     }
 
     #generatedTestPage .generated-test-school {
-        gap: 8px !important;
+        gap: 7px !important;
     }
 
     #generatedTestPage .generated-test-logo {
-        width: 32px !important;
-        height: 32px !important;
-        font-size: 16px !important;
+        width: 27px !important;
+        height: 27px !important;
+        font-size: 14px !important;
+        border-radius: 4px !important;
     }
 
     #generatedTestPage .generated-test-school h2 {
-        font-size: 15px !important;
-        margin-bottom: 1px !important;
+        font-size: 14px !important;
+        line-height: 1.1 !important;
+        margin: 0 0 2px 0 !important;
     }
 
     #generatedTestPage .generated-test-school p {
-        font-size: 8px !important;
+        font-size: 7px !important;
+        letter-spacing: 0.4px !important;
     }
 
+    /* INFORMACIONI */
+
     #generatedTestPage .generated-test-details {
-        gap: 5px !important;
+        gap: 4px !important;
     }
 
     #generatedTestPage .generated-test-detail {
-        min-width: 65px !important;
-        padding: 5px 7px !important;
-        border-radius: 5px !important;
+        min-width: 58px !important;
+        padding: 4px 5px !important;
+        border-radius: 3px !important;
     }
 
     #generatedTestPage .generated-test-detail .detail-label {
-        font-size: 8px !important;
-        margin-bottom: 2px !important;
+        font-size: 7px !important;
+        margin-bottom: 1px !important;
     }
 
     #generatedTestPage .generated-test-detail strong {
-        font-size: 9px !important;
+        font-size: 8px !important;
     }
 
+    /* EMRI DHE DATA */
+
     #generatedTestPage .generated-test-student {
+        grid-column: 1 / -1 !important;
+        grid-template-columns: 1fr 130px !important;
         gap: 12px !important;
-        padding-top: 8px !important;
+        padding-top: 5px !important;
+        border-top: 1px solid #999 !important;
     }
 
     #generatedTestPage .generated-test-student span {
-        font-size: 9px !important;
-        margin-bottom: 4px !important;
+        font-size: 8px !important;
+        margin-bottom: 3px !important;
+    }
+
+    #generatedTestPage .generated-test-student .student-line {
+        height: 1px !important;
     }
 
     /* PYETJET */
 
     #generatedTestPage .generated-test-question {
-        padding: 9px 11px !important;
-        margin-bottom: 7px !important;
-        border-radius: 5px !important;
+        background: #ffffff !important;
+
+        border: none !important;
+        border-bottom: 1px solid #d1d5db !important;
+
+        border-radius: 0 !important;
+
+        padding: 5px 0 !important;
+        margin: 0 !important;
+
         box-shadow: none !important;
+
         page-break-inside: avoid !important;
         break-inside: avoid !important;
     }
@@ -4734,32 +4762,85 @@ function printGeneratedTest() {
         display: none !important;
     }
 
+    /* TEKSTI I PYETJES */
+
     #generatedTestPage .generated-test-question-title {
-        gap: 7px !important;
-        margin-bottom: 7px !important;
-        font-size: 11px !important;
-        line-height: 1.3 !important;
+        display: flex !important;
+        align-items: flex-start !important;
+
+        gap: 6px !important;
+        margin: 0 0 3px 0 !important;
+
+        color: #111827 !important;
+
+        font-size: 10px !important;
+        font-weight: 700 !important;
+        line-height: 1.2 !important;
     }
+
+    /* NUMRI */
 
     #generatedTestPage .generated-test-number {
-        width: 22px !important;
-        height: 22px !important;
-        font-size: 9px !important;
-        border-radius: 5px !important;
+        flex-shrink: 0 !important;
+
+        width: 20px !important;
+        height: 20px !important;
+
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        background: #ffffff !important;
+        color: #111827 !important;
+
+        border: 1px solid #555 !important;
+        border-radius: 50% !important;
+
+        font-size: 8px !important;
+        font-weight: 700 !important;
     }
 
-    /* ALTERNATIVAT */
+    /* ALTERNATIVAT A/B/C/D */
 
     #generatedTestPage .generated-test-options {
-        gap: 5px 8px !important;
-        padding-left: 29px !important;
+        display: grid !important;
+
+        grid-template-columns: 1fr 1fr !important;
+
+        gap: 2px 18px !important;
+
+        padding-left: 26px !important;
+        margin: 0 !important;
     }
 
     #generatedTestPage .generated-test-option {
-        padding: 6px 8px !important;
-        border-radius: 4px !important;
-        font-size: 9.5px !important;
-        line-height: 1.25 !important;
+        background: #ffffff !important;
+
+        border: none !important;
+        border-radius: 0 !important;
+
+        padding: 2px 0 !important;
+
+        color: #1f2937 !important;
+
+        font-size: 9px !important;
+        line-height: 1.15 !important;
+
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    #generatedTestPage .generated-test-option strong {
+        color: #111827 !important;
+        font-weight: 700 !important;
+        margin-right: 3px !important;
+    }
+
+    /* MOS NDARJEN E PYETJEVE */
+
+    #generatedTestPage .generated-test-question,
+    #generatedTestPage .generated-test-options,
+    #generatedTestPage .generated-test-option {
         page-break-inside: avoid !important;
         break-inside: avoid !important;
     }
