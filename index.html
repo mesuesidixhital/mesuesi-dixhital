@@ -685,17 +685,1204 @@
          JAVASCRIPT BAZË
          ========================================= -->
 
-    <script>
+   <!-- =========================================
+     PJESA 2
+     HYRJA PËR MËSUES + DASHBOARD
+     ========================================= -->
 
-        function openLogin() {
+<style>
+
+    /* =========================================
+       LOGIN PAGE
+       ========================================= */
+
+    #loginPage {
+        min-height: 100vh;
+
+        display: none;
+
+        align-items: center;
+        justify-content: center;
+
+        background: #f5f7fb;
+
+        padding: 30px;
+    }
+
+    .login-card {
+        width: 100%;
+        max-width: 430px;
+
+        background: #ffffff;
+
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+
+        padding: 35px;
+
+        box-shadow: 0 15px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .login-logo {
+        width: 55px;
+        height: 55px;
+
+        margin: 0 auto 18px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background: #eef2ff;
+
+        border-radius: 14px;
+
+        font-size: 28px;
+    }
+
+    .login-card h2 {
+        text-align: center;
+
+        font-size: 25px;
+
+        color: #111827;
+
+        margin-bottom: 8px;
+    }
+
+    .login-card > p {
+        text-align: center;
+
+        color: #6b7280;
+
+        font-size: 14px;
+
+        margin-bottom: 28px;
+    }
+
+    .login-form-group {
+        margin-bottom: 18px;
+    }
+
+    .login-form-group label {
+        display: block;
+
+        font-size: 13px;
+
+        font-weight: 700;
+
+        color: #374151;
+
+        margin-bottom: 7px;
+    }
+
+    .login-form-group input {
+        width: 100%;
+
+        height: 45px;
+
+        padding: 0 13px;
+
+        border: 1px solid #d1d5db;
+
+        border-radius: 8px;
+
+        outline: none;
+
+        font-size: 14px;
+
+        transition: 0.2s;
+    }
+
+    .login-form-group input:focus {
+        border-color: #2563eb;
+
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+    }
+
+    .login-submit {
+        width: 100%;
+
+        height: 45px;
+
+        border: none;
+
+        border-radius: 8px;
+
+        background: #2563eb;
+
+        color: white;
+
+        font-size: 14px;
+
+        font-weight: 700;
+
+        margin-top: 5px;
+    }
+
+    .login-submit:hover {
+        background: #1d4ed8;
+    }
+
+    .login-back {
+        width: 100%;
+
+        margin-top: 12px;
+
+        height: 42px;
+
+        border: 1px solid #d1d5db;
+
+        background: white;
+
+        color: #374151;
+
+        border-radius: 8px;
+
+        font-size: 13px;
+
+        font-weight: 600;
+    }
+
+    .login-back:hover {
+        background: #f9fafb;
+    }
+
+
+    /* =========================================
+       DASHBOARD
+       ========================================= */
+
+    #dashboardPage {
+        display: none;
+
+        min-height: 100vh;
+
+        background: #f5f7fb;
+    }
+
+    .dashboard-layout {
+        min-height: 100vh;
+
+        display: flex;
+    }
+
+
+    /* =========================================
+       SIDEBAR
+       ========================================= */
+
+    .dashboard-sidebar {
+        width: 250px;
+
+        min-width: 250px;
+
+        background: #111827;
+
+        color: white;
+
+        padding: 22px 14px;
+
+        display: flex;
+
+        flex-direction: column;
+    }
+
+    .dashboard-brand {
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        padding: 0 10px 24px;
+
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+
+        margin-bottom: 18px;
+    }
+
+    .dashboard-brand-logo {
+        width: 38px;
+        height: 38px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background: rgba(255,255,255,0.10);
+
+        border-radius: 9px;
+
+        font-size: 20px;
+    }
+
+    .dashboard-brand strong {
+        display: block;
+
+        font-size: 15px;
+    }
+
+    .dashboard-brand span {
+        display: block;
+
+        margin-top: 2px;
+
+        font-size: 10px;
+
+        color: #9ca3af;
+    }
+
+
+    /* =========================================
+       SIDEBAR MENU
+       ========================================= */
+
+    .dashboard-menu {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 5px;
+    }
+
+    .dashboard-menu button {
+        width: 100%;
+
+        border: none;
+
+        background: transparent;
+
+        color: #d1d5db;
+
+        text-align: left;
+
+        padding: 11px 12px;
+
+        border-radius: 8px;
+
+        font-size: 13px;
+
+        font-weight: 600;
+
+        transition: 0.2s;
+    }
+
+    .dashboard-menu button:hover {
+        background: rgba(255,255,255,0.08);
+
+        color: white;
+    }
+
+    .dashboard-menu button.active {
+        background: #2563eb;
+
+        color: white;
+    }
+
+
+    /* =========================================
+       MAIN DASHBOARD
+       ========================================= */
+
+    .dashboard-main {
+        flex: 1;
+
+        min-width: 0;
+
+        display: flex;
+
+        flex-direction: column;
+    }
+
+
+    /* =========================================
+       DASHBOARD TOPBAR
+       ========================================= */
+
+    .dashboard-topbar {
+        height: 70px;
+
+        background: white;
+
+        border-bottom: 1px solid #e5e7eb;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        padding: 0 28px;
+    }
+
+    .dashboard-topbar h2 {
+        font-size: 18px;
+
+        color: #111827;
+    }
+
+    .teacher-profile {
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+    }
+
+    .teacher-avatar {
+        width: 35px;
+        height: 35px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background: #dbeafe;
+
+        color: #1d4ed8;
+
+        border-radius: 50%;
+
+        font-size: 14px;
+
+        font-weight: 800;
+    }
+
+    .teacher-profile span {
+        font-size: 13px;
+
+        font-weight: 700;
+
+        color: #374151;
+    }
+
+
+    /* =========================================
+       DASHBOARD CONTENT
+       ========================================= */
+
+    .dashboard-content {
+        padding: 28px;
+
+        flex: 1;
+    }
+
+    .welcome-box {
+        background: white;
+
+        border: 1px solid #e5e7eb;
+
+        border-radius: 14px;
+
+        padding: 24px;
+
+        margin-bottom: 22px;
+    }
+
+    .welcome-box h1 {
+        font-size: 24px;
+
+        color: #111827;
+
+        margin-bottom: 7px;
+    }
+
+    .welcome-box p {
+        font-size: 14px;
+
+        color: #6b7280;
+    }
+
+
+    /* =========================================
+       DASHBOARD STATISTICS
+       ========================================= */
+
+    .dashboard-stats {
+        display: grid;
+
+        grid-template-columns: repeat(4, 1fr);
+
+        gap: 16px;
+
+        margin-bottom: 25px;
+    }
+
+    .stat-card {
+        background: white;
+
+        border: 1px solid #e5e7eb;
+
+        border-radius: 12px;
+
+        padding: 20px;
+    }
+
+    .stat-card-icon {
+        width: 38px;
+        height: 38px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background: #eff6ff;
+
+        border-radius: 9px;
+
+        font-size: 18px;
+
+        margin-bottom: 13px;
+    }
+
+    .stat-card strong {
+        display: block;
+
+        font-size: 24px;
+
+        color: #111827;
+
+        margin-bottom: 3px;
+    }
+
+    .stat-card span {
+        font-size: 12px;
+
+        color: #6b7280;
+    }
+
+
+    /* =========================================
+       QUICK ACTIONS
+       ========================================= */
+
+    .quick-actions {
+        display: grid;
+
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 16px;
+    }
+
+    .quick-action {
+        background: white;
+
+        border: 1px solid #e5e7eb;
+
+        border-radius: 12px;
+
+        padding: 20px;
+
+        text-align: left;
+
+        transition: 0.2s;
+    }
+
+    .quick-action:hover {
+        transform: translateY(-2px);
+
+        box-shadow: 0 8px 20px rgba(15,23,42,0.06);
+    }
+
+    .quick-action-icon {
+        font-size: 25px;
+
+        margin-bottom: 12px;
+    }
+
+    .quick-action h3 {
+        font-size: 15px;
+
+        color: #111827;
+
+        margin-bottom: 6px;
+    }
+
+    .quick-action p {
+        font-size: 12px;
+
+        color: #6b7280;
+
+        line-height: 1.5;
+    }
+
+
+    /* =========================================
+       RESPONSIVE DASHBOARD
+       ========================================= */
+
+    @media (max-width: 900px) {
+
+        .dashboard-sidebar {
+            width: 210px;
+
+            min-width: 210px;
+        }
+
+        .dashboard-stats {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .quick-actions {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+
+    @media (max-width: 650px) {
+
+        .dashboard-layout {
+            flex-direction: column;
+        }
+
+        .dashboard-sidebar {
+            width: 100%;
+
+            min-width: 100%;
+
+            padding: 12px;
+        }
+
+        .dashboard-brand {
+            margin-bottom: 10px;
+            padding-bottom: 12px;
+        }
+
+        .dashboard-menu {
+            flex-direction: row;
+
+            overflow-x: auto;
+        }
+
+        .dashboard-menu button {
+            white-space: nowrap;
+
+            width: auto;
+        }
+
+        .dashboard-stats {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .quick-actions {
+            grid-template-columns: 1fr;
+        }
+
+        .dashboard-topbar {
+            padding: 0 16px;
+        }
+
+        .dashboard-content {
+            padding: 16px;
+        }
+
+        .teacher-profile span {
+            display: none;
+        }
+    }
+
+</style>
+
+
+<!-- =========================================
+     LOGIN
+     ========================================= -->
+
+<section id="loginPage">
+
+    <div class="login-card">
+
+        <div class="login-logo">
+            📚
+        </div>
+
+        <h2>
+            Hyr për mësues
+        </h2>
+
+        <p>
+            Hyni në hapësirën tuaj të punës
+        </p>
+
+
+        <div class="login-form-group">
+
+            <label for="teacherName">
+                Emri i mësuesit
+            </label>
+
+            <input
+                type="text"
+                id="teacherName"
+                placeholder="Shkruani emrin tuaj"
+            >
+
+        </div>
+
+
+        <div class="login-form-group">
+
+            <label for="teacherEmail">
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="teacherEmail"
+                placeholder="Shkruani email-in"
+            >
+
+        </div>
+
+
+        <button
+            class="login-submit"
+            onclick="loginTeacher()"
+        >
+            Hyr në platformë
+        </button>
+
+
+        <button
+            class="login-back"
+            onclick="showHomePage()"
+        >
+            ← Kthehu në faqen kryesore
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     DASHBOARD
+     ========================================= -->
+
+<section id="dashboardPage">
+
+    <div class="dashboard-layout">
+
+
+        <!-- SIDEBAR -->
+
+        <aside class="dashboard-sidebar">
+
+            <div class="dashboard-brand">
+
+                <div class="dashboard-brand-logo">
+                    📚
+                </div>
+
+                <div>
+                    <strong>Mësuesi Dixhital</strong>
+                    <span>Paneli i mësuesit</span>
+                </div>
+
+            </div>
+
+
+            <nav class="dashboard-menu">
+
+                <button
+                    class="active"
+                    onclick="showDashboard()"
+                >
+                    🏠 Dashboard
+                </button>
+
+                <button onclick="openQuestionBank()">
+                    📚 Banka e pyetjeve
+                </button>
+
+                <button onclick="openAIGenerator()">
+                    🤖 Gjenero pyetje
+                </button>
+
+                <button onclick="openCreateTest()">
+                    📝 Krijo test
+                </button>
+
+                <button onclick="openQuizzes()">
+                    🧩 Kuize
+                </button>
+
+                <button onclick="openResults()">
+                    📊 Rezultatet
+                </button>
+
+                <button onclick="logoutTeacher()">
+                    🚪 Dil
+                </button>
+
+            </nav>
+
+        </aside>
+
+
+        <!-- MAIN -->
+
+        <main class="dashboard-main">
+
+
+            <!-- TOPBAR -->
+
+            <div class="dashboard-topbar">
+
+                <h2>
+                    Dashboard
+                </h2>
+
+                <div class="teacher-profile">
+
+                    <div class="teacher-avatar">
+                        M
+                    </div>
+
+                    <span id="dashboardTeacherName">
+                        Mësues
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTENT -->
+
+            <div class="dashboard-content">
+
+
+                <div class="welcome-box">
+
+                    <h1 id="welcomeTeacher">
+                        Mirë se vini! 👋
+                    </h1>
+
+                    <p>
+                        Menaxhoni pyetjet, testet dhe materialet
+                        tuaja mësimore nga një vend i vetëm.
+                    </p>
+
+                </div>
+
+
+                <!-- STATISTIKA -->
+
+                <div class="dashboard-stats">
+
+                    <div class="stat-card">
+
+                        <div class="stat-card-icon">
+                            📚
+                        </div>
+
+                        <strong id="statQuestions">
+                            0
+                        </strong>
+
+                        <span>
+                            Pyetje në bankë
+                        </span>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-card-icon">
+                            📋
+                        </div>
+
+                        <strong id="statTests">
+                            0
+                        </strong>
+
+                        <span>
+                            Teste të krijuara
+                        </span>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-card-icon">
+                            🧩
+                        </div>
+
+                        <strong id="statQuizzes">
+                            0
+                        </strong>
+
+                        <span>
+                            Kuize
+                        </span>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-card-icon">
+                            📊
+                        </div>
+
+                        <strong id="statResults">
+                            0
+                        </strong>
+
+                        <span>
+                            Rezultate
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- VEPRIMET E SHPEJTA -->
+
+                <div class="quick-actions">
+
+
+                    <button
+                        class="quick-action"
+                        onclick="openQuestionBank()"
+                    >
+
+                        <div class="quick-action-icon">
+                            📚
+                        </div>
+
+                        <h3>
+                            Banka e pyetjeve
+                        </h3>
+
+                        <p>
+                            Shikoni, shtoni dhe menaxhoni
+                            pyetjet tuaja.
+                        </p>
+
+                    </button>
+
+
+                    <button
+                        class="quick-action"
+                        onclick="openAIGenerator()"
+                    >
+
+                        <div class="quick-action-icon">
+                            🤖
+                        </div>
+
+                        <h3>
+                            Gjenero pyetje
+                        </h3>
+
+                        <p>
+                            Krijoni pyetje të reja me AI.
+                        </p>
+
+                    </button>
+
+
+                    <button
+                        class="quick-action"
+                        onclick="openCreateTest()"
+                    >
+
+                        <div class="quick-action-icon">
+                            📝
+                        </div>
+
+                        <h3>
+                            Krijo test
+                        </h3>
+
+                        <p>
+                            Përgatitni një test të gatshëm
+                            për printim.
+                        </p>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</section>
+
+
+<script>
+
+    /* =========================================
+       NAVIGIMI BAZË
+       ========================================= */
+
+    function hideAllMainPages() {
+
+        const home = document.getElementById("app");
+
+        const login = document.getElementById("loginPage");
+
+        const dashboard = document.getElementById("dashboardPage");
+
+        if (home) {
+            home.style.display = "none";
+        }
+
+        if (login) {
+            login.style.display = "none";
+        }
+
+        if (dashboard) {
+            dashboard.style.display = "none";
+        }
+
+    }
+
+
+    /* =========================================
+       FAQJA KRYESORE
+       ========================================= */
+
+    function showHomePage() {
+
+        hideAllMainPages();
+
+        const home = document.getElementById("app");
+
+        if (home) {
+            home.style.display = "block";
+        }
+
+    }
+
+
+    /* =========================================
+       LOGIN
+       ========================================= */
+
+    function openLogin() {
+
+        hideAllMainPages();
+
+        const login = document.getElementById("loginPage");
+
+        if (login) {
+            login.style.display = "flex";
+        }
+
+    }
+
+
+    /* =========================================
+       HYRJA E MËSUESIT
+       ========================================= */
+
+    function loginTeacher() {
+
+        const nameInput =
+            document.getElementById("teacherName");
+
+        const emailInput =
+            document.getElementById("teacherEmail");
+
+        const name =
+            nameInput.value.trim();
+
+        const email =
+            emailInput.value.trim();
+
+
+        if (!name) {
 
             alert(
-                "Hyrja për mësues do të ndërtohet në pjesën tjetër."
+                "Ju lutem shkruani emrin e mësuesit."
             );
+
+            nameInput.focus();
+
+            return;
+        }
+
+
+        if (!email) {
+
+            alert(
+                "Ju lutem shkruani email-in."
+            );
+
+            emailInput.focus();
+
+            return;
+        }
+
+
+        localStorage.setItem(
+            "mesuesiDixhitalTeacherName",
+            name
+        );
+
+        localStorage.setItem(
+            "mesuesiDixhitalTeacherEmail",
+            email
+        );
+
+
+        openDashboard();
+
+    }
+
+
+    /* =========================================
+       DASHBOARD
+       ========================================= */
+
+    function openDashboard() {
+
+        hideAllMainPages();
+
+        const dashboard =
+            document.getElementById("dashboardPage");
+
+        if (dashboard) {
+
+            dashboard.style.display = "block";
 
         }
 
-    </script>
 
+        updateTeacherInfo();
+
+    }
+
+
+    function showDashboard() {
+
+        openDashboard();
+
+    }
+
+
+    /* =========================================
+       INFORMACIONI I MËSUESIT
+       ========================================= */
+
+    function updateTeacherInfo() {
+
+        const savedName =
+            localStorage.getItem(
+                "mesuesiDixhitalTeacherName"
+            );
+
+
+        const name =
+            savedName || "Mësues";
+
+
+        const dashboardName =
+            document.getElementById(
+                "dashboardTeacherName"
+            );
+
+        const welcome =
+            document.getElementById(
+                "welcomeTeacher"
+            );
+
+
+        if (dashboardName) {
+
+            dashboardName.textContent =
+                name;
+
+        }
+
+
+        if (welcome) {
+
+            welcome.textContent =
+                "Mirë se vini, " + name + "! 👋";
+
+        }
+
+    }
+
+
+    /* =========================================
+       LOGOUT
+       ========================================= */
+
+    function logoutTeacher() {
+
+        localStorage.removeItem(
+            "mesuesiDixhitalTeacherName"
+        );
+
+        localStorage.removeItem(
+            "mesuesiDixhitalTeacherEmail"
+        );
+
+        showHomePage();
+
+    }
+
+
+    /* =========================================
+       PJESËT QË DO TË NDËRTOHEN
+       ========================================= */
+
+    function openQuestionBank() {
+
+        alert(
+            "📚 Banka e pyetjeve do të ndërtohet në Pjesën 3."
+        );
+
+    }
+
+
+    function openAIGenerator() {
+
+        alert(
+            "🤖 Gjenerimi me AI do të ndërtohet më vonë."
+        );
+
+    }
+
+
+    function openCreateTest() {
+
+        alert(
+            "📝 Krijimi i testit do të ndërtohet më vonë."
+        );
+
+    }
+
+
+    function openQuizzes() {
+
+        alert(
+            "🧩 Kuizet do të ndërtohen më vonë."
+        );
+
+    }
+
+
+    function openResults() {
+
+        alert(
+            "📊 Rezultatet do të ndërtohen më vonë."
+        );
+
+    }
+
+</script>
 </body>
 </html>
