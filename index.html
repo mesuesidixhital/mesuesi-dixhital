@@ -3600,13 +3600,25 @@
                             )}
                         </div>
 
-                        <button
-                            class="question-delete-button"
-                            onclick="deleteQuestion('${item.id}')"
-                            title="Fshi pyetjen"
-                        >
-                            🗑️
-                        </button>
+                        <div class="question-card-actions">
+
+    <button
+        class="question-edit-button"
+        onclick="editQuestion('${item.id}')"
+        title="Ndrysho pyetjen"
+    >
+        ✏️
+    </button>
+
+    <button
+        class="question-delete-button"
+        onclick="deleteQuestion('${item.id}')"
+        title="Fshi pyetjen"
+    >
+        🗑️
+    </button>
+
+</div>
 
                     </div>
 
@@ -3725,7 +3737,68 @@
         `;
 
     }
+/* =========================================
+   NDRYSHO PYETJEN
+   ========================================= */
 
+function editQuestion(id) {
+
+    const questions = getBankQuestions();
+
+    const question = questions.find(function(item) {
+        return item.id === id;
+    });
+
+    if (!question) {
+        return;
+    }
+
+    const form = document.getElementById("questionForm");
+
+    if (!form) {
+        return;
+    }
+
+    document.getElementById("questionSubject").value =
+        question.subject || "";
+
+    document.getElementById("questionGrade").value =
+        question.grade || "";
+
+    document.getElementById("questionTopic").value =
+        question.topic || "";
+
+    document.getElementById("questionDifficulty").value =
+        question.difficulty || "";
+
+    document.getElementById("questionText").value =
+        question.question || "";
+
+    document.getElementById("optionA").value =
+        question.options?.A || "";
+
+    document.getElementById("optionB").value =
+        question.options?.B || "";
+
+    document.getElementById("optionC").value =
+        question.options?.C || "";
+
+    document.getElementById("optionD").value =
+        question.options?.D || "";
+
+    document.getElementById("correctAnswer").value =
+        question.correct || "";
+
+    form.dataset.editingId = id;
+
+    form.style.display = "block";
+
+    form.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+}
 
     /* =========================================
        FSHI PYETJEN
