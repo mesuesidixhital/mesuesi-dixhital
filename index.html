@@ -1841,12 +1841,20 @@
 
     function openQuestionBank() {
 
-        alert(
-            "📚 Banka e pyetjeve do të ndërtohet në Pjesën 3."
-        );
+    hideAllMainPages();
+
+    const page =
+        document.getElementById("questionBankPage");
+
+    if (page) {
+
+        page.style.display = "block";
+
+        displayQuestionBank();
 
     }
 
+}
 
     function openAIGenerator() {
 
@@ -1880,6 +1888,1981 @@
         alert(
             "📊 Rezultatet do të ndërtohen më vonë."
         );
+
+    }
+<!-- =========================================
+     PJESA 3
+     BANKA E PYETJEVE
+     ========================================= -->
+
+<style>
+
+    /* =========================================
+       QUESTION BANK PAGE
+       ========================================= */
+
+    #questionBankPage {
+        display: none;
+
+        min-height: 100vh;
+
+        background: #f5f7fb;
+    }
+
+
+    /* =========================================
+       QUESTION BANK CONTENT
+       ========================================= */
+
+    .question-bank-content {
+        padding: 28px;
+    }
+
+
+    /* =========================================
+       HEADER
+       ========================================= */
+
+    .question-bank-header {
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 20px;
+
+        margin-bottom: 22px;
+    }
+
+    .question-bank-title h1 {
+        font-size: 25px;
+
+        color: #111827;
+
+        margin-bottom: 6px;
+    }
+
+    .question-bank-title p {
+        font-size: 13px;
+
+        color: #6b7280;
+    }
+
+    .add-question-button {
+        border: none;
+
+        background: #2563eb;
+
+        color: white;
+
+        padding: 12px 18px;
+
+        border-radius: 8px;
+
+        font-size: 13px;
+
+        font-weight: 700;
+    }
+
+    .add-question-button:hover {
+        background: #1d4ed8;
+    }
+
+
+    /* =========================================
+       STATISTIKA
+       ========================================= */
+
+    .question-bank-stats {
+        display: grid;
+
+        grid-template-columns:
+            repeat(4, 1fr);
+
+        gap: 14px;
+
+        margin-bottom: 20px;
+    }
+
+    .question-bank-stat {
+        background: white;
+
+        border: 1px solid #e5e7eb;
+
+        border-radius: 11px;
+
+        padding: 17px;
+    }
+
+    .question-bank-stat span {
+        display: block;
+
+        font-size: 11px;
+
+        color: #6b7280;
+
+        margin-bottom: 5px;
+    }
+
+    .question-bank-stat strong {
+        font-size: 22px;
+
+        color: #111827;
+    }
+
+
+    /* =========================================
+       TOOLBAR
+       ========================================= */
+
+    .question-bank-toolbar {
+        background: white;
+
+        border: 1px solid #e5e7eb;
+
+        border-radius: 12px;
+
+        padding: 16px;
+
+        margin-bottom: 18px;
+
+        display: grid;
+
+        grid-template-columns: 1.5fr 1fr 1fr 1fr;
+
+        gap: 10px;
+    }
+
+    .question-bank-toolbar input,
+    .question-bank-toolbar select {
+
+        width: 100%;
+
+        height: 40px;
+
+        border: 1px solid #d1d5db;
+
+        border-radius: 7px;
+
+        padding: 0 11px;
+
+        font-size: 12px;
+
+        outline: none;
+
+        background: white;
+    }
+
+    .question-bank-toolbar input:focus,
+    .question-bank-toolbar select:focus {
+
+        border-color: #2563eb;
+
+        box-shadow:
+            0 0 0 3px
+            rgba(37,99,235,0.08);
+    }
+
+
+    /* =========================================
+       ADD QUESTION FORM
+       ========================================= */
+
+    #questionFormContainer {
+
+        display: none;
+
+        background: white;
+
+        border: 1px solid #e5e7eb;
+
+        border-radius: 12px;
+
+        padding: 22px;
+
+        margin-bottom: 20px;
+    }
+
+    .question-form-title {
+
+        font-size: 17px;
+
+        font-weight: 800;
+
+        color: #111827;
+
+        margin-bottom: 18px;
+    }
+
+    .question-form-grid {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 14px;
+    }
+
+    .question-form-group {
+
+        margin-bottom: 2px;
+    }
+
+    .question-form-group.full {
+
+        grid-column: 1 / -1;
+    }
+
+    .question-form-group label {
+
+        display: block;
+
+        font-size: 12px;
+
+        font-weight: 700;
+
+        color: #374151;
+
+        margin-bottom: 6px;
+    }
+
+    .question-form-group input,
+    .question-form-group select,
+    .question-form-group textarea {
+
+        width: 100%;
+
+        border: 1px solid #d1d5db;
+
+        border-radius: 7px;
+
+        outline: none;
+
+        padding: 10px;
+
+        font-size: 13px;
+
+        background: white;
+    }
+
+    .question-form-group input,
+    .question-form-group select {
+
+        height: 40px;
+    }
+
+    .question-form-group textarea {
+
+        min-height: 90px;
+
+        resize: vertical;
+    }
+
+    .question-form-group input:focus,
+    .question-form-group select:focus,
+    .question-form-group textarea:focus {
+
+        border-color: #2563eb;
+
+        box-shadow:
+            0 0 0 3px
+            rgba(37,99,235,0.08);
+    }
+
+
+    /* =========================================
+       ALTERNATIVAT
+       ========================================= */
+
+    .options-title {
+
+        grid-column: 1 / -1;
+
+        font-size: 13px;
+
+        font-weight: 800;
+
+        color: #111827;
+
+        margin-top: 4px;
+    }
+
+    .option-row {
+
+        display: grid;
+
+        grid-template-columns: 35px 1fr;
+
+        align-items: center;
+
+        gap: 8px;
+    }
+
+    .option-letter {
+
+        height: 35px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background: #eff6ff;
+
+        color: #1d4ed8;
+
+        border-radius: 7px;
+
+        font-size: 13px;
+
+        font-weight: 800;
+    }
+
+
+    /* =========================================
+       FORM BUTTONS
+       ========================================= */
+
+    .question-form-actions {
+
+        display: flex;
+
+        justify-content: flex-end;
+
+        gap: 10px;
+
+        margin-top: 20px;
+
+        padding-top: 18px;
+
+        border-top: 1px solid #f0f0f0;
+    }
+
+    .question-cancel-button {
+
+        border: 1px solid #d1d5db;
+
+        background: white;
+
+        color: #374151;
+
+        padding: 10px 16px;
+
+        border-radius: 7px;
+
+        font-size: 12px;
+
+        font-weight: 700;
+    }
+
+    .question-save-button {
+
+        border: none;
+
+        background: #2563eb;
+
+        color: white;
+
+        padding: 10px 18px;
+
+        border-radius: 7px;
+
+        font-size: 12px;
+
+        font-weight: 700;
+    }
+
+    .question-save-button:hover {
+
+        background: #1d4ed8;
+    }
+
+
+    /* =========================================
+       QUESTION LIST
+       ========================================= */
+
+    .question-bank-list {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .question-card {
+
+        background: white;
+
+        border: 1px solid #e5e7eb;
+
+        border-radius: 11px;
+
+        padding: 18px;
+    }
+
+    .question-card-header {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        gap: 15px;
+
+        margin-bottom: 10px;
+    }
+
+    .question-card-number {
+
+        width: 30px;
+
+        height: 30px;
+
+        flex-shrink: 0;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background: #eff6ff;
+
+        color: #1d4ed8;
+
+        border-radius: 7px;
+
+        font-size: 12px;
+
+        font-weight: 800;
+    }
+
+    .question-card-text {
+
+        flex: 1;
+
+        font-size: 14px;
+
+        line-height: 1.5;
+
+        color: #111827;
+
+        font-weight: 600;
+    }
+
+    .question-delete-button {
+
+        border: none;
+
+        background: #fef2f2;
+
+        color: #dc2626;
+
+        width: 32px;
+
+        height: 32px;
+
+        border-radius: 7px;
+
+        font-size: 14px;
+    }
+
+    .question-delete-button:hover {
+
+        background: #fee2e2;
+    }
+
+
+    /* =========================================
+       QUESTION META
+       ========================================= */
+
+    .question-card-meta {
+
+        display: flex;
+
+        flex-wrap: wrap;
+
+        gap: 6px;
+
+        margin-bottom: 13px;
+
+        margin-left: 40px;
+    }
+
+    .question-badge {
+
+        padding: 4px 8px;
+
+        border-radius: 5px;
+
+        background: #f3f4f6;
+
+        color: #4b5563;
+
+        font-size: 10px;
+
+        font-weight: 700;
+    }
+
+
+    /* =========================================
+       OPTIONS IN CARD
+       ========================================= */
+
+    .question-card-options {
+
+        display: grid;
+
+        grid-template-columns:
+            1fr 1fr;
+
+        gap: 7px;
+
+        margin-left: 40px;
+    }
+
+    .question-card-option {
+
+        padding: 8px 10px;
+
+        background: #f8fafc;
+
+        border: 1px solid #e5e7eb;
+
+        border-radius: 6px;
+
+        font-size: 12px;
+
+        color: #374151;
+    }
+
+    .question-card-option.correct {
+
+        background: #ecfdf5;
+
+        border-color: #86efac;
+
+        color: #166534;
+
+        font-weight: 700;
+    }
+
+
+    /* =========================================
+       EMPTY STATE
+       ========================================= */
+
+    .question-bank-empty {
+
+        background: white;
+
+        border: 1px dashed #d1d5db;
+
+        border-radius: 12px;
+
+        padding: 55px 20px;
+
+        text-align: center;
+    }
+
+    .question-bank-empty-icon {
+
+        font-size: 42px;
+
+        margin-bottom: 12px;
+    }
+
+    .question-bank-empty h3 {
+
+        font-size: 17px;
+
+        color: #111827;
+
+        margin-bottom: 6px;
+    }
+
+    .question-bank-empty p {
+
+        font-size: 13px;
+
+        color: #6b7280;
+
+        margin-bottom: 18px;
+    }
+
+
+    /* =========================================
+       RESPONSIVE
+       ========================================= */
+
+    @media (max-width: 900px) {
+
+        .question-bank-stats {
+
+            grid-template-columns:
+                repeat(2, 1fr);
+        }
+
+        .question-bank-toolbar {
+
+            grid-template-columns:
+                1fr 1fr;
+        }
+
+    }
+
+
+    @media (max-width: 650px) {
+
+        .question-bank-content {
+
+            padding: 16px;
+        }
+
+        .question-bank-header {
+
+            flex-direction: column;
+
+            align-items: flex-start;
+        }
+
+        .question-bank-toolbar {
+
+            grid-template-columns: 1fr;
+        }
+
+        .question-form-grid {
+
+            grid-template-columns: 1fr;
+        }
+
+        .question-form-group.full {
+
+            grid-column: auto;
+        }
+
+        .question-card-options {
+
+            grid-template-columns: 1fr;
+        }
+
+        .question-card-meta,
+        .question-card-options {
+
+            margin-left: 0;
+        }
+
+    }
+
+</style>
+
+
+<!-- =========================================
+     QUESTION BANK PAGE
+     ========================================= -->
+
+<section id="questionBankPage">
+
+    <div class="dashboard-layout">
+
+
+        <!-- SIDEBAR -->
+
+        <aside class="dashboard-sidebar">
+
+            <div class="dashboard-brand">
+
+                <div class="dashboard-brand-logo">
+                    📚
+                </div>
+
+                <div>
+                    <strong>Mësuesi Dixhital</strong>
+                    <span>Paneli i mësuesit</span>
+                </div>
+
+            </div>
+
+
+            <nav class="dashboard-menu">
+
+                <button onclick="openDashboard()">
+                    🏠 Dashboard
+                </button>
+
+                <button
+                    class="active"
+                    onclick="openQuestionBank()"
+                >
+                    📚 Banka e pyetjeve
+                </button>
+
+                <button onclick="openAIGenerator()">
+                    🤖 Gjenero pyetje
+                </button>
+
+                <button onclick="openCreateTest()">
+                    📝 Krijo test
+                </button>
+
+                <button onclick="openQuizzes()">
+                    🧩 Kuize
+                </button>
+
+                <button onclick="openResults()">
+                    📊 Rezultatet
+                </button>
+
+                <button onclick="logoutTeacher()">
+                    🚪 Dil
+                </button>
+
+            </nav>
+
+        </aside>
+
+
+        <!-- MAIN -->
+
+        <main class="dashboard-main">
+
+
+            <div class="dashboard-topbar">
+
+                <h2>
+                    Banka e pyetjeve
+                </h2>
+
+                <div class="teacher-profile">
+
+                    <div class="teacher-avatar">
+                        M
+                    </div>
+
+                    <span id="questionBankTeacherName">
+                        Mësues
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="question-bank-content">
+
+
+                <!-- HEADER -->
+
+                <div class="question-bank-header">
+
+                    <div class="question-bank-title">
+
+                        <h1>
+                            Banka e pyetjeve
+                        </h1>
+
+                        <p>
+                            Ruani dhe menaxhoni pyetjet tuaja
+                            për krijimin e testeve.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="add-question-button"
+                        onclick="toggleQuestionForm()"
+                    >
+                        ➕ Shto pyetje
+                    </button>
+
+                </div>
+
+
+                <!-- STATISTIKA -->
+
+                <div class="question-bank-stats">
+
+                    <div class="question-bank-stat">
+
+                        <span>
+                            Pyetje gjithsej
+                        </span>
+
+                        <strong id="bankStatTotal">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="question-bank-stat">
+
+                        <span>
+                            Lëndë
+                        </span>
+
+                        <strong id="bankStatSubjects">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="question-bank-stat">
+
+                        <span>
+                            Klasa
+                        </span>
+
+                        <strong id="bankStatGrades">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="question-bank-stat">
+
+                        <span>
+                            Të vështira
+                        </span>
+
+                        <strong id="bankStatHard">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FORMULARI -->
+
+                <div id="questionFormContainer">
+
+                    <div class="question-form-title">
+                        ➕ Shto pyetje të re
+                    </div>
+
+
+                    <div class="question-form-grid">
+
+
+                        <div class="question-form-group">
+
+                            <label>
+                                Lënda
+                            </label>
+
+                            <select id="questionSubject">
+
+                                <option value="">
+                                    Zgjidh lëndën
+                                </option>
+
+                                <option value="Fizikë">
+                                    Fizikë
+                                </option>
+
+                                <option value="Kimi">
+                                    Kimi
+                                </option>
+
+                                <option value="Matematikë">
+                                    Matematikë
+                                </option>
+
+                                <option value="Biologji">
+                                    Biologji
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="question-form-group">
+
+                            <label>
+                                Klasa
+                            </label>
+
+                            <select id="questionGrade">
+
+                                <option value="">
+                                    Zgjidh klasën
+                                </option>
+
+                                <option value="6">
+                                    Klasa 6
+                                </option>
+
+                                <option value="7">
+                                    Klasa 7
+                                </option>
+
+                                <option value="8">
+                                    Klasa 8
+                                </option>
+
+                                <option value="9">
+                                    Klasa 9
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="question-form-group">
+
+                            <label>
+                                Tema
+                            </label>
+
+                            <input
+                                type="text"
+                                id="questionTopic"
+                                placeholder="p.sh. Forca dhe lëvizja"
+                            >
+
+                        </div>
+
+
+                        <div class="question-form-group">
+
+                            <label>
+                                Vështirësia
+                            </label>
+
+                            <select id="questionDifficulty">
+
+                                <option value="I lehtë">
+                                    I lehtë
+                                </option>
+
+                                <option value="Mesatar" selected>
+                                    Mesatar
+                                </option>
+
+                                <option value="I vështirë">
+                                    I vështirë
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="question-form-group full">
+
+                            <label>
+                                Pyetja
+                            </label>
+
+                            <textarea
+                                id="questionText"
+                                placeholder="Shkruani pyetjen..."
+                            ></textarea>
+
+                        </div>
+
+
+                        <div class="options-title">
+                            Alternativat
+                        </div>
+
+
+                        <div class="question-form-group">
+
+                            <div class="option-row">
+
+                                <div class="option-letter">
+                                    A
+                                </div>
+
+                                <input
+                                    type="text"
+                                    id="optionA"
+                                    placeholder="Alternativa A"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="question-form-group">
+
+                            <div class="option-row">
+
+                                <div class="option-letter">
+                                    B
+                                </div>
+
+                                <input
+                                    type="text"
+                                    id="optionB"
+                                    placeholder="Alternativa B"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="question-form-group">
+
+                            <div class="option-row">
+
+                                <div class="option-letter">
+                                    C
+                                </div>
+
+                                <input
+                                    type="text"
+                                    id="optionC"
+                                    placeholder="Alternativa C"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="question-form-group">
+
+                            <div class="option-row">
+
+                                <div class="option-letter">
+                                    D
+                                </div>
+
+                                <input
+                                    type="text"
+                                    id="optionD"
+                                    placeholder="Alternativa D"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="question-form-group">
+
+                            <label>
+                                Përgjigjja e saktë
+                            </label>
+
+                            <select id="questionCorrect">
+
+                                <option value="A">
+                                    A
+                                </option>
+
+                                <option value="B">
+                                    B
+                                </option>
+
+                                <option value="C">
+                                    C
+                                </option>
+
+                                <option value="D">
+                                    D
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="question-form-actions">
+
+                        <button
+                            class="question-cancel-button"
+                            onclick="toggleQuestionForm()"
+                        >
+                            Anulo
+                        </button>
+
+                        <button
+                            class="question-save-button"
+                            onclick="saveQuestion()"
+                        >
+                            💾 Ruaj pyetjen
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FILTERS -->
+
+                <div class="question-bank-toolbar">
+
+                    <input
+                        type="text"
+                        id="bankSearch"
+                        placeholder="🔎 Kërko pyetje..."
+                        oninput="displayQuestionBank()"
+                    >
+
+
+                    <select
+                        id="bankSubjectFilter"
+                        onchange="displayQuestionBank()"
+                    >
+
+                        <option value="">
+                            Të gjitha lëndët
+                        </option>
+
+                        <option value="Fizikë">
+                            Fizikë
+                        </option>
+
+                        <option value="Kimi">
+                            Kimi
+                        </option>
+
+                        <option value="Matematikë">
+                            Matematikë
+                        </option>
+
+                        <option value="Biologji">
+                            Biologji
+                        </option>
+
+                    </select>
+
+
+                    <select
+                        id="bankGradeFilter"
+                        onchange="displayQuestionBank()"
+                    >
+
+                        <option value="">
+                            Të gjitha klasat
+                        </option>
+
+                        <option value="6">
+                            Klasa 6
+                        </option>
+
+                        <option value="7">
+                            Klasa 7
+                        </option>
+
+                        <option value="8">
+                            Klasa 8
+                        </option>
+
+                        <option value="9">
+                            Klasa 9
+                        </option>
+
+                    </select>
+
+
+                    <select
+                        id="bankDifficultyFilter"
+                        onchange="displayQuestionBank()"
+                    >
+
+                        <option value="">
+                            Të gjitha vështirësitë
+                        </option>
+
+                        <option value="I lehtë">
+                            I lehtë
+                        </option>
+
+                        <option value="Mesatar">
+                            Mesatar
+                        </option>
+
+                        <option value="I vështirë">
+                            I vështirë
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- LISTA -->
+
+                <div
+                    id="questionBankList"
+                    class="question-bank-list"
+                ></div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</section>
+</script>
+    <script>
+
+    /* =========================================
+       QUESTION BANK STORAGE
+       ========================================= */
+
+    function getBankQuestions() {
+
+        const saved =
+            localStorage.getItem(
+                "mesuesiDixhitalQuestions"
+            );
+
+        if (!saved) {
+            return [];
+        }
+
+        try {
+
+            return JSON.parse(saved);
+
+        } catch (error) {
+
+            console.error(
+                "Gabim gjatë leximit të pyetjeve:",
+                error
+            );
+
+            return [];
+
+        }
+
+    }
+
+
+    function saveBankQuestions(questions) {
+
+        localStorage.setItem(
+            "mesuesiDixhitalQuestions",
+            JSON.stringify(questions)
+        );
+
+    }
+
+
+    /* =========================================
+       HAP / MBYLL FORMULARIN
+       ========================================= */
+
+    function toggleQuestionForm() {
+
+        const form =
+            document.getElementById(
+                "questionFormContainer"
+            );
+
+        if (!form) {
+            return;
+        }
+
+        if (form.style.display === "block") {
+
+            form.style.display = "none";
+
+        } else {
+
+            form.style.display = "block";
+
+        }
+
+    }
+
+
+    /* =========================================
+       RUAJ PYETJEN
+       ========================================= */
+
+    function saveQuestion() {
+
+        const subject =
+            document.getElementById(
+                "questionSubject"
+            ).value;
+
+        const grade =
+            document.getElementById(
+                "questionGrade"
+            ).value;
+
+        const topic =
+            document.getElementById(
+                "questionTopic"
+            ).value.trim();
+
+        const difficulty =
+            document.getElementById(
+                "questionDifficulty"
+            ).value;
+
+        const question =
+            document.getElementById(
+                "questionText"
+            ).value.trim();
+
+        const optionA =
+            document.getElementById(
+                "optionA"
+            ).value.trim();
+
+        const optionB =
+            document.getElementById(
+                "optionB"
+            ).value.trim();
+
+        const optionC =
+            document.getElementById(
+                "optionC"
+            ).value.trim();
+
+        const optionD =
+            document.getElementById(
+                "optionD"
+            ).value.trim();
+
+        const correct =
+            document.getElementById(
+                "questionCorrect"
+            ).value;
+
+
+        /* =====================================
+           VALIDIMI
+           ===================================== */
+
+        if (!subject) {
+
+            alert("Zgjidhni lëndën.");
+
+            return;
+        }
+
+
+        if (!grade) {
+
+            alert("Zgjidhni klasën.");
+
+            return;
+        }
+
+
+        if (!question) {
+
+            alert("Shkruani pyetjen.");
+
+            return;
+        }
+
+
+        if (
+            !optionA ||
+            !optionB ||
+            !optionC ||
+            !optionD
+        ) {
+
+            alert(
+                "Plotësoni të gjitha alternativat."
+            );
+
+            return;
+        }
+
+
+        /* =====================================
+           KRIJO OBJEKTIN
+           ===================================== */
+
+        const newQuestion = {
+
+            id:
+                Date.now().toString(),
+
+            subject:
+                subject,
+
+            grade:
+                grade,
+
+            topic:
+                topic,
+
+            difficulty:
+                difficulty,
+
+            question:
+                question,
+
+            options: {
+
+                A: optionA,
+
+                B: optionB,
+
+                C: optionC,
+
+                D: optionD
+
+            },
+
+            correct:
+                correct,
+
+            createdAt:
+                new Date().toISOString()
+
+        };
+
+
+        /* =====================================
+           RUAJ
+           ===================================== */
+
+        const questions =
+            getBankQuestions();
+
+        questions.push(newQuestion);
+
+        saveBankQuestions(questions);
+
+
+        /* =====================================
+           PASTRO FORMULARIN
+           ===================================== */
+
+        clearQuestionForm();
+
+
+        const form =
+            document.getElementById(
+                "questionFormContainer"
+            );
+
+        if (form) {
+
+            form.style.display = "none";
+
+        }
+
+
+        /* =====================================
+           SHFAQ LISTËN
+           ===================================== */
+
+        displayQuestionBank();
+
+
+        alert(
+            "✅ Pyetja u ruajt me sukses!"
+        );
+
+    }
+
+
+    /* =========================================
+       PASTRO FORMULARIN
+       ========================================= */
+
+    function clearQuestionForm() {
+
+        document.getElementById(
+            "questionSubject"
+        ).value = "";
+
+        document.getElementById(
+            "questionGrade"
+        ).value = "";
+
+        document.getElementById(
+            "questionTopic"
+        ).value = "";
+
+        document.getElementById(
+            "questionDifficulty"
+        ).value = "Mesatar";
+
+        document.getElementById(
+            "questionText"
+        ).value = "";
+
+        document.getElementById(
+            "optionA"
+        ).value = "";
+
+        document.getElementById(
+            "optionB"
+        ).value = "";
+
+        document.getElementById(
+            "optionC"
+        ).value = "";
+
+        document.getElementById(
+            "optionD"
+        ).value = "";
+
+        document.getElementById(
+            "questionCorrect"
+        ).value = "A";
+
+    }
+
+
+    /* =========================================
+       SHFAQ BANKËN
+       ========================================= */
+
+    function displayQuestionBank() {
+
+        const container =
+            document.getElementById(
+                "questionBankList"
+            );
+
+        if (!container) {
+            return;
+        }
+
+
+        let questions =
+            getBankQuestions();
+
+
+        /* =====================================
+           FILTERAT
+           ===================================== */
+
+        const search =
+            (
+                document.getElementById(
+                    "bankSearch"
+                )?.value || ""
+            )
+            .trim()
+            .toLowerCase();
+
+
+        const subject =
+            document.getElementById(
+                "bankSubjectFilter"
+            )?.value || "";
+
+
+        const grade =
+            document.getElementById(
+                "bankGradeFilter"
+            )?.value || "";
+
+
+        const difficulty =
+            document.getElementById(
+                "bankDifficultyFilter"
+            )?.value || "";
+
+
+        questions =
+            questions.filter(function(item) {
+
+                const matchesSearch =
+                    !search ||
+
+                    item.question
+                        .toLowerCase()
+                        .includes(search)
+
+                    ||
+
+                    (item.topic || "")
+                        .toLowerCase()
+                        .includes(search);
+
+
+                const matchesSubject =
+                    !subject ||
+                    item.subject === subject;
+
+
+                const matchesGrade =
+                    !grade ||
+                    item.grade === grade;
+
+
+                const matchesDifficulty =
+                    !difficulty ||
+                    item.difficulty === difficulty;
+
+
+                return (
+                    matchesSearch &&
+                    matchesSubject &&
+                    matchesGrade &&
+                    matchesDifficulty
+                );
+
+            });
+
+
+        /* =====================================
+           STATISTIKAT
+           ===================================== */
+
+        updateQuestionBankStats();
+
+
+        /* =====================================
+           EMPTY STATE
+           ===================================== */
+
+        if (questions.length === 0) {
+
+            container.innerHTML = `
+
+                <div class="question-bank-empty">
+
+                    <div class="question-bank-empty-icon">
+                        📚
+                    </div>
+
+                    <h3>
+                        Nuk ka pyetje
+                    </h3>
+
+                    <p>
+                        Filloni duke shtuar pyetjen tuaj të parë.
+                    </p>
+
+                    <button
+                        class="add-question-button"
+                        onclick="toggleQuestionForm()"
+                    >
+                        ➕ Shto pyetjen e parë
+                    </button>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        /* =====================================
+           NDËRTO LISTËN
+           ===================================== */
+
+        let html = "";
+
+
+        questions.forEach(function(item, index) {
+
+            html += `
+
+                <div class="question-card">
+
+                    <div class="question-card-header">
+
+                        <div class="question-card-number">
+                            ${index + 1}
+                        </div>
+
+                        <div class="question-card-text">
+                            ${escapeQuestionHTML(
+                                item.question
+                            )}
+                        </div>
+
+                        <button
+                            class="question-delete-button"
+                            onclick="deleteQuestion('${item.id}')"
+                            title="Fshi pyetjen"
+                        >
+                            🗑️
+                        </button>
+
+                    </div>
+
+
+                    <div class="question-card-meta">
+
+                        <span class="question-badge">
+                            ${escapeQuestionHTML(
+                                item.subject
+                            )}
+                        </span>
+
+                        <span class="question-badge">
+                            Klasa ${escapeQuestionHTML(
+                                item.grade
+                            )}
+                        </span>
+
+                        ${
+                            item.topic
+                            ?
+                            `
+                            <span class="question-badge">
+                                ${escapeQuestionHTML(
+                                    item.topic
+                                )}
+                            </span>
+                            `
+                            :
+                            ""
+                        }
+
+                        <span class="question-badge">
+                            ${escapeQuestionHTML(
+                                item.difficulty
+                            )}
+                        </span>
+
+                    </div>
+
+
+                    <div class="question-card-options">
+
+                        ${renderQuestionOption(
+                            "A",
+                            item.options.A,
+                            item.correct
+                        )}
+
+                        ${renderQuestionOption(
+                            "B",
+                            item.options.B,
+                            item.correct
+                        )}
+
+                        ${renderQuestionOption(
+                            "C",
+                            item.options.C,
+                            item.correct
+                        )}
+
+                        ${renderQuestionOption(
+                            "D",
+                            item.options.D,
+                            item.correct
+                        )}
+
+                    </div>
+
+                </div>
+
+            `;
+
+        });
+
+
+        container.innerHTML = html;
+
+    }
+
+
+    /* =========================================
+       RENDER OPTION
+       ========================================= */
+
+    function renderQuestionOption(
+        letter,
+        text,
+        correct
+    ) {
+
+        const className =
+            letter === correct
+                ? "question-card-option correct"
+                : "question-card-option";
+
+
+        return `
+
+            <div class="${className}">
+
+                <strong>
+                    ${letter})
+                </strong>
+
+                ${escapeQuestionHTML(text)}
+
+                ${
+                    letter === correct
+                    ? " ✓"
+                    : ""
+                }
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =========================================
+       FSHI PYETJEN
+       ========================================= */
+
+    function deleteQuestion(id) {
+
+        const confirmed =
+            confirm(
+                "A jeni të sigurt që dëshironi ta fshini këtë pyetje?"
+            );
+
+
+        if (!confirmed) {
+            return;
+        }
+
+
+        let questions =
+            getBankQuestions();
+
+
+        questions =
+            questions.filter(function(item) {
+
+                return item.id !== id;
+
+            });
+
+
+        saveBankQuestions(questions);
+
+
+        displayQuestionBank();
+
+    }
+
+
+    /* =========================================
+       STATISTIKAT
+       ========================================= */
+
+    function updateQuestionBankStats() {
+
+        const questions =
+            getBankQuestions();
+
+
+        const subjects =
+            new Set(
+                questions
+                    .map(function(item) {
+                        return item.subject;
+                    })
+                    .filter(Boolean)
+            );
+
+
+        const grades =
+            new Set(
+                questions
+                    .map(function(item) {
+                        return item.grade;
+                    })
+                    .filter(Boolean)
+            );
+
+
+        const hard =
+            questions.filter(function(item) {
+
+                return item.difficulty ===
+                    "I vështirë";
+
+            });
+
+
+        const totalElement =
+            document.getElementById(
+                "bankStatTotal"
+            );
+
+        const subjectsElement =
+            document.getElementById(
+                "bankStatSubjects"
+            );
+
+        const gradesElement =
+            document.getElementById(
+                "bankStatGrades"
+            );
+
+        const hardElement =
+            document.getElementById(
+                "bankStatHard"
+            );
+
+
+        if (totalElement) {
+
+            totalElement.textContent =
+                questions.length;
+
+        }
+
+
+        if (subjectsElement) {
+
+            subjectsElement.textContent =
+                subjects.size;
+
+        }
+
+
+        if (gradesElement) {
+
+            gradesElement.textContent =
+                grades.size;
+
+        }
+
+
+        if (hardElement) {
+
+            hardElement.textContent =
+                hard.length;
+
+        }
+
+    }
+
+
+    /* =========================================
+       SIGURIA E TEKSTIT
+       ========================================= */
+
+    function escapeQuestionHTML(text) {
+
+        return String(text || "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
 
     }
 
