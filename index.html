@@ -3201,177 +3201,259 @@
        RUAJ PYETJEN
        ========================================= */
 
-    function saveQuestion() {
+   function saveQuestion() {
 
-        const subject =
-            document.getElementById(
-                "questionSubject"
-            ).value;
+    const subject =
+        document.getElementById("questionSubject").value;
 
-        const grade =
-            document.getElementById(
-                "questionGrade"
-            ).value;
+    const grade =
+        document.getElementById("questionGrade").value;
 
-        const topic =
-            document.getElementById(
-                "questionTopic"
-            ).value.trim();
+    const topic =
+        document.getElementById("questionTopic").value.trim();
 
-        const difficulty =
-            document.getElementById(
-                "questionDifficulty"
-            ).value;
+    const difficulty =
+        document.getElementById("questionDifficulty").value;
 
-        const question =
-            document.getElementById(
-                "questionText"
-            ).value.trim();
+    const question =
+        document.getElementById("questionText").value.trim();
 
-        const optionA =
-            document.getElementById(
-                "optionA"
-            ).value.trim();
+    const optionA =
+        document.getElementById("optionA").value.trim();
 
-        const optionB =
-            document.getElementById(
-                "optionB"
-            ).value.trim();
+    const optionB =
+        document.getElementById("optionB").value.trim();
 
-        const optionC =
-            document.getElementById(
-                "optionC"
-            ).value.trim();
+    const optionC =
+        document.getElementById("optionC").value.trim();
 
-        const optionD =
-            document.getElementById(
-                "optionD"
-            ).value.trim();
+    const optionD =
+        document.getElementById("optionD").value.trim();
 
-        const correct =
-            document.getElementById(
-                "questionCorrect"
-            ).value;
+    const correct =
+        document.getElementById("questionCorrect").value;
 
 
-        /* =====================================
-           VALIDIMI
-           ===================================== */
+    /* =====================================
+       VALIDIMI
+       ===================================== */
 
-        if (!subject) {
+    if (!subject) {
+        alert("Zgjidhni lëndën.");
+        return;
+    }
 
-            alert("Zgjidhni lëndën.");
+    if (!grade) {
+        alert("Zgjidhni klasën.");
+        return;
+    }
 
-            return;
-        }
+    if (!question) {
+        alert("Shkruani pyetjen.");
+        return;
+    }
 
-
-        if (!grade) {
-
-            alert("Zgjidhni klasën.");
-
-            return;
-        }
-
-
-        if (!question) {
-
-            alert("Shkruani pyetjen.");
-
-            return;
-        }
+    if (!optionA || !optionB || !optionC || !optionD) {
+        alert("Plotësoni të gjitha alternativat.");
+        return;
+    }
 
 
-        if (
-            !optionA ||
-            !optionB ||
-            !optionC ||
-            !optionD
-        ) {
+    /* =====================================
+       MERR PYETJET
+       ===================================== */
+
+    const questions = getBankQuestions();
+
+
+    /* =====================================
+       KONTROLLO NËSE PO NDRYSHOHET
+       ===================================== */
+
+    const saveButton =
+        document.querySelector(
+            "#questionFormContainer button[onclick='saveQuestion()']"
+        );
+
+    const editingId =
+        saveButton?.dataset.editingId || "";
+
+
+    /* =====================================
+       NDRYSHO PYETJEN EKZISTUESE
+       ===================================== */
+
+    if (editingId) {
+
+        const index =
+            questions.findIndex(function(item) {
+                return item.id === editingId;
+            });
+
+
+        if (index !== -1) {
+
+            questions[index] = {
+
+                ...questions[index],
+
+                subject:
+                    subject,
+
+                grade:
+                    grade,
+
+                topic:
+                    topic,
+
+                difficulty:
+                    difficulty,
+
+                question:
+                    question,
+
+                options: {
+
+                    A: optionA,
+
+                    B: optionB,
+
+                    C: optionC,
+
+                    D: optionD
+
+                },
+
+                correct:
+                    correct
+
+            };
+
+
+            saveBankQuestions(questions);
+
+            clearQuestionForm();
+
+
+            if (saveButton) {
+
+                delete saveButton.dataset.editingId;
+
+                saveButton.textContent =
+                    "💾 Ruaj pyetjen";
+
+            }
+
+
+            const form =
+                document.getElementById(
+                    "questionFormContainer"
+                );
+
+            if (form) {
+                form.style.display = "none";
+            }
+
+
+            displayQuestionBank();
+
 
             alert(
-                "Plotësoni të gjitha alternativat."
+                "✅ Pyetja u ndryshua me sukses!"
             );
 
             return;
-        }
-
-
-        /* =====================================
-           KRIJO OBJEKTIN
-           ===================================== */
-
-        const newQuestion = {
-
-            id:
-                Date.now().toString(),
-
-            subject:
-                subject,
-
-            grade:
-                grade,
-
-            topic:
-                topic,
-
-            difficulty:
-                difficulty,
-
-            question:
-                question,
-
-            options: {
-
-                A: optionA,
-
-                B: optionB,
-
-                C: optionC,
-
-                D: optionD
-
-            },
-
-            correct:
-                correct,
-
-            createdAt:
-                new Date().toISOString()
-
-        };
-
-
-        /* =====================================
-           RUAJ
-           ===================================== */
-
-        const questions =
-            getBankQuestions();
-
-        questions.push(newQuestion);
-
-        saveBankQuestions(questions);
-
-
-        /* =====================================
-           PASTRO FORMULARIN
-           ===================================== */
-
-        clearQuestionForm();
-
-
-        const form =
-            document.getElementById(
-                "questionFormContainer"
-            );
-
-        if (form) {
-
-            form.style.display = "none";
 
         }
 
+    }
+
+
+    /* =====================================
+       KRIJO PYETJE TË RE
+       ===================================== */
+
+    const newQuestion = {
+
+        id:
+            Date.now().toString(),
+
+        subject:
+            subject,
+
+        grade:
+            grade,
+
+        topic:
+            topic,
+
+        difficulty:
+            difficulty,
+
+        question:
+            question,
+
+        options: {
+
+            A: optionA,
+
+            B: optionB,
+
+            C: optionC,
+
+            D: optionD
+
+        },
+
+        correct:
+            correct,
+
+        createdAt:
+            new Date().toISOString()
+
+    };
+
+
+    questions.push(newQuestion);
+
+    saveBankQuestions(questions);
+
+
+    /* =====================================
+       PASTRO FORMULARIN
+       ===================================== */
+
+    clearQuestionForm();
+
+
+    if (saveButton) {
+
+        delete saveButton.dataset.editingId;
+
+        saveButton.textContent =
+            "💾 Ruaj pyetjen";
+
+    }
+
+
+    const form =
+        document.getElementById(
+            "questionFormContainer"
+        );
+
+    if (form) {
+        form.style.display = "none";
+    }
+
+
+    displayQuestionBank();
+
+
+    alert(
+        "✅ Pyetja u ruajt me sukses!"
+    );
+
+}
 
         /* =====================================
            SHFAQ LISTËN
