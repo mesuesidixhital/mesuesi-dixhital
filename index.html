@@ -4612,7 +4612,7 @@ function printGeneratedTest() {
 
     @page {
         size: A4;
-        margin: 8mm 10mm;
+        margin: 7mm 10mm;
     }
 
     html,
@@ -4621,6 +4621,7 @@ function printGeneratedTest() {
         padding: 0 !important;
         background: #ffffff !important;
         font-family: Arial, sans-serif !important;
+        font-size: 10px !important;
     }
 
     body * {
@@ -4637,6 +4638,7 @@ function printGeneratedTest() {
         left: 0 !important;
         top: 0 !important;
         width: 100% !important;
+        min-height: 0 !important;
         background: #ffffff !important;
     }
 
@@ -4661,87 +4663,190 @@ function printGeneratedTest() {
         padding: 0 !important;
     }
 
-    /* KOKA E TESTIT */
 
-   #generatedTestPage .generated-test-header {
-    display: grid !important;
-    grid-template-columns: 1fr auto !important;
+    /* =========================================
+       KOKA E TESTIT
+       ========================================= */
 
-    padding: 4px 7px !important;
-    margin: 0 0 5px 0 !important;
+    #generatedTestPage .generated-test-header {
+        display: grid !important;
+        grid-template-columns: 1fr auto !important;
 
-    border: 1px solid #333 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
+        padding: 4px 7px !important;
+        margin: 0 0 5px 0 !important;
 
-    gap: 5px !important;
-}
+        background: #ffffff !important;
 
-    #generatedTestPage .generated-test-school {
-        gap: 7px !important;
+        border: 1px solid #333 !important;
+        border-radius: 0 !important;
+
+        box-shadow: none !important;
+
+        gap: 5px !important;
+
+        box-sizing: border-box !important;
     }
 
-   #generatedTestPage .generated-test-logo {
-    width: 22px !important;
-    height: 22px !important;
-    font-size: 11px !important;
-    border-radius: 3px !important;
-}
+    #generatedTestPage .generated-test-school {
+        display: flex !important;
+        align-items: center !important;
+        gap: 5px !important;
+    }
 
-#generatedTestPage .generated-test-school {
-    gap: 5px !important;
-}
+    #generatedTestPage .generated-test-logo {
+        width: 22px !important;
+        height: 22px !important;
 
-#generatedTestPage .generated-test-school h2 {
-    font-size: 12px !important;
-    line-height: 1 !important;
-    margin: 0 0 1px 0 !important;
-}
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
 
-#generatedTestPage .generated-test-school p {
-    font-size: 6px !important;
-    letter-spacing: 0.3px !important;
-}
+        background: #ffffff !important;
+        border: none !important;
+        border-radius: 0 !important;
 
-#generatedTestPage .generated-test-details {
-    gap: 3px !important;
-}
+        font-size: 11px !important;
+    }
 
-#generatedTestPage .generated-test-detail {
-    min-width: 50px !important;
-    padding: 3px 4px !important;
-    border-radius: 2px !important;
-}
+    #generatedTestPage .generated-test-school h2 {
+        margin: 0 0 1px 0 !important;
 
-#generatedTestPage .generated-test-detail .detail-label {
-    font-size: 6px !important;
-    margin-bottom: 1px !important;
-}
+        font-size: 12px !important;
+        line-height: 1 !important;
+        font-weight: 800 !important;
 
-#generatedTestPage .generated-test-detail strong {
-    font-size: 7px !important;
-}
+        color: #111827 !important;
+    }
 
-#generatedTestPage .generated-test-student {
-    grid-column: 1 / -1 !important;
-    grid-template-columns: 1fr 110px !important;
-    gap: 10px !important;
-    padding-top: 3px !important;
-    border-top: 1px solid #999 !important;
-}
+    #generatedTestPage .generated-test-school p {
+        margin: 0 !important;
 
-#generatedTestPage .generated-test-student span {
-    font-size: 7px !important;
-    margin-bottom: 2px !important;
-}
+        font-size: 6px !important;
+        line-height: 1 !important;
+
+        font-weight: 700 !important;
+
+        color: #374151 !important;
+
+        letter-spacing: 0.3px !important;
+    }
+
+
+    /* =========================================
+       LËNDA / KLASA / PYETJE
+       ========================================= */
+
+    #generatedTestPage .generated-test-details {
+        display: flex !important;
+        align-items: stretch !important;
+
+        gap: 3px !important;
+    }
+
+    #generatedTestPage .generated-test-detail {
+        min-width: 50px !important;
+
+        padding: 3px 4px !important;
+
+        background: #ffffff !important;
+
+        border: 1px solid #999 !important;
+        border-radius: 2px !important;
+
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+
+        box-sizing: border-box !important;
+    }
+
+    #generatedTestPage .generated-test-detail .detail-label {
+        display: block !important;
+
+        margin: 0 0 1px 0 !important;
+
+        font-size: 6px !important;
+        line-height: 1 !important;
+
+        font-weight: 600 !important;
+
+        color: #4b5563 !important;
+    }
+
+    #generatedTestPage .generated-test-detail strong {
+        font-size: 7px !important;
+        line-height: 1 !important;
+
+        font-weight: 800 !important;
+
+        color: #111827 !important;
+    }
+
+
+    /* =========================================
+       EMRI DHE DATA
+       ========================================= */
+
+    #generatedTestPage .generated-test-student {
+        grid-column: 1 / -1 !important;
+
+        display: grid !important;
+        grid-template-columns: 1fr 110px !important;
+
+        gap: 10px !important;
+
+        padding-top: 3px !important;
+
+        border-top: 1px solid #999 !important;
+    }
+
+    #generatedTestPage .generated-test-student > div {
+        position: relative !important;
+    }
+
+    #generatedTestPage .generated-test-student span {
+        display: block !important;
+
+        margin: 0 0 2px 0 !important;
+
+        font-size: 7px !important;
+        line-height: 1 !important;
+
+        font-weight: 700 !important;
+
+        color: #111827 !important;
+    }
 
     #generatedTestPage .generated-test-student .student-line {
         height: 1px !important;
+
+        width: 100% !important;
+
+        background: #555 !important;
     }
 
-    /* PYETJET */
+
+    /* =========================================
+       LISTA E PYETJEVE
+       ========================================= */
+
+    #generatedTestPage .generated-test-questions {
+        width: 100% !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+
+    /* =========================================
+       PYETJET
+       ========================================= */
 
     #generatedTestPage .generated-test-question {
+        position: relative !important;
+
+        width: 100% !important;
+
         background: #ffffff !important;
 
         border: none !important;
@@ -4749,10 +4854,13 @@ function printGeneratedTest() {
 
         border-radius: 0 !important;
 
-        padding: 5px 0 !important;
+        padding: 4px 0 4px 0 !important;
+
         margin: 0 !important;
 
         box-shadow: none !important;
+
+        box-sizing: border-box !important;
 
         page-break-inside: avoid !important;
         break-inside: avoid !important;
@@ -4762,88 +4870,130 @@ function printGeneratedTest() {
         display: none !important;
     }
 
-    /* TEKSTI I PYETJES */
+
+    /* =========================================
+       PYETJA + NUMRI
+       ========================================= */
 
     #generatedTestPage .generated-test-question-title {
         display: flex !important;
+
         align-items: flex-start !important;
 
-        gap: 6px !important;
-        margin: 0 0 3px 0 !important;
+        gap: 5px !important;
+
+        margin: 0 0 2px 0 !important;
 
         color: #111827 !important;
 
-        font-size: 10px !important;
+        font-size: 9.5px !important;
+
         font-weight: 700 !important;
+
         line-height: 1.2 !important;
     }
-
-    /* NUMRI */
 
     #generatedTestPage .generated-test-number {
         flex-shrink: 0 !important;
 
-        width: 20px !important;
-        height: 20px !important;
+        width: 18px !important;
+        height: 18px !important;
 
         display: flex !important;
+
         align-items: center !important;
         justify-content: center !important;
 
         background: #ffffff !important;
+
         color: #111827 !important;
 
         border: 1px solid #555 !important;
+
         border-radius: 50% !important;
 
         font-size: 8px !important;
+
         font-weight: 700 !important;
+
+        box-sizing: border-box !important;
     }
 
-    /* ALTERNATIVAT A/B/C/D */
+
+    /* =========================================
+       ALTERNATIVAT A / B / C / D
+       ========================================= */
 
     #generatedTestPage .generated-test-options {
-    display: grid !important;
+        display: grid !important;
 
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
 
-    gap: 2px 30px !important;
+        column-gap: 30px !important;
+        row-gap: 1px !important;
 
-    padding-left: 26px !important;
+        width: calc(100% - 23px) !important;
 
-    margin: 0 !important;
+        margin: 0 !important;
 
-    width: calc(100% - 26px) !important;
+        padding: 0 !important;
 
-    box-sizing: border-box !important;
-}
+        margin-left: 23px !important;
 
-   #generatedTestPage .generated-test-option {
-    background: transparent !important;
+        box-sizing: border-box !important;
+    }
 
-    border: none !important;
-    border-radius: 0 !important;
+    #generatedTestPage .generated-test-option {
+        display: block !important;
 
-    padding: 1px 0 !important;
+        width: 100% !important;
 
-    color: #111827 !important;
+        min-width: 0 !important;
 
-    font-size: 9px !important;
-    line-height: 1.15 !important;
+        background: transparent !important;
 
-    page-break-inside: avoid !important;
-    break-inside: avoid !important;
-}
+        border: none !important;
+        border-radius: 0 !important;
+
+        padding: 1px 0 !important;
+
+        margin: 0 !important;
+
+        color: #111827 !important;
+
+        font-size: 9px !important;
+
+        line-height: 1.15 !important;
+
+        white-space: normal !important;
+
+        overflow: visible !important;
+
+        word-break: normal !important;
+
+        overflow-wrap: break-word !important;
+
+        box-sizing: border-box !important;
+
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
 
     #generatedTestPage .generated-test-option strong {
         color: #111827 !important;
+
         font-weight: 700 !important;
+
         margin-right: 3px !important;
     }
 
-    /* MOS NDARJEN E PYETJEVE */
+
+    /* =========================================
+       PARANDALIMI I NDARJES SË PYETJES
+       ========================================= */
 
     #generatedTestPage .generated-test-question,
+    #generatedTestPage .generated-test-question-title,
     #generatedTestPage .generated-test-options,
     #generatedTestPage .generated-test-option {
         page-break-inside: avoid !important;
