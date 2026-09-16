@@ -1627,25 +1627,28 @@
 
     function hideAllMainPages() {
 
-        const home = document.getElementById("app");
+    const pages = [
+        "app",
+        "loginPage",
+        "dashboardPage",
+        "questionBankPage",
+        "aiGeneratorPage",
+        "createTestPage",
+        "quizzesPage",
+        "resultsPage"
+    ];
 
-        const login = document.getElementById("loginPage");
+    pages.forEach(function(id) {
 
-        const dashboard = document.getElementById("dashboardPage");
+        const page = document.getElementById(id);
 
-        if (home) {
-            home.style.display = "none";
+        if (page) {
+            page.style.display = "none";
         }
 
-        if (login) {
-            login.style.display = "none";
-        }
+    });
 
-        if (dashboard) {
-            dashboard.style.display = "none";
-        }
-
-    }
+}
 
 
     /* =========================================
