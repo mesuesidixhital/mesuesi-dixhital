@@ -3204,10 +3204,10 @@
    function saveQuestion() {
 
     const subject =
-        document.getElementById("questionSubject").value;
+        document.getElementById("questionSubject").value.trim();
 
     const grade =
-        document.getElementById("questionGrade").value;
+        document.getElementById("questionGrade").value.trim();
 
     const topic =
         document.getElementById("questionTopic").value.trim();
@@ -3234,41 +3234,41 @@
         document.getElementById("questionCorrect").value;
 
 
-    /* =====================================
-       VALIDIMI
-       ===================================== */
+    /* ================================
+       KONTROLLI I FUSHAVE
+       ================================ */
 
     if (!subject) {
-        alert("Zgjidhni lëndën.");
+        alert("Ju lutem zgjidhni lëndën.");
         return;
     }
 
     if (!grade) {
-        alert("Zgjidhni klasën.");
+        alert("Ju lutem zgjidhni klasën.");
         return;
     }
 
     if (!question) {
-        alert("Shkruani pyetjen.");
+        alert("Ju lutem shkruani pyetjen.");
         return;
     }
 
     if (!optionA || !optionB || !optionC || !optionD) {
-        alert("Plotësoni të gjitha alternativat.");
+        alert("Ju lutem plotësoni të gjitha alternativat A, B, C dhe D.");
         return;
     }
 
 
-    /* =====================================
-       MERR PYETJET
-       ===================================== */
+    /* ================================
+       MERR BANKËN
+       ================================ */
 
-    const questions = getBankQuestions();
+    let questions = getBankQuestions();
 
 
-    /* =====================================
-       KONTROLLO NËSE PO NDRYSHOHET
-       ===================================== */
+    /* ================================
+       KONTROLLO NËSE JEMI DUKE NDRYSHUAR
+       ================================ */
 
     const saveButton =
         document.querySelector(
@@ -3279,15 +3279,18 @@
         saveButton?.dataset.editingId || "";
 
 
-    /* =====================================
+    /* ================================
        NDRYSHO PYETJEN EKZISTUESE
-       ===================================== */
+       ================================ */
 
     if (editingId) {
 
         const index =
             questions.findIndex(function(item) {
-                return item.id === editingId;
+
+                return String(item.id) ===
+                       String(editingId);
+
             });
 
 
@@ -3315,11 +3318,8 @@
                 options: {
 
                     A: optionA,
-
                     B: optionB,
-
                     C: optionC,
-
                     D: optionD
 
                 },
@@ -3332,17 +3332,27 @@
 
             saveBankQuestions(questions);
 
-            clearQuestionForm();
+
+            delete saveButton.dataset.editingId;
+
+            saveButton.textContent =
+                "💾 Ruaj pyetjen";
 
 
-            if (saveButton) {
+            const cancelButton =
+                document.querySelector(
+                    "#questionFormContainer button[onclick='clearQuestionForm()']"
+                );
 
-                delete saveButton.dataset.editingId;
+            if (cancelButton) {
 
-                saveButton.textContent =
-                    "💾 Ruaj pyetjen";
+                cancelButton.textContent =
+                    "✖ Anulo";
 
             }
+
+
+            clearQuestionForm();
 
 
             const form =
@@ -3369,9 +3379,9 @@
     }
 
 
-    /* =====================================
-       KRIJO PYETJE TË RE
-       ===================================== */
+    /* ================================
+       SHTO PYETJE TË RE
+       ================================ */
 
     const newQuestion = {
 
@@ -3396,11 +3406,8 @@
         options: {
 
             A: optionA,
-
             B: optionB,
-
             C: optionC,
-
             D: optionD
 
         },
@@ -3416,24 +3423,19 @@
 
     questions.push(newQuestion);
 
+
+    /* ================================
+       RUAJ
+       ================================ */
+
     saveBankQuestions(questions);
 
 
-    /* =====================================
+    /* ================================
        PASTRO FORMULARIN
-       ===================================== */
+       ================================ */
 
     clearQuestionForm();
-
-
-    if (saveButton) {
-
-        delete saveButton.dataset.editingId;
-
-        saveButton.textContent =
-            "💾 Ruaj pyetjen";
-
-    }
 
 
     const form =
@@ -3442,19 +3444,24 @@
         );
 
     if (form) {
+
         form.style.display = "none";
+
     }
 
+
+    /* ================================
+       RIFRESKO BANKËN
+       ================================ */
 
     displayQuestionBank();
 
 
     alert(
-        "✅ Pyetja u ruajt me sukses!"
+        "✅ Pyetja u shtua me sukses!"
     );
 
 }
-
         /* =====================================
            SHFAQ LISTËN
            ===================================== */
