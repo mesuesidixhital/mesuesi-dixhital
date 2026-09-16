@@ -3825,60 +3825,155 @@
 
 function editQuestion(id) {
 
+    console.log("EDIT u thirr për ID:", id);
+
     const questions = getBankQuestions();
 
     const question = questions.find(function(item) {
-        return item.id === id;
+        return String(item.id) === String(id);
     });
 
     if (!question) {
+        alert("Pyetja nuk u gjet.");
         return;
     }
 
-    const form = document.getElementById("questionForm");
+    const subject =
+        document.getElementById("questionSubject");
 
-    if (!form) {
+    const grade =
+        document.getElementById("questionGrade");
+
+    const topic =
+        document.getElementById("questionTopic");
+
+    const difficulty =
+        document.getElementById("questionDifficulty");
+
+    const text =
+        document.getElementById("questionText");
+
+    const optionA =
+        document.getElementById("optionA");
+
+    const optionB =
+        document.getElementById("optionB");
+
+    const optionC =
+        document.getElementById("optionC");
+
+    const optionD =
+        document.getElementById("optionD");
+
+    const correct =
+        document.getElementById("questionCorrect");
+
+
+    if (
+        !subject ||
+        !grade ||
+        !topic ||
+        !difficulty ||
+        !text ||
+        !optionA ||
+        !optionB ||
+        !optionC ||
+        !optionD ||
+        !correct
+    ) {
+
+        alert(
+            "Formulari i pyetjes nuk u gjet plotësisht."
+        );
+
         return;
     }
 
-    document.getElementById("questionSubject").value =
+
+    subject.value =
         question.subject || "";
 
-    document.getElementById("questionGrade").value =
+    grade.value =
         question.grade || "";
 
-    document.getElementById("questionTopic").value =
+    topic.value =
         question.topic || "";
 
-    document.getElementById("questionDifficulty").value =
-        question.difficulty || "";
+    difficulty.value =
+        question.difficulty || "Mesatar";
 
-    document.getElementById("questionText").value =
+    text.value =
         question.question || "";
 
-    document.getElementById("optionA").value =
+    optionA.value =
         question.options?.A || "";
 
-    document.getElementById("optionB").value =
+    optionB.value =
         question.options?.B || "";
 
-    document.getElementById("optionC").value =
+    optionC.value =
         question.options?.C || "";
 
-    document.getElementById("optionD").value =
+    optionD.value =
         question.options?.D || "";
 
-    document.getElementById("correctAnswer").value =
-        question.correct || "";
+    correct.value =
+        question.correct || "A";
 
-    form.dataset.editingId = id;
 
-    form.style.display = "block";
+    const form =
+        document.getElementById(
+            "questionFormContainer"
+        );
 
-    form.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
+
+    if (form) {
+
+        form.style.display = "block";
+
+        form.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }
+
+
+    const saveButton =
+        document.querySelector(
+            "#questionFormContainer button[onclick='saveQuestion()']"
+        );
+
+
+    if (saveButton) {
+
+        saveButton.dataset.editingId =
+            String(id);
+
+        saveButton.textContent =
+            "💾 Ruaj ndryshimet";
+
+    } else {
+
+        console.log(
+            "Nuk u gjet butoni saveQuestion()."
+        );
+
+    }
+
+
+    const cancelButton =
+        document.querySelector(
+            "#questionFormContainer button[onclick='clearQuestionForm()']"
+        );
+
+
+    if (cancelButton) {
+
+        cancelButton.textContent =
+            "✖ Anulo ndryshimin";
+
+    }
 
 }
 
