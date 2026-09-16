@@ -4605,7 +4605,7 @@ function printGeneratedTest() {
     background: #f3f5f9;
 }
 /* =========================================
-   PRINTIM PROFESIONAL A4
+   PRINTIM TESTI - A4
    ========================================= */
 
 @media print {
@@ -4625,12 +4625,12 @@ function printGeneratedTest() {
     }
 
     body * {
-        visibility: hidden;
+        visibility: hidden !important;
     }
 
     #generatedTestPage,
     #generatedTestPage * {
-        visibility: visible;
+        visibility: visible !important;
     }
 
     #generatedTestPage {
@@ -4642,7 +4642,7 @@ function printGeneratedTest() {
         background: #ffffff !important;
     }
 
-    /* FSHEH ELEMENTET E FAQES */
+    /* FSHEH SIDEBARIN, TOPBARIN DHE BUTONAT */
 
     #generatedTestPage .sidebar,
     #generatedTestPage .topbar,
@@ -4650,10 +4650,13 @@ function printGeneratedTest() {
         display: none !important;
     }
 
+    /* HAPËSIRA E TESTIT */
+
     #generatedTestPage .main-content {
         width: 100% !important;
-        padding: 0 !important;
+        max-width: none !important;
         margin: 0 !important;
+        padding: 0 !important;
     }
 
     #generatedTestPage #generatedTestContent {
@@ -4665,19 +4668,20 @@ function printGeneratedTest() {
 
 
     /* =========================================
-       KOKA E TESTIT
+       HEADER
        ========================================= */
 
     #generatedTestPage .generated-test-header {
         display: grid !important;
         grid-template-columns: 1fr auto !important;
 
-        padding: 4px 7px !important;
+        width: 100% !important;
+
+        padding: 4px 6px !important;
         margin: 0 0 5px 0 !important;
 
         background: #ffffff !important;
-
-        border: 1px solid #333 !important;
+        border: 1px solid #333333 !important;
         border-radius: 0 !important;
 
         box-shadow: none !important;
@@ -4687,33 +4691,35 @@ function printGeneratedTest() {
         box-sizing: border-box !important;
     }
 
+
+    /* LOGO + EMRI */
+
     #generatedTestPage .generated-test-school {
         display: flex !important;
         align-items: center !important;
-        gap: 5px !important;
+        gap: 4px !important;
     }
 
-   #generatedTestPage .generated-test-logo {
-    width: 12px !important;
-    height: 12px !important;
+    #generatedTestPage .generated-test-logo {
+        width: 12px !important;
+        height: 12px !important;
+        min-width: 12px !important;
+        min-height: 12px !important;
 
-    min-width: 12px !important;
-    min-height: 12px !important;
+        padding: 0 !important;
+        margin: 0 !important;
 
-    padding: 0 !important;
-    margin: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
 
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
 
-    background: #ffffff !important;
-    border: none !important;
-    border-radius: 0 !important;
-
-    font-size: 7px !important;
-    line-height: 1 !important;
-}
+        font-size: 7px !important;
+        line-height: 1 !important;
+    }
 
     #generatedTestPage .generated-test-school h2 {
         margin: 0 0 1px 0 !important;
@@ -4732,10 +4738,8 @@ function printGeneratedTest() {
         line-height: 1 !important;
 
         font-weight: 700 !important;
-
         color: #374151 !important;
-
-        letter-spacing: 0.3px !important;
+        letter-spacing: 0.2px !important;
     }
 
 
@@ -4746,7 +4750,6 @@ function printGeneratedTest() {
     #generatedTestPage .generated-test-details {
         display: flex !important;
         align-items: stretch !important;
-
         gap: 3px !important;
     }
 
@@ -4757,7 +4760,7 @@ function printGeneratedTest() {
 
         background: #ffffff !important;
 
-        border: 1px solid #999 !important;
+        border: 1px solid #999999 !important;
         border-radius: 2px !important;
 
         display: flex !important;
@@ -4776,7 +4779,6 @@ function printGeneratedTest() {
         line-height: 1 !important;
 
         font-weight: 600 !important;
-
         color: #4b5563 !important;
     }
 
@@ -4785,7 +4787,6 @@ function printGeneratedTest() {
         line-height: 1 !important;
 
         font-weight: 800 !important;
-
         color: #111827 !important;
     }
 
@@ -4804,11 +4805,7 @@ function printGeneratedTest() {
 
         padding-top: 3px !important;
 
-        border-top: 1px solid #999 !important;
-    }
-
-    #generatedTestPage .generated-test-student > div {
-        position: relative !important;
+        border-top: 1px solid #999999 !important;
     }
 
     #generatedTestPage .generated-test-student span {
@@ -4820,16 +4817,14 @@ function printGeneratedTest() {
         line-height: 1 !important;
 
         font-weight: 700 !important;
-
         color: #111827 !important;
     }
 
     #generatedTestPage .generated-test-student .student-line {
+        width: 100% !important;
         height: 1px !important;
 
-        width: 100% !important;
-
-        background: #555 !important;
+        background: #555555 !important;
     }
 
 
@@ -4842,16 +4837,16 @@ function printGeneratedTest() {
 
         margin: 0 !important;
         padding: 0 !important;
+
+        box-sizing: border-box !important;
     }
 
 
     /* =========================================
-       PYETJET
+       PYETJA
        ========================================= */
 
     #generatedTestPage .generated-test-question {
-        position: relative !important;
-
         width: 100% !important;
 
         background: #ffffff !important;
@@ -4861,8 +4856,7 @@ function printGeneratedTest() {
 
         border-radius: 0 !important;
 
-        padding: 4px 0 4px 0 !important;
-
+        padding: 4px 0 !important;
         margin: 0 !important;
 
         box-shadow: none !important;
@@ -4884,19 +4878,19 @@ function printGeneratedTest() {
 
     #generatedTestPage .generated-test-question-title {
         display: flex !important;
-
         align-items: flex-start !important;
 
         gap: 5px !important;
 
+        width: 100% !important;
+
         margin: 0 0 2px 0 !important;
+        padding: 0 !important;
 
         color: #111827 !important;
 
         font-size: 9.5px !important;
-
         font-weight: 700 !important;
-
         line-height: 1.2 !important;
     }
 
@@ -4907,7 +4901,6 @@ function printGeneratedTest() {
         height: 18px !important;
 
         display: flex !important;
-
         align-items: center !important;
         justify-content: center !important;
 
@@ -4915,55 +4908,82 @@ function printGeneratedTest() {
 
         color: #111827 !important;
 
-        border: 1px solid #555 !important;
-
+        border: 1px solid #555555 !important;
         border-radius: 50% !important;
 
         font-size: 8px !important;
-
         font-weight: 700 !important;
 
         box-sizing: border-box !important;
     }
 
-  /* ALTERNATIVAT A / B / C / D - PRINT */
-#generatedTestPage .generated-test-option {
-    display: block !important;
 
-    width: 100% !important;
-    max-width: none !important;
-    min-width: 0 !important;
-
-    background: transparent !important;
-    border: none !important;
-    border-radius: 0 !important;
-
-    padding: 1px 0 !important;
-    margin: 0 !important;
-
-    color: #111827 !important;
-
-    font-size: 9px !important;
-    line-height: 1.15 !important;
-
-    white-space: normal !important;
-    overflow: visible !important;
-    word-break: normal !important;
-    overflow-wrap: break-word !important;
-
-    box-sizing: border-box !important;
-
-    page-break-inside: avoid !important;
-    break-inside: avoid !important;
-}
-
-#generatedTestPage .generated-test-option strong {
-    color: #111827 !important;
-    font-weight: 700 !important;
-    margin-right: 3px !important;
-}
     /* =========================================
-       PARANDALIMI I NDARJES SË PYETJES
+       A / B / C / D
+       ========================================= */
+
+    #generatedTestPage .generated-test-options {
+        display: grid !important;
+
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+
+        grid-template-rows: auto auto !important;
+
+        column-gap: 20px !important;
+        row-gap: 1px !important;
+
+        width: 100% !important;
+        max-width: none !important;
+        min-width: 0 !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        box-sizing: border-box !important;
+    }
+
+    #generatedTestPage .generated-test-option {
+        display: block !important;
+
+        width: 100% !important;
+        max-width: none !important;
+        min-width: 0 !important;
+
+        background: transparent !important;
+
+        border: none !important;
+        border-radius: 0 !important;
+
+        padding: 1px 0 !important;
+        margin: 0 !important;
+
+        color: #111827 !important;
+
+        font-size: 9px !important;
+        line-height: 1.15 !important;
+
+        white-space: normal !important;
+
+        overflow: visible !important;
+
+        word-break: normal !important;
+        overflow-wrap: break-word !important;
+
+        box-sizing: border-box !important;
+
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    #generatedTestPage .generated-test-option strong {
+        color: #111827 !important;
+        font-weight: 700 !important;
+        margin-right: 3px !important;
+    }
+
+
+    /* =========================================
+       MOS NDAR PYETJEN
        ========================================= */
 
     #generatedTestPage .generated-test-question,
