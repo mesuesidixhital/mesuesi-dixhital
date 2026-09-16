@@ -1,5733 +1,701 @@
 <!DOCTYPE html>
 <html lang="sq">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Mësuesi Dixhital</title>
-
-<style>
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f4f7fb;
-    color: #172033;
-}
-
-/* NAVBAR */
-
-.navbar {
-    background: white;
-    border-bottom: 1px solid #e5e7eb;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 16px 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: 800;
-    color: #2563eb;
-    cursor: pointer;
-}
-
-.logo span {
-    color: #111827;
-}
-
-.nav-links {
-    display: flex;
-    gap: 25px;
-    align-items: center;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: #374151;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.login-button {
-    background: #2563eb;
-    color: white !important;
-    padding: 11px 18px;
-    border-radius: 9px;
-}
-
-/* PAGES */
-
-.page {
-    display: none;
-}
-
-.page.active {
-    display: block;
-}
-
-/* HOME */
-
-.hero {
-    max-width: 1200px;
-    margin: auto;
-    padding: 90px 24px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    align-items: center;
-}
-
-.badge {
-    display: inline-block;
-    background: #dbeafe;
-    color: #1d4ed8;
-    padding: 8px 14px;
-    border-radius: 30px;
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.hero h1 {
-    font-size: 55px;
-    line-height: 1.1;
-    margin-bottom: 20px;
-}
-
-.hero h1 span {
-    color: #2563eb;
-}
-
-.hero p {
-    font-size: 19px;
-    line-height: 1.7;
-    color: #667085;
-    margin-bottom: 30px;
-}
-
-.primary-button {
-    border: none;
-    background: #2563eb;
-    color: white;
-    padding: 14px 22px;
-    border-radius: 10px;
-    font-size: 15px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.primary-button:hover {
-    background: #1d4ed8;
-}
-
-.secondary-button {
-    border: 1px solid #d1d5db;
-    background: white;
-    color: #2563eb;
-    padding: 13px 22px;
-    border-radius: 10px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 12px;
-}
-
-.hero-card {
-    background: white;
-    padding: 25px;
-    border-radius: 22px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-}
-
-.hero-card-title {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.preview-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-.preview-box {
-    background: #f8fafc;
-    padding: 20px;
-    border-radius: 12px;
-}
-
-.preview-box strong {
-    display: block;
-    font-size: 27px;
-    margin-top: 8px;
-    color: #2563eb;
-}
-
-/* SECTIONS */
-
-.section {
-    max-width: 1200px;
-    margin: auto;
-    padding: 70px 24px;
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.section-title h2 {
-    font-size: 38px;
-    margin-bottom: 12px;
-}
-
-.section-title p {
-    color: #667085;
-}
-
-/* FEATURES */
-
-.features {
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 18px;
-}
-
-.feature {
-    background: white;
-    padding: 25px;
-    border-radius: 17px;
-    border: 1px solid #e5e7eb;
-}
-
-.feature-icon {
-    font-size: 34px;
-    margin-bottom: 15px;
-}
-
-.feature h3 {
-    margin-bottom: 10px;
-}
-
-.feature p {
-    color: #667085;
-    line-height: 1.5;
-}
-
-/* LOGIN */
-
-.login-container {
-    min-height: calc(100vh - 75px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 20px;
-}
-
-.login-box {
-    width: 100%;
-    max-width: 430px;
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-}
-
-.login-box h1 {
-    margin-bottom: 10px;
-}
-
-.login-box > p {
-    color: #667085;
-    margin-bottom: 25px;
-}
-
-.form-group {
-    margin-bottom: 18px;
-}
-
-.form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 7px;
-}
-
-.form-group input,
-.generator-form select,
-.generator-form input {
-    width: 100%;
-    padding: 13px;
-    border: 1px solid #d1d5db;
-    border-radius: 9px;
-    font-size: 15px;
-}
-
-.full-button {
-    width: 100%;
-    padding: 14px;
-    border: none;
-    border-radius: 9px;
-    background: #2563eb;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.error {
-    display: none;
-    margin-top: 15px;
-    background: #fee2e2;
-    color: #b91c1c;
-    padding: 12px;
-    border-radius: 8px;
-}
-
-.demo {
-    margin-top: 20px;
-    padding: 14px;
-    background: #eff6ff;
-    border-radius: 9px;
-    color: #1d4ed8;
-    font-size: 13px;
-}
-
-/* DASHBOARD */
-
-.dashboard {
-    min-height: calc(100vh - 75px);
-    display: flex;
-}
-
-.sidebar {
-    width: 250px;
-    background: #111827;
-    color: white;
-    padding: 25px 15px;
-}
-
-.sidebar-logo {
-    font-size: 21px;
-    font-weight: bold;
-    padding: 0 12px 25px;
-}
-
-.sidebar button {
-    width: 100%;
-    background: transparent;
-    color: #cbd5e1;
-    border: none;
-    padding: 13px 12px;
-    text-align: left;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-bottom: 5px;
-}
-
-.sidebar button:hover,
-.sidebar button.active {
-    background: #2563eb;
-    color: white;
-}
-
-.dashboard-main {
-    flex: 1;
-    padding: 35px;
-}
-
-.dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-}
-
-.logout {
-    background: #fee2e2;
-    color: #b91c1c;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.welcome {
-    background: linear-gradient(135deg,#2563eb,#1d4ed8);
-    color: white;
-    padding: 30px;
-    border-radius: 18px;
-    margin-bottom: 25px;
-}
-
-.welcome p {
-    margin-top: 8px;
-    color: #dbeafe;
-}
-
-.dashboard-cards {
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 18px;
-    margin-bottom: 25px;
-}
-
-.dashboard-card {
-    background: white;
-    padding: 22px;
-    border-radius: 14px;
-    border: 1px solid #e5e7eb;
-}
-
-.dashboard-card span {
-    color: #667085;
-}
-
-.dashboard-card strong {
-    display: block;
-    font-size: 28px;
-    margin-top: 10px;
-}
-
-/* DASHBOARD CONTENT */
-
-.dashboard-content {
-    background: white;
-    padding: 25px;
-    border-radius: 16px;
-    border: 1px solid #e5e7eb;
-}
-
-.dashboard-content h2 {
-    margin-bottom: 20px;
-}
-
-.quick-actions {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 15px;
-}
-
-.quick-action {
-    background: #f8fafc;
-    border: 1px solid #e5e7eb;
-    padding: 22px;
-    border-radius: 12px;
-    cursor: pointer;
-    text-align: left;
-}
-
-.quick-action:hover {
-    border-color: #2563eb;
-    background: #eff6ff;
-}
-
-.quick-action strong {
-    display: block;
-    margin-bottom: 7px;
-}
-
-.quick-action span {
-    color: #667085;
-    font-size: 13px;
-}
-
-/* GENERATOR */
-
-.generator-container {
-    max-width: 1000px;
-}
-
-.generator-form {
-    background: white;
-    padding: 30px;
-    border-radius: 18px;
-    border: 1px solid #e5e7eb;
-}
-
-.generator-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-}
-
-.generator-group {
-    margin-bottom: 5px;
-}
-
-.generator-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 7px;
-}
-
-.generate-button {
-    margin-top: 25px;
-    background: #2563eb;
-    color: white;
-    border: none;
-    padding: 14px 25px;
-    border-radius: 9px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 15px;
-}
-
-/* QUESTIONS */
-
-.questions-area {
-    margin-top: 30px;
-}
-
-.question-card {
-    background: white;
-    padding: 22px;
-    border-radius: 14px;
-    border: 1px solid #e5e7eb;
-    margin-bottom: 15px;
-}
-
-.question-number {
-    color: #2563eb;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.question-text {
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.answers {
-    display: grid;
-    gap: 8px;
-}
-
-.answer {
-    padding: 10px;
-    background: #f8fafc;
-    border-radius: 7px;
-}
-
-.correct {
-    background: #dcfce7;
-    color: #166534;
-    font-weight: bold;
-}
-
-.question-actions {
-    margin-top: 15px;
-    display: flex;
-    gap: 10px;
-}
-
-.small-button {
-    border: none;
-    padding: 8px 12px;
-    border-radius: 7px;
-    cursor: pointer;
-}
-
-.save-button {
-    background: #dcfce7;
-    color: #166534;
-}
-
-.delete-button {
-    background: #fee2e2;
-    color: #b91c1c;
-}
-
-/* RESPONSIVE */
-
-@media(max-width:900px) {
-
-    .hero {
-        grid-template-columns: 1fr;
-    }
-
-    .features {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .dashboard-cards {
-        grid-template-columns: 1fr 1fr;
-    }
-
-}
-
-@media(max-width:650px) {
-
-    .nav-links {
-        display: none;
-    }
-
-    .hero h1 {
-        font-size: 40px;
-    }
-
-    .features {
-        grid-template-columns: 1fr;
-    }
-
-    .dashboard {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        width: 100%;
-    }
-
-    .dashboard-cards {
-        grid-template-columns: 1fr;
-    }
-
-    .generator-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .quick-actions {
-        grid-template-columns: 1fr;
-    }
-
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mësuesi Dixhital</title>
+
+    <style>
+
+        /* =========================================
+           RESET
+           ========================================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+            min-height: 100vh;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+
+        /* =========================================
+           FAQJA KRYESORE
+           ========================================= */
+
+        #app {
+            min-height: 100vh;
+        }
+
+
+        /* =========================================
+           HEADER
+           ========================================= */
+
+        .site-header {
+            width: 100%;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 16px 32px;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #eef2ff;
+            border-radius: 10px;
+
+            font-size: 22px;
+        }
+
+        .brand-text h1 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #111827;
+        }
+
+        .brand-text p {
+            margin-top: 2px;
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+
+        /* =========================================
+           BUTONI HYR
+           ========================================= */
+
+        .login-button {
+            border: none;
+            background: #2563eb;
+            color: white;
+
+            padding: 11px 20px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            transition: 0.2s;
+        }
+
+        .login-button:hover {
+            background: #1d4ed8;
+        }
+
+
+        /* =========================================
+           HERO
+           ========================================= */
+
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+
+            padding: 80px 30px 70px;
+
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+
+            gap: 50px;
+
+            align-items: center;
+        }
+
+        .hero-content h2 {
+            font-size: 48px;
+            line-height: 1.1;
+
+            color: #111827;
+
+            margin-bottom: 20px;
+        }
+
+        .hero-content h2 span {
+            color: #2563eb;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            line-height: 1.7;
+
+            color: #6b7280;
+
+            max-width: 650px;
+
+            margin-bottom: 30px;
+        }
+
+        .hero-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            border: none;
+
+            background: #2563eb;
+            color: white;
+
+            padding: 14px 24px;
+
+            border-radius: 9px;
+
+            font-size: 15px;
+            font-weight: 700;
+
+            transition: 0.2s;
+        }
+
+        .hero-button:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================================
+           HERO CARD
+           ========================================= */
+
+        .hero-card {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+            border-radius: 18px;
+
+            padding: 30px;
+
+            box-shadow: 0 15px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        .hero-card-title {
+            font-size: 18px;
+            font-weight: 800;
+
+            margin-bottom: 22px;
+
+            color: #111827;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+
+            gap: 14px;
+
+            padding: 14px 0;
+
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+
+        .feature-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #eff6ff;
+
+            border-radius: 9px;
+
+            font-size: 18px;
+
+            flex-shrink: 0;
+        }
+
+        .feature-item strong {
+            display: block;
+
+            font-size: 14px;
+
+            color: #111827;
+
+            margin-bottom: 3px;
+        }
+
+        .feature-item span {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+
+        /* =========================================
+           VEÇORITË
+           ========================================= */
+
+        .features-section {
+            background: white;
+
+            padding: 70px 30px;
+        }
+
+        .section-title {
+            text-align: center;
+
+            max-width: 700px;
+
+            margin: 0 auto 40px;
+        }
+
+        .section-title h2 {
+            font-size: 30px;
+            color: #111827;
+
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            max-width: 1100px;
+
+            margin: 0 auto;
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: #f8fafc;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 14px;
+
+            padding: 24px;
+
+            transition: 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-3px);
+
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.07);
+        }
+
+        .feature-card-icon {
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #eef2ff;
+
+            border-radius: 10px;
+
+            font-size: 22px;
+
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 17px;
+
+            margin-bottom: 8px;
+
+            color: #111827;
+        }
+
+        .feature-card p {
+            font-size: 13px;
+
+            line-height: 1.6;
+
+            color: #6b7280;
+        }
+
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+
+        .site-footer {
+            background: #111827;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px 20px;
+        }
+
+        .site-footer p {
+            font-size: 13px;
+
+            color: #d1d5db;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+
+        @media (max-width: 850px) {
+
+            .hero {
+                grid-template-columns: 1fr;
+
+                padding-top: 50px;
+
+                gap: 30px;
+            }
+
+            .hero-content h2 {
+                font-size: 38px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .site-header {
+                padding: 12px 16px;
+            }
+
+            .brand-text h1 {
+                font-size: 17px;
+            }
+
+            .brand-text p {
+                display: none;
+            }
+
+            .login-button {
+                padding: 9px 14px;
+                font-size: 12px;
+            }
+
+            .hero {
+                padding: 45px 20px;
+            }
+
+            .hero-content h2 {
+                font-size: 32px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .features-section {
+                padding: 50px 20px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
 </head>
+
 
 <body>
 
-<!-- NAVBAR -->
+    <div id="app">
 
-<nav class="navbar">
+        <!-- =====================================
+             HEADER
+             ===================================== -->
 
-<div class="nav-container">
+        <header class="site-header">
 
-<div class="logo" onclick="showPage('home')">
-Mësuesi <span>Dixhital</span>
-</div>
+            <div class="brand">
 
-<div class="nav-links">
-
-<a onclick="showPage('home')">
-Ballina
-</a>
-
-<a onclick="showPage('dashboard')">
-Paneli
-</a>
-
-<a onclick="showPage('login')" class="login-button">
-Hyr për mësues
-</a>
-
-</div>
-
-</div>
-
-</nav>
-
-
-<!-- =========================
-HOME
-========================= -->
-
-<div id="home" class="page active">
-
-<section class="hero">
-
-<div>
-
-<div class="badge">
-🚀 Platformë për mësues
-</div>
-
-<h1>
-Mësimdhënia bëhet
-<span>më e zgjuar.</span>
-</h1>
-
-<p>
-Mësuesi Dixhital ju ndihmon të krijoni
-pyetje, teste, kuize dhe materiale
-mësimore më shpejt.
-</p>
-
-<div class="hero-buttons">
-
-<button class="primary-button"
-onclick="showPage('login')">
-👨‍🏫 Hyr për mësues
-</button>
-
-<button class="secondary-button"
-onclick="showPage('dashboard')">
-Shiko panelin
-</button>
-
-</div>
-
-</div>
-
-
-<div class="hero-card">
-
-<div class="hero-card-title">
-📊 Paneli i Mësuesit
-</div>
-
-<div class="preview-grid">
-
-<div class="preview-box">
-📚 Pyetje
-<strong>250+</strong>
-</div>
-
-<div class="preview-box">
-📝 Teste
-<strong>35</strong>
-</div>
-
-<div class="preview-box">
-🎯 Kuize
-<strong>48</strong>
-</div>
-
-<div class="preview-box">
-👨‍🎓 Nxënës
-<strong>120</strong>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section class="section">
-
-<div class="section-title">
-
-<h2>Çfarë mund të bëjë mësuesi?</h2>
-
-<p>
-Mjetet kryesore të platformës.
-</p>
-
-</div>
-
-
-<div class="features">
-
-<div class="feature">
-
-<div class="feature-icon">🤖</div>
-
-<h3>Gjenero pyetje</h3>
-
-<p>
-Krijo pyetje sipas lëndës,
-klasës dhe nivelit.
-</p>
-
-</div>
-
-
-<div class="feature">
-
-<div class="feature-icon">📚</div>
-
-<h3>Bankë pyetjesh</h3>
-
-<p>
-Ruaj dhe organizo pyetjet
-tuaja.
-</p>
-
-</div>
-
-
-<div class="feature">
-
-<div class="feature-icon">📝</div>
-
-<h3>Krijo teste</h3>
-
-<p>
-Përgatit teste dhe kuize
-për nxënësit.
-</p>
-
-</div>
-
-
-<div class="feature">
-
-<div class="feature-icon">📊</div>
-
-<h3>Rezultatet</h3>
-
-<p>
-Ndiq progresin dhe rezultatet
-e nxënësve.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-</div>
-
-
-<!-- =========================
-LOGIN
-========================= -->
-
-<div id="login" class="page">
-
-<div class="login-container">
-
-<div class="login-box">
-
-<div class="badge">
-👨‍🏫 Mësuesi Dixhital
-</div>
-
-<h1>
-Hyr për mësues
-</h1>
-
-<p>
-Hyni në panelin tuaj personal.
-</p>
-
-
-<form onsubmit="login(event)">
-
-<div class="form-group">
-
-<label>
-Email
-</label>
-
-<input
-type="email"
-id="email"
-placeholder="Shkruani email-in"
-required
->
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Fjalëkalimi
-</label>
-
-<input
-type="password"
-id="password"
-placeholder="Shkruani fjalëkalimin"
-required
->
-
-</div>
-
-
-<button class="full-button">
-Hyr në platformë
-</button>
-
-</form>
-
-
-<div id="loginError" class="error">
-Email ose fjalëkalim i pasaktë.
-</div>
-
-
-<div class="demo">
-
-<strong>Hyrje demo</strong><br><br>
-
-Email:
-mesues@mesuesidixhital.com
-
-<br>
-
-Fjalëkalimi:
-123456
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =========================
-DASHBOARD
-========================= -->
-
-<div id="dashboard" class="page">
-
-<div class="dashboard">
-
-<aside class="sidebar">
-
-<div class="sidebar-logo">
-Mësuesi Dixhital
-</div>
-
-
-<button
-class="active"
-onclick="openDashboard()">
-🏠 Dashboard
-</button>
-
-
-<button
-onclick="openGenerator()">
-🤖 Gjenero pyetje
-</button>
-
-
-<button
-onclick="openQuestionBank()">
-📚 Banka e pyetjeve
-</button>
-
-
-<button onclick="openCreateTest()">
-    📝 Krijo test
-</button>
-
-
-<button
-onclick="comingSoon('Kuize')">
-🎯 Kuize
-</button>
-
-
-<button
-onclick="comingSoon('Rezultatet')">
-📊 Rezultatet
-</button>
-
-
-<button onclick="logout()">
-🚪 Dil
-</button>
-
-</aside>
-
-
-<main class="dashboard-main">
-
-<!-- DASHBOARD HOME -->
-
-<div id="dashboardHome">
-
-<div class="dashboard-header">
-
-<div>
-
-<h1>
-Paneli i Mësuesit
-</h1>
-
-<p>
-Menaxhoni materialet tuaja.
-</p>
-
-</div>
-
-<button class="logout"
-onclick="logout()">
-Dil
-</button>
-
-</div>
-
-
-<div class="welcome">
-
-<h2>
-Mirë se vini! 👋
-</h2>
-
-<p>
-Krijoni pyetje dhe materiale
-mësimore në pak minuta.
-</p>
-
-</div>
-
-
-<div class="dashboard-cards">
-
-<div class="dashboard-card">
-<span>📚 Pyetje</span>
-<strong>250</strong>
-</div>
-
-<div class="dashboard-card">
-<span>📝 Teste</span>
-<strong>35</strong>
-</div>
-
-<div class="dashboard-card">
-<span>🎯 Kuize</span>
-<strong>48</strong>
-</div>
-
-<div class="dashboard-card">
-<span>👨‍🎓 Nxënës</span>
-<strong>120</strong>
-</div>
-
-</div>
-
-
-<div class="dashboard-content">
-
-<h2>
-Veprime të shpejta
-</h2>
-
-
-<div class="quick-actions">
-
-<button
-class="quick-action"
-onclick="openGenerator()">
-
-<strong>
-🤖 Gjenero pyetje
-</strong>
-
-<span>
-Krijoni pyetje të reja.
-</span>
-
-</button>
-
-
-<button
-class="quick-action"
-onclick="comingSoon('Krijo test')">
-
-<strong>
-📝 Krijo test
-</strong>
-
-<span>
-Përgatitni një test.
-</span>
-
-</button>
-
-
-<button
-class="quick-action"
-onclick="openQuestionBank()">
-
-<strong>
-📚 Banka e pyetjeve
-</strong>
-
-<span>
-Shikoni pyetjet e ruajtura.
-</span>
-
-</button>
-
-
-<button
-class="quick-action"
-onclick="comingSoon('Rezultatet')">
-
-<strong>
-📊 Rezultatet
-</strong>
-
-<span>
-Analizoni rezultatet.
-</span>
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =========================
-QUESTION GENERATOR
-========================= -->
-
-<div id="generatorPage" style="display:none">
-
-<div class="dashboard-header">
-
-<div>
-
-<h1>
-🤖 Gjenero pyetje
-</h1>
-
-<p>
-Zgjidhni parametrat e pyetjeve.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="generator-container">
-
-<div class="generator-form">
-
-<div class="generator-grid">
-
-
-<div class="generator-group">
-
-<label>
-Lënda
-</label>
-
-<select id="subject">
-
-<option value="Fizikë">
-Fizikë
-</option>
-
-<option value="Kimi">
-Kimi
-</option>
-
-<option value="Matematikë">
-Matematikë
-</option>
-
-<option value="Gjeografi">
-Gjeografi
-</option>
-
-</select>
-
-</div>
-
-
-<div class="generator-group">
-
-<label>
-Klasa
-</label>
-
-<select id="grade">
-
-<option value="6">
-Klasa 6
-</option>
-
-<option value="7">
-Klasa 7
-</option>
-
-<option value="8">
-Klasa 8
-</option>
-
-<option value="9">
-Klasa 9
-</option>
-
-</select>
-
-</div>
-
-
-<div class="generator-group">
-
-<label>
-Tema
-</label>
-
-<input
-type="text"
-id="topic"
-placeholder="p.sh. Forca dhe lëvizja"
->
-
-</div>
-
-
-<div class="generator-group">
-
-<label>
-Niveli
-</label>
-
-<select id="difficulty">
-
-<option value="I lehtë">
-I lehtë
-</option>
-
-<option value="Mesatar" selected>
-Mesatar
-</option>
-
-<option value="I vështirë">
-I vështirë
-</option>
-
-<option value="Shumë i vështirë">
-Shumë i vështirë
-</option>
-
-</select>
-
-</div>
-
-
-<div class="generator-group">
-
-<label>
-Lloji i pyetjes
-</label>
-
-<select id="questionType">
-
-<option value="alternative">
-Me alternativa
-</option>
-
-<option value="e hapur">
-Pyetje e hapur
-</option>
-
-<option value="sakte">
-E vërtetë / E gabuar
-</option>
-
-</select>
-
-</div>
-
-
-<div class="generator-group">
-
-<label>
-Numri i pyetjeve
-</label>
-
-<select id="questionCount">
-
-<option value="5">
-5 pyetje
-</option>
-
-<option value="10">
-10 pyetje
-</option>
-
-<option value="15">
-15 pyetje
-</option>
-
-<option value="20">
-20 pyetje
-</option>
-
-</select>
-
-</div>
-
-</div>
-
-
-<button
-class="generate-button"
-onclick="generateQuestions()">
-
-🤖 Gjenero pyetjet
-
-</button>
-
-</div>
-
-
-<div id="questionsArea"
-class="questions-area">
-</div>
-
-</div>
-
-</div>
-
-</main>
-
-</div>
-
-</div>
-
-
-<script>
-
-/* =========================
-PAGE NAVIGATION
-========================= */
-
-function showPage(page) {
-
-document.querySelectorAll(".page")
-.forEach(function(p) {
-p.classList.remove("active");
-});
-
-document.getElementById(page)
-.classList.add("active");
-
-window.scrollTo(0,0);
-
-}
-
-
-/* =========================
-LOGIN
-========================= */
-
-function login(event) {
-
-event.preventDefault();
-
-const email =
-document.getElementById("email").value;
-
-const password =
-document.getElementById("password").value;
-
-if(
-email === "mesues@mesuesidixhital.com"
-&&
-password === "123456"
-) {
-
-document.getElementById("loginError")
-.style.display = "none";
-
-showPage("dashboard");
-
-} else {
-
-document.getElementById("loginError")
-.style.display = "block";
-
-}
-
-}
-
-
-/* =========================
-DASHBOARD
-========================= */
-
-function openDashboard() {
-
-    document.querySelectorAll(".page").forEach(function(page) {
-        page.classList.remove("active");
-    });
-
-    const dashboard = document.getElementById("dashboard");
-
-    if (dashboard) {
-        dashboard.classList.add("active");
-    }
-
-    const dashboardHome =
-        document.getElementById("dashboardHome");
-
-    const generatorPage =
-        document.getElementById("generatorPage");
-
-    if (dashboardHome) {
-        dashboardHome.style.display = "block";
-    }
-
-    if (generatorPage) {
-        generatorPage.style.display = "none";
-    }
-
-    window.scrollTo(0, 0);
-}
-
-function openGenerator() {
-    showPage('ai-generator');
-}
-
-/* =========================
-OTHER BUTTONS
-========================= */
-
-function comingSoon(name) {
-
-alert(
-name +
-" do të ndërtohet në hapin tjetër."
-);
-
-}
-
-
-/* =========================
-LOGOUT
-========================= */
-
-function logout() {
-
-showPage("home");
-
-document.getElementById("email").value = "";
-
-document.getElementById("password").value = "";
-
-}
-
-
-/* =========================
-QUESTION GENERATOR
-========================= */
-
-function generateQuestions() {
-
-const subject =
-document.getElementById("subject").value;
-
-const grade =
-document.getElementById("grade").value;
-
-const topic =
-document.getElementById("topic").value;
-
-const difficulty =
-document.getElementById("difficulty").value;
-
-const type =
-document.getElementById("questionType").value;
-
-const count =
-parseInt(
-document.getElementById("questionCount").value
-);
-
-
-if(topic.trim() === "") {
-
-alert("Ju lutem shkruani temën.");
-
-return;
-
-}
-
-
-const area =
-document.getElementById("questionsArea");
-
-area.innerHTML = "";
-
-
-for(let i = 1; i <= count; i++) {
-
-let questionText = "";
-
-let answers = "";
-
-
-/*
-PYETJE DEMO
-*/
-
-if(subject === "Fizikë") {
-
-questionText =
-`Në temën "${topic}", cila nga pohimet e mëposhtme është e saktë?`;
-
-answers = `
-<div class="answer">
-A) Pohimi i parë
-</div>
-
-<div class="answer correct">
-B) Përgjigjja e saktë
-</div>
-
-<div class="answer">
-C) Pohimi i tretë
-</div>
-
-<div class="answer">
-D) Pohimi i katërt
-</div>
-`;
-
-}
-
-else if(subject === "Kimi") {
-
-questionText =
-`Cili është një koncept i rëndësishëm që lidhet me temën "${topic}"?`;
-
-answers = `
-<div class="answer">
-A) Opsioni i parë
-</div>
-
-<div class="answer correct">
-B) Përgjigjja e saktë
-</div>
-
-<div class="answer">
-C) Opsioni i tretë
-</div>
-
-<div class="answer">
-D) Opsioni i katërt
-</div>
-`;
-
-}
-
-else {
-
-questionText =
-`Cila është përgjigjja më e saktë për temën "${topic}"?`;
-
-answers = `
-<div class="answer">
-A) Opsioni A
-</div>
-
-<div class="answer correct">
-B) Përgjigjja e saktë
-</div>
-
-<div class="answer">
-C) Opsioni C
-</div>
-
-<div class="answer">
-D) Opsioni D
-</div>
-`;
-
-}
-
-
-const card =
-document.createElement("div");
-
-card.className =
-"question-card";
-
-
-card.innerHTML = `
-
-<div class="question-number">
-Pyetja ${i}
-</div>
-
-<div class="question-text">
-${questionText}
-</div>
-
-<div class="answers">
-${answers}
-</div>
-
-<div class="question-actions">
-
-<button
-class="small-button save-button"
-onclick="saveQuestion(this)">
-💾 Ruaj
-</button>
-
-<button
-class="small-button delete-button"
-onclick="deleteQuestion(this)">
-🗑 Fshi
-</button>
-
-</div>
-
-`;
-
-
-area.appendChild(card);
-
-}
-
-}
-
-
-/* =========================
-SAVE QUESTION
-========================= */
-
-function saveQuestion(button) {
-
-button.innerHTML = "✅ U ruajt";
-
-button.disabled = true;
-
-}
-
-
-/* =========================
-DELETE QUESTION
-========================= */
-
-function deleteQuestion(button) {
-
-const card =
-button.closest(".question-card");
-
-card.remove();
-
-}
-
-</script>
-<!-- ============================= -->
-<!-- BANKA E PYETJEVE - PJESA 1 -->
-<!-- ============================= -->
-
-<section id="questionBankPage" class="page">
-
-    <div class="dashboard-layout">
-
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-
-            <div class="sidebar-logo">
-                📚 Mësuesi Dixhital
-            </div>
-
-            <button onclick="openDashboard()">
-                🏠 Dashboard
-            </button>
-
-            <button onclick="openAIGenerator()">
-                🤖 Gjenero pyetje
-            </button>
-
-            <button class="active" onclick="openQuestionBank()">
-                📚 Banka e pyetjeve
-            </button>
-
-            <button onclick="openCreateTest()">
-              📝 Krijo test
-            </button>
-
-            <button onclick="comingSoon('Kuize')">
-                🎯 Kuize
-            </button>
-
-            <button onclick="comingSoon('Rezultatet')">
-                📊 Rezultatet
-            </button>
-
-            <button onclick="logout()">
-                🚪 Dil
-            </button>
-
-        </aside>
-
-
-        <!-- PËRMBAJTJA -->
-        <main class="main-content">
-
-            <div class="topbar">
-
-                <div>
-                    <h1>📚 Banka e Pyetjeve</h1>
-                    <p>
-                        Ruaj, kërko dhe menaxho pyetjet e tua.
-                    </p>
+                <div class="brand-logo">
+                    📚
                 </div>
 
-                <div class="teacher-badge">
-                    👨‍🏫 Mësues
+                <div class="brand-text">
+                    <h1>Mësuesi Dixhital</h1>
+                    <p>Platformë për mësuesit</p>
                 </div>
 
             </div>
 
-
-            <!-- KËRKIMI DHE FILTRAT -->
-            <div class="bank-card">
-
-                <h2>🔎 Kërko dhe filtro pyetjet</h2>
-
-                <div class="bank-filters">
-
-                    <div class="bank-form-group">
-
-                        <label>Kërko pyetje</label>
-
-                        <input
-                            type="text"
-                            id="bankSearch"
-                            placeholder="Shkruaj për të kërkuar..."
-                            oninput="displayQuestionBank()"
-                        >
-
-                    </div>
-
-
-                    <div class="bank-form-group">
-
-                        <label>Lënda</label>
-
-                        <select
-                            id="bankSubject"
-                            onchange="displayQuestionBank()"
-                        >
-
-                            <option value="">
-                                Të gjitha
-                            </option>
-
-                            <option value="Fizikë">
-                                Fizikë
-                            </option>
-
-                            <option value="Kimi">
-                                Kimi
-                            </option>
-
-                            <option value="Matematikë">
-                                Matematikë
-                            </option>
-
-                            <option value="Biologji">
-                                Biologji
-                            </option>
-
-                            <option value="Gjeografi">
-                                Gjeografi
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="bank-form-group">
-
-                        <label>Klasa</label>
-
-                        <select
-                            id="bankGrade"
-                            onchange="displayQuestionBank()"
-                        >
-
-                            <option value="">
-                                Të gjitha
-                            </option>
-
-                            <option value="6">
-                                Klasa 6
-                            </option>
-
-                            <option value="7">
-                                Klasa 7
-                            </option>
-
-                            <option value="8">
-                                Klasa 8
-                            </option>
-
-                            <option value="9">
-                                Klasa 9
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-
-                <button
-                    class="add-question-button"
-                    onclick="openAddQuestionForm()"
-                >
-                    ➕ Shto pyetje
-                </button>
-
-            </div>
-
-
-            <!-- FORMULARI PËR PYETJE TË RE -->
-            <div
-                id="addQuestionForm"
-                class="bank-card"
-                style="display:none;"
-            >
-
-                <h2>➕ Shto pyetje të re</h2>
-
-
-                <div class="bank-form-group">
-
-                    <label>Pyetja</label>
-
-                    <textarea
-                        id="newQuestionText"
-                        placeholder="Shkruani pyetjen..."
-                    ></textarea>
-
-                </div>
-
-
-                <div class="bank-grid">
-
-
-                    <div class="bank-form-group">
-
-                        <label>Lënda</label>
-
-                        <select id="newSubject">
-
-                            <option value="Fizikë">
-                                Fizikë
-                            </option>
-
-                            <option value="Kimi">
-                                Kimi
-                            </option>
-
-                            <option value="Matematikë">
-                                Matematikë
-                            </option>
-
-                            <option value="Biologji">
-                                Biologji
-                            </option>
-
-                            <option value="Gjeografi">
-                                Gjeografi
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="bank-form-group">
-
-                        <label>Klasa</label>
-
-                        <select id="newGrade">
-
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="bank-form-group">
-
-                        <label>Tema</label>
-
-                        <input
-                            type="text"
-                            id="newTopic"
-                            placeholder="p.sh. Forca dhe lëvizja"
-                        >
-
-                    </div>
-
-
-                    <div class="bank-form-group">
-
-                        <label>Niveli</label>
-
-                        <select id="newDifficulty">
-
-                            <option value="I lehtë">
-                                I lehtë
-                            </option>
-
-                            <option value="Mesatar">
-                                Mesatar
-                            </option>
-
-                            <option value="I vështirë">
-                                I vështirë
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-
-                <h3>Alternativat e përgjigjes</h3>
-
-
-                <div class="bank-grid">
-
-                    <input
-                        type="text"
-                        id="optionA"
-                        placeholder="A) Alternativa A"
-                    >
-
-                    <input
-                        type="text"
-                        id="optionB"
-                        placeholder="B) Alternativa B"
-                    >
-
-                    <input
-                        type="text"
-                        id="optionC"
-                        placeholder="C) Alternativa C"
-                    >
-
-                    <input
-                        type="text"
-                        id="optionD"
-                        placeholder="D) Alternativa D"
-                    >
-
-                </div>
-
-
-                <div class="bank-form-group">
-
-                    <label>Përgjigjja e saktë</label>
-
-                    <select id="correctOption">
-
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="question-form-actions">
-
-                    <button
-                        class="save-question-button"
-                        onclick="addNewQuestion()"
-                    >
-                        💾 Ruaj pyetjen
-                    </button>
-
-                    <button
-                        class="cancel-question-button"
-                        onclick="closeAddQuestionForm()"
-                    >
-                        Anulo
-                    </button>
-
-                </div>
-
-            </div>
-
-<!-- STATISTIKAT E BANKËS -->
-
-<div class="bank-statistics">
-
-    <div class="bank-stat-card">
-        <div class="bank-stat-icon">📚</div>
-        <div>
-            <div class="bank-stat-number" id="totalBankQuestions">0</div>
-            <div class="bank-stat-label">Gjithsej pyetje</div>
-        </div>
-    </div>
-
-    <div class="bank-stat-card">
-        <div class="bank-stat-icon">🧪</div>
-        <div>
-            <div class="bank-stat-number" id="totalBankSubjects">0</div>
-            <div class="bank-stat-label">Lëndë</div>
-        </div>
-    </div>
-
-    <div class="bank-stat-card">
-        <div class="bank-stat-icon">🎓</div>
-        <div>
-            <div class="bank-stat-number" id="totalBankGrades">0</div>
-            <div class="bank-stat-label">Klasa</div>
-        </div>
-    </div>
-
-    <div class="bank-stat-card">
-        <div class="bank-stat-icon">⭐</div>
-        <div>
-            <div class="bank-stat-number" id="totalHardQuestions">0</div>
-            <div class="bank-stat-label">Pyetje të vështira</div>
-        </div>
-    </div>
-
-</div>
-
-<!-- LISTA E PYETJEVE -->
-            <!-- LISTA E PYETJEVE -->
-            <div id="questionBankList">
-
-                <!-- Pyetjet do të shfaqen këtu -->
-
-            </div>
-
-        </main>
-
-    </div>
-
-</section>
-
-
-<!-- ============================= -->
-<!-- STILIZIMI I BANKËS -->
-<!-- ============================= -->
-
-<style>
-
-.bank-card {
-    background: white;
-    border-radius: 18px;
-    padding: 25px;
-    margin-bottom: 22px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-}
-
-.bank-card h2 {
-    margin-top: 0;
-    color: #1f2937;
-}
-
-.bank-form-group {
-    margin-bottom: 15px;
-}
-
-.bank-form-group label {
-    display: block;
-    margin-bottom: 7px;
-    font-weight: 600;
-    color: #374151;
-}
-
-.bank-form-group input,
-.bank-form-group select,
-.bank-form-group textarea {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 12px;
-    border: 1px solid #d1d5db;
-    border-radius: 9px;
-    font-size: 15px;
-}
-
-.bank-form-group textarea {
-    min-height: 110px;
-    resize: vertical;
-}
-
-.bank-filters {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.bank-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.bank-grid input {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 12px;
-    border: 1px solid #d1d5db;
-    border-radius: 9px;
-    font-size: 15px;
-}
-
-.add-question-button {
-    margin-top: 10px;
-    background: #2563eb;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-.save-question-button {
-    background: #16a34a;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-.cancel-question-button {
-    background: #e5e7eb;
-    color: #374151;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-.question-form-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.bank-question {
-    background: white;
-    border-radius: 18px;
-    padding: 25px;
-    margin-bottom: 18px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-}
-
-.bank-question-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-}
-
-.bank-question-number {
-    font-weight: bold;
-    color: #2563eb;
-}
-
-.bank-question-meta {
-    color: #6b7280;
-    font-size: 14px;
-}
-
-.bank-question-text {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 15px;
-}
-
-.bank-option {
-    padding: 9px 12px;
-    background: #f3f4f6;
-    border-radius: 8px;
-    margin: 6px 0;
-}
-
-.bank-correct {
-    margin-top: 12px;
-    padding: 10px;
-    background: #ecfdf5;
-    color: #047857;
-    border-radius: 8px;
-}
-
-.bank-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.bank-actions button {
-    border: none;
-    padding: 9px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.delete-bank-question {
-    background: #fee2e2;
-    color: #b91c1c;
-}
-
-@media(max-width:800px) {
-
-    .bank-filters {
-        grid-template-columns: 1fr;
-    }
-
-    .bank-grid {
-        grid-template-columns: 1fr;
-    }
-
-}
-
-</style>
-    <script>
-
-/* ================================
-   BANKA E PYETJEVE
-   FUNKSIONET
-================================ */
-
-function openQuestionBank() {
-
-    showPage('questionBankPage');
-
-    displayQuestionBank();
-}
-
-
-/* Hap formularin */
-
-function openAddQuestionForm() {
-
-    document.getElementById('addQuestionForm').style.display = 'block';
-
-    document.getElementById('newQuestionText').focus();
-}
-
-
-/* Mbyll formularin */
-
-function closeAddQuestionForm() {
-
-    document.getElementById('addQuestionForm').style.display = 'none';
-
-}
-
-
-/* Merr pyetjet nga localStorage */
-
-function getBankQuestions() {
-
-    const savedQuestions =
-        localStorage.getItem('mesuesiDixhitalQuestionBank');
-
-    if (!savedQuestions) {
-
-        return [];
-
-    }
-
-    try {
-
-        return JSON.parse(savedQuestions);
-
-    } catch (error) {
-
-        console.error('Gabim në leximin e pyetjeve:', error);
-
-        return [];
-
-    }
-
-}
-
-
-/* Ruaj pyetjet */
-
-function saveBankQuestions(questions) {
-
-    localStorage.setItem(
-        'mesuesiDixhitalQuestionBank',
-        JSON.stringify(questions)
-    );
-
-}
-
-
-/* Shto pyetje të re */
-
-function addNewQuestion() {
-
-    const questionText =
-        document.getElementById('newQuestionText').value.trim();
-
-    const subject =
-        document.getElementById('newSubject').value;
-
-    const grade =
-        document.getElementById('newGrade').value;
-
-    const topic =
-        document.getElementById('newTopic').value.trim();
-
-    const difficulty =
-        document.getElementById('newDifficulty').value;
-
-    const optionA =
-        document.getElementById('optionA').value.trim();
-
-    const optionB =
-        document.getElementById('optionB').value.trim();
-
-    const optionC =
-        document.getElementById('optionC').value.trim();
-
-    const optionD =
-        document.getElementById('optionD').value.trim();
-
-    const correctOption =
-        document.getElementById('correctOption').value;
-
-
-    /* Kontrolli */
-
-    if (!questionText) {
-
-        alert('Ju lutem shkruani pyetjen.');
-
-        return;
-
-    }
-
-    if (!optionA || !optionB || !optionC || !optionD) {
-
-        alert('Ju lutem plotësoni të gjitha alternativat.');
-
-        return;
-
-    }
-
-
-    /* Krijojmë pyetjen */
-
-    const newQuestion = {
-
-        id: Date.now(),
-
-        question: questionText,
-
-        subject: subject,
-
-        grade: grade,
-
-        topic: topic,
-
-        difficulty: difficulty,
-
-        options: {
-
-            A: optionA,
-
-            B: optionB,
-
-            C: optionC,
-
-            D: optionD
-
-        },
-
-        correct: correctOption,
-
-        createdAt: new Date().toISOString()
-
-    };
-
-
-    /* Marrim pyetjet ekzistuese */
-
-    const questions = getBankQuestions();
-
-
-    /* Shtojmë pyetjen */
-
-    questions.push(newQuestion);
-
-
-    /* Ruajmë */
-
-    saveBankQuestions(questions);
-updateBankStatistics();
-
-    /* Pastrojmë formularin */
-
-    document.getElementById('newQuestionText').value = '';
-
-    document.getElementById('newTopic').value = '';
-
-    document.getElementById('optionA').value = '';
-
-    document.getElementById('optionB').value = '';
-
-    document.getElementById('optionC').value = '';
-
-    document.getElementById('optionD').value = '';
-
-
-    /* Mbyllim formularin */
-
-    closeAddQuestionForm();
-
-
-    /* Rifreskojmë listën */
-
-    displayQuestionBank();
-
-
-    alert('✅ Pyetja u ruajt me sukses!');
-
-}
-
-
-/* Shfaq pyetjet */
-
-function displayQuestionBank() {
-
-    const list =
-        document.getElementById('questionBankList');
-
-    if (!list) return;
-
-
-    const questions = getBankQuestions();
-
-
-    /* Kërkimi */
-
-    const searchElement =
-        document.getElementById('bankSearch');
-
-    const search =
-        searchElement
-            ? searchElement.value.toLowerCase().trim()
-            : '';
-
-
-    /* Filtri lëndës */
-
-    const subjectElement =
-        document.getElementById('bankSubject');
-
-    const selectedSubject =
-        subjectElement
-            ? subjectElement.value
-            : '';
-
-
-    /* Filtri klasës */
-
-    const gradeElement =
-        document.getElementById('bankGrade');
-
-    const selectedGrade =
-        gradeElement
-            ? gradeElement.value
-            : '';
-
-
-    /* Filtrimi */
-
-    const filteredQuestions =
-        questions.filter(function(question) {
-
-            const matchesSearch =
-
-                !search ||
-
-                question.question
-                    .toLowerCase()
-                    .includes(search) ||
-
-                (question.topic || '')
-                    .toLowerCase()
-                    .includes(search);
-
-
-            const matchesSubject =
-
-                !selectedSubject ||
-
-                question.subject === selectedSubject;
-
-
-            const matchesGrade =
-
-                !selectedGrade ||
-
-                question.grade === selectedGrade;
-
-
-            return (
-
-                matchesSearch &&
-                matchesSubject &&
-                matchesGrade
-
-            );
-
-        });
-
-
-    /* Nuk ka pyetje */
-
-    if (filteredQuestions.length === 0) {
-
-        list.innerHTML = `
-
-            <div class="bank-card">
-
-                <h3>📭 Nuk ka pyetje</h3>
-
-                <p>
-                    Nuk u gjet asnjë pyetje.
-                    Kliko "➕ Shto pyetje"
-                    për të krijuar pyetjen e parë.
-                </p>
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    /* Shfaq pyetjet */
-
-    list.innerHTML =
-        filteredQuestions.map(function(question, index) {
-
-           return `
-
-    <div class="bank-question">
-
-        <div class="bank-question-header">
-
-            <span class="bank-question-number">
-                Pyetja ${index + 1}
-            </span>
-
-            <div class="bank-badges">
-
-                <span class="bank-badge bank-badge-subject">
-                    📚 ${escapeBankHTML(question.subject)}
-                </span>
-
-                <span class="bank-badge bank-badge-grade">
-                    🎓 Klasa ${escapeBankHTML(question.grade)}
-                </span>
-
-                <span class="bank-badge bank-badge-difficulty">
-                    ⭐ ${escapeBankHTML(question.difficulty)}
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <div class="bank-question-text">
-
-            ${escapeBankHTML(question.question)}
-
-        </div>
-
-
-        <div class="bank-option">
-
-            <strong>A)</strong>
-            ${escapeBankHTML(question.options.A)}
-
-        </div>
-
-
-        <div class="bank-option">
-
-            <strong>B)</strong>
-            ${escapeBankHTML(question.options.B)}
-
-        </div>
-
-
-        <div class="bank-option">
-
-            <strong>C)</strong>
-            ${escapeBankHTML(question.options.C)}
-
-        </div>
-
-
-        <div class="bank-option">
-
-            <strong>D)</strong>
-            ${escapeBankHTML(question.options.D)}
-
-        </div>
-
-
-        <div class="bank-correct">
-
-            ✅ Përgjigjja e saktë:
-            <strong>${question.correct}</strong>
-
-        </div>
-
-
-        <div class="bank-question-meta">
-
-            📚 Tema:
-            ${escapeBankHTML(question.topic || 'Pa temë')}
-
-        </div>
-
-
-        <div class="bank-actions">
-
-            <button
-                class="edit-bank-question"
-                onclick="editBankQuestion(${question.id})"
-            >
-                ✏️ Ndrysho
+            <button class="login-button" onclick="openLogin()">
+                Hyr për mësues
             </button>
 
-            <button
-                class="delete-bank-question"
-                onclick="deleteBankQuestion(${question.id})"
-            >
-                🗑️ Fshi
-            </button>
+        </header>
 
-        </div>
-        
-    </div>
 
-`;
+        <!-- =====================================
+             HERO
+             ===================================== -->
 
-        }).join('');
+        <main>
 
-}
+            <section class="hero">
 
+                <div class="hero-content">
 
-/* Fshi pyetje */
-
-function deleteBankQuestion(id) {
-
-    const confirmed =
-        confirm('A jeni i sigurt se dëshironi ta fshini këtë pyetje?');
-
-
-    if (!confirmed) {
-
-        return;
-
-    }
-
-
-    const questions = getBankQuestions();
-
-
-    const updatedQuestions =
-        questions.filter(function(question) {
-
-            return question.id !== id;
-
-        });
-
-
-    saveBankQuestions(updatedQuestions);
-
-
-    displayQuestionBank();
-
-
-    alert('🗑️ Pyetja u fshi.');
-
-}
-
-
-/* Mbrojtje për tekstin HTML */
-
-function escapeBankHTML(text) {
-
-    return String(text || '')
-
-        .replace(/&/g, '&amp;')
-
-        .replace(/</g, '&lt;')
-
-        .replace(/>/g, '&gt;')
-
-        .replace(/"/g, '&quot;')
-
-        .replace(/'/g, '&#039;');
-
-}
-
-
-/* Kur hapet faqja */
-
-document.addEventListener(
-    'DOMContentLoaded',
-    function() {
-
-        displayQuestionBank();
-
-    }
-);
-function editBankQuestion(id) {
-    const questions = getBankQuestions();
-
-    const question = questions.find(function(item) {
-        return item.id === id;
-    });
-
-    if (!question) {
-        alert('Pyetja nuk u gjet.');
-        return;
-    }
-
-    document.getElementById('newQuestionText').value = question.question;
-    document.getElementById('newSubject').value = question.subject;
-    document.getElementById('newGrade').value = question.grade;
-    document.getElementById('newTopic').value = question.topic || '';
-    document.getElementById('newDifficulty').value = question.difficulty;
-
-    document.getElementById('optionA').value = question.options.A;
-    document.getElementById('optionB').value = question.options.B;
-    document.getElementById('optionC').value = question.options.C;
-    document.getElementById('optionD').value = question.options.D;
-    document.getElementById('correctOption').value = question.correct;
-
-    document.getElementById('addQuestionForm').style.display = 'block';
-
-    window.editingQuestionId = id;
-
-    document.getElementById('newQuestionText').focus();
-}
-</script>
-<script>
-function updateEditedQuestion() {
-    if (!window.editingQuestionId) return false;
-
-    const questions = getBankQuestions();
-
-    const index = questions.findIndex(function(question) {
-        return question.id === window.editingQuestionId;
-    });
-
-    if (index === -1) {
-        alert('Pyetja nuk u gjet.');
-        return true;
-    }
-
-    questions[index].question =
-        document.getElementById('newQuestionText').value.trim();
-
-    questions[index].subject =
-        document.getElementById('newSubject').value;
-
-    questions[index].grade =
-        document.getElementById('newGrade').value;
-
-    questions[index].topic =
-        document.getElementById('newTopic').value.trim();
-
-    questions[index].difficulty =
-        document.getElementById('newDifficulty').value;
-
-    questions[index].options.A =
-        document.getElementById('optionA').value.trim();
-
-    questions[index].options.B =
-        document.getElementById('optionB').value.trim();
-
-    questions[index].options.C =
-        document.getElementById('optionC').value.trim();
-
-    questions[index].options.D =
-        document.getElementById('optionD').value.trim();
-
-    questions[index].correct =
-        document.getElementById('correctOption').value;
-
-    saveBankQuestions(questions);
-
-    window.editingQuestionId = null;
-
-    document.getElementById('addQuestionForm').style.display = 'none';
-
-    displayQuestionBank();
-
-    alert('✅ Pyetja u ndryshua me sukses!');
-
-    return true;
-}
-</script>
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-
-    const originalAddQuestion = window.addNewQuestion;
-
-    window.addNewQuestion = function() {
-
-        if (window.editingQuestionId) {
-            updateEditedQuestion();
-            return;
-        }
-
-        originalAddQuestion();
-    };
-
-});
-</script>
-   <script>
-function updateBankStatistics() {
-
-    const questions = getBankQuestions();
-
-    const subjects = new Set(
-        questions
-            .map(function(question) {
-                return question.subject;
-            })
-            .filter(Boolean)
-    );
-
-    const grades = new Set(
-        questions
-            .map(function(question) {
-                return question.grade;
-            })
-            .filter(Boolean)
-    );
-
-    const hardQuestions = questions.filter(function(question) {
-    return question.difficulty === 'I vështirë';
-});
-
-    const totalQuestionsElement =
-        document.getElementById('totalBankQuestions');
-
-    const totalSubjectsElement =
-        document.getElementById('totalBankSubjects');
-
-    const totalGradesElement =
-        document.getElementById('totalBankGrades');
-
-    const totalHardElement =
-        document.getElementById('totalHardQuestions');
-
-    if (totalQuestionsElement) {
-        totalQuestionsElement.textContent = questions.length;
-    }
-
-    if (totalSubjectsElement) {
-        totalSubjectsElement.textContent = subjects.size;
-    }
-
-    if (totalGradesElement) {
-        totalGradesElement.textContent = grades.size;
-    }
-
-    if (totalHardElement) {
-        totalHardElement.textContent = hardQuestions.length;
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    updateBankStatistics();
-});
-</script> 
-   <style>
-
-/* =========================================================
-   MËSUESI DIXHITAL
-   BANKA E PYETJEVE — PROFESSIONAL REDESIGN
-   ========================================================= */
-
-#questionBankPage {
-    background: #f5f7fb;
-    min-height: 100vh;
-    color: #172033;
-}
-
-/* ---------- MAIN LAYOUT ---------- */
-
-#questionBankPage .dashboard-layout {
-    display: flex;
-    min-height: 100vh;
-}
-
-/* ---------- SIDEBAR ---------- */
-
-#questionBankPage .sidebar {
-    width: 245px;
-    min-width: 245px;
-    background: linear-gradient(180deg, #172554 0%, #1e3a8a 100%);
-    color: white;
-    padding: 24px 14px;
-    box-shadow: 8px 0 30px rgba(15, 23, 42, 0.08);
-}
-
-#questionBankPage .sidebar-logo {
-    font-size: 20px;
-    font-weight: 800;
-    padding: 8px 12px 28px;
-    letter-spacing: -0.3px;
-}
-
-#questionBankPage .sidebar button {
-    width: 100%;
-    border: 0;
-    background: transparent;
-    color: rgba(255,255,255,0.78);
-    padding: 13px 15px;
-    margin: 4px 0;
-    border-radius: 12px;
-    text-align: left;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-#questionBankPage .sidebar button:hover {
-    background: rgba(255,255,255,0.10);
-    color: white;
-    transform: translateX(2px);
-}
-
-#questionBankPage .sidebar button.active {
-    background: rgba(255,255,255,0.16);
-    color: white;
-    box-shadow: inset 3px 0 0 white;
-}
-
-/* ---------- MAIN CONTENT ---------- */
-
-#questionBankPage .main-content {
-    flex: 1;
-    padding: 30px;
-    max-width: 1500px;
-    margin: 0 auto;
-}
-
-/* ---------- PAGE HEADER ---------- */
-
-#questionBankPage .bank-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 28px;
-}
-
-#questionBankPage .bank-title-area h1 {
-    margin: 0;
-    font-size: 30px;
-    font-weight: 800;
-    color: #172033;
-    letter-spacing: -0.8px;
-}
-
-#questionBankPage .bank-title-area p {
-    margin: 7px 0 0;
-    color: #64748b;
-    font-size: 14px;
-}
-
-/* ---------- STATISTICS ---------- */
-
-#questionBankPage .bank-statistics {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-    margin: 0 0 25px;
-}
-
-#questionBankPage .bank-stat-card {
-    background: white;
-    border: 1px solid #e8edf5;
-    border-radius: 18px;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    box-shadow: 0 5px 20px rgba(15,23,42,0.045);
-    transition: all 0.2s ease;
-}
-
-#questionBankPage .bank-stat-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 28px rgba(15,23,42,0.08);
-}
-
-#questionBankPage .bank-stat-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #eef2ff;
-    font-size: 23px;
-}
-
-#questionBankPage .bank-stat-number {
-    font-size: 25px;
-    font-weight: 800;
-    color: #172033;
-    line-height: 1;
-}
-
-#questionBankPage .bank-stat-label {
-    margin-top: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    color: #64748b;
-}
-
-/* ---------- TOOLBAR ---------- */
-
-#questionBankPage .bank-toolbar {
-    background: white;
-    border: 1px solid #e8edf5;
-    border-radius: 18px;
-    padding: 18px;
-    margin-bottom: 25px;
-    box-shadow: 0 5px 20px rgba(15,23,42,0.04);
-}
-
-#questionBankPage .bank-toolbar-row {
-    display: grid;
-    grid-template-columns: 1fr 180px 180px auto;
-    gap: 12px;
-    align-items: center;
-}
-
-#questionBankPage .bank-toolbar input,
-#questionBankPage .bank-toolbar select {
-    height: 46px;
-    border: 1px solid #dbe2ec;
-    background: #f8fafc;
-    border-radius: 11px;
-    padding: 0 14px;
-    color: #172033;
-    font-size: 14px;
-    outline: none;
-    transition: all 0.2s ease;
-}
-
-#questionBankPage .bank-toolbar input:focus,
-#questionBankPage .bank-toolbar select:focus {
-    background: white;
-    border-color: #4f46e5;
-    box-shadow: 0 0 0 3px rgba(79,70,229,0.10);
-}
-
-#questionBankPage .bank-toolbar input::placeholder {
-    color: #94a3b8;
-}
-
-/* ---------- ADD BUTTON ---------- */
-
-#questionBankPage .add-question-button,
-#questionBankPage button[onclick="openAddQuestionForm()"] {
-    height: 46px;
-    border: 0;
-    border-radius: 11px;
-    padding: 0 18px;
-    background: linear-gradient(135deg, #4f46e5, #6366f1);
-    color: white;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 7px 18px rgba(79,70,229,0.22);
-    transition: all 0.2s ease;
-}
-
-#questionBankPage .add-question-button:hover,
-#questionBankPage button[onclick="openAddQuestionForm()"]:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 24px rgba(79,70,229,0.28);
-}
-
-/* ---------- QUESTION FORM ---------- */
-
-#questionBankPage #addQuestionForm {
-    background: white;
-    border: 1px solid #e5eaf2;
-    border-radius: 20px;
-    padding: 25px;
-    margin-bottom: 25px;
-    box-shadow: 0 10px 30px rgba(15,23,42,0.06);
-}
-
-#questionBankPage #addQuestionForm h2 {
-    margin-top: 0;
-    color: #172033;
-    font-size: 21px;
-}
-
-/* Form labels */
-
-#questionBankPage #addQuestionForm label {
-    color: #334155;
-    font-weight: 700;
-    font-size: 13px;
-}
-
-/* Form inputs */
-
-#questionBankPage #addQuestionForm input,
-#questionBankPage #addQuestionForm select,
-#questionBankPage #addQuestionForm textarea {
-    border: 1px solid #dbe2ec;
-    border-radius: 10px;
-    background: #f8fafc;
-    transition: all 0.2s ease;
-}
-
-#questionBankPage #addQuestionForm input:focus,
-#questionBankPage #addQuestionForm select:focus,
-#questionBankPage #addQuestionForm textarea:focus {
-    border-color: #4f46e5;
-    background: white;
-    box-shadow: 0 0 0 3px rgba(79,70,229,0.08);
-    outline: none;
-}
-
-/* ---------- QUESTION CARDS ---------- */
-
-#questionBankPage .bank-question {
-    background: white;
-    border: 1px solid #e6ebf2;
-    border-radius: 18px;
-    padding: 23px;
-    margin-bottom: 16px;
-    box-shadow: 0 5px 18px rgba(15,23,42,0.035);
-    transition: all 0.2s ease;
-}
-
-#questionBankPage .bank-question:hover {
-    border-color: #d5dcef;
-    box-shadow: 0 12px 28px rgba(15,23,42,0.07);
-    transform: translateY(-2px);
-}
-
-#questionBankPage .bank-question-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 16px;
-}
-
-#questionBankPage .bank-question-number {
-    display: inline-flex;
-    align-items: center;
-    background: #eef2ff;
-    color: #4338ca;
-    padding: 6px 11px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: 800;
-}
-
-#questionBankPage .bank-question-meta {
-    color: #64748b;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-#questionBankPage .bank-question-text {
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 1.55;
-    color: #172033;
-    margin-bottom: 17px;
-}
-
-/* ---------- OPTIONS ---------- */
-
-#questionBankPage .bank-option {
-    background: #f8fafc;
-    border: 1px solid #edf1f6;
-    border-radius: 10px;
-    padding: 11px 14px;
-    margin: 7px 0;
-    color: #475569;
-    font-size: 14px;
-    transition: background 0.2s ease;
-}
-
-#questionBankPage .bank-option:hover {
-    background: #f1f5f9;
-}
-
-#questionBankPage .bank-option strong {
-    color: #334155;
-    margin-right: 5px;
-}
-
-/* ---------- CORRECT ANSWER ---------- */
-
-#questionBankPage .bank-correct {
-    margin-top: 15px;
-    padding: 10px 13px;
-    border-radius: 10px;
-    background: #ecfdf5;
-    border: 1px solid #bbf7d0;
-    color: #166534;
-    font-size: 13px;
-}
-
-/* ---------- ACTIONS ---------- */
-
-#questionBankPage .bank-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
-    margin-top: 18px;
-    padding-top: 15px;
-    border-top: 1px solid #edf1f6;
-}
-
-#questionBankPage .bank-actions button {
-    border: 0;
-    border-radius: 9px;
-    padding: 9px 14px;
-    font-size: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-#questionBankPage .edit-bank-question {
-    background: #eef2ff;
-    color: #4338ca;
-}
-
-#questionBankPage .edit-bank-question:hover {
-    background: #e0e7ff;
-    transform: translateY(-1px);
-}
-
-#questionBankPage .delete-bank-question {
-    background: #fff1f2;
-    color: #be123c;
-}
-
-#questionBankPage .delete-bank-question:hover {
-    background: #ffe4e6;
-    transform: translateY(-1px);
-}
-
-/* ---------- EMPTY STATE ---------- */
-
-#questionBankPage .bank-card {
-    background: white;
-    border: 1px dashed #cbd5e1;
-    border-radius: 18px;
-    padding: 50px 25px;
-    text-align: center;
-    color: #64748b;
-}
-
-#questionBankPage .bank-card h3 {
-    color: #334155;
-    margin-bottom: 8px;
-}
-
-/* ---------- RESPONSIVE ---------- */
-
-@media (max-width: 1100px) {
-
-    #questionBankPage .bank-statistics {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    #questionBankPage .bank-toolbar-row {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-@media (max-width: 760px) {
-
-    #questionBankPage .dashboard-layout {
-        flex-direction: column;
-    }
-
-    #questionBankPage .sidebar {
-        width: 100%;
-        min-width: 100%;
-        padding: 12px;
-    }
-
-    #questionBankPage .sidebar-logo {
-        padding: 10px;
-    }
-
-    #questionBankPage .sidebar button {
-        display: inline-block;
-        width: auto;
-        margin: 3px;
-    }
-
-    #questionBankPage .main-content {
-        padding: 18px;
-    }
-
-    #questionBankPage .bank-header {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    #questionBankPage .bank-title-area h1 {
-        font-size: 24px;
-    }
-
-    #questionBankPage .bank-statistics {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-    }
-
-    #questionBankPage .bank-stat-card {
-        padding: 15px;
-    }
-
-    #questionBankPage .bank-toolbar-row {
-        grid-template-columns: 1fr;
-    }
-
-    #questionBankPage .bank-question-header {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-}
-
-@media (max-width: 480px) {
-
-    #questionBankPage .bank-statistics {
-        grid-template-columns: 1fr;
-    }
-
-    #questionBankPage .bank-question {
-        padding: 17px;
-    }
-
-    #questionBankPage .bank-actions {
-        justify-content: stretch;
-    }
-
-    #questionBankPage .bank-actions button {
-        flex: 1;
-    }
-
-}
-
-</style>
-    <style>
-
-/* =====================================================
-   BANKA E PYETJEVE — PREMIUM TOOLBAR
-   ===================================================== */
-
-#questionBankPage .bank-toolbar {
-    position: relative;
-    overflow: hidden;
-    padding: 22px;
-    background: linear-gradient(145deg, #ffffff 0%, #f8faff 100%);
-    border: 1px solid #e4e9f2;
-}
-
-#questionBankPage .bank-toolbar::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(90deg, #4f46e5, #6366f1, #8b5cf6);
-}
-
-/* Titulli i toolbar-it */
-
-#questionBankPage .bank-toolbar::after {
-    content: "Kërko dhe filtro pyetjet";
-    display: block;
-    margin-bottom: 14px;
-    color: #334155;
-    font-size: 13px;
-    font-weight: 800;
-}
-
-/* Rreshti i kontrolleve */
-
-#questionBankPage .bank-toolbar-row {
-    position: relative;
-    z-index: 1;
-}
-
-/* Search */
-
-#questionBankPage #bankSearch {
-    height: 50px;
-    padding-left: 18px;
-    border-radius: 12px;
-    background: white;
-    border: 1px solid #dce3ee;
-    font-size: 14px;
-    box-shadow: 0 3px 10px rgba(15,23,42,0.025);
-}
-
-#questionBankPage #bankSearch:focus {
-    border-color: #6366f1;
-    box-shadow: 0 0 0 4px rgba(99,102,241,0.10);
-}
-
-/* Selects */
-
-#questionBankPage #bankSubject,
-#questionBankPage #bankGrade {
-    height: 50px;
-    border-radius: 12px;
-    background: white;
-    border: 1px solid #dce3ee;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-#questionBankPage #bankSubject:focus,
-#questionBankPage #bankGrade:focus {
-    border-color: #6366f1;
-    box-shadow: 0 0 0 4px rgba(99,102,241,0.10);
-}
-
-/* Add button */
-
-#questionBankPage button[onclick="openAddQuestionForm()"] {
-    height: 50px;
-    min-width: 155px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
-    box-shadow:
-        0 8px 20px rgba(79,70,229,0.22),
-        inset 0 1px 0 rgba(255,255,255,0.20);
-    font-size: 14px;
-    letter-spacing: 0.1px;
-}
-
-#questionBankPage button[onclick="openAddQuestionForm()"]:hover {
-    transform: translateY(-2px);
-    box-shadow:
-        0 12px 25px rgba(79,70,229,0.28),
-        inset 0 1px 0 rgba(255,255,255,0.20);
-}
-
-</style>
-    <style>
-
-/* =====================================================
-   BANKA E PYETJEVE — PREMIUM QUESTION FORM
-   ===================================================== */
-
-#questionBankPage #addQuestionForm {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(145deg, #ffffff 0%, #f8faff 100%);
-    border: 1px solid #e2e8f0;
-    border-radius: 22px;
-    padding: 30px;
-    box-shadow: 0 14px 40px rgba(15,23,42,0.07);
-}
-
-/* Vijë dekorative */
-
-#questionBankPage #addQuestionForm::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #4f46e5, #6366f1, #8b5cf6);
-}
-
-/* Titulli */
-
-#questionBankPage #addQuestionForm h2 {
-    font-size: 23px;
-    font-weight: 800;
-    color: #172033;
-    margin-bottom: 6px;
-    letter-spacing: -0.4px;
-}
-
-/* Përshkrimi */
-
-#questionBankPage #addQuestionForm::after {
-    content: "";
-    display: block;
-}
-
-/* Labels */
-
-#questionBankPage #addQuestionForm label {
-    display: block;
-    margin-bottom: 7px;
-    color: #334155;
-    font-size: 13px;
-    font-weight: 750;
-}
-
-/* Të gjitha inputet */
-
-#questionBankPage #addQuestionForm input,
-#questionBankPage #addQuestionForm select,
-#questionBankPage #addQuestionForm textarea {
-    width: 100%;
-    box-sizing: border-box;
-    border: 1px solid #dbe3ed;
-    border-radius: 12px;
-    background: #ffffff;
-    color: #172033;
-    font-size: 14px;
-    padding: 12px 14px;
-    transition: all 0.2s ease;
-}
-
-/* Focus */
-
-#questionBankPage #addQuestionForm input:focus,
-#questionBankPage #addQuestionForm select:focus,
-#questionBankPage #addQuestionForm textarea:focus {
-    outline: none;
-    border-color: #6366f1;
-    box-shadow: 0 0 0 4px rgba(99,102,241,0.09);
-}
-
-/* Pyetja */
-
-#questionBankPage #newQuestionText {
-    min-height: 105px;
-    resize: vertical;
-    line-height: 1.55;
-}
-
-/* Alternativat */
-
-#questionBankPage #optionA,
-#questionBankPage #optionB,
-#questionBankPage #optionC,
-#questionBankPage #optionD {
-    padding-left: 42px;
-}
-
-/* Ngjyra të lehta për alternativat */
-
-#questionBankPage #optionA {
-    border-left: 4px solid #4f46e5;
-}
-
-#questionBankPage #optionB {
-    border-left: 4px solid #6366f1;
-}
-
-#questionBankPage #optionC {
-    border-left: 4px solid #8b5cf6;
-}
-
-#questionBankPage #optionD {
-    border-left: 4px solid #a855f7;
-}
-
-/* Përgjigjja e saktë */
-
-#questionBankPage #correctOption {
-    border: 1px solid #bbf7d0;
-    background: #f0fdf4;
-    color: #166534;
-    font-weight: 700;
-}
-
-/* Butonat */
-
-#questionBankPage .question-form-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 24px;
-    padding-top: 20px;
-    border-top: 1px solid #e8edf4;
-}
-
-/* Ruaj */
-
-#questionBankPage .save-question-button {
-    border: 0;
-    border-radius: 11px;
-    padding: 12px 22px;
-    background: linear-gradient(135deg, #4f46e5, #6366f1);
-    color: white;
-    font-size: 14px;
-    font-weight: 750;
-    cursor: pointer;
-    box-shadow: 0 8px 18px rgba(79,70,229,0.20);
-    transition: all 0.2s ease;
-}
-
-#questionBankPage .save-question-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(79,70,229,0.27);
-}
-
-/* Anulo */
-
-#questionBankPage .cancel-question-button {
-    border: 1px solid #dbe2ea;
-    border-radius: 11px;
-    padding: 12px 20px;
-    background: white;
-    color: #475569;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-#questionBankPage .cancel-question-button:hover {
-    background: #f8fafc;
-    border-color: #cbd5e1;
-}
-
-/* Telefon */
-
-@media (max-width: 600px) {
-
-    #questionBankPage #addQuestionForm {
-        padding: 20px;
-        border-radius: 18px;
-    }
-
-    #questionBankPage .question-form-actions {
-        flex-direction: column;
-    }
-
-    #questionBankPage .save-question-button,
-    #questionBankPage .cancel-question-button {
-        width: 100%;
-    }
-
-}
-
-</style>
-    <style>
-
-/* =====================================================
-   BANKA E PYETJEVE — PREMIUM QUESTION CARDS
-   ===================================================== */
-
-/* Karta */
-
-#questionBankPage .bank-question {
-    position: relative;
-    overflow: hidden;
-    background: #ffffff;
-    border: 1px solid #e5eaf2;
-    border-radius: 20px;
-    padding: 24px;
-    margin-bottom: 18px;
-    box-shadow: 0 6px 20px rgba(15,23,42,0.04);
-    transition: all 0.25s ease;
-}
-
-#questionBankPage .bank-question::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: linear-gradient(180deg, #4f46e5, #8b5cf6);
-}
-
-#questionBankPage .bank-question:hover {
-    transform: translateY(-3px);
-    border-color: #d8def0;
-    box-shadow: 0 14px 32px rgba(15,23,42,0.08);
-}
-
-/* Header i pyetjes */
-
-#questionBankPage .bank-question-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 18px;
-}
-
-/* Numri */
-
-#questionBankPage .bank-question-number {
-    background: #eef2ff;
-    color: #4338ca;
-    border: 1px solid #e0e7ff;
-    padding: 7px 12px;
-    border-radius: 9px;
-    font-size: 12px;
-    font-weight: 800;
-}
-
-/* Informacioni */
-
-#questionBankPage .bank-question-meta {
-    display: inline-flex;
-    align-items: center;
-    color: #64748b;
-    font-size: 12px;
-    font-weight: 650;
-}
-
-/* Teksti */
-
-#questionBankPage .bank-question-text {
-    color: #172033;
-    font-size: 17px;
-    font-weight: 750;
-    line-height: 1.55;
-    margin-bottom: 18px;
-}
-
-/* Alternativat */
-
-#questionBankPage .bank-option {
-    position: relative;
-    background: #f8fafc;
-    border: 1px solid #e8edf3;
-    border-radius: 11px;
-    padding: 12px 15px;
-    margin: 8px 0;
-    color: #475569;
-    font-size: 14px;
-    line-height: 1.45;
-    transition: all 0.2s ease;
-}
-
-#questionBankPage .bank-option:hover {
-    background: #f1f5f9;
-    border-color: #dbe2ea;
-    transform: translateX(2px);
-}
-
-#questionBankPage .bank-option strong {
-    color: #4338ca;
-    font-weight: 800;
-    margin-right: 7px;
-}
-
-/* Përgjigjja e saktë */
-
-#questionBankPage .bank-correct {
-    margin-top: 17px;
-    padding: 12px 15px;
-    border-radius: 11px;
-    background: linear-gradient(135deg, #ecfdf5, #f0fdf4);
-    border: 1px solid #bbf7d0;
-    color: #166534;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-#questionBankPage .bank-correct strong {
-    font-weight: 800;
-}
-
-/* Tema */
-
-#questionBankPage .bank-question > .bank-question-meta:last-of-type {
-    margin-top: 14px;
-    padding-top: 13px;
-    border-top: 1px solid #edf1f5;
-    width: 100%;
-    color: #64748b;
-}
-
-/* Butonat */
-
-#questionBankPage .bank-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 9px;
-    margin-top: 18px;
-    padding-top: 16px;
-    border-top: 1px solid #edf1f5;
-}
-
-#questionBankPage .bank-actions button {
-    border: 0;
-    border-radius: 10px;
-    padding: 10px 15px;
-    font-size: 12px;
-    font-weight: 750;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-/* Ndrysho */
-
-#questionBankPage .edit-bank-question {
-    background: #eef2ff;
-    color: #4338ca;
-    border: 1px solid #e0e7ff;
-}
-
-#questionBankPage .edit-bank-question:hover {
-    background: #e0e7ff;
-    transform: translateY(-2px);
-}
-
-/* Fshi */
-
-#questionBankPage .delete-bank-question {
-    background: #fff1f2;
-    color: #be123c;
-    border: 1px solid #ffe4e6;
-}
-
-#questionBankPage .delete-bank-question:hover {
-    background: #ffe4e6;
-    transform: translateY(-2px);
-}
-
-/* Mobile */
-
-@media (max-width: 650px) {
-
-    #questionBankPage .bank-question {
-        padding: 20px;
-    }
-
-    #questionBankPage .bank-question-header {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    #questionBankPage .bank-actions {
-        justify-content: stretch;
-    }
-
-    #questionBankPage .bank-actions button {
-        flex: 1;
-    }
-
-}
-
-</style>
-    <style>
-
-/* =====================================================
-   BANKA E PYETJEVE — BADGES
-   ===================================================== */
-
-#questionBankPage .bank-badges {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    gap: 7px;
-}
-
-/* Badge bazë */
-
-#questionBankPage .bank-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 7px 11px;
-    border-radius: 9px;
-    font-size: 11px;
-    font-weight: 800;
-    line-height: 1;
-    white-space: nowrap;
-}
-
-/* Lënda */
-
-#questionBankPage .bank-badge-subject {
-    color: #4338ca;
-    background: #eef2ff;
-    border: 1px solid #e0e7ff;
-}
-
-/* Klasa */
-
-#questionBankPage .bank-badge-grade {
-    color: #0369a1;
-    background: #e0f2fe;
-    border: 1px solid #bae6fd;
-}
-
-/* Vështirësia */
-
-#questionBankPage .bank-badge-difficulty {
-    color: #b45309;
-    background: #fffbeb;
-    border: 1px solid #fde68a;
-}
-
-/* Mobile */
-
-@media (max-width: 650px) {
-
-    #questionBankPage .bank-badges {
-        justify-content: flex-start;
-        width: 100%;
-    }
-
-    #questionBankPage .bank-badge {
-        font-size: 10px;
-        padding: 7px 9px;
-    }
-
-}
-
-</style>
-    <script>
-
-function openCreateTest() {
-    showPage('createTestPage');
-}
-
-</script>
-    <section id="createTestPage" class="page">
-
-    <div class="dashboard-layout">
-
-        <aside class="sidebar">
-
-            <div class="sidebar-logo">
-                📚 Mësuesi Dixhital
-            </div>
-
-            <button onclick="openDashboard()">
-                🏠 Dashboard
-            </button>
-
-            <button onclick="openAIGenerator()">
-                🤖 Gjenero pyetje
-            </button>
-
-            <button onclick="openQuestionBank()">
-                📚 Banka e pyetjeve
-            </button>
-
-            <button class="active" onclick="openCreateTest()">
-                📝 Krijo test
-            </button>
-
-            <button onclick="comingSoon('Kuize')">
-                🎯 Kuize
-            </button>
-
-            <button onclick="comingSoon('Rezultatet')">
-                📊 Rezultatet
-            </button>
-
-            <button onclick="logout()">
-                🚪 Dil
-            </button>
-
-        </aside>
-
-
-        <main class="main-content">
-
-            <div class="topbar">
-
-                <div>
-                    <h1>📝 Krijo Test</h1>
+                    <h2>
+                        Mësimdhënia më
+                        <span>e thjeshtë.</span>
+                    </h2>
 
                     <p>
-                        Krijo një test profesional nga Banka e Pyetjeve.
-                    </p>
-                </div>
-
-                <div class="teacher-badge">
-                    👨‍🏫 Mësues
-                </div>
-
-            </div>
-
-
-            <div class="create-test-card">
-
-                <div class="create-test-title">
-                    <h2>⚙️ Parametrat e testit</h2>
-
-                    <p>
-                        Zgjidh parametrat për testin që dëshiron të krijosh.
-                    </p>
-                </div>
-
-
-                <div class="create-test-grid">
-
-                    <div class="create-test-field">
-
-                        <label>📚 Lënda</label>
-
-                        <select id="testSubject">
-
-                            <option value="">
-                                Zgjidh lëndën
-                            </option>
-
-                            <option value="Fizikë">
-                                Fizikë
-                            </option>
-
-                            <option value="Kimi">
-                                Kimi
-                            </option>
-
-                            <option value="Matematikë">
-                                Matematikë
-                            </option>
-
-                            <option value="Biologji">
-                                Biologji
-                            </option>
-
-                            <option value="Gjeografi">
-                                Gjeografi
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="create-test-field">
-
-                        <label>🎓 Klasa</label>
-
-                        <select id="testGrade">
-
-                            <option value="">
-                                Zgjidh klasën
-                            </option>
-
-                            <option value="6">Klasa 6</option>
-                            <option value="7">Klasa 7</option>
-                            <option value="8">Klasa 8</option>
-                            <option value="9">Klasa 9</option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="create-test-field">
-
-                        <label>📖 Tema</label>
-
-                        <input
-                            type="text"
-                            id="testTopic"
-                            placeholder="p.sh. Forca dhe lëvizja"
-                        >
-
-                    </div>
-
-
-                    <div class="create-test-field">
-
-                        <label>⭐ Vështirësia</label>
-
-                        <select id="testDifficulty">
-
-                            <option value="">
-                                Të gjitha nivelet
-                            </option>
-
-                            <option value="I lehtë">
-                                I lehtë
-                            </option>
-
-                            <option value="Mesatar">
-                                Mesatar
-                            </option>
-
-                            <option value="I vështirë">
-                                I vështirë
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="create-test-field">
-
-                        <label>🔢 Numri i pyetjeve</label>
-
-                        <select id="testQuestionCount">
-
-                            <option value="5">5 pyetje</option>
-                            <option value="10">10 pyetje</option>
-                            <option value="15">15 pyetje</option>
-                            <option value="20">20 pyetje</option>
-                            <option value="25">25 pyetje</option>
-                            <option value="30">30 pyetje</option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="create-test-field">
-
-                        <label>🔘 Lloji i pyetjeve</label>
-
-                        <select id="testQuestionType">
-
-                            <option value="multiple-choice">
-                                Me alternativa A/B/C/D
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-
-                <div class="create-test-options">
-
-                    <label class="create-test-checkbox">
-
-                        <input
-                            type="checkbox"
-                            id="shuffleQuestions"
-                            checked
-                        >
-
-                        <span>
-                            🔀 Përziej pyetjet
-                        </span>
-
-                    </label>
-
-
-                    <label class="create-test-checkbox">
-
-                        <input
-                            type="checkbox"
-                            id="shuffleOptions"
-                        >
-
-                        <span>
-                            🔀 Përziej alternativat
-                        </span>
-
-                    </label>
-
-                </div>
-
-
-                <div class="create-test-actions">
-
-                    <button
-                        class="create-test-primary"
-                        onclick="generateTestFromBank()"
-                    >
-                        📝 Krijo Testin
-                    </button>
-
-                </div>
-
-            </div>
-
-        </main>
-
-    </div>
-
-</section>
-    <script>
-
-function generateTestFromBank() {
-
-    const subject = document.getElementById('testSubject').value;
-    const grade = document.getElementById('testGrade').value;
-    const topic = document.getElementById('testTopic').value.trim().toLowerCase();
-    const difficulty = document.getElementById('testDifficulty').value;
-
-    const questionCount =
-        parseInt(document.getElementById('testQuestionCount').value);
-
-    const shuffleQuestions =
-        document.getElementById('shuffleQuestions').checked;
-
-    const shuffleOptions =
-        document.getElementById('shuffleOptions').checked;
-
-
-    // Merr pyetjet nga Banka e Pyetjeve
-    let questions = getBankQuestions();
-
-
-    // Filtrimi
-    questions = questions.filter(function(question) {
-
-        const matchesSubject =
-            !subject || question.subject === subject;
-
-        const matchesGrade =
-            !grade || question.grade === grade;
-
-        const matchesTopic =
-            !topic ||
-            (question.topic || '').toLowerCase().includes(topic);
-
-        const matchesDifficulty =
-            !difficulty || question.difficulty === difficulty;
-
-        return (
-            matchesSubject &&
-            matchesGrade &&
-            matchesTopic &&
-            matchesDifficulty
-        );
-
-    });
-
-
-    // Kontrollo nëse ka mjaft pyetje
-    if (questions.length < questionCount) {
-
-        alert(
-            '⚠️ Nuk ka mjaft pyetje në Bankën e Pyetjeve për këto parametra.\n\n' +
-            'Pyetje të gjetura: ' + questions.length +
-            '\nPyetje të kërkuara: ' + questionCount
-        );
-
-        return;
-    }
-
-
-    // Përziej pyetjet
-    if (shuffleQuestions) {
-
-        questions.sort(function() {
-            return Math.random() - 0.5;
-        });
-
-    }
-
-
-    // Merr numrin e kërkuar
-    questions = questions.slice(0, questionCount);
-
-
-    // Përziej alternativat
-    if (shuffleOptions) {
-
-        questions = questions.map(function(question) {
-
-            const optionEntries =
-                Object.entries(question.options);
-
-            optionEntries.sort(function() {
-                return Math.random() - 0.5;
-            });
-
-            const newOptions = {};
-            const letters = ['A', 'B', 'C', 'D'];
-
-            let newCorrect = '';
-
-            optionEntries.forEach(function(entry, index) {
-
-                const oldLetter = entry[0];
-                const value = entry[1];
-
-                const newLetter = letters[index];
-
-                newOptions[newLetter] = value;
-
-                if (oldLetter === question.correct) {
-                    newCorrect = newLetter;
-                }
-
-            });
-
-            return {
-                ...question,
-                options: newOptions,
-                correct: newCorrect
-            };
-
-        });
-
-    }
-
-
-    // Ruaje testin e krijuar
-    window.generatedTest = {
-
-        subject: subject,
-        grade: grade,
-        topic: topic,
-        difficulty: difficulty,
-        questions: questions,
-        createdAt: new Date().toISOString()
-
-    };
-
-
-    alert(
-    '✅ Testi u krijua me sukses!\n\n' +
-    'Pyetje: ' + questions.length
-);
-
-showPage('generatedTestPage');
-displayGeneratedTest();
-
-    console.log('Testi i krijuar:', window.generatedTest);
-
-}
-
-</script>
-    <section id="generatedTestPage" class="page">
-
-    <div class="dashboard-layout">
-
-        <aside class="sidebar">
-
-            <div class="sidebar-logo">
-                📚 Mësuesi Dixhital
-            </div>
-
-            <button onclick="openDashboard()">
-                🏠 Dashboard
-            </button>
-
-            <button onclick="openAIGenerator()">
-                🤖 Gjenero pyetje
-            </button>
-
-            <button onclick="openQuestionBank()">
-                📚 Banka e pyetjeve
-            </button>
-
-            <button onclick="openCreateTest()">
-                📝 Krijo test
-            </button>
-
-            <button class="active">
-                📄 Testi i krijuar
-            </button>
-
-            <button onclick="comingSoon('Kuize')">
-                🎯 Kuize
-            </button>
-
-            <button onclick="comingSoon('Rezultatet')">
-                📊 Rezultatet
-            </button>
-
-            <button onclick="logout()">
-                🚪 Dil
-            </button>
-
-        </aside>
-
-
-        <main class="main-content">
-
-            <div class="topbar">
-
-                <div>
-                    <h1>📄 Testi i krijuar</h1>
-
-                    <p>
-                        Testi i krijuar nga Banka e Pyetjeve.
-                    </p>
-                </div>
-
-                <div class="teacher-badge">
-                    👨‍🏫 Mësues
-                </div>
-
-            </div>
-
-
-            <div id="generatedTestContent">
-
-                <!-- Testi do të shfaqet këtu -->
-
-            </div>
-
-
-        </main>
-
-    </div>
-
-</section>
-    <script>
-
-function displayGeneratedTest() {
-
-    const test = window.generatedTest;
-
-    if (!test || !test.questions || test.questions.length === 0) {
-        alert('⚠️ Nuk u gjet testi i krijuar.');
-        return;
-    }
-
-    const container = document.getElementById('generatedTestContent');
-
-    if (!container) {
-        alert('⚠️ Nuk u gjet zona e testit.');
-        return;
-    }
-
-    let html = '';
-
-   /* HEADERI PROFESIONAL I TESTIT */
-
-html += `
-    <div class="generated-test-header">
-
-        <div class="generated-test-school">
-
-            <div class="generated-test-logo">
-                📚
-            </div>
-
-            <div>
-                <h2>Mësuesi Dixhital</h2>
-
-                <p>
-                    TEST I NJOHURIVE
-                </p>
-            </div>
-
-        </div>
-
-
-        <div class="generated-test-details">
-
-            <div class="generated-test-detail">
-                <span class="detail-label">Lënda</span>
-                <strong>
-                    ${escapeBankHTML(test.subject || 'Të gjitha lëndët')}
-                </strong>
-            </div>
-
-            <div class="generated-test-detail">
-                <span class="detail-label">Klasa</span>
-                <strong>
-                    ${escapeBankHTML(test.grade || 'Të gjitha')}
-                </strong>
-            </div>
-
-            <div class="generated-test-detail">
-                <span class="detail-label">Pyetje</span>
-                <strong>
-                    ${test.questions.length}
-                </strong>
-            </div>
-
-        </div>
-
-
-        <div class="generated-test-student">
-
-            <div>
-                <span>Emri dhe mbiemri:</span>
-                <div class="student-line"></div>
-            </div>
-
-            <div>
-                <span>Data:</span>
-                <div class="student-line student-date-line"></div>
-            </div>
-
-        </div>
-
-    </div>
-`;
-
-    /* PYETJET */
-
-    html += `
-        <div class="generated-test-questions">
-    `;
-
-    test.questions.forEach(function(question, index) {
-
-        html += `
-            <div class="generated-test-question">
-
-                <div class="generated-test-question-title">
-
-                    <span class="generated-test-number">
-                        ${index + 1}
-                    </span>
-
-                    <span>
-                        ${escapeBankHTML(question.question)}
-                    </span>
-
-                </div>
-
-                <div class="generated-test-options">
-
-                    <div class="generated-test-option">
-                        <strong>A)</strong>
-                        ${escapeBankHTML(question.options.A)}
-                    </div>
-
-                    <div class="generated-test-option">
-                        <strong>B)</strong>
-                        ${escapeBankHTML(question.options.B)}
-                    </div>
-
-                    <div class="generated-test-option">
-                        <strong>C)</strong>
-                        ${escapeBankHTML(question.options.C)}
-                    </div>
-
-                    <div class="generated-test-option">
-                        <strong>D)</strong>
-                        ${escapeBankHTML(question.options.D)}
-                    </div>
-
-                </div>
-
-            </div>
-        `;
-
-    });
-
-    /* MBYLL KONTAINERIN E PYETJEVE */
-
-    html += `
-        </div>
-    `;
-
-
-    /* BUTONAT */
-
-    html += `
-        <div class="generated-test-actions">
-
-            <button onclick="openCreateTest()">
-                ↩️ Kthehu
-            </button>
-
-            <button onclick="printGeneratedTest()">
-                🖨️ Printo Testin
-            </button>
-
-        </div>
-    `;
-
-
-    /* SHFAQ TESTIN */
-
-    container.innerHTML = html;
-
-}
-function printGeneratedTest() {
-
-    const test = window.generatedTest;
-
-    if (!test || !test.questions || test.questions.length === 0) {
-        alert('⚠️ Nuk u gjet testi për printim.');
-        return;
-    }
-
-    window.print();
-}
-</script>
-    <style>
-
-#generatedTestPage {
-    background: #f3f5f9;
-}
-/* =========================================
-   PRINTIM TESTI - A4
-   ========================================= */
-
-@media print {
-
-    @page {
-        size: A4;
-        margin: 7mm 10mm;
-    }
-
-    html,
-    body {
-        margin: 0 !important;
-        padding: 0 !important;
-        background: #ffffff !important;
-        font-family: Arial, sans-serif !important;
-        font-size: 10px !important;
-    }
-
-    body * {
-        visibility: hidden !important;
-    }
-
-    #generatedTestPage,
-    #generatedTestPage * {
-        visibility: visible !important;
-    }
-
-    #generatedTestPage {
-        position: absolute !important;
-        left: 0 !important;
-        top: 0 !important;
-        width: 100% !important;
-        min-height: 0 !important;
-        background: #ffffff !important;
-    }
-
-    /* FSHEH SIDEBARIN, TOPBARIN DHE BUTONAT */
-
-    #generatedTestPage .sidebar,
-    #generatedTestPage .topbar,
-    #generatedTestPage .generated-test-actions {
-        display: none !important;
-    }
-
-    /* HAPËSIRA E TESTIT */
-
-    #generatedTestPage .main-content {
-        width: 100% !important;
-        max-width: none !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-    #generatedTestPage #generatedTestContent {
-        width: 100% !important;
-        max-width: none !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-
-    /* =========================================
-       HEADER
-       ========================================= */
-
-    #generatedTestPage .generated-test-header {
-        display: grid !important;
-        grid-template-columns: 1fr auto !important;
-
-        width: 100% !important;
-
-        padding: 4px 6px !important;
-        margin: 0 0 5px 0 !important;
-
-        background: #ffffff !important;
-        border: 1px solid #333333 !important;
-        border-radius: 0 !important;
-
-        box-shadow: none !important;
-
-        gap: 5px !important;
-
-        box-sizing: border-box !important;
-    }
-
-
-    /* LOGO + EMRI */
-
-    #generatedTestPage .generated-test-school {
-        display: flex !important;
-        align-items: center !important;
-        gap: 4px !important;
-    }
-
-    #generatedTestPage .generated-test-logo {
-        width: 12px !important;
-        height: 12px !important;
-        min-width: 12px !important;
-        min-height: 12px !important;
-
-        padding: 0 !important;
-        margin: 0 !important;
-
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-
-        background: transparent !important;
-        border: none !important;
-        border-radius: 0 !important;
-
-        font-size: 7px !important;
-        line-height: 1 !important;
-    }
-
-    #generatedTestPage .generated-test-school h2 {
-        margin: 0 0 1px 0 !important;
-
-        font-size: 12px !important;
-        line-height: 1 !important;
-        font-weight: 800 !important;
-
-        color: #111827 !important;
-    }
-
-    #generatedTestPage .generated-test-school p {
-        margin: 0 !important;
-
-        font-size: 6px !important;
-        line-height: 1 !important;
-
-        font-weight: 700 !important;
-        color: #374151 !important;
-        letter-spacing: 0.2px !important;
-    }
-
-
-    /* =========================================
-       LËNDA / KLASA / PYETJE
-       ========================================= */
-
-    #generatedTestPage .generated-test-details {
-        display: flex !important;
-        align-items: stretch !important;
-        gap: 3px !important;
-    }
-
-    #generatedTestPage .generated-test-detail {
-        min-width: 50px !important;
-
-        padding: 3px 4px !important;
-
-        background: #ffffff !important;
-
-        border: 1px solid #999999 !important;
-        border-radius: 2px !important;
-
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-
-        box-sizing: border-box !important;
-    }
-
-    #generatedTestPage .generated-test-detail .detail-label {
-        display: block !important;
-
-        margin: 0 0 1px 0 !important;
-
-        font-size: 6px !important;
-        line-height: 1 !important;
-
-        font-weight: 600 !important;
-        color: #4b5563 !important;
-    }
-
-    #generatedTestPage .generated-test-detail strong {
-        font-size: 7px !important;
-        line-height: 1 !important;
-
-        font-weight: 800 !important;
-        color: #111827 !important;
-    }
-
-
-    /* =========================================
-       EMRI DHE DATA
-       ========================================= */
-
-    #generatedTestPage .generated-test-student {
-        grid-column: 1 / -1 !important;
-
-        display: grid !important;
-        grid-template-columns: 1fr 110px !important;
-
-        gap: 10px !important;
-
-        padding-top: 3px !important;
-
-        border-top: 1px solid #999999 !important;
-    }
-
-    #generatedTestPage .generated-test-student span {
-        display: block !important;
-
-        margin: 0 0 2px 0 !important;
-
-        font-size: 7px !important;
-        line-height: 1 !important;
-
-        font-weight: 700 !important;
-        color: #111827 !important;
-    }
-
-    #generatedTestPage .generated-test-student .student-line {
-        width: 100% !important;
-        height: 1px !important;
-
-        background: #555555 !important;
-    }
-
-
-    /* =========================================
-       LISTA E PYETJEVE
-       ========================================= */
-
-    #generatedTestPage .generated-test-questions {
-        width: 100% !important;
-
-        margin: 0 !important;
-        padding: 0 !important;
-
-        box-sizing: border-box !important;
-    }
-
-
-    /* =========================================
-       PYETJA
-       ========================================= */
-
-    #generatedTestPage .generated-test-question {
-        width: 100% !important;
-
-        background: #ffffff !important;
-
-        border: none !important;
-        border-bottom: 1px solid #d1d5db !important;
-
-        border-radius: 0 !important;
-
-        padding: 4px 0 !important;
-        margin: 0 !important;
-
-        box-shadow: none !important;
-
-        box-sizing: border-box !important;
-
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-    }
-
-    #generatedTestPage .generated-test-question::before {
-        display: none !important;
-    }
-
-
-    /* =========================================
-       PYETJA + NUMRI
-       ========================================= */
-
-    #generatedTestPage .generated-test-question-title {
-        display: flex !important;
-        align-items: flex-start !important;
-
-        gap: 5px !important;
-
-        width: 100% !important;
-
-        margin: 0 0 2px 0 !important;
-        padding: 0 !important;
-
-        color: #111827 !important;
-
-        font-size: 9.5px !important;
-        font-weight: 700 !important;
-        line-height: 1.2 !important;
-    }
-
-    #generatedTestPage .generated-test-number {
-        flex-shrink: 0 !important;
-
-        width: 18px !important;
-        height: 18px !important;
-
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-
-        background: #ffffff !important;
-
-        color: #111827 !important;
-
-        border: 1px solid #555555 !important;
-        border-radius: 50% !important;
-
-        font-size: 8px !important;
-        font-weight: 700 !important;
-
-        box-sizing: border-box !important;
-    }
-
-
-    /* =========================================
-       A / B / C / D
-       ========================================= */
-
-    #generatedTestPage .generated-test-options {
-        display: grid !important;
-
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
-
-        grid-template-rows: auto auto !important;
-
-        column-gap: 20px !important;
-        row-gap: 1px !important;
-
-        width: 100% !important;
-        max-width: none !important;
-        min-width: 0 !important;
-
-        margin: 0 !important;
-        padding: 0 !important;
-
-        box-sizing: border-box !important;
-    }
-
-    #generatedTestPage .generated-test-option {
-        display: block !important;
-
-        width: 100% !important;
-        max-width: none !important;
-        min-width: 0 !important;
-
-        background: transparent !important;
-
-        border: none !important;
-        border-radius: 0 !important;
-
-        padding: 1px 0 !important;
-        margin: 0 !important;
-
-        color: #111827 !important;
-
-        font-size: 9px !important;
-        line-height: 1.15 !important;
-
-        white-space: normal !important;
-
-        overflow: visible !important;
-
-        word-break: normal !important;
-        overflow-wrap: break-word !important;
-
-        box-sizing: border-box !important;
-
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-    }
-
-    #generatedTestPage .generated-test-option strong {
-        color: #111827 !important;
-        font-weight: 700 !important;
-        margin-right: 3px !important;
-    }
-
-
-    /* =========================================
-       MOS NDAR PYETJEN
-       ========================================= */
-
-    #generatedTestPage .generated-test-question,
-    #generatedTestPage .generated-test-question-title,
-    #generatedTestPage .generated-test-options,
-    #generatedTestPage .generated-test-option {
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-    }
-
-}
-/* VEPRIMET E TESTIT */
-
-#generatedTestPage .generated-test-actions {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 12px;
-
-    margin-top: 24px;
-    padding: 18px 0;
-}
-
-#generatedTestPage .generated-test-actions button {
-    border: none;
-    border-radius: 10px;
-
-    padding: 11px 18px;
-
-    font-size: 13px;
-    font-weight: 700;
-
-    cursor: pointer;
-
-    background: #eef2ff;
-    color: #4338ca;
-
-    transition: all 0.2s ease;
-}
-
-#generatedTestPage .generated-test-actions button:hover {
-    background: #e0e7ff;
-    transform: translateY(-1px);
-}
-
-#generatedTestPage .generated-test-actions button:last-child {
-    background: #4f46e5;
-    color: #ffffff;
-}
-
-#generatedTestPage .generated-test-actions button:last-child:hover {
-    background: #4338ca;
-}
-/* HEADER PROFESIONAL I TESTIT */
-
-#generatedTestPage .generated-test-header {
-    display: grid !important;
-    grid-template-columns: 1fr auto !important;
-
-    padding: 4px 7px !important;
-    margin: 0 0 5px 0 !important;
-
-    border: 1px solid #333 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-
-    gap: 5px !important;
-}
-
-/* LOGO + TITULLI */
-
-#generatedTestPage .generated-test-school {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-
-#generatedTestPage .generated-test-logo {
-    width: 48px;
-    height: 48px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #eef2ff;
-    border-radius: 12px;
-
-    font-size: 24px;
-}
-
-#generatedTestPage .generated-test-school h2 {
-    margin: 0 0 3px;
-    font-size: 21px;
-    font-weight: 800;
-    color: #172033;
-}
-
-#generatedTestPage .generated-test-school p {
-    margin: 0;
-    font-size: 11px;
-    font-weight: 800;
-    color: #475569;
-    letter-spacing: 0.8px;
-}
-
-
-/* INFORMACIONI I TESTIT */
-
-#generatedTestPage .generated-test-details {
-    display: flex;
-    align-items: stretch;
-    gap: 10px;
-}
-
-#generatedTestPage .generated-test-detail {
-    min-width: 95px;
-
-    padding: 10px 14px;
-
-    background: #f8fafc;
-    border: 1px solid #e5e9f0;
-    border-radius: 10px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-#generatedTestPage .generated-test-detail .detail-label {
-    display: block;
-
-    margin-bottom: 4px;
-
-    font-size: 11px;
-    font-weight: 600;
-
-    color: #64748b;
-}
-
-#generatedTestPage .generated-test-detail strong {
-    font-size: 13px;
-    font-weight: 800;
-
-    color: #172033;
-}
-
-
-/* EMRI I NXËNËSIT + DATA */
-
-#generatedTestPage .generated-test-student {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: 1fr 180px;
-    gap: 18px;
-    padding-top: 16px;
-    border-top: 1px solid #cbd5e1;
-}
-
-#generatedTestPage .generated-test-student > div {
-    position: relative;
-}
-
-#generatedTestPage .generated-test-student span {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 11px;
-    font-weight: 700;
-    color: #334155;
-}
-
-#generatedTestPage .generated-test-student .student-line {
-    height: 1px;
-    background: #64748b;
-    width: 100%;
-}
-
-#generatedTestPage .generated-test-student .student-date-line {
-    width: 100%;
-}
-/* BUTONAT */
-
-#generatedTestPage .generated-test-actions {
-    display: flex;
-    justify-content: flex-end;
-
-    gap: 10px;
-    margin-top: 22px;
-}
-
-#generatedTestPage .generated-test-actions button {
-    border: 0;
-
-    border-radius: 9px;
-
-    padding: 11px 17px;
-
-    font-size: 13px;
-    font-weight: 750;
-
-    cursor: pointer;
-
-    transition: all 0.2s ease;
-}
-
-#generatedTestPage .generated-test-actions button:first-child {
-    background: #ffffff;
-    color: #475569;
-    border: 1px solid #dce2ea;
-}
-
-#generatedTestPage .generated-test-actions button:last-child {
-    background: #4f46e5;
-    color: #ffffff;
-
-    box-shadow: 0 5px 12px rgba(79,70,229,0.20);
-}
-
-#generatedTestPage .generated-test-actions button:hover {
-    transform: translateY(-1px);
-}
-
-
-/* TELEFON */
-
-@media (max-width: 700px) {
-
-    #generatedTestPage .main-content {
-        padding: 16px;
-    }
-
-    #generatedTestPage .generated-test-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    #generatedTestPage .generated-test-options {
-        grid-template-columns: 1fr;
-        padding-left: 0;
-    }
-
-    #generatedTestPage .generated-test-actions {
-        flex-direction: column;
-    }
-
-    #generatedTestPage .generated-test-actions button {
-        width: 100%;
-    }
-
-}
-
-</style>
-    <style>
-
-#generatedTestPage .generated-test-header {
-    background: yellow !important;
-    border: 5px solid red !important;
-    padding: 30px !important;
-}
-
-#generatedTestPage .generated-test-question {
-    position: relative;
-    background: #ffffff;
-    border: 1px solid #cbd5e1;
-    border-radius: 10px;
-    padding: 16px 18px;
-    margin-bottom: 12px;
-    box-shadow: none;
-    page-break-inside: avoid;
-    break-inside: avoid;
-}
-#generatedTestPage .generated-test-option {
-    background: white !important;
-    border: 3px solid blue !important;
-    padding: 15px !important;
-}
-
-</style>
-</body>
-</html>
-<!-- PJESA 2 - vazhdimi i kodit -->
-
-<section id="ai-generator" class="page">
-
-    <div class="dashboard-layout">
-
-        <aside class="sidebar">
-
-            <div class="sidebar-logo">
-                📚 Mësuesi Dixhital
-            </div>
-
-            <button onclick="openDashboard()">
-                🏠 Dashboard
-            </button>
-
-            <button class="active" onclick="openAIGenerator()">
-                🤖 Gjenero pyetje
-            </button>
-
-           <button onclick="openQuestionBank()">
-    📚 Banka e pyetjeve
-</button>
-
-            <button onclick="comingSoon('Krijo test')">
-                📝 Krijo test
-            </button>
-
-            <button onclick="comingSoon('Kuize')">
-                🎯 Kuize
-            </button>
-
-            <button onclick="comingSoon('Rezultatet')">
-                📊 Rezultatet
-            </button>
-
-            <button onclick="logout()">
-                🚪 Dil
-            </button>
-
-        </aside>
-
-
-        <main class="main-content">
-
-            <div class="topbar">
-
-                <div>
-                    <h1>🤖 Gjeneruesi i pyetjeve me AI</h1>
-                    <p>Krijo pyetje të përshtatura për nxënësit tuaj.</p>
-                </div>
-
-                <div class="teacher-badge">
-                    👨‍🏫 Mësues
-                </div>
-
-            </div>
-
-
-            <div class="generator-container">
-
-                <div class="generator-card">
-
-                    <h2>⚙️ Parametrat e pyetjeve</h2>
-
-                    <p class="description">
-                        Zgjidh parametrat dhe krijo pyetje sipas nevojave të tua.
+                        Mësuesi Dixhital është një platformë e krijuar
+                        për t'i ndihmuar mësuesit të përgatisin pyetje,
+                        teste dhe materiale mësimore në mënyrë të shpejtë
+                        dhe profesionale.
                     </p>
 
-
-                    <div class="form-grid">
-
-                        <div class="form-group">
-
-                            <label>Lënda</label>
-
-                            <select id="aiSubject">
-
-                                <option value="Fizikë">Fizikë</option>
-                                <option value="Kimi">Kimi</option>
-                                <option value="Matematikë">Matematikë</option>
-                                <option value="Biologji">Biologji</option>
-                                <option value="Gjeografi">Gjeografi</option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>Klasa</label>
-
-                            <select id="aiGrade">
-
-                                <option value="6">Klasa 6</option>
-                                <option value="7">Klasa 7</option>
-                                <option value="8">Klasa 8</option>
-                                <option value="9">Klasa 9</option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>Tema</label>
-
-                            <input
-                                type="text"
-                                id="aiTopic"
-                                placeholder="p.sh. Forca dhe lëvizja"
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>Niveli</label>
-
-                            <select id="aiDifficulty">
-
-                                <option value="I lehtë">I lehtë</option>
-                                <option value="Mesatar" selected>Mesatar</option>
-                                <option value="I vështirë">I vështirë</option>
-                                <option value="Olimpiadë">Olimpiadë</option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>Lloji i pyetjes</label>
-
-                            <select id="aiQuestionType">
-
-                                <option value="Me alternativa">
-                                    Me alternativa
-                                </option>
-
-                                <option value="E hapur">
-                                    Pyetje e hapur
-                                </option>
-
-                                <option value="E vërtetë / E gabuar">
-                                    E vërtetë / E gabuar
-                                </option>
-
-                                <option value="Me llogaritje">
-                                    Me llogaritje
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>Numri i pyetjeve</label>
-
-                            <select id="aiQuestionCount">
-
-                                <option value="5">5 pyetje</option>
-                                <option value="10">10 pyetje</option>
-                                <option value="15">15 pyetje</option>
-                                <option value="20">20 pyetje</option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        class="generate-button"
-                        onclick="generateAIQuestions()"
-                    >
-
-                        🤖 GJENERO PYETJET
-
+                    <button class="hero-button" onclick="openLogin()">
+                        🚀 Fillo tani
                     </button>
 
                 </div>
 
 
-                <div id="aiResults" class="ai-results">
+                <div class="hero-card">
 
-                    <div class="empty-results">
+                    <div class="hero-card-title">
+                        Çfarë mund të bëni?
+                    </div>
 
-                        <div class="empty-icon">🧠</div>
 
-                        <h3>Pyetjet do të shfaqen këtu</h3>
+                    <div class="feature-item">
+
+                        <div class="feature-icon">
+                            📝
+                        </div>
+
+                        <div>
+                            <strong>Krijo pyetje</strong>
+                            <span>
+                                Përgatit pyetje për nxënësit
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="feature-item">
+
+                        <div class="feature-icon">
+                            📚
+                        </div>
+
+                        <div>
+                            <strong>Bankë pyetjesh</strong>
+                            <span>
+                                Ruaj dhe organizo pyetjet
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="feature-item">
+
+                        <div class="feature-icon">
+                            📋
+                        </div>
+
+                        <div>
+                            <strong>Krijo teste</strong>
+                            <span>
+                                Përgatit teste të gatshme për printim
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="feature-item">
+
+                        <div class="feature-icon">
+                            🤖
+                        </div>
+
+                        <div>
+                            <strong>AI për pyetje</strong>
+                            <span>
+                                Gjenero pyetje me inteligjencë artificiale
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================
+                 VEÇORITË
+                 ===================================== -->
+
+            <section class="features-section">
+
+                <div class="section-title">
+
+                    <h2>
+                        Gjithçka që i nevojitet mësuesit
+                    </h2>
+
+                    <p>
+                        Një hapësirë e vetme për organizimin,
+                        krijimin dhe menaxhimin e materialeve mësimore.
+                    </p>
+
+                </div>
+
+
+                <div class="features-grid">
+
+                    <div class="feature-card">
+
+                        <div class="feature-card-icon">
+                            📚
+                        </div>
+
+                        <h3>
+                            Banka e pyetjeve
+                        </h3>
 
                         <p>
-                            Zgjidh temën dhe parametrat, pastaj kliko
-                            "Gjenero pyetjet".
+                            Ruani pyetjet tuaja dhe gjeni ato
+                            shpejt sipas lëndës, klasës dhe vështirësisë.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-card-icon">
+                            🤖
+                        </div>
+
+                        <h3>
+                            Gjenerim me AI
+                        </h3>
+
+                        <p>
+                            Krijoni pyetje të reja për temat
+                            që dëshironi të zhvilloni në klasë.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-card-icon">
+                            📝
+                        </div>
+
+                        <h3>
+                            Krijo test
+                        </h3>
+
+                        <p>
+                            Zgjidhni pyetjet dhe krijoni teste
+                            të gatshme për përdorim dhe printim.
                         </p>
 
                     </div>
 
                 </div>
 
-            </div>
+            </section>
 
         </main>
 
+
+        <!-- =====================================
+             FOOTER
+             ===================================== -->
+
+        <footer class="site-footer">
+
+            <p>
+                © 2026 Mësuesi Dixhital — Platformë për mësuesit
+            </p>
+
+        </footer>
+
     </div>
 
-</section>
 
+    <!-- =========================================
+         JAVASCRIPT BAZË
+         ========================================= -->
 
-<style>
+    <script>
 
-.ai-results {
-    margin-top: 25px;
-}
+        function openLogin() {
 
-.empty-results {
-    background: white;
-    border-radius: 18px;
-    padding: 45px;
-    text-align: center;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-}
-
-.empty-icon {
-    font-size: 55px;
-    margin-bottom: 15px;
-}
-
-.empty-results h3 {
-    margin-bottom: 8px;
-    color: #1f2937;
-}
-
-.empty-results p {
-    color: #6b7280;
-}
-
-.question-card {
-    background: white;
-    border-radius: 18px;
-    padding: 25px;
-    margin-bottom: 18px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-}
-
-.question-number {
-    font-weight: bold;
-    color: #2563eb;
-    margin-bottom: 10px;
-}
-
-.question-text {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 18px;
-}
-
-.answer-option {
-    padding: 10px 14px;
-    margin: 7px 0;
-    background: #f3f4f6;
-    border-radius: 10px;
-}
-
-.correct-answer {
-    margin-top: 15px;
-    padding: 12px;
-    background: #ecfdf5;
-    border-radius: 10px;
-    color: #047857;
-}
-
-.question-actions {
-    margin-top: 18px;
-    display: flex;
-    gap: 10px;
-}
-
-.question-actions button {
-    border: none;
-    padding: 9px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.save-btn {
-    background: #2563eb;
-    color: white;
-}
-
-.delete-btn {
-    background: #fee2e2;
-    color: #b91c1c;
-}
-
-</style>
-
-
-<script>
-
-function openAIGenerator() {
-
-    document.querySelectorAll('.page').forEach(function(page) {
-        page.classList.remove('active');
-    });
-
-    const generator = document.getElementById('ai-generator');
-
-    if (generator) {
-        generator.classList.add('active');
-    }
-}
-
-
-function generateAIQuestions() {
-
-    const subject =
-        document.getElementById('aiSubject').value;
-
-    const grade =
-        document.getElementById('aiGrade').value;
-
-    const topic =
-        document.getElementById('aiTopic').value.trim();
-
-    const difficulty =
-        document.getElementById('aiDifficulty').value;
-
-    const type =
-        document.getElementById('aiQuestionType').value;
-
-    const count =
-        parseInt(
-            document.getElementById('aiQuestionCount').value
-        );
-
-
-    if (!topic) {
-
-        alert("Ju lutem shkruani temën e pyetjeve.");
-
-        return;
-    }
-
-
-    const results =
-        document.getElementById('aiResults');
-
-
-    results.innerHTML = "";
-
-
-    for (let i = 1; i <= count; i++) {
-
-        let questionText =
-            `Pyetja ${i}: Cili është koncepti kryesor që lidhet me "${topic}" në lëndën ${subject}, për klasën ${grade}?`;
-
-
-        if (type === "Me llogaritje") {
-
-            questionText =
-                `Pyetja ${i}: Zgjidh ushtrimin e mëposhtëm që lidhet me "${topic}" dhe shpjego hapat e zgjidhjes.`;
+            alert(
+                "Hyrja për mësues do të ndërtohet në pjesën tjetër."
+            );
 
         }
 
+    </script>
 
-        if (type === "E hapur") {
-
-            questionText =
-                `Pyetja ${i}: Shpjego me fjalët e tua rëndësinë e "${topic}" në ${subject}.`;
-
-        }
-
-
-        if (type === "E vërtetë / E gabuar") {
-
-            questionText =
-                `Pyetja ${i}: "${topic}" është një koncept i rëndësishëm në ${subject}. E vërtetë apo e gabuar?`;
-
-        }
-
-
-        const card =
-            document.createElement("div");
-
-        card.className = "question-card";
-
-
-        card.innerHTML = `
-
-            <div class="question-number">
-                Pyetja ${i} • ${difficulty}
-            </div>
-
-            <div class="question-text">
-                ${questionText}
-            </div>
-
-            <div class="answer-option">
-                A) Opsioni i parë
-            </div>
-
-            <div class="answer-option">
-                B) Opsioni i dytë
-            </div>
-
-            <div class="answer-option">
-                C) Opsioni i tretë
-            </div>
-
-            <div class="answer-option">
-                D) Opsioni i katërt
-            </div>
-
-            <div class="correct-answer">
-                <strong>Përgjigjja:</strong>
-                A
-            </div>
-
-            <div class="question-actions">
-
-                <button
-                    class="save-btn"
-                    onclick="saveAIQuestion(this)"
-                >
-                    💾 Ruaj
-                </button>
-
-                <button
-                    class="delete-btn"
-                    onclick="this.closest('.question-card').remove()"
-                >
-                    🗑 Fshi
-                </button>
-
-            </div>
-
-        `;
-
-
-        results.appendChild(card);
-
-    }
-
-}
-
-
-function saveAIQuestion(button) {
-
-    button.innerHTML = "✅ U ruajt";
-
-    button.disabled = true;
-
-    button.style.opacity = "0.7";
-
-}
-
-
-</script>
+</body>
+</html>
