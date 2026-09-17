@@ -1227,6 +1227,43 @@ button{
 }
 
 
+
+/* =========================================================
+   GJENERO PYETJE ME AI - HAPI 1
+========================================================= */
+
+#aiGeneratorPage{background:#f5f7fb;}
+.ai-generator-content{padding:28px;}
+.ai-generator-header{margin-bottom:20px;}
+.ai-generator-header h1{font-size:25px;margin-bottom:6px;}
+.ai-generator-header p{color:#6b7280;font-size:13px;line-height:1.5;}
+.ai-generator-layout{display:grid;grid-template-columns:360px 1fr;gap:20px;align-items:start;}
+.ai-generator-card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:22px;}
+.ai-generator-card-title{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800;margin-bottom:18px;}
+.ai-generator-card-title-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#eef2ff;border-radius:9px;font-size:20px;}
+.ai-form-group{margin-bottom:14px;}
+.ai-form-group label{display:block;font-size:12px;font-weight:700;margin-bottom:6px;}
+.ai-form-group select,.ai-form-group input,.ai-form-group textarea{width:100%;border:1px solid #d1d5db;border-radius:7px;outline:none;background:#fff;padding:0 11px;}
+.ai-form-group select,.ai-form-group input{height:42px;}
+.ai-form-group textarea{min-height:82px;padding:10px 11px;resize:vertical;}
+.ai-form-group select:focus,.ai-form-group input:focus,.ai-form-group textarea:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.08);}
+.ai-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.ai-help-box{background:#f8fafc;border:1px solid #e5e7eb;border-radius:9px;padding:12px;margin-top:4px;margin-bottom:16px;}
+.ai-help-box strong{display:block;font-size:11px;margin-bottom:4px;}
+.ai-help-box span{display:block;color:#6b7280;font-size:11px;line-height:1.5;}
+.ai-generate-button{width:100%;border:0;background:#2563eb;color:#fff;padding:13px 18px;border-radius:8px;font-weight:800;font-size:13px;}
+.ai-generate-button:hover{background:#1d4ed8;}
+.ai-results-card{min-height:520px;}
+.ai-results-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:1px solid #f0f0f0;margin-bottom:14px;}
+.ai-results-header h2{font-size:16px;}
+.ai-results-status{font-size:11px;color:#6b7280;background:#f8fafc;border:1px solid #e5e7eb;padding:6px 9px;border-radius:6px;}
+.ai-empty-state{min-height:400px;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px 20px;}
+.ai-empty-icon{width:68px;height:68px;display:flex;align-items:center;justify-content:center;margin:0 auto 15px;background:#eef2ff;border-radius:18px;font-size:34px;}
+.ai-empty-state h3{font-size:17px;margin-bottom:7px;}
+.ai-empty-state p{max-width:440px;color:#6b7280;font-size:12px;line-height:1.6;margin:auto;}
+@media(max-width:900px){.ai-generator-layout{grid-template-columns:1fr;}}
+@media(max-width:650px){.ai-generator-content{padding:16px;}.ai-form-grid{grid-template-columns:1fr;}}
+
 /* =========================================================
    RESPONSIVE
 ========================================================= */
@@ -2497,6 +2534,174 @@ button{
 </section>
 
 
+
+
+<!-- =========================================================
+     GJENERO PYETJE ME AI - HAPI 1
+========================================================= -->
+<section id="aiGeneratorPage" class="page">
+
+    <div class="dashboard-layout">
+
+        <aside class="dashboard-sidebar">
+
+            <div class="dashboard-brand">
+                <div class="dashboard-brand-logo">📚</div>
+                <div>
+                    <strong>Mësuesi Dixhital</strong>
+                    <span>Paneli i mësuesit</span>
+                </div>
+            </div>
+
+            <nav class="dashboard-menu">
+                <button onclick="openDashboard()">🏠 Dashboard</button>
+                <button onclick="openQuestionBank()">📚 Banka e pyetjeve</button>
+                <button class="active" onclick="openAIGenerator()">🤖 Gjenero pyetje</button>
+                <button onclick="openCreateTest()">📝 Krijo test</button>
+                <button onclick="openSavedTests()">📂 Testet e ruajtura</button>
+                <button onclick="openQuizzes()">🧩 Kuize</button>
+                <button onclick="openResults()">📊 Rezultatet</button>
+                <button onclick="logoutTeacher()">🚪 Dil</button>
+            </nav>
+
+        </aside>
+
+        <main class="dashboard-main">
+
+            <div class="dashboard-topbar">
+                <h2>Gjenero pyetje me AI</h2>
+
+                <div class="teacher-profile">
+                    <div class="teacher-avatar">M</div>
+                    <span id="aiGeneratorTeacherName">Mësues</span>
+                </div>
+            </div>
+
+            <div class="ai-generator-content">
+
+                <div class="ai-generator-header">
+                    <h1>🤖 Gjenero pyetje me AI</h1>
+                    <p>
+                        Zgjidhni lëndën, klasën dhe kriteret e pyetjeve.
+                        Kjo ndërfaqe është Hapi 1; lidhja reale me AI do të bëhet në Hapin 2.
+                    </p>
+                </div>
+
+                <div class="ai-generator-layout">
+
+                    <div class="ai-generator-card">
+
+                        <div class="ai-generator-card-title">
+                            <div class="ai-generator-card-title-icon">⚙️</div>
+                            Parametrat e pyetjeve
+                        </div>
+
+                        <div class="ai-form-grid">
+
+                            <div class="ai-form-group">
+                                <label>Lënda</label>
+                                <select id="aiSubject">
+                                    <option value="Fizikë">Fizikë</option>
+                                    <option value="Kimi">Kimi</option>
+                                    <option value="Matematikë">Matematikë</option>
+                                    <option value="Biologji">Biologji</option>
+                                    <option value="Gjeografi">Gjeografi</option>
+                                </select>
+                            </div>
+
+                            <div class="ai-form-group">
+                                <label>Klasa</label>
+                                <select id="aiGrade">
+                                    <option value="6">Klasa 6</option>
+                                    <option value="7">Klasa 7</option>
+                                    <option value="8">Klasa 8</option>
+                                    <option value="9" selected>Klasa 9</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="ai-form-group">
+                            <label>Tema</label>
+                            <input type="text" id="aiTopic" placeholder="p.sh. Forca dhe lëvizja">
+                        </div>
+
+                        <div class="ai-form-grid">
+
+                            <div class="ai-form-group">
+                                <label>Vështirësia</label>
+                                <select id="aiDifficulty">
+                                    <option value="I lehtë">I lehtë</option>
+                                    <option value="Mesatar" selected>Mesatar</option>
+                                    <option value="I vështirë">I vështirë</option>
+                                </select>
+                            </div>
+
+                            <div class="ai-form-group">
+                                <label>Numri i pyetjeve</label>
+                                <input type="number" id="aiQuestionCount" min="1" max="50" value="10">
+                            </div>
+
+                        </div>
+
+                        <div class="ai-form-group">
+                            <label>Lloji i pyetjeve</label>
+                            <select id="aiQuestionType">
+                                <option value="multiple-choice">Me alternativa A–D</option>
+                                <option value="critical-thinking">Mendim kritik</option>
+                                <option value="mixed">Të përziera</option>
+                            </select>
+                        </div>
+
+                        <div class="ai-form-group">
+                            <label>Udhëzim shtesë (opsionale)</label>
+                            <textarea id="aiInstructions" placeholder="p.sh. Përfshi pyetje logjike dhe situata nga jeta e përditshme."></textarea>
+                        </div>
+
+                        <div class="ai-help-box">
+                            <strong>💡 Këshillë</strong>
+                            <span>
+                                Sa më e qartë të jetë tema dhe udhëzimi,
+                                aq më specifike do të jenë pyetjet.
+                            </span>
+                        </div>
+
+                        <button class="ai-generate-button" onclick="generateAIQuestions()">
+                            ✨ Gjenero pyetjet
+                        </button>
+
+                    </div>
+
+                    <div class="ai-generator-card ai-results-card">
+
+                        <div class="ai-results-header">
+                            <h2>Pyetjet e gjeneruara</h2>
+                            <span id="aiResultsStatus" class="ai-results-status">Në pritje</span>
+                        </div>
+
+                        <div id="aiResultsContent" class="ai-empty-state">
+                            <div>
+                                <div class="ai-empty-icon">🤖</div>
+                                <h3>Gati për të krijuar pyetje</h3>
+                                <p>
+                                    Plotësoni parametrat në të majtë dhe klikoni
+                                    “Gjenero pyetjet”. Në Hapin 2 kjo faqe do të lidhet
+                                    me AI dhe pyetjet reale do të shfaqen këtu.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</section>
 
 <!-- =========================================================
      KRIJO TEST
@@ -5679,10 +5884,84 @@ body{
 
 function openAIGenerator(){
 
-    alert(
-        "🤖 Gjenerimi me AI do të aktivizohet në hapin tjetër."
-    );
+    hideAllPages();
 
+    const page = document.getElementById("aiGeneratorPage");
+
+    if(page){
+        page.style.display = "block";
+    }
+
+    updateTeacherInfo();
+
+    const teacherName =
+        localStorage.getItem("mesuesiDixhitalTeacherName") || "Mësues";
+
+    const teacherNameElement =
+        document.getElementById("aiGeneratorTeacherName");
+
+    if(teacherNameElement){
+        teacherNameElement.textContent = teacherName;
+    }
+
+    setActiveMenuButton("aiGeneratorPage");
+}
+
+
+function generateAIQuestions(){
+
+    const topic =
+        document.getElementById("aiTopic").value.trim();
+
+    const count =
+        parseInt(
+            document.getElementById("aiQuestionCount").value,
+            10
+        ) || 0;
+
+    if(!topic){
+        alert("Ju lutem shkruani temën e pyetjeve.");
+        document.getElementById("aiTopic").focus();
+        return;
+    }
+
+    if(count < 1 || count > 50){
+        alert("Numri i pyetjeve duhet të jetë nga 1 deri në 50.");
+        document.getElementById("aiQuestionCount").focus();
+        return;
+    }
+
+    const status =
+        document.getElementById("aiResultsStatus");
+
+    const results =
+        document.getElementById("aiResultsContent");
+
+    if(status){
+        status.textContent = "Hapi 1 – gati";
+    }
+
+    if(results){
+
+        results.innerHTML = `
+            <div>
+                <div class="ai-empty-icon">⚡</div>
+
+                <h3>Parametrat u pranuan</h3>
+
+                <p>
+                    ${escapeHTML(
+                        count + " pyetje për temën: " + topic
+                    )}
+                </p>
+
+                <p style="margin-top:8px;">
+                    Në Hapin 2 do ta lidhim këtë formular me AI
+                    dhe pyetjet reale do të shfaqen këtu.
+                </p>
+            </div>
+        `;
+    }
 }
 
 
