@@ -1254,146 +1254,6 @@ button{
 .ai-generate-button{width:100%;border:0;background:#2563eb;color:#fff;padding:13px 18px;border-radius:8px;font-weight:800;font-size:13px;}
 .ai-generate-button:hover{background:#1d4ed8;}
 .ai-results-card{min-height:520px;}
-
-.ai-generated-results{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-}
-
-.ai-generated-toolbar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-    padding:14px;
-    background:#f8fafc;
-    border:1px solid #e5e7eb;
-    border-radius:10px;
-}
-
-.ai-generated-toolbar strong{
-    display:block;
-    font-size:13px;
-    margin-bottom:3px;
-}
-
-.ai-generated-toolbar span{
-    color:#6b7280;
-    font-size:11px;
-}
-
-.ai-save-all-button,
-.ai-save-one-button{
-    border:0;
-    background:#2563eb;
-    color:#fff;
-    border-radius:7px;
-    font-weight:700;
-    cursor:pointer;
-}
-
-.ai-save-all-button{
-    padding:10px 14px;
-    white-space:nowrap;
-}
-
-.ai-save-one-button{
-    padding:7px 10px;
-    font-size:11px;
-    white-space:nowrap;
-}
-
-.ai-generated-question{
-    background:#fff;
-    border:1px solid #e5e7eb;
-    border-radius:10px;
-    padding:15px;
-}
-
-.ai-generated-question-header{
-    display:flex;
-    align-items:flex-start;
-    gap:10px;
-}
-
-.ai-question-number{
-    width:30px;
-    height:30px;
-    min-width:30px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#eff6ff;
-    color:#1d4ed8;
-    border-radius:7px;
-    font-weight:800;
-    font-size:12px;
-}
-
-.ai-generated-question-text{
-    flex:1;
-    font-size:13px;
-    line-height:1.55;
-    font-weight:700;
-}
-
-.ai-generated-options{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-    margin:13px 0 10px 40px;
-}
-
-.ai-generated-option{
-    display:flex;
-    gap:8px;
-    align-items:flex-start;
-    padding:9px 10px;
-    background:#f8fafc;
-    border:1px solid #e5e7eb;
-    border-radius:7px;
-    font-size:12px;
-    line-height:1.4;
-}
-
-.ai-generated-option strong{
-    min-width:20px;
-}
-
-.ai-generated-option.correct{
-    background:#ecfdf5;
-    border-color:#86efac;
-    color:#166534;
-}
-
-.ai-generated-meta{
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-    margin-left:40px;
-}
-
-.ai-generated-meta span{
-    background:#f3f4f6;
-    color:#4b5563;
-    border-radius:5px;
-    padding:4px 7px;
-    font-size:10px;
-    font-weight:700;
-}
-
-@media(max-width:800px){
-    .ai-generated-options{
-        grid-template-columns:1fr;
-    }
-
-    .ai-generated-toolbar{
-        align-items:flex-start;
-        flex-direction:column;
-    }
-}
-
 .ai-results-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:1px solid #f0f0f0;margin-bottom:14px;}
 .ai-results-header h2{font-size:16px;}
 .ai-results-status{font-size:11px;color:#6b7280;background:#f8fafc;border:1px solid #e5e7eb;padding:6px 9px;border-radius:6px;}
@@ -2723,7 +2583,7 @@ button{
                     <h1>🤖 Gjenero pyetje me AI</h1>
                     <p>
                         Zgjidhni lëndën, klasën dhe kriteret e pyetjeve.
-                        Gjeneroni pyetje reale me AI sipas lëndës, klasës, temës dhe vështirësisë së zgjedhur.
+                        Kjo ndërfaqe është Hapi 1; lidhja reale me AI do të bëhet në Hapin 2.
                     </p>
                 </div>
 
@@ -3267,6 +3127,7 @@ button{
 function hideAllPages(){
 
     const pages = [
+        "app",
         "loginPage",
         "dashboardPage",
         "questionBankPage",
@@ -6049,443 +5910,184 @@ function openAIGenerator(){
 
 function generateAIQuestions(){
 
-    const subject =
-        document.getElementById("aiSubject").value;
-
-    const grade =
-        document.getElementById("aiGrade").value;
-
-    const topic =
-        document.getElementById("aiTopic").value.trim();
-
-    const count =
-        parseInt(
-            document.getElementById("aiQuestionCount").value,
-            10
-        ) || 0;
-
-    const difficulty =
-        document.getElementById("aiDifficulty").value;
-
-    const questionType =
-        document.getElementById("aiQuestionType").value;
-
-    const instructions =
-        document.getElementById("aiInstructions").value.trim();
-
-    const status =
-        document.getElementById("aiResultsStatus");
-
-    const results =
-        document.getElementById("aiResultsContent");
+    const subject = document.getElementById("aiSubject")?.value || "";
+    const grade = document.getElementById("aiGrade")?.value || "";
+    const topic = document.getElementById("aiTopic")?.value.trim() || "";
+    const count = parseInt(document.getElementById("aiQuestionCount")?.value, 10) || 0;
+    const difficulty = document.getElementById("aiDifficulty")?.value || "";
+    const questionType = document.getElementById("aiQuestionType")?.value || "multiple-choice";
+    const instructions = document.getElementById("aiInstructions")?.value.trim() || "";
+    const status = document.getElementById("aiResultsStatus");
+    const results = document.getElementById("aiResultsContent");
 
     if(!topic){
         alert("Ju lutem shkruani temën e pyetjeve.");
-        document.getElementById("aiTopic").focus();
+        document.getElementById("aiTopic")?.focus();
         return;
     }
 
     if(count < 1 || count > 50){
         alert("Numri i pyetjeve duhet të jetë nga 1 deri në 50.");
-        document.getElementById("aiQuestionCount").focus();
+        document.getElementById("aiQuestionCount")?.focus();
         return;
     }
 
-    if(status){
-        status.textContent = "⏳ Duke gjeneruar...";
-    }
-
+    if(status) status.textContent = "⏳ Duke gjeneruar...";
     if(results){
         results.className = "ai-empty-state";
-        results.innerHTML = `
-            <div>
-                <div class="ai-empty-icon">🤖</div>
-                <h3>AI po përgatit pyetjet...</h3>
-                <p>Ju lutem prisni pak.</p>
-            </div>
-        `;
+        results.innerHTML = "<div><div class=\"ai-empty-icon\">🤖</div><h3>AI po përgatit pyetjet...</h3><p>Ju lutem prisni pak.</p></div>";
     }
 
-    const existingQuestions =
-        getBankQuestions()
-            .map(function(item){
-                return item.question || "";
-            })
-            .filter(Boolean)
-            .slice(-100);
+    const existingQuestions = typeof getBankQuestions === "function"
+        ? getBankQuestions().map(q => q.question || "").filter(Boolean).slice(-100)
+        : [];
 
-    const typeInstruction =
-        questionType === "multiple-choice"
-            ? "Të gjitha pyetjet duhet të jenë me alternativa A-D."
-            : questionType === "critical-thinking"
-                ? "Pyetjet duhet të kërkojnë arsyetim, analizë dhe mendim kritik, por secila duhet të ketë alternativa A-D."
-                : "Kombino pyetje të drejtpërdrejta, logjike, analitike dhe të mendimit kritik, të gjitha me alternativa A-D.";
-
-    const prompt = `
-Je një ekspert i përgatitjes së testeve shkollore për arsimin parauniversitar në Kosovë.
-Gjenero pyetje në gjuhën shqipe për këto parametra:
-
-Lënda: ${subject}
-Klasa: ${grade}
-Tema: ${topic}
-Numri i pyetjeve: ${count}
-Vështirësia: ${difficulty}
-Lloji: ${questionType}
-Udhëzim shtesë: ${instructions || "Asnjë"}
-
-${typeInstruction}
-
-KËRKESA TË RËNDËSISHME:
-- Pyetjet duhet të jenë të sakta, të qarta dhe të përshtatshme për klasën e zgjedhur.
-- Mos përsërit pyetje me njëra-tjetrën.
-- Mos kopjo pyetjet ekzistuese më poshtë. Krijo pyetje të reja.
-- Vetëm NJË alternativë duhet të jetë e saktë.
-- Alternativat A-D duhet të jenë të besueshme dhe jo tepër të dukshme.
-- Për çdo pyetje jep vetëm një përgjigje të saktë: A, B, C ose D.
-- Mos shto shpjegime jashtë JSON-it.
-- Kthe përgjigjen VETËM si JSON valid, pa markdown dhe pa blloqe kodi.
-
-FORMATI I DETYRUESHËM:
-{
-  "questions": [
-    {
-      "question": "Teksti i pyetjes",
-      "options": {
-        "A": "Alternativa A",
-        "B": "Alternativa B",
-        "C": "Alternativa C",
-        "D": "Alternativa D"
-      },
-      "correct": "A"
+    let typeInstruction = "Të gjitha pyetjet duhet të jenë me alternativa A-D.";
+    if(questionType === "critical-thinking"){
+        typeInstruction = "Pyetjet duhet të kërkojnë arsyetim, analizë dhe mendim kritik, por secila duhet të ketë alternativa A-D.";
     }
-  ]
-}
 
-PYETJET EKZISTUESE QË DUHET TË SHMANGEN:
-${existingQuestions.length ? existingQuestions.map(function(q,i){ return (i+1)+". "+q; }).join("\n") : "Nuk ka ende pyetje në bankë."}
-`;
+    const prompt = [
+        "Je ekspert i përgatitjes së testeve shkollore për arsimin parauniversitar në Kosovë.",
+        "Gjenero pyetje në gjuhën shqipe.",
+        "Lënda: " + subject,
+        "Klasa: " + grade,
+        "Tema: " + topic,
+        "Numri i pyetjeve: " + count,
+        "Vështirësia: " + difficulty,
+        "Lloji: " + questionType,
+        "Udhëzim shtesë: " + (instructions || "Asnjë"),
+        "",
+        typeInstruction,
+        "",
+        "KËRKESA:",
+        "- Pyetjet duhet të jenë të sakta, të qarta dhe të përshtatshme për klasën.",
+        "- Mos përsërit pyetje me njëra-tjetrën.",
+        "- Mos kopjo pyetjet ekzistuese më poshtë.",
+        "- Vetëm një alternativë A-D duhet të jetë e saktë.",
+        "- Kthe vetëm JSON valid, pa markdown, pa shpjegime.",
+        "",
+        'FORMATI: {"questions":[{"question":"Teksti i pyetjes","options":{"A":"Alternativa A","B":"Alternativa B","C":"Alternativa C","D":"Alternativa D"},"correct":"A"}]}',
+        "",
+        "PYETJET EKZISTUESE QË DUHET TË SHMANGEN:",
+        existingQuestions.length ? existingQuestions.map((q,i) => (i+1) + ". " + q).join("\n") : "Nuk ka ende pyetje në bankë."
+    ].join("\n");
 
-    const WORKER_URL =
-        "https://mesuesi-dixhital.aafrimkkrasniqi.workers.dev";
+    const WORKER_URL = "https://mesuesi-dixhital.aafrimkkrasniqi.workers.dev";
 
     fetch(WORKER_URL, {
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
-        },
-        body:JSON.stringify({
-            prompt:prompt
-        })
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=UTF-8" },
+        body: JSON.stringify({ prompt: prompt })
     })
     .then(function(response){
-        return response.json().then(function(data){
+        return response.text().then(function(raw){
+            let data;
+            try { data = JSON.parse(raw); }
+            catch(e){ throw new Error("Serveri nuk ktheu JSON të vlefshëm."); }
             if(!response.ok || !data.success){
-                throw new Error(
-                    data.error ||
-                    "Gabim gjatë komunikimit me AI."
-                );
+                throw new Error(data.error || "Gabim gjatë komunikimit me AI.");
             }
             return data;
         });
     })
     .then(function(data){
-
         let text = String(data.text || "").trim();
-
-        text = text
-            .replace(/^```json\s*/i, "")
-            .replace(/^```\s*/i, "")
-            .replace(/\s*```$/i, "")
-            .trim();
+        text = text.replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/\s*```$/i, "").trim();
 
         let parsed;
-
-        try{
+        try {
             parsed = JSON.parse(text);
-        }catch(error){
+        } catch(e) {
             const start = text.indexOf("{");
             const end = text.lastIndexOf("}");
-
-            if(start !== -1 && end !== -1 && end > start){
-                parsed = JSON.parse(
-                    text.substring(start, end + 1)
-                );
-            }else{
-                throw new Error(
-                    "AI nuk ktheu JSON të vlefshëm."
-                );
-            }
+            if(start !== -1 && end > start) parsed = JSON.parse(text.substring(start, end + 1));
+            else throw new Error("AI nuk ktheu JSON të vlefshëm.");
         }
 
-        const questions =
-            Array.isArray(parsed)
-                ? parsed
-                : parsed.questions;
+        const list = Array.isArray(parsed) ? parsed : parsed.questions;
+        if(!Array.isArray(list) || !list.length) throw new Error("AI nuk ktheu pyetje.");
 
-        if(!Array.isArray(questions) || !questions.length){
-            throw new Error(
-                "AI nuk ktheu pyetje."
-            );
-        }
-
-        const cleanQuestions = questions
-            .map(function(item){
-                const options = item.options || {};
-
-                return {
-                    question:String(item.question || "").trim(),
-                    options:{
-                        A:String(options.A || "").trim(),
-                        B:String(options.B || "").trim(),
-                        C:String(options.C || "").trim(),
-                        D:String(options.D || "").trim()
-                    },
-                    correct:String(item.correct || "A")
-                        .trim()
-                        .toUpperCase()
-                };
-            })
-            .filter(function(item){
-                return item.question &&
-                    item.options.A &&
-                    item.options.B &&
-                    item.options.C &&
-                    item.options.D &&
-                    ["A","B","C","D"].includes(item.correct);
-            })
-            .slice(0, count);
-
-        if(!cleanQuestions.length){
-            throw new Error(
-                "Pyetjet e kthyera nga AI nuk kanë formatin e duhur."
-            );
-        }
-
-        window.generatedAIQuestions = cleanQuestions.map(function(item){
+        const clean = list.map(function(item){
+            const o = item.options || {};
             return {
-                ...item,
-                subject:subject,
-                grade:grade,
-                topic:topic,
-                difficulty:difficulty
+                question: String(item.question || "").trim(),
+                options: {A:String(o.A || "").trim(), B:String(o.B || "").trim(), C:String(o.C || "").trim(), D:String(o.D || "").trim()},
+                correct: String(item.correct || "").trim().toUpperCase(),
+                subject: subject,
+                grade: grade,
+                topic: topic,
+                difficulty: difficulty
             };
-        });
+        }).filter(function(q){
+            return q.question && q.options.A && q.options.B && q.options.C && q.options.D && ["A","B","C","D"].includes(q.correct);
+        }).slice(0, count);
 
+        if(!clean.length) throw new Error("Pyetjet e kthyera nga AI nuk kanë formatin e duhur.");
+
+        window.generatedAIQuestions = clean;
         displayAIQuestions();
-
-        if(status){
-            status.textContent =
-                "✅ " + window.generatedAIQuestions.length + " pyetje";
-        }
+        if(status) status.textContent = "✅ " + clean.length + " pyetje";
     })
     .catch(function(error){
-
-        console.error("AI ERROR:", error);
-
-        if(status){
-            status.textContent = "❌ Gabim";
-        }
-
+        console.error(error);
+        if(status) status.textContent = "❌ Gabim";
         if(results){
             results.className = "ai-empty-state";
-            results.innerHTML = `
-                <div>
-                    <div class="ai-empty-icon">⚠️</div>
-                    <h3>Nuk u gjeneruan pyetjet</h3>
-                    <p>${escapeHTML(error.message || "Gabim i panjohur.")}</p>
-                    <button
-                        class="ai-generate-button"
-                        style="max-width:220px;margin-top:18px;"
-                        onclick="generateAIQuestions()"
-                    >
-                        🔄 Provo përsëri
-                    </button>
-                </div>
-            `;
+            results.innerHTML = "<div><div class=\"ai-empty-icon\">⚠️</div><h3>Nuk u gjeneruan pyetjet</h3><p>" + escapeHTML(error.message || "Gabim i panjohur.") + "</p><button class=\"ai-generate-button\" onclick=\"generateAIQuestions()\">🔄 Provo përsëri</button></div>";
         }
     });
 }
 
-
 function displayAIQuestions(){
-
-    const results =
-        document.getElementById("aiResultsContent");
-
-    if(!results){
-        return;
-    }
-
-    const questions =
-        window.generatedAIQuestions || [];
-
-    if(!questions.length){
-        return;
-    }
+    const results = document.getElementById("aiResultsContent");
+    const questions = window.generatedAIQuestions || [];
+    if(!results || !questions.length) return;
 
     results.className = "ai-generated-results";
-
-    let html = `
-        <div class="ai-generated-toolbar">
-            <div>
-                <strong>${questions.length} pyetje të gjeneruara</strong>
-                <span>Kontrolloni pyetjet para se t'i ruani.</span>
-            </div>
-            <button
-                class="ai-save-all-button"
-                onclick="saveAllAIQuestions()"
-            >
-                💾 Ruaj të gjitha
-            </button>
-        </div>
-    `;
+    let html = "<div class=\"ai-generated-toolbar\"><strong>" + questions.length + " pyetje të gjeneruara</strong><button class=\"ai-save-all-button\" onclick=\"saveAllAIQuestions()\">💾 Ruaj të gjitha</button></div>";
 
     questions.forEach(function(item,index){
-
-        html += `
-            <div class="ai-generated-question">
-                <div class="ai-generated-question-header">
-                    <span class="ai-question-number">${index + 1}</span>
-                    <div class="ai-generated-question-text">
-                        ${escapeHTML(item.question)}
-                    </div>
-                    <button
-                        class="ai-save-one-button"
-                        onclick="saveSingleAIQuestion(${index})"
-                    >
-                        💾 Ruaj
-                    </button>
-                </div>
-
-                <div class="ai-generated-options">
-                    <div class="ai-generated-option ${item.correct === "A" ? "correct" : ""}">
-                        <strong>A</strong>
-                        <span>${escapeHTML(item.options.A)}</span>
-                    </div>
-                    <div class="ai-generated-option ${item.correct === "B" ? "correct" : ""}">
-                        <strong>B</strong>
-                        <span>${escapeHTML(item.options.B)}</span>
-                    </div>
-                    <div class="ai-generated-option ${item.correct === "C" ? "correct" : ""}">
-                        <strong>C</strong>
-                        <span>${escapeHTML(item.options.C)}</span>
-                    </div>
-                    <div class="ai-generated-option ${item.correct === "D" ? "correct" : ""}">
-                        <strong>D</strong>
-                        <span>${escapeHTML(item.options.D)}</span>
-                    </div>
-                </div>
-
-                <div class="ai-generated-meta">
-                    <span>${escapeHTML(item.subject)}</span>
-                    <span>Klasa ${escapeHTML(item.grade)}</span>
-                    <span>${escapeHTML(item.difficulty)}</span>
-                    <span>Përgjigjja: ${escapeHTML(item.correct)}</span>
-                </div>
-            </div>
-        `;
+        html += "<div class=\"ai-generated-question\"><div class=\"ai-generated-question-header\"><b>" + (index+1) + ".</b><div class=\"ai-generated-question-text\">" + escapeHTML(item.question) + "</div><button class=\"ai-save-one-button\" onclick=\"saveSingleAIQuestion(" + index + ")\">💾 Ruaj</button></div>";
+        ["A","B","C","D"].forEach(function(letter){
+            html += "<div class=\"ai-generated-option " + (item.correct === letter ? "correct" : "") + "\"><strong>" + letter + "</strong><span>" + escapeHTML(item.options[letter]) + "</span></div>";
+        });
+        html += "<div class=\"ai-generated-meta\">" + escapeHTML(item.subject) + " · Klasa " + escapeHTML(item.grade) + " · " + escapeHTML(item.difficulty) + " · Përgjigjja: " + escapeHTML(item.correct) + "</div></div>";
     });
-
     results.innerHTML = html;
 }
 
-
 function saveSingleAIQuestion(index){
-
-    const item =
-        window.generatedAIQuestions?.[index];
-
-    if(!item){
-        return;
-    }
-
-    let questions = getBankQuestions();
-
-    const exists = questions.some(function(q){
-        return String(q.question || "").trim().toLowerCase() ===
-            String(item.question || "").trim().toLowerCase();
-    });
-
-    if(exists){
-        alert("⚠️ Kjo pyetje ekziston tashmë në Bankën e Pyetjeve.");
-        return;
-    }
-
-    questions.push({
-        id:Date.now().toString() + Math.random().toString(16).slice(2),
-        subject:item.subject,
-        grade:item.grade,
-        topic:item.topic,
-        difficulty:item.difficulty,
-        question:item.question,
-        options:{
-            A:item.options.A,
-            B:item.options.B,
-            C:item.options.C,
-            D:item.options.D
-        },
-        correct:item.correct,
-        createdAt:new Date().toISOString()
-    });
-
+    const item = (window.generatedAIQuestions || [])[index];
+    if(!item || typeof getBankQuestions !== "function" || typeof saveBankQuestions !== "function") return;
+    const questions = getBankQuestions();
+    const exists = questions.some(q => String(q.question || "").trim().toLowerCase() === item.question.trim().toLowerCase());
+    if(exists){ alert("⚠️ Kjo pyetje ekziston tashmë në Bankën e Pyetjeve."); return; }
+    questions.push({id:Date.now().toString()+Math.random().toString(16).slice(2), subject:item.subject, grade:item.grade, topic:item.topic, difficulty:item.difficulty, question:item.question, options:item.options, correct:item.correct, createdAt:new Date().toISOString()});
     saveBankQuestions(questions);
-    displayQuestionBank();
-    updateDashboardStats();
-
+    if(typeof displayQuestionBank === "function") displayQuestionBank();
+    if(typeof updateDashboardStats === "function") updateDashboardStats();
     alert("✅ Pyetja u ruajt në Bankën e Pyetjeve!");
 }
 
-
 function saveAllAIQuestions(){
-
-    const questionsToSave =
-        window.generatedAIQuestions || [];
-
-    if(!questionsToSave.length){
-        alert("Nuk ka pyetje për t'u ruajtur.");
-        return;
-    }
-
-    let questions = getBankQuestions();
+    const list = window.generatedAIQuestions || [];
+    if(!list.length){ alert("Nuk ka pyetje për t'u ruajtur."); return; }
+    const questions = getBankQuestions();
     let added = 0;
-
-    questionsToSave.forEach(function(item){
-
-        const exists = questions.some(function(q){
-            return String(q.question || "").trim().toLowerCase() ===
-                String(item.question || "").trim().toLowerCase();
-        });
-
+    list.forEach(function(item){
+        const exists = questions.some(q => String(q.question || "").trim().toLowerCase() === item.question.trim().toLowerCase());
         if(!exists){
-            questions.push({
-                id:Date.now().toString() + Math.random().toString(16).slice(2),
-                subject:item.subject,
-                grade:item.grade,
-                topic:item.topic,
-                difficulty:item.difficulty,
-                question:item.question,
-                options:{
-                    A:item.options.A,
-                    B:item.options.B,
-                    C:item.options.C,
-                    D:item.options.D
-                },
-                correct:item.correct,
-                createdAt:new Date().toISOString()
-            });
-
+            questions.push({id:Date.now().toString()+Math.random().toString(16).slice(2), subject:item.subject, grade:item.grade, topic:item.topic, difficulty:item.difficulty, question:item.question, options:item.options, correct:item.correct, createdAt:new Date().toISOString()});
             added++;
         }
     });
-
     saveBankQuestions(questions);
-    displayQuestionBank();
-    updateDashboardStats();
-
-    alert(
-        "✅ U ruajtën " + added + " pyetje në Bankën e Pyetjeve."
-    );
+    if(typeof displayQuestionBank === "function") displayQuestionBank();
+    if(typeof updateDashboardStats === "function") updateDashboardStats();
+    alert("✅ U ruajtën " + added + " pyetje në Bankën e Pyetjeve.");
 }
+
 
 
 function openQuizzes(){
