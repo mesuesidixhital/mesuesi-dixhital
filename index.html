@@ -3127,6 +3127,7 @@ button{
 function hideAllPages(){
 
     const pages = [
+        "app",
         "loginPage",
         "dashboardPage",
         "questionBankPage",
@@ -4280,13 +4281,34 @@ function openCreateTest(){
 
     hideAllPages();
 
-    document.getElementById(
-        "createTestPage"
-    ).style.display = "block";
+    const page = document.getElementById("createTestPage");
+    if(!page){ return; }
+
+    page.style.display = "block";
 
     updateTeacherInfo();
 
     loadTestQuestionList();
+
+    // Për ta bërë Krijo Test më të thjeshtë:
+    // të gjitha pyetjet e disponueshme zgjidhen automatikisht.
+    setTimeout(function(){
+        const boxes = document.querySelectorAll("#testQuestionList .test-question-checkbox");
+        const countInput = document.getElementById("testQuestionCount");
+        const selectAll = document.getElementById("selectAllQuestions");
+
+        boxes.forEach(function(box){ box.checked = true; });
+
+        if(selectAll && boxes.length){
+            selectAll.checked = true;
+        }
+
+        if(countInput && boxes.length){
+            countInput.value = boxes.length;
+        }
+
+        updateSelectedQuestionCount();
+    }, 0);
 
 }
 
@@ -5976,7 +5998,7 @@ function generateAIQuestions(){
 
     fetch(WORKER_URL, {
         method: "POST",
-        headers: { "Content-Type": "text/plain;charset=UTF-8" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: prompt })
     })
     .then(function(response){
