@@ -3234,54 +3234,62 @@
         document.getElementById("questionCorrect").value;
 
 
-    /* ================================
-       KONTROLLI I FUSHAVE
-       ================================ */
+    /* =====================================
+       VALIDIMI
+       ===================================== */
 
     if (!subject) {
-        alert("Ju lutem zgjidhni lëndën.");
+        alert("Zgjidhni lëndën.");
         return;
     }
 
     if (!grade) {
-        alert("Ju lutem zgjidhni klasën.");
+        alert("Zgjidhni klasën.");
         return;
     }
 
     if (!question) {
-        alert("Ju lutem shkruani pyetjen.");
+        alert("Shkruani pyetjen.");
         return;
     }
 
     if (!optionA || !optionB || !optionC || !optionD) {
-        alert("Ju lutem plotësoni të gjitha alternativat A, B, C dhe D.");
+        alert("Plotësoni të gjitha alternativat.");
         return;
     }
 
 
-    /* ================================
-       MERR BANKËN
-       ================================ */
+    /* =====================================
+       MERR PYETJET NGA BANKA
+       ===================================== */
 
     let questions = getBankQuestions();
 
 
-    /* ================================
-       KONTROLLO NËSE JEMI DUKE NDRYSHUAR
-       ================================ */
+    /* =====================================
+       GJEJ BUTONIN RUAJ
+       ===================================== */
 
     const saveButton =
         document.querySelector(
             "#questionFormContainer button[onclick='saveQuestion()']"
         );
 
+
+    /* =====================================
+       KONTROLLO NËSE JEMI DUKE EDITUAR
+       ===================================== */
+
     const editingId =
-        saveButton?.dataset.editingId || "";
+        saveButton &&
+        saveButton.dataset.editingId
+            ? saveButton.dataset.editingId
+            : "";
 
 
-    /* ================================
+    /* =====================================
        NDRYSHO PYETJEN EKZISTUESE
-       ================================ */
+       ===================================== */
 
     if (editingId) {
 
@@ -3300,32 +3308,29 @@
 
                 ...questions[index],
 
-                subject:
-                    subject,
+                subject: subject,
 
-                grade:
-                    grade,
+                grade: grade,
 
-                topic:
-                    topic,
+                topic: topic,
 
-                difficulty:
-                    difficulty,
+                difficulty: difficulty,
 
-                question:
-                    question,
+                question: question,
 
                 options: {
 
                     A: optionA,
+
                     B: optionB,
+
                     C: optionC,
+
                     D: optionD
 
                 },
 
-                correct:
-                    correct
+                correct: correct
 
             };
 
@@ -3333,27 +3338,24 @@
             saveBankQuestions(questions);
 
 
-            delete saveButton.dataset.editingId;
+            /* Rivendos gjendjen e butonit */
 
-            saveButton.textContent =
-                "💾 Ruaj pyetjen";
+            if (saveButton) {
 
+                delete saveButton.dataset.editingId;
 
-            const cancelButton =
-                document.querySelector(
-                    "#questionFormContainer button[onclick='clearQuestionForm()']"
-                );
-
-            if (cancelButton) {
-
-                cancelButton.textContent =
-                    "✖ Anulo";
+                saveButton.textContent =
+                    "💾 Ruaj pyetjen";
 
             }
 
 
+            /* Pastro formularin */
+
             clearQuestionForm();
 
+
+            /* Fshi formularin nga pamja */
 
             const form =
                 document.getElementById(
@@ -3361,9 +3363,13 @@
                 );
 
             if (form) {
+
                 form.style.display = "none";
+
             }
 
+
+            /* Rifresko bankën */
 
             displayQuestionBank();
 
@@ -3379,9 +3385,9 @@
     }
 
 
-    /* ================================
-       SHTO PYETJE TË RE
-       ================================ */
+    /* =====================================
+       KRIJO PYETJE TË RE
+       ===================================== */
 
     const newQuestion = {
 
@@ -3406,8 +3412,11 @@
         options: {
 
             A: optionA,
+
             B: optionB,
+
             C: optionC,
+
             D: optionD
 
         },
@@ -3421,22 +3430,44 @@
     };
 
 
+    /* =====================================
+       SHTO PYETJEN E RE NË BANKË
+       ===================================== */
+
     questions.push(newQuestion);
 
 
-    /* ================================
-       RUAJ
-       ================================ */
+    /* =====================================
+       RUAJE BANKËN
+       ===================================== */
 
     saveBankQuestions(questions);
 
 
-    /* ================================
+    /* =====================================
+       RIVENDOS BUTONIN
+       ===================================== */
+
+    if (saveButton) {
+
+        delete saveButton.dataset.editingId;
+
+        saveButton.textContent =
+            "💾 Ruaj pyetjen";
+
+    }
+
+
+    /* =====================================
        PASTRO FORMULARIN
-       ================================ */
+       ===================================== */
 
     clearQuestionForm();
 
+
+    /* =====================================
+       MBYLL FORMULARIN
+       ===================================== */
 
     const form =
         document.getElementById(
@@ -3450,31 +3481,22 @@
     }
 
 
-    /* ================================
+    /* =====================================
        RIFRESKO BANKËN
-       ================================ */
+       ===================================== */
 
     displayQuestionBank();
 
+
+    /* =====================================
+       MESAZHI
+       ===================================== */
 
     alert(
         "✅ Pyetja u shtua me sukses!"
     );
 
 }
-        /* =====================================
-           SHFAQ LISTËN
-           ===================================== */
-
-        displayQuestionBank();
-
-
-        alert(
-            "✅ Pyetja u ruajt me sukses!"
-        );
-
-    }
-
 
     /* =========================================
        PASTRO FORMULARIN
