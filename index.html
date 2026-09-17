@@ -6,6 +6,13 @@
 
 <title>Mësuesi Dixhital</title>
 
+<!-- =========================================================
+     LIBRARIES PËR PDF
+========================================================= -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <style>
 
 /* =========================================================
@@ -834,7 +841,7 @@ button{
 
 
 /* =========================================================
-   KRIJO TEST
+   KRIJO TEST - V1.1
 ========================================================= */
 
 #createTestPage{
@@ -846,7 +853,7 @@ button{
 }
 
 .create-test-header{
-    margin-bottom:22px;
+    margin-bottom:18px;
 }
 
 .create-test-header h1{
@@ -869,7 +876,7 @@ button{
 
 .create-test-grid{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(4,1fr);
     gap:15px;
 }
 
@@ -887,27 +894,58 @@ button{
     border:1px solid #d1d5db;
     border-radius:7px;
     padding:0 10px;
+    background:#fff;
 }
 
 .test-question-selector{
     margin-top:20px;
 }
 
+.selector-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:12px;
+}
+
 .selector-title{
     font-size:15px;
     font-weight:800;
-    margin-bottom:12px;
+}
+
+.available-count{
+    font-size:12px;
+    color:#6b7280;
+}
+
+.available-count strong{
+    color:#2563eb;
 }
 
 .select-all-row{
     display:flex;
     align-items:center;
+    justify-content:space-between;
     gap:8px;
-    padding:10px;
+    padding:10px 12px;
     background:#f8fafc;
     border:1px solid #e5e7eb;
     border-radius:7px;
     margin-bottom:10px;
+}
+
+.select-all-left{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.selected-count{
+    font-size:11px;
+    color:#6b7280;
 }
 
 .test-select-question{
@@ -918,12 +956,23 @@ button{
     display:flex;
     align-items:flex-start;
     gap:10px;
+    transition:.15s;
+}
+
+.test-select-question:hover{
+    border-color:#bfdbfe;
+    background:#f8fbff;
+}
+
+.test-select-question input{
+    margin-top:3px;
 }
 
 .test-select-question label{
     flex:1;
     font-size:13px;
     line-height:1.5;
+    cursor:pointer;
 }
 
 .create-test-actions{
@@ -931,6 +980,8 @@ button{
     justify-content:flex-end;
     gap:10px;
     margin-top:20px;
+    padding-top:18px;
+    border-top:1px solid #f0f0f0;
 }
 
 .primary-button{
@@ -942,6 +993,10 @@ button{
     font-weight:700;
 }
 
+.primary-button:hover{
+    background:#1d4ed8;
+}
+
 .secondary-button{
     border:1px solid #d1d5db;
     background:#fff;
@@ -950,9 +1005,22 @@ button{
     font-weight:700;
 }
 
+.secondary-button:hover{
+    background:#f8fafc;
+}
+
+.danger-button{
+    border:1px solid #fecaca;
+    background:#fff;
+    color:#b91c1c;
+    padding:12px 20px;
+    border-radius:8px;
+    font-weight:700;
+}
+
 
 /* =========================================================
-   TESTI I GJENERUAR
+   TESTI I GJENERUAR - V1.1
 ========================================================= */
 
 #generatedTestPage{
@@ -960,75 +1028,184 @@ button{
 }
 
 .generated-test-wrapper{
-    padding:28px;
+    padding:24px;
 }
 
 .generated-test-actions{
+    max-width:850px;
+    margin:0 auto 16px;
     display:flex;
     justify-content:flex-end;
-    gap:10px;
-    margin-bottom:20px;
+    flex-wrap:wrap;
+    gap:8px;
 }
 
 .generated-test-paper{
     max-width:850px;
     margin:auto;
     background:#fff;
-    padding:40px;
+    padding:28px 36px;
     border:1px solid #e5e7eb;
     box-shadow:0 8px 25px rgba(15,23,42,.06);
 }
 
 .test-header{
-    border:2px solid #111827;
-    padding:18px;
-    margin-bottom:25px;
+    border:1.5px solid #111827;
+    padding:12px 15px;
+    margin-bottom:18px;
+}
+
+.test-header-brand{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:5px;
+}
+
+.test-header-brand-left{
+    font-size:12px;
+    font-weight:800;
+}
+
+.test-header-brand-right{
+    font-size:10px;
+    color:#4b5563;
 }
 
 .test-header h1{
     text-align:center;
-    font-size:22px;
-    margin-bottom:16px;
+    font-size:20px;
+    margin:3px 0 10px;
 }
 
 .test-info{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:8px 30px;
-    font-size:13px;
+    gap:5px 25px;
+    font-size:11.5px;
+    line-height:1.35;
+}
+
+.test-info-line{
+    white-space:nowrap;
 }
 
 .generated-test-question{
-    margin-bottom:24px;
+    margin-bottom:14px;
     page-break-inside:avoid;
+    break-inside:avoid;
 }
 
 .generated-test-question-text{
-    font-size:14px;
+    font-size:12.5px;
     font-weight:700;
-    line-height:1.5;
-    margin-bottom:10px;
+    line-height:1.4;
+    margin-bottom:5px;
 }
 
 .generated-test-options{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:7px 20px;
+    column-gap:35px;
+    row-gap:2px;
+    padding-left:3px;
 }
 
 .generated-test-option{
-    font-size:13px;
-    line-height:1.5;
-    padding:4px 0;
+    font-size:11.5px;
+    line-height:1.35;
+    padding:1px 0;
 }
 
 .test-footer{
-    margin-top:30px;
+    margin-top:18px;
     border-top:1px solid #d1d5db;
-    padding-top:12px;
-    font-size:11px;
+    padding-top:7px;
+    font-size:9px;
     text-align:center;
     color:#6b7280;
+}
+
+
+/* =========================================================
+   TESTET E RUAJTURA
+========================================================= */
+
+.saved-tests-panel{
+    max-width:850px;
+    margin:20px auto 0;
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:20px;
+}
+
+.saved-tests-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:14px;
+}
+
+.saved-tests-title h3{
+    font-size:16px;
+}
+
+.saved-tests-list{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.saved-test-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:12px;
+    border:1px solid #e5e7eb;
+    border-radius:8px;
+    background:#f8fafc;
+}
+
+.saved-test-info{
+    min-width:0;
+}
+
+.saved-test-info strong{
+    display:block;
+    font-size:13px;
+    margin-bottom:3px;
+}
+
+.saved-test-info span{
+    font-size:11px;
+    color:#6b7280;
+}
+
+.saved-test-actions{
+    display:flex;
+    gap:6px;
+}
+
+.saved-test-open,
+.saved-test-delete{
+    border:0;
+    border-radius:6px;
+    padding:7px 10px;
+    font-size:11px;
+    font-weight:700;
+}
+
+.saved-test-open{
+    background:#eff6ff;
+    color:#1d4ed8;
+}
+
+.saved-test-delete{
+    background:#fef2f2;
+    color:#b91c1c;
 }
 
 
@@ -1054,6 +1231,13 @@ button{
    RESPONSIVE
 ========================================================= */
 
+@media(max-width:1000px){
+
+    .create-test-grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
 @media(max-width:900px){
 
     .hero{
@@ -1077,9 +1261,6 @@ button{
         grid-template-columns:1fr 1fr;
     }
 
-    .create-test-grid{
-        grid-template-columns:1fr 1fr;
-    }
 }
 
 @media(max-width:650px){
@@ -1152,18 +1333,27 @@ button{
     .generated-test-paper{
         padding:20px;
     }
+
+    .test-info{
+        grid-template-columns:1fr;
+    }
+
+    .saved-test-item{
+        flex-direction:column;
+        align-items:flex-start;
+    }
 }
 
 
 /* =========================================================
-   PRINTIMI FINAL
+   PRINTIMI A4 - SHUME KOMPAKT
 ========================================================= */
 
 @media print{
 
     @page{
         size:A4;
-        margin:15mm;
+        margin:9mm 11mm 10mm 11mm;
     }
 
     html,
@@ -1171,6 +1361,7 @@ button{
         background:#fff !important;
         margin:0 !important;
         padding:0 !important;
+        width:100% !important;
     }
 
     body *{
@@ -1197,7 +1388,8 @@ button{
         margin:0 !important;
     }
 
-    .generated-test-actions{
+    .generated-test-actions,
+    .saved-tests-panel{
         display:none !important;
     }
 
@@ -1213,38 +1405,63 @@ button{
     }
 
     .test-header{
-        border:2px solid #000 !important;
-        padding:15px !important;
-        margin-bottom:20px !important;
+        border:1.5px solid #000 !important;
+        padding:7px 10px !important;
+        margin-bottom:11px !important;
+    }
+
+    .test-header-brand{
+        margin-bottom:2px !important;
+    }
+
+    .test-header-brand-left{
+        font-size:9px !important;
+    }
+
+    .test-header-brand-right{
+        font-size:8px !important;
     }
 
     .test-header h1{
-        font-size:20px !important;
-        margin-bottom:14px !important;
+        font-size:15px !important;
+        margin:1px 0 6px !important;
     }
 
     .test-info{
-        font-size:12px !important;
+        font-size:9.5px !important;
+        gap:2px 15px !important;
+        line-height:1.25 !important;
     }
 
     .generated-test-question{
+        margin-bottom:8px !important;
         page-break-inside:avoid !important;
         break-inside:avoid !important;
-        margin-bottom:18px !important;
     }
 
     .generated-test-question-text{
-        font-size:12.5px !important;
-        line-height:1.45 !important;
+        font-size:10.5px !important;
+        line-height:1.25 !important;
+        margin-bottom:3px !important;
+    }
+
+    .generated-test-options{
+        grid-template-columns:1fr 1fr !important;
+        column-gap:25px !important;
+        row-gap:0 !important;
+        padding-left:3px !important;
     }
 
     .generated-test-option{
-        font-size:11.5px !important;
-        line-height:1.4 !important;
+        font-size:9.5px !important;
+        line-height:1.2 !important;
+        padding:0 !important;
     }
 
     .test-footer{
-        font-size:9px !important;
+        margin-top:9px !important;
+        padding-top:4px !important;
+        font-size:7px !important;
     }
 }
 
@@ -1573,6 +1790,12 @@ button{
                 </button>
 
                 <button
+                    onclick="openSavedTests()"
+                >
+                    📂 Testet e ruajtura
+                </button>
+
+                <button
                     onclick="openQuizzes()"
                 >
                     🧩 Kuize
@@ -1657,7 +1880,7 @@ button{
                         </strong>
 
                         <span>
-                            Teste të krijuara
+                            Teste të ruajtura
                         </span>
                     </div>
 
@@ -1808,6 +2031,10 @@ button{
                     📝 Krijo test
                 </button>
 
+                <button onclick="openSavedTests()">
+                    📂 Testet e ruajtura
+                </button>
+
                 <button onclick="openQuizzes()">
                     🧩 Kuize
                 </button>
@@ -1900,8 +2127,6 @@ button{
 
                 </div>
 
-
-                <!-- FORMULARI -->
 
                 <div id="questionFormContainer">
 
@@ -2162,8 +2387,6 @@ button{
                 </div>
 
 
-                <!-- FILTRAT -->
-
                 <div class="question-bank-toolbar">
 
                     <input
@@ -2320,6 +2543,10 @@ button{
                     📝 Krijo test
                 </button>
 
+                <button onclick="openSavedTests()">
+                    📂 Testet e ruajtura
+                </button>
+
                 <button onclick="openQuizzes()">
                     🧩 Kuize
                 </button>
@@ -2346,10 +2573,15 @@ button{
                 </h2>
 
                 <div class="teacher-profile">
-                    <div class="teacher-avatar">M</div>
+
+                    <div class="teacher-avatar">
+                        M
+                    </div>
+
                     <span id="createTestTeacherName">
                         Mësues
                     </span>
+
                 </div>
 
             </div>
@@ -2364,8 +2596,8 @@ button{
                     </h1>
 
                     <p>
-                        Zgjidhni pyetjet nga banka dhe krijoni
-                        një test të gatshëm për printim.
+                        Zgjidhni kriteret, përzgjidhni pyetjet
+                        dhe krijoni testin tuaj.
                     </p>
 
                 </div>
@@ -2381,7 +2613,10 @@ button{
                                 Lënda
                             </label>
 
-                            <select id="testSubject">
+                            <select
+                                id="testSubject"
+                                onchange="loadTestQuestionList()"
+                            >
 
                                 <option value="">
                                     Të gjitha
@@ -2418,7 +2653,10 @@ button{
                                 Klasa
                             </label>
 
-                            <select id="testGrade">
+                            <select
+                                id="testGrade"
+                                onchange="loadTestQuestionList()"
+                            >
 
                                 <option value="">
                                     Të gjitha
@@ -2448,6 +2686,38 @@ button{
                         <div class="create-test-group">
 
                             <label>
+                                Vështirësia
+                            </label>
+
+                            <select
+                                id="testDifficulty"
+                                onchange="loadTestQuestionList()"
+                            >
+
+                                <option value="">
+                                    Të gjitha
+                                </option>
+
+                                <option value="I lehtë">
+                                    I lehtë
+                                </option>
+
+                                <option value="Mesatar">
+                                    Mesatar
+                                </option>
+
+                                <option value="I vështirë">
+                                    I vështirë
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="create-test-group">
+
+                            <label>
                                 Numri i pyetjeve
                             </label>
 
@@ -2456,6 +2726,7 @@ button{
                                 id="testQuestionCount"
                                 min="1"
                                 value="10"
+                                oninput="updateSelectedQuestionCount()"
                             >
 
                         </div>
@@ -2465,21 +2736,44 @@ button{
 
                     <div class="test-question-selector">
 
-                        <div class="selector-title">
-                            Zgjidh pyetjet
+                        <div class="selector-top">
+
+                            <div class="selector-title">
+                                Zgjidh pyetjet
+                            </div>
+
+                            <div class="available-count">
+                                Të disponueshme:
+                                <strong id="availableQuestionCount">
+                                    0
+                                </strong>
+                            </div>
+
                         </div>
+
 
                         <div class="select-all-row">
 
-                            <input
-                                type="checkbox"
-                                id="selectAllQuestions"
-                                onchange="toggleAllTestQuestions()"
-                            >
+                            <div class="select-all-left">
 
-                            <label for="selectAllQuestions">
-                                Zgjidh të gjitha pyetjet e shfaqura
-                            </label>
+                                <input
+                                    type="checkbox"
+                                    id="selectAllQuestions"
+                                    onchange="toggleAllTestQuestions()"
+                                >
+
+                                <label for="selectAllQuestions">
+                                    Zgjidh të gjitha
+                                </label>
+
+                            </div>
+
+                            <div
+                                class="selected-count"
+                                id="selectedQuestionCount"
+                            >
+                                0 të zgjedhura
+                            </div>
 
                         </div>
 
@@ -2538,10 +2832,38 @@ button{
             </button>
 
             <button
+                class="secondary-button"
+                onclick="saveCurrentGeneratedTest()"
+            >
+                💾 Ruaj testin
+            </button>
+
+            <button
+                class="secondary-button"
+                onclick="downloadWord()"
+            >
+                📝 Word
+            </button>
+
+            <button
+                class="secondary-button"
+                onclick="downloadPDF()"
+            >
+                📄 PDF
+            </button>
+
+            <button
                 class="primary-button"
                 onclick="printGeneratedTest()"
             >
-                🖨️ Printo Testin
+                🖨️ Printo
+            </button>
+
+            <button
+                class="secondary-button"
+                onclick="openSavedTests()"
+            >
+                📂 Testet e ruajtura
             </button>
 
         </div>
@@ -2551,6 +2873,35 @@ button{
             id="generatedTestContent"
             class="generated-test-paper"
         ></div>
+
+
+        <div
+            id="savedTestsPanel"
+            class="saved-tests-panel"
+        >
+
+            <div class="saved-tests-title">
+
+                <h3>
+                    📂 Testet e ruajtura
+                </h3>
+
+                <button
+                    class="secondary-button"
+                    onclick="refreshSavedTests()"
+                    style="padding:7px 10px;font-size:11px;"
+                >
+                    Rifresko
+                </button>
+
+            </div>
+
+            <div
+                id="savedTestsList"
+                class="saved-tests-list"
+            ></div>
+
+        </div>
 
     </div>
 
@@ -2733,6 +3084,37 @@ function updateTeacherInfo(){
 }
 
 
+function getSavedTests(){
+
+    const saved =
+        localStorage.getItem(
+            "mesuesiDixhitalTests"
+        );
+
+    if(!saved){
+        return [];
+    }
+
+    try{
+
+        const parsed =
+            JSON.parse(saved);
+
+        return Array.isArray(parsed)
+            ? parsed
+            : [];
+
+    }catch(error){
+
+        console.error(error);
+
+        return [];
+
+    }
+
+}
+
+
 function updateDashboardStats(){
 
     const questions =
@@ -2754,16 +3136,12 @@ function updateDashboardStats(){
             questions.length;
     }
 
-    const tests =
-        JSON.parse(
-            localStorage.getItem(
-                "mesuesiDixhitalTests"
-            ) || "[]"
-        );
 
     if(statTests){
+
         statTests.textContent =
-            tests.length;
+            getSavedTests().length;
+
     }
 
 }
@@ -3036,8 +3414,6 @@ function saveQuestion(){
             : "";
 
 
-    /* EDITIM */
-
     if(editingId){
 
         const index =
@@ -3100,8 +3476,6 @@ function saveQuestion(){
 
     }
 
-
-    /* PYETJE E RE */
 
     const newQuestion = {
 
@@ -3572,7 +3946,7 @@ function editQuestion(id){
 
 
 /* =========================================================
-   FSHI
+   FSHI PYETJE
 ========================================================= */
 
 function deleteQuestion(id){
@@ -3612,7 +3986,7 @@ function deleteQuestion(id){
 
 
 /* =========================================================
-   STATISTIKAT
+   STATISTIKAT E BANKËS
 ========================================================= */
 
 function updateQuestionBankStats(){
@@ -3650,28 +4024,46 @@ function updateQuestionBankStats(){
         });
 
 
-    document.getElementById(
-        "bankStatTotal"
-    ).textContent =
-        questions.length;
+    const total =
+        document.getElementById(
+            "bankStatTotal"
+        );
+
+    const subjectCount =
+        document.getElementById(
+            "bankStatSubjects"
+        );
+
+    const gradeCount =
+        document.getElementById(
+            "bankStatGrades"
+        );
+
+    const hardCount =
+        document.getElementById(
+            "bankStatHard"
+        );
 
 
-    document.getElementById(
-        "bankStatSubjects"
-    ).textContent =
-        subjects.size;
+    if(total){
+        total.textContent =
+            questions.length;
+    }
 
+    if(subjectCount){
+        subjectCount.textContent =
+            subjects.size;
+    }
 
-    document.getElementById(
-        "bankStatGrades"
-    ).textContent =
-        grades.size;
+    if(gradeCount){
+        gradeCount.textContent =
+            grades.size;
+    }
 
-
-    document.getElementById(
-        "bankStatHard"
-    ).textContent =
-        hard.length;
+    if(hardCount){
+        hardCount.textContent =
+            hard.length;
+    }
 
 }
 
@@ -3703,6 +4095,11 @@ function loadTestQuestionList(){
         );
 
 
+    if(!container){
+        return;
+    }
+
+
     const subject =
         document.getElementById(
             "testSubject"
@@ -3712,6 +4109,12 @@ function loadTestQuestionList(){
     const grade =
         document.getElementById(
             "testGrade"
+        ).value;
+
+
+    const difficulty =
+        document.getElementById(
+            "testDifficulty"
         ).value;
 
 
@@ -3733,9 +4136,44 @@ function loadTestQuestionList(){
                 String(grade);
 
 
-            return subjectOK && gradeOK;
+            const difficultyOK =
+                !difficulty ||
+                item.difficulty ===
+                difficulty;
+
+
+            return(
+                subjectOK &&
+                gradeOK &&
+                difficultyOK
+            );
 
         });
+
+
+    const available =
+        document.getElementById(
+            "availableQuestionCount"
+        );
+
+
+    if(available){
+
+        available.textContent =
+            questions.length;
+
+    }
+
+
+    const selectAll =
+        document.getElementById(
+            "selectAllQuestions"
+        );
+
+
+    if(selectAll){
+        selectAll.checked = false;
+    }
 
 
     if(questions.length === 0){
@@ -3755,6 +4193,8 @@ function loadTestQuestionList(){
             </div>
 
         `;
+
+        updateSelectedQuestionCount();
 
         return;
     }
@@ -3778,6 +4218,7 @@ function loadTestQuestionList(){
                 type="checkbox"
                 class="test-question-checkbox"
                 value="${escapeAttribute(item.id)}"
+                onchange="updateSelectedQuestionCount()"
             >
 
             <label>
@@ -3805,35 +4246,23 @@ function loadTestQuestionList(){
     });
 
 
-    document.getElementById(
-        "selectAllQuestions"
-    ).checked = false;
+    updateSelectedQuestionCount();
 
 }
 
 
-document.getElementById(
-    "testSubject"
-).addEventListener(
-    "change",
-    loadTestQuestionList
-);
-
-
-document.getElementById(
-    "testGrade"
-).addEventListener(
-    "change",
-    loadTestQuestionList
-);
-
-
 function toggleAllTestQuestions(){
 
-    const checked =
+    const selectAll =
         document.getElementById(
             "selectAllQuestions"
-        ).checked;
+        );
+
+
+    const checked =
+        selectAll
+            ? selectAll.checked
+            : false;
 
 
     document
@@ -3846,6 +4275,95 @@ function toggleAllTestQuestions(){
                 checked;
 
         });
+
+
+    updateSelectedQuestionCount();
+
+}
+
+
+function updateSelectedQuestionCount(){
+
+    const selected =
+        document.querySelectorAll(
+            ".test-question-checkbox:checked"
+        ).length;
+
+
+    const selectedCount =
+        document.getElementById(
+            "selectedQuestionCount"
+        );
+
+
+    if(selectedCount){
+
+        selectedCount.textContent =
+            selected + " të zgjedhura";
+
+    }
+
+
+    const all =
+        document.querySelectorAll(
+            ".test-question-checkbox"
+        );
+
+
+    const selectAll =
+        document.getElementById(
+            "selectAllQuestions"
+        );
+
+
+    if(
+        selectAll &&
+        all.length > 0
+    ){
+
+        selectAll.checked =
+            selected === all.length;
+
+    }
+
+}
+
+
+/* =========================================================
+   SHUFFLE
+========================================================= */
+
+function shuffleArray(array){
+
+    const result =
+        [...array];
+
+
+    for(
+        let i = result.length - 1;
+        i > 0;
+        i--
+    ){
+
+        const j =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+
+        [
+            result[i],
+            result[j]
+        ] =
+        [
+            result[j],
+            result[i]
+        ];
+
+    }
+
+
+    return result;
 
 }
 
@@ -3891,7 +4409,38 @@ function generateTestFromBank(){
         );
 
 
-    let questions =
+    if(
+        !requested ||
+        requested < 1
+    ){
+
+        alert(
+            "Vendosni një numër të vlefshëm pyetjesh."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        requested > selected.length
+    ){
+
+        alert(
+            "Numri i kërkuar i pyetjeve (" +
+            requested +
+            ") është më i madh se numri i pyetjeve të zgjedhura (" +
+            selected.length +
+            ")."
+        );
+
+        return;
+
+    }
+
+
+    const questions =
         getBankQuestions();
 
 
@@ -3905,37 +4454,19 @@ function generateTestFromBank(){
         });
 
 
-    if(
-        requested > 0 &&
-        selectedQuestions.length > requested
-    ){
-
-        selectedQuestions =
-            selectedQuestions
-                .sort(
-                    function(){
-                        return Math.random() - .5;
-                    }
-                )
-                .slice(
-                    0,
-                    requested
-                );
-
-    }
-
-
-    /* Përziej pyetjet */
-
     selectedQuestions =
-        selectedQuestions.sort(
-            function(){
-                return Math.random() - .5;
-            }
+        shuffleArray(
+            selectedQuestions
+        )
+        .slice(
+            0,
+            requested
         );
 
 
-    /* Përziej alternativat */
+    /* =====================================================
+       PËRZIERJA E ALTERNATIVAVE
+    ===================================================== */
 
     selectedQuestions =
         selectedQuestions.map(
@@ -3950,25 +4481,28 @@ function generateTestFromBank(){
                         function(letter){
 
                             return {
+
                                 letter:letter,
+
                                 text:
                                     item.options[
                                         letter
                                     ],
+
                                 correct:
                                     letter ===
                                     item.correct
+
                             };
 
                         }
                     );
 
 
-                pairs.sort(
-                    function(){
-                        return Math.random() - .5;
-                    }
-                );
+                const shuffledPairs =
+                    shuffleArray(
+                        pairs
+                    );
 
 
                 const newOptions = {};
@@ -3977,7 +4511,7 @@ function generateTestFromBank(){
                     "A";
 
 
-                pairs.forEach(
+                shuffledPairs.forEach(
                     function(pair,index){
 
                         const newLetter =
@@ -4033,6 +4567,12 @@ function generateTestFromBank(){
         ).value;
 
 
+    const testDifficulty =
+        document.getElementById(
+            "testDifficulty"
+        ).value;
+
+
     window.generatedTestInfo = {
 
         subject:
@@ -4043,15 +4583,20 @@ function generateTestFromBank(){
                 ? "Klasa " + testGrade
                 : "Të gjitha klasat",
 
+        difficulty:
+            testDifficulty || "Të gjitha",
+
         date:
             new Date().toLocaleDateString(
                 "sq-AL"
-            )
+            ),
+
+        teacher:
+            localStorage.getItem(
+                "mesuesiDixhitalTeacherName"
+            ) || "Mësues"
 
     };
-
-
-    saveCreatedTest();
 
 
     displayGeneratedTest();
@@ -4063,6 +4608,9 @@ function generateTestFromBank(){
     document.getElementById(
         "generatedTestPage"
     ).style.display = "block";
+
+
+    refreshSavedTests();
 
 }
 
@@ -4130,30 +4678,44 @@ function displayGeneratedTest(){
 
         <div class="test-header">
 
+            <div class="test-header-brand">
+
+                <div class="test-header-brand-left">
+                    📚 MËSUESI DIXHITAL
+                </div>
+
+                <div class="test-header-brand-right">
+                    TEST I NJOHURIVE
+                </div>
+
+            </div>
+
+
             <h1>
                 TEST I NJOHURIVE
             </h1>
 
+
             <div class="test-info">
 
-                <div>
+                <div class="test-info-line">
                     <strong>Lënda:</strong>
                     ${escapeHTML(info.subject || "")}
                 </div>
 
-                <div>
+                <div class="test-info-line">
                     <strong>Klasa:</strong>
                     ${escapeHTML(info.grade || "")}
                 </div>
 
-                <div>
+                <div class="test-info-line">
                     <strong>Emri:</strong>
-                    ______________________________
+                    __________________________________
                 </div>
 
-                <div>
+                <div class="test-info-line">
                     <strong>Data:</strong>
-                    ${escapeHTML(info.date || "")}
+                    __________________________________
                 </div>
 
             </div>
@@ -4165,6 +4727,10 @@ function displayGeneratedTest(){
 
     questions.forEach(
         function(item,index){
+
+            const options =
+                item.options || {};
+
 
             html += `
 
@@ -4181,23 +4747,23 @@ function displayGeneratedTest(){
                     <div class="generated-test-options">
 
                         <div class="generated-test-option">
-                            A)
-                            ${escapeHTML(item.options.A)}
+                            <strong>A)</strong>
+                            ${escapeHTML(options.A)}
                         </div>
 
                         <div class="generated-test-option">
-                            B)
-                            ${escapeHTML(item.options.B)}
+                            <strong>B)</strong>
+                            ${escapeHTML(options.B)}
                         </div>
 
                         <div class="generated-test-option">
-                            C)
-                            ${escapeHTML(item.options.C)}
+                            <strong>C)</strong>
+                            ${escapeHTML(options.C)}
                         </div>
 
                         <div class="generated-test-option">
-                            D)
-                            ${escapeHTML(item.options.D)}
+                            <strong>D)</strong>
+                            ${escapeHTML(options.D)}
                         </div>
 
                     </div>
@@ -4221,6 +4787,362 @@ function displayGeneratedTest(){
 
     container.innerHTML =
         html;
+
+}
+
+
+/* =========================================================
+   RUAJ TESTIN
+========================================================= */
+
+function saveCurrentGeneratedTest(){
+
+    if(
+        !window.generatedTest ||
+        !window.generatedTest.length
+    ){
+
+        alert(
+            "Nuk ka test për t'u ruajtur."
+        );
+
+        return;
+
+    }
+
+
+    const tests =
+        getSavedTests();
+
+
+    const info =
+        window.generatedTestInfo || {};
+
+
+    const newTest = {
+
+        id:
+            Date.now().toString(),
+
+        createdAt:
+            new Date().toISOString(),
+
+        subject:
+            info.subject || "",
+
+        grade:
+            info.grade || "",
+
+        difficulty:
+            info.difficulty || "",
+
+        date:
+            info.date || "",
+
+        teacher:
+            info.teacher || "",
+
+        questions:
+            JSON.parse(
+                JSON.stringify(
+                    window.generatedTest
+                )
+            )
+
+    };
+
+
+    tests.unshift(
+        newTest
+    );
+
+
+    localStorage.setItem(
+        "mesuesiDixhitalTests",
+        JSON.stringify(tests)
+    );
+
+
+    updateDashboardStats();
+
+    refreshSavedTests();
+
+
+    alert(
+        "✅ Testi u ruajt me sukses!"
+    );
+
+}
+
+
+/* =========================================================
+   LISTA E TESTEVE TË RUAJTURA
+========================================================= */
+
+function openSavedTests(){
+
+    hideAllPages();
+
+    document.getElementById(
+        "generatedTestPage"
+    ).style.display = "block";
+
+    updateTeacherInfo();
+
+    refreshSavedTests();
+
+
+    const panel =
+        document.getElementById(
+            "savedTestsPanel"
+        );
+
+
+    if(panel){
+
+        panel.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
+
+    }
+
+}
+
+
+function refreshSavedTests(){
+
+    const container =
+        document.getElementById(
+            "savedTestsList"
+        );
+
+
+    if(!container){
+        return;
+    }
+
+
+    const tests =
+        getSavedTests();
+
+
+    if(tests.length === 0){
+
+        container.innerHTML = `
+
+            <div style="
+                text-align:center;
+                padding:25px;
+                color:#6b7280;
+                font-size:12px;
+            ">
+                Nuk ka teste të ruajtura ende.
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    let html = "";
+
+
+    tests.forEach(function(test,index){
+
+        const number =
+            test.questions?.length || 0;
+
+
+        const created =
+            test.createdAt
+                ?
+                new Date(
+                    test.createdAt
+                ).toLocaleDateString(
+                    "sq-AL"
+                )
+                :
+                "";
+
+
+        html += `
+
+            <div class="saved-test-item">
+
+                <div class="saved-test-info">
+
+                    <strong>
+                        ${escapeHTML(
+                            test.subject ||
+                            "Test"
+                        )}
+                        —
+                        ${escapeHTML(
+                            test.grade || ""
+                        )}
+                    </strong>
+
+                    <span>
+                        ${number} pyetje
+                        ·
+                        ${escapeHTML(created)}
+                        ${
+                            test.difficulty
+                            ?
+                            " · " +
+                            escapeHTML(
+                                test.difficulty
+                            )
+                            :
+                            ""
+                        }
+                    </span>
+
+                </div>
+
+
+                <div class="saved-test-actions">
+
+                    <button
+                        class="saved-test-open"
+                        onclick="openSavedTest('${escapeAttribute(test.id)}')"
+                    >
+                        👁️ Hap
+                    </button>
+
+                    <button
+                        class="saved-test-delete"
+                        onclick="deleteSavedTest('${escapeAttribute(test.id)}')"
+                    >
+                        🗑️ Fshi
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    container.innerHTML =
+        html;
+
+}
+
+
+function openSavedTest(id){
+
+    const tests =
+        getSavedTests();
+
+
+    const test =
+        tests.find(function(item){
+
+            return String(item.id) ===
+                String(id);
+
+        });
+
+
+    if(!test){
+
+        alert(
+            "Testi nuk u gjet."
+        );
+
+        return;
+
+    }
+
+
+    window.generatedTest =
+        JSON.parse(
+            JSON.stringify(
+                test.questions || []
+            )
+        );
+
+
+    window.generatedTestInfo = {
+
+        subject:
+            test.subject || "",
+
+        grade:
+            test.grade || "",
+
+        difficulty:
+            test.difficulty || "",
+
+        date:
+            test.date ||
+            new Date(
+                test.createdAt
+            ).toLocaleDateString(
+                "sq-AL"
+            ),
+
+        teacher:
+            test.teacher || ""
+
+    };
+
+
+    displayGeneratedTest();
+
+
+    hideAllPages();
+
+
+    document.getElementById(
+        "generatedTestPage"
+    ).style.display = "block";
+
+
+    refreshSavedTests();
+
+}
+
+
+function deleteSavedTest(id){
+
+    if(!confirm(
+        "A jeni të sigurt që dëshironi ta fshini këtë test?"
+    )){
+
+        return;
+
+    }
+
+
+    let tests =
+        getSavedTests();
+
+
+    tests =
+        tests.filter(function(test){
+
+            return String(test.id) !==
+                String(id);
+
+        });
+
+
+    localStorage.setItem(
+        "mesuesiDixhitalTests",
+        JSON.stringify(tests)
+    );
+
+
+    updateDashboardStats();
+
+    refreshSavedTests();
 
 }
 
@@ -4251,44 +5173,502 @@ function printGeneratedTest(){
 
 
 /* =========================================================
-   RUAJ TESTET
+   SHKARKO PDF
 ========================================================= */
 
-function saveCreatedTest(){
+async function downloadPDF(){
 
-    const tests =
-        JSON.parse(
-            localStorage.getItem(
-                "mesuesiDixhitalTests"
-            ) || "[]"
+    if(
+        !window.generatedTest ||
+        !window.generatedTest.length
+    ){
+
+        alert(
+            "Nuk ka test për shkarkim."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !window.html2canvas ||
+        !window.jspdf
+    ){
+
+        alert(
+            "Biblioteka për PDF nuk u ngarkua. Përdorni Printo dhe zgjidhni Save as PDF."
+        );
+
+        return;
+
+    }
+
+
+    const paper =
+        document.getElementById(
+            "generatedTestContent"
         );
 
 
-    tests.push({
+    if(!paper){
+        return;
+    }
 
-        id:
-            Date.now().toString(),
 
-        createdAt:
-            new Date().toISOString(),
+    const actions =
+        document.querySelector(
+            ".generated-test-actions"
+        );
 
-        questions:
-            window.generatedTest.map(
-                function(item){
-                    return item.id;
+
+    const savedPanel =
+        document.getElementById(
+            "savedTestsPanel"
+        );
+
+
+    if(actions){
+        actions.style.display = "none";
+    }
+
+    if(savedPanel){
+        savedPanel.style.display = "none";
+    }
+
+
+    try{
+
+        const canvas =
+            await html2canvas(
+                paper,
+                {
+                    scale:2,
+                    useCORS:true,
+                    backgroundColor:"#ffffff"
                 }
-            )
-
-    });
+            );
 
 
-    localStorage.setItem(
-        "mesuesiDixhitalTests",
-        JSON.stringify(tests)
+        const {
+            jsPDF
+        } =
+            window.jspdf;
+
+
+        const pdf =
+            new jsPDF({
+                orientation:"portrait",
+                unit:"mm",
+                format:"a4"
+            });
+
+
+        const pageWidth =
+            210;
+
+
+        const pageHeight =
+            297;
+
+
+        const margin =
+            8;
+
+
+        const usableWidth =
+            pageWidth -
+            (margin * 2);
+
+
+        const imgWidth =
+            usableWidth;
+
+
+        const imgHeight =
+            canvas.height *
+            imgWidth /
+            canvas.width;
+
+
+        let heightLeft =
+            imgHeight;
+
+
+        let position =
+            margin;
+
+
+        pdf.addImage(
+            canvas.toDataURL("image/png"),
+            "PNG",
+            margin,
+            position,
+            imgWidth,
+            imgHeight
+        );
+
+
+        heightLeft -=
+            pageHeight -
+            margin * 2;
+
+
+        while(heightLeft > 0){
+
+            position =
+                -(imgHeight -
+                heightLeft) +
+                margin;
+
+
+            pdf.addPage();
+
+
+            pdf.addImage(
+                canvas.toDataURL("image/png"),
+                "PNG",
+                margin,
+                position,
+                imgWidth,
+                imgHeight
+            );
+
+
+            heightLeft -=
+                pageHeight -
+                margin * 2;
+
+        }
+
+
+        const info =
+            window.generatedTestInfo || {};
+
+
+        const subject =
+            (info.subject || "Test")
+                .replace(
+                    /[^a-zA-Z0-9À-ž]+/g,
+                    "-"
+                );
+
+
+        pdf.save(
+            "Test-" +
+            subject +
+            "-" +
+            Date.now() +
+            ".pdf"
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            "PDF nuk mund të krijohej. Përdorni butonin Printo dhe zgjidhni Save as PDF."
+        );
+
+    }
+
+
+    if(actions){
+        actions.style.display = "";
+    }
+
+    if(savedPanel){
+        savedPanel.style.display = "";
+    }
+
+}
+
+
+/* =========================================================
+   SHKARKO WORD
+========================================================= */
+
+function downloadWord(){
+
+    if(
+        !window.generatedTest ||
+        !window.generatedTest.length
+    ){
+
+        alert(
+            "Nuk ka test për shkarkim."
+        );
+
+        return;
+
+    }
+
+
+    const info =
+        window.generatedTestInfo || {};
+
+
+    const questions =
+        window.generatedTest || [];
+
+
+    let html = `
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<style>
+
+body{
+    font-family:Arial,sans-serif;
+    margin:25px;
+    color:#111;
+}
+
+.header{
+    border:2px solid #111;
+    padding:12px;
+    margin-bottom:18px;
+}
+
+.brand{
+    font-weight:bold;
+    font-size:12px;
+}
+
+.title{
+    text-align:center;
+    font-size:20px;
+    font-weight:bold;
+    margin:8px 0 12px;
+}
+
+.info{
+    font-size:12px;
+    line-height:1.7;
+}
+
+.question{
+    margin-bottom:16px;
+    page-break-inside:avoid;
+}
+
+.question-text{
+    font-weight:bold;
+    font-size:12px;
+    margin-bottom:6px;
+}
+
+.options{
+    width:100%;
+}
+
+.option-row{
+    width:100%;
+    display:flex;
+}
+
+.option{
+    width:50%;
+    font-size:11px;
+    padding:3px 0;
+}
+
+.footer{
+    border-top:1px solid #aaa;
+    margin-top:20px;
+    padding-top:8px;
+    text-align:center;
+    font-size:9px;
+    color:#666;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+    <div class="brand">
+        MËSUESI DIXHITAL
+    </div>
+
+    <div class="title">
+        TEST I NJOHURIVE
+    </div>
+
+    <div class="info">
+
+        <strong>Lënda:</strong>
+        ${escapeHTML(info.subject || "")}
+        &nbsp;&nbsp;&nbsp;
+
+        <strong>Klasa:</strong>
+        ${escapeHTML(info.grade || "")}
+
+        <br>
+
+        <strong>Emri:</strong>
+        ______________________________________
+
+        &nbsp;&nbsp;
+
+        <strong>Data:</strong>
+        __________________
+
+    </div>
+
+</div>
+
+`;
+
+
+    questions.forEach(
+        function(item,index){
+
+            html += `
+
+<div class="question">
+
+    <div class="question-text">
+
+        ${index + 1}.
+        ${escapeHTML(item.question)}
+
+    </div>
+
+    <div class="options">
+
+        <div class="option-row">
+
+            <div class="option">
+                <strong>A)</strong>
+                ${escapeHTML(item.options.A)}
+            </div>
+
+            <div class="option">
+                <strong>B)</strong>
+                ${escapeHTML(item.options.B)}
+            </div>
+
+        </div>
+
+        <div class="option-row">
+
+            <div class="option">
+                <strong>C)</strong>
+                ${escapeHTML(item.options.C)}
+            </div>
+
+            <div class="option">
+                <strong>D)</strong>
+                ${escapeHTML(item.options.D)}
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+`;
+
+        }
     );
 
 
-    updateDashboardStats();
+    html += `
+
+<div class="footer">
+
+    Mësuesi Dixhital — Test i përgatitur për printim
+
+</div>
+
+</body>
+
+</html>
+
+`;
+
+
+    const blob =
+        new Blob(
+            [
+                "\ufeff",
+                html
+            ],
+            {
+                type:
+                    "application/msword"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    const infoSubject =
+        (info.subject || "Test")
+            .replace(
+                /[^a-zA-Z0-9À-ž]+/g,
+                "-"
+            );
+
+
+    link.href =
+        url;
+
+
+    link.download =
+        "Test-" +
+        infoSubject +
+        "-" +
+        Date.now() +
+        ".doc";
+
+
+    document.body.appendChild(
+        link
+    );
+
+
+    link.click();
+
+
+    document.body.removeChild(
+        link
+    );
+
+
+    setTimeout(
+        function(){
+
+            URL.revokeObjectURL(
+                url
+            );
+
+        },
+        1000
+    );
 
 }
 
@@ -4364,6 +5744,8 @@ document.addEventListener(
         updateDashboardStats();
 
         displayQuestionBank();
+
+        refreshSavedTests();
 
     }
 );
