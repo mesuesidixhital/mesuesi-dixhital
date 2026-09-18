@@ -3127,9 +3127,11 @@ button{
 function hideAllPages(){
 
     const pages = [
+        "app",
         "loginPage",
         "dashboardPage",
         "questionBankPage",
+        "aiGeneratorPage",
         "createTestPage",
         "generatedTestPage"
     ];
@@ -4616,12 +4618,30 @@ function generateTestFromBank(){
 
     if(selected.length === 0){
 
-        alert(
-            "Zgjidhni të paktën një pyetje."
-        );
+        const availableBoxes =
+            Array.from(document.querySelectorAll(".test-question-checkbox"));
 
+        const requestedValue =
+            parseInt(document.getElementById("testQuestionCount")?.value, 10) || 0;
+
+        if(availableBoxes.length && requestedValue > 0){
+            availableBoxes.slice(0, requestedValue).forEach(function(box){
+                box.checked = true;
+            });
+        }
+
+    }
+
+    const selectedAfterAuto =
+        Array.from(
+            document.querySelectorAll(".test-question-checkbox:checked")
+        ).map(function(box){
+            return String(box.value);
+        });
+
+    if(selectedAfterAuto.length === 0){
+        alert("Nuk ka pyetje të disponueshme për këtë test.");
         return;
-
     }
 
 
@@ -4649,7 +4669,7 @@ function generateTestFromBank(){
 
 
     if(
-        requested > selected.length
+        requested > selectedAfterAuto.length
     ){
 
         alert(
@@ -4672,7 +4692,7 @@ function generateTestFromBank(){
     let selectedQuestions =
         questions.filter(function(item){
 
-            return selected.includes(
+            return selectedAfterAuto.includes(
                 String(item.id)
             );
 
