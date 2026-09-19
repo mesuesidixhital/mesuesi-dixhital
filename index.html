@@ -3512,13 +3512,20 @@ class="quiz-settings-card">
 
 <label>Numri i pyetjeve</label>
 
-<select id="quizQuestionCount">
+<div class="quiz-setting-group">
 
-<option value="5">5 pyetje</option>
-<option value="10" selected>10 pyetje</option>
-<option value="15">15 pyetje</option>
-<option value="20">20 pyetje</option>
+<label for="quizTimePerQuestion">
+⏱️ Koha për çdo pyetje
+</label>
 
+<select id="quizTimePerQuestion">
+
+<option value="15">15 sekonda</option>
+<option value="30" selected>30 sekonda</option>
+<option value="45">45 sekonda</option>
+<option value="60">60 sekonda</option>
+<option value="90">90 sekonda</option>
+    
 </select>
 
 </div>
@@ -3558,7 +3565,13 @@ Pyetja 1 nga 10
 <span id="quizScoreText">
 Pikët: 0
 </span>
-
+    
+<span
+id="quizTimer"
+class="quiz-timer">
+⏱️ 30 sekonda
+</span>
+    
 </div>
 
 <div class="quiz-progress-bar">
@@ -4961,7 +4974,12 @@ function generateTestFromBank(){
             ).value
         ) || 0;
 
-
+const timePerQuestion =
+    parseInt(
+        document.getElementById(
+            "quizTimePerQuestion"
+        ).value
+    ) || 30;
     if(requested < 1){
 
         alert(
@@ -5768,7 +5786,283 @@ function downloadWord(){
             margin-left:20px;
             margin-bottom:4px;
         }
+/* =========================================================
+   MËSUESI DIXHITAL – CSS SHTESË PËR KUIZIN
+   ========================================================= */
 
+.quiz-top-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.quiz-timer {
+    min-width: 150px;
+    text-align: center;
+    background: #f3f4f6;
+    color: #111827;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-weight: 700;
+    font-size: 16px;
+    border: 1px solid #d1d5db;
+}
+
+.quiz-timer.warning {
+    background: #fff3cd;
+    color: #856404;
+    border-color: #ffe69c;
+}
+
+.quiz-timer.danger {
+    background: #f8d7da;
+    color: #842029;
+    border-color: #f1aeb5;
+    animation: quizTimerPulse 1s infinite;
+}
+
+@keyframes quizTimerPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.04);
+    }
+}
+
+.quiz-progress {
+    flex: 1;
+    min-width: 220px;
+}
+
+.quiz-progress-text {
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.quiz-progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.quiz-progress-fill {
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.quiz-feedback {
+    margin-top: 15px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    line-height: 1.6;
+}
+
+.quiz-feedback.correct {
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    color: #065f46;
+}
+
+.quiz-feedback.wrong {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+}
+
+.quiz-correct-answer {
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    border-radius: 8px;
+    color: #065f46;
+}
+
+.quiz-wrong-answer {
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: #ffffff;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+}
+
+.quiz-feedback-explanation {
+    margin-top: 12px;
+    padding: 13px 15px;
+    background: #ffffff;
+    border: 1px solid #dbeafe;
+    border-left: 4px solid #2563eb;
+    border-radius: 8px;
+    line-height: 1.6;
+    font-size: 14px;
+    color: #1f2937;
+}
+
+.quiz-feedback-explanation strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #1d4ed8;
+}
+
+.quiz-action-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+}
+
+.quiz-action-buttons button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.quiz-action-buttons button:hover {
+    transform: translateY(-1px);
+}
+
+.quiz-next-button {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.quiz-finish-button {
+    background: #16a34a;
+    color: #ffffff;
+}
+
+.quiz-restart-button {
+    background: #7c3aed;
+    color: #ffffff;
+}
+
+.quiz-results-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.result-delete {
+    background: #dc2626;
+    color: #ffffff;
+    border: none;
+    padding: 7px 12px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.result-delete:hover {
+    background: #b91c1c;
+}
+
+.results-clear-button {
+    background: #b91c1c;
+    color: #ffffff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.results-clear-button:hover {
+    background: #991b1b;
+}
+
+.quiz-explanation-field {
+    width: 100%;
+    min-height: 90px;
+    resize: vertical;
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
+.quiz-explanation-field:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12);
+}
+
+.quiz-explanation-label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 600;
+}
+
+.quiz-question-card {
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.quiz-option {
+    transition: 0.2s;
+}
+
+.quiz-option:hover {
+    transform: translateY(-1px);
+}
+
+.quiz-timeout-message {
+    margin-top: 10px;
+    padding: 12px;
+    background: #fff3cd;
+    border: 1px solid #ffe69c;
+    border-radius: 8px;
+    color: #856404;
+    font-weight: 600;
+}
+
+.quiz-final-result {
+    padding: 20px;
+    border-radius: 12px;
+}
+
+@media (max-width: 600px) {
+
+    .quiz-top-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .quiz-progress {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .quiz-timer {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .quiz-action-buttons,
+    .quiz-results-buttons {
+        flex-direction: column;
+    }
+
+    .quiz-action-buttons button,
+    .quiz-results-buttons button {
+        width: 100%;
+    }
+}
         </style>
 
         </head>
@@ -6449,7 +6743,7 @@ function saveAllAIQuestions(){
 
 window.quizState = {
 
-    questions:[],
+    questions,
 
     currentIndex:0,
 
@@ -6457,11 +6751,14 @@ window.quizState = {
 
     answered:false,
 
-    correctAnswers:0,
+    timePerQuestion:
+        timePerQuestion,
 
-    wrongAnswers:0,
+    timeLeft:
+        timePerQuestion,
 
-    startedAt:null
+    timer:
+        null,
 
 };
 
@@ -6681,7 +6978,212 @@ function startQuiz(){
 
 }
 
+function startQuizTimer(){
 
+    const state =
+        window.quizState;
+
+    clearInterval(
+        state.timer
+    );
+
+    state.timeLeft =
+        state.timePerQuestion;
+
+    const timerElement =
+        document.getElementById(
+            "quizTimer"
+        );
+
+    function updateTimer(){
+
+        if(!timerElement)
+            return;
+
+        timerElement.textContent =
+            "⏱️ " +
+            state.timeLeft +
+            " sekonda";
+
+        timerElement.classList.remove(
+            "warning",
+            "danger"
+        );
+
+        if(state.timeLeft <= 10){
+
+            timerElement.classList.add(
+                "danger"
+            );
+
+        }else if(state.timeLeft <= 20){
+
+            timerElement.classList.add(
+                "warning"
+            );
+
+        }
+
+    }
+
+    updateTimer();
+
+    state.timer =
+        setInterval(
+            function(){
+
+                if(state.answered)
+                    return;
+
+                state.timeLeft--;
+
+                updateTimer();
+
+                if(state.timeLeft <= 0){
+
+                    clearInterval(
+                        state.timer
+                    );
+
+                    state.timer =
+                        null;
+
+                    timeOutQuizQuestion();
+
+                }
+
+            },
+            1000
+        );
+
+}
+ function timeOutQuizQuestion(){
+
+    const state =
+        window.quizState;
+
+
+    if(!state || state.answered)
+        return;
+
+
+    state.answered =
+        true;
+
+
+    state.wrongAnswers += 1;
+
+
+    const question =
+        state.questions[
+            state.currentIndex
+        ];
+
+
+    const explanation =
+        getQuizExplanation(
+            question
+        );
+
+
+    const buttons =
+        document.querySelectorAll(
+            ".quiz-option"
+        );
+
+
+    buttons.forEach(
+        function(button){
+
+            button.disabled = true;
+
+            const optionLetter =
+                button.dataset.letter;
+
+
+            if(
+                optionLetter ===
+                question.correct
+            ){
+
+                button.classList.add(
+                    "correct"
+                );
+
+            }
+
+        }
+    );
+
+
+    const feedback =
+        document.getElementById(
+            "quizFeedback"
+        );
+
+
+    feedback.style.display =
+        "block";
+
+
+    feedback.className =
+        "quiz-feedback wrong";
+
+
+    feedback.innerHTML =
+        "⏰ <strong>Koha mbaroi!</strong>" +
+
+        "<div class=\"quiz-correct-answer\">" +
+            "✅ Përgjigjja e saktë: <strong>" +
+            escapeHTML(
+                question.correct
+            ) +
+            "</strong>" +
+        "</div>" +
+
+        "<div class=\"quiz-feedback-explanation\">" +
+            "<strong>💡 Shpjegimi</strong>" +
+            escapeHTML(
+                explanation
+            ) +
+        "</div>";
+
+
+    const timerElement =
+        document.getElementById(
+            "quizTimer"
+        );
+
+
+    if(timerElement){
+
+        timerElement.textContent =
+            "⏰ Koha mbaroi";
+
+
+        timerElement.classList.remove(
+            "warning"
+        );
+
+
+        timerElement.classList.add(
+            "danger"
+        );
+
+    }
+
+
+    const next =
+        document.getElementById(
+            "quizNextButton"
+        );
+
+
+    next.style.display =
+        "inline-block";
+
+}
+    
 function showQuizQuestion(){
 
     const state =
@@ -6704,7 +7206,7 @@ function showQuizQuestion(){
 
 
     state.answered = false;
-
+    startQuizTimer();
 
     const total =
         state.questions.length;
@@ -6843,7 +7345,21 @@ function showQuizQuestion(){
     });
 
 }
+    
+function getQuizExplanation(question){
 
+    if(!question){
+        return "";
+    }
+
+    return (
+        question.explanation ||
+        question.explanationText ||
+        question.explain ||
+        "Nuk është dhënë shpjegim për këtë pyetje."
+    );
+
+}
 
 function answerQuiz(letter){
 
@@ -6863,6 +7379,14 @@ function answerQuiz(letter){
 
     state.answered =
         true;
+
+
+    clearInterval(
+        state.timer
+    );
+
+    state.timer =
+        null;
 
 
     const buttons =
@@ -6893,7 +7417,8 @@ function answerQuiz(letter){
 
 
             if(
-                optionLetter === letter
+                optionLetter ===
+                letter
             ){
 
                 button.classList.add(
@@ -6926,8 +7451,9 @@ function answerQuiz(letter){
         feedback.className =
             "quiz-feedback correct";
 
+
         feedback.innerHTML =
-            "✅ <strong>Përgjigje e saktë!</strong> " +
+            "✅ <strong>Përgjigje e saktë!</strong><br>" +
             "Bravo!";
 
     }else{
@@ -6935,15 +7461,41 @@ function answerQuiz(letter){
         state.wrongAnswers += 1;
 
 
+        const explanation =
+            getQuizExplanation(
+                question
+            );
+
+
         feedback.className =
             "quiz-feedback wrong";
 
+
         feedback.innerHTML =
-            "❌ <strong>Përgjigje e gabuar.</strong> " +
-            "Përgjigjja e saktë është " +
-            "<strong>" +
-            question.correct +
-            "</strong>.";
+            "❌ <strong>Përgjigje e gabuar.</strong>" +
+
+            "<div class=\"quiz-wrong-answer\">" +
+                "Përgjigjja juaj: <strong>" +
+                escapeHTML(
+                    letter
+                ) +
+                "</strong>" +
+            "</div>" +
+
+            "<div class=\"quiz-correct-answer\">" +
+                "✅ Përgjigjja e saktë: <strong>" +
+                escapeHTML(
+                    question.correct
+                ) +
+                "</strong>" +
+            "</div>" +
+
+            "<div class=\"quiz-feedback-explanation\">" +
+                "<strong>💡 Shpjegimi</strong>" +
+                escapeHTML(
+                    explanation
+                ) +
+            "</div>";
 
     }
 
@@ -6960,11 +7512,11 @@ function answerQuiz(letter){
             "quizNextButton"
         );
 
+
     next.style.display =
         "inline-block";
 
 }
-
 
 function nextQuizQuestion(){
 
@@ -6974,6 +7526,14 @@ function nextQuizQuestion(){
 
     if(!state.answered)
         return;
+
+
+    clearInterval(
+        state.timer
+    );
+
+    state.timer =
+        null;
 
 
     state.currentIndex++;
@@ -7000,6 +7560,13 @@ function finishQuiz(){
 
     const state =
         window.quizState;
+    
+clearInterval(
+        state.timer
+    );
+
+    state.timer =
+        null;
 
 
     const total =
