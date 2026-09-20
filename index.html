@@ -8180,17 +8180,216 @@ document.addEventListener(
     </div>`;
   };
 
+  /* =========================================================
+     STATISTIKAT PRO — NOTAT E NXËNËSVE
+  ========================================================= */
+  window.openExtendedStats=()=>{
+    openProPage('mdProPage');
+    renderExtendedStats();
+  };
+
+  function getGradeStatistics(){
+    const classes=read(PRO_KEYS.classes,[]);
+    classes.forEach(c=>normalizeClassStudents(c));
+    write(PRO_KEYS.classes,classes);
+
+    const students=[];
+    classes.forEach(c=>{
+      (c.students||[]).forEach(st=>{
+        const p1=gradeAverage(st.grades?.p1||[]);
+        const p2=gradeAverage(st.grades?.p2||[]);
+        const p1n=p1==='—'?null:Number(p1);
+        const p2n=p2==='—'?null:Number(p2);
+        const vals=[p1n,p2n].filter(v=>v!==null);
+        const annual=vals.length?(vals.reduce((a,b)=>a+b,0)/vals.length):null;
+        const final=st.grades?.final!==null && st.grades?.final!==undefined && st.grades?.final!==''
+          ?Number(st.grades.final)
+          :(annual!==null?Math.round(annual):null);
+        students.push({
+          classId:c.id,
+          className:c.name||'Pa emër',
+          student:studentDisplayName(st),
+          p1:p1n,
+          p2:p2n,
+          annual,
+          final
+        });
+      });
+    });
+
+    const periodValues=period=>students.map(s=>s[period]).filter(v=>typeof v==='number'&&isFinite(v));
+    const average=arr=>arr.length?(arr.reduce((a,b)=>a+b,0)/arr.length):null;
+    const p1vals=periodValues('p1'), p2vals=periodValues('p2'), annualVals=periodValues('annual');
+    const gradeDistribution={1:0,2:0,3:0,4:0,5:0};
+    students.forEach(s=>{
+      if([1,2,3,4,5].includes(s.final)) gradeDistribution[s.final]++;
+    });
+
+    const classStats=classes.map(c=>{
+      const ss=students.filter(s=>s.classId===c.id);
+      const p1=ss.map(s=>s.p1).filter(v=>v!==null);
+      const p2=ss.map(s=>s.p2).filter(v=>v!==null);
+      const an=ss.map(s=>s.annual).filter(v=>v!==null);
+      return {
+        name:c.name||'Pa emër',
+        students:ss.length,
+        p1:average(p1),
+        p2:average(p2),
+        annual:average(an)
+      };
+    });
+
+    const improved=students.filter(s=>s.p1!==null&&s.p2!==null&&s.p2>s.p1).length;
+    const declined=students.filter(s=>s.p1!==null&&s.p2!==null&&s.p2<s.p1).length;
+    const unchanged=students.filter(s=>s.p1!==null&&s.p2!==null&&s.p2===s.p1).length;
+    const below3=students.filter(s=>s.annual!==null&&s.annual<3).length;
+    const excellent=students.filter(s=>s.annual!==null&&s.annual>=4.5).length;
+
+    return {
+      students,classes,classStats,p1vals,p2vals,annualVals,gradeDistribution,
+      p1avg:average(p1vals),p2avg:average(p2vals),annualavg:average(annualVals),
+      improved,declined,unchanged,below3,excellent
+    };
+  }
+
+  function fmtAvg(v){return v===null||v===undefined?'—':Number(v).toFixed(2);}
+
+  function gradeBar(value,total){
+    const pct=total?Math.round((value/total)*100):0;
+    return `<div class="md-grade-bar-wrap"><div class="md-grade-bar"><span style="width:${pct}%"></span></div><b>${value}</b></div>`;
+  }
+
+  function renderExtendedStats(){
+    const d=getGradeStatistics();
+    const s=stats();
+    const total=d.students.length;
+    const maxDist=Math.max(...Object.values(d.gradeDistribution),1);
+
+    document.getElementById('mdProContent').innerHTML=`
+      <div class="md-section-head">
+        <div>
+          <span class="md-kicker">STATISTIKA PRO</span>
+          <h1>📊 Statistikat e nxënësve dhe notave</h1>
+          <p>Analizë automatike e notave të Periudhës I, Periudhës II, mesatares vjetore dhe notës përfundimtare.</p>
+        </div>
+        <button class="md-secondary" onclick="openProOverview()">← Kthehu te Qendra PRO</button>
+      </div>
+
+      <div class="md-pro-kpi-grid">
+        <div class="md-pro-kpi"><strong>${total}</strong><span>👥 Nxënës gjithsej</span></div>
+        <div class="md-pro-kpi"><strong>${fmtAvg(d.p1avg)}</strong><span>📝 Mesatarja – Periudha I</span></div>
+        <div class="md-pro-kpi"><strong>${fmtAvg(d.p2avg)}</strong><span>📝 Mesatarja – Periudha II</span></div>
+        <div class="md-pro-kpi"><strong>${fmtAvg(d.annualavg)}</strong><span>📈 Mesatarja vjetore</span></div>
+      </div>
+
+      <div class="md-stats-grid">
+        <div class="md-stats-card">
+          <div class="md-stats-card-head"><h3>📈 Ndryshimi nga P. I në P. II</h3><span>${total?Math.round((d.improved/Math.max(d.improved+d.declined+d.unchanged,1))*100):0}% me përmirësim</span></div>
+          <div class="md-stat-row"><span>🟢 Përmirësuar</span><strong>${d.improved}</strong></div>
+          <div class="md-stat-row"><span>🔴 U përkeqësuan</span><strong>${d.declined}</strong></div>
+          <div class="md-stat-row"><span>⚪ Pa ndryshim</span><strong>${d.unchanged}</strong></div>
+        </div>
+
+        <div class="md-stats-card">
+          <div class="md-stats-card-head"><h3>🎯 Gjendja e nxënësve</h3><span>bazuar në mesataren vjetore</span></div>
+          <div class="md-stat-row"><span>⭐ Mesatare ≥ 4.50</span><strong>${d.excellent}</strong></div>
+          <div class="md-stat-row"><span>⚠️ Mesatare &lt; 3.00</span><strong>${d.below3}</strong></div>
+          <div class="md-stat-row"><span>🏫 Klasa</span><strong>${d.classes.length}</strong></div>
+        </div>
+      </div>
+
+      <div class="md-stats-card md-stats-wide">
+        <div class="md-stats-card-head"><div><h3>🏅 Shpërndarja e notave përfundimtare</h3><span>Numri i nxënësve sipas notës</span></div></div>
+        <div class="md-grade-distribution">
+          ${[5,4,3,2,1].map(g=>`<div class="md-grade-dist-row"><div class="md-grade-label"><b>${g}</b><span>${d.gradeDistribution[g]} nxënës</span></div><div class="md-grade-dist-track"><span style="width:${Math.round((d.gradeDistribution[g]/maxDist)*100)}%"></span></div></div>`).join('')}
+        </div>
+      </div>
+
+      <div class="md-stats-card md-stats-wide">
+        <div class="md-stats-card-head"><div><h3>🏫 Statistikat sipas klasës</h3><span>Mesataret llogariten nga notat e regjistruara.</span></div></div>
+        ${d.classStats.length?`<div class="md-table-scroll"><table class="md-pro-table"><thead><tr><th>Klasa</th><th>Nxënës</th><th>P. I</th><th>P. II</th><th>Vjetore</th></tr></thead><tbody>${d.classStats.map(c=>`<tr><td><strong>${esc(c.name)}</strong></td><td>${c.students}</td><td>${fmtAvg(c.p1)}</td><td>${fmtAvg(c.p2)}</td><td><strong>${fmtAvg(c.annual)}</strong></td></tr>`).join('')}</tbody></table></div>`:`<div class="md-empty"><span>📚</span><h3>Nuk ka të dhëna</h3><p>Krijoni klasën dhe regjistroni nxënësit me nota.</p></div>`}
+      </div>
+
+      <div class="md-stats-card md-stats-wide">
+        <div class="md-stats-card-head"><div><h3>👨‍🎓 Statistikat individuale</h3><span>Shikoni performancën e secilit nxënës.</span></div></div>
+        ${d.students.length?`<div class="md-table-scroll"><table class="md-pro-table"><thead><tr><th>Nxënësi</th><th>Klasa</th><th>P. I</th><th>P. II</th><th>Vjetore</th><th>Finale</th></tr></thead><tbody>${d.students.map(x=>`<tr><td><strong>${esc(x.student)}</strong></td><td>${esc(x.className)}</td><td>${fmtAvg(x.p1)}</td><td>${fmtAvg(x.p2)}</td><td>${fmtAvg(x.annual)}</td><td>${x.final??'—'}</td></tr>`).join('')}</tbody></table></div>`:`<div class="md-empty"><span>👨‍🎓</span><h3>Nuk ka nxënës me të dhëna</h3><p>Regjistroni nxënësit te moduli Nxënës & Klasa.</p></div>`}
+      </div>
+
+      <div class="md-stats-note">💡 Këto statistika lexojnë drejtpërdrejt notat e ruajtura te <b>Nxënës & Klasa</b>. Ndryshoni ose shtoni një notë dhe statistikat përditësohen automatikisht kur hapni këtë faqe përsëri.</div>
+    `;
+  }
+
+  function normalizeStudent(st, index=0){
+    if(typeof st==='string') return {id:uid('student'),name:st,surname:'',notes:'',grades:{p1:[],p2:[],final:null}};
+    const g=st.grades||{};
+    return Object.assign({id:uid('student'),name:'',surname:'',notes:'',grades:{p1:[],p2:[],final:null}},st,{grades:{p1:Array.isArray(g.p1)?g.p1:[],p2:Array.isArray(g.p2)?g.p2:[],final:g.final??null}});
+  }
+  function normalizeClassStudents(c){
+    let changed=false;
+    c.students=(c.students||[]).map((st,i)=>{if(typeof st==='string')changed=true;return normalizeStudent(st,i);});
+    return changed;
+  }
+  function gradeAverage(list){
+    const a=(list||[]).map(x=>Number(x.value)).filter(x=>x>=1&&x<=5);
+    return a.length ? (a.reduce((x,y)=>x+y,0)/a.length).toFixed(2) : '—';
+  }
+  function studentDisplayName(st){return [st.name,st.surname].filter(Boolean).join(' ')||'Nxënës';}
+  function renderGradeRows(st, period){
+    const arr=st.grades?.[period]||[];
+    return arr.length ? arr.map(g=>`<tr><td>${esc(g.date||'')}</td><td><strong>${Number(g.value)}</strong></td><td>${esc(g.description||'')}</td><td><button class="md-grade-delete" onclick="deleteStudentGrade('${st.id}','${period}','${g.id}')">×</button></td></tr>`).join('') : `<tr><td colspan="4" class="md-muted">Nuk ka nota të regjistruara.</td></tr>`;
+  }
+  function studentCard(c,st){
+    const p1=gradeAverage(st.grades.p1),p2=gradeAverage(st.grades.p2);
+    const overall=(p1==='—'&&p2==='—')?'—':((Number(p1==='—'?0:p1)+Number(p2==='—'?0:p2))/(p1==='—'||p2==='—'?1:2)).toFixed(2);
+    const final=st.grades.final??(overall==='—'?'—':Math.round(Number(overall)));
+    return `<article class="md-student-pro-card">
+      <div class="md-student-pro-head"><div class="md-student-avatar">${esc((st.name||'N').charAt(0).toUpperCase())}</div><div><h3>${esc(studentDisplayName(st))}</h3><span>${esc(c.subject||'Lënda')} · ${esc(c.grade||'Klasa')}</span></div><div class="md-student-actions"><button class="md-icon-btn" title="Ndrysho nxënësin" onclick="editStudent('${c.id}','${st.id}')">✏️</button><button class="md-icon-btn" title="Fshi nxënësin" onclick="deleteStudent('${c.id}','${st.id}')">🗑️</button></div></div>
+      <div class="md-grade-summary"><div><small>Periudha I</small><strong>${p1}</strong></div><div><small>Periudha II</small><strong>${p2}</strong></div><div><small>Mes. vjetore</small><strong>${overall}</strong></div><div><small>Nota përfundimtare</small><strong>${final}</strong></div></div>
+      <div class="md-grade-actions"><button class="md-primary" onclick="showGradeForm('${c.id}','${st.id}','p1')">＋ Nota – Periudha I</button><button class="md-primary md-secondary-primary" onclick="showGradeForm('${c.id}','${st.id}','p2')">＋ Nota – Periudha II</button><button class="md-secondary" onclick="showStudentGrades('${c.id}','${st.id}')">📊 Shiko notat</button></div>
+      <div id="mdStudentDetail_${st.id}" class="md-student-detail"></div>
+    </article>`;
+  }
   function classesView(){
     const classes=read(PRO_KEYS.classes,[]);
-    document.getElementById('mdProContent').innerHTML=`<div class="md-section-head"><div><span class="md-kicker">NXËNËS & KLASA</span><h1>Menaxhimi i klasave</h1><p>Ruani klasat dhe listat e nxënësve lokalisht në shfletuesin tuaj.</p></div><button class="md-primary" onclick="showClassForm()">＋ Shto klasë</button></div>
+    classes.forEach(c=>normalizeClassStudents(c)); write(PRO_KEYS.classes,classes);
+    document.getElementById('mdProContent').innerHTML=`<div class="md-section-head"><div><span class="md-kicker">NXËNËS & KLASA</span><h1>Menaxhimi i klasave</h1><p>Krijoni klasa, regjistroni nxënësit dhe mbani notat në të dy periudhat.</p></div><button class="md-primary" onclick="showClassForm()">＋ Shto klasë</button></div>
+      <div class="md-pro-note">📌 Çdo nxënës ka regjistër të veçantë të notave për <b>Periudhën I</b> dhe <b>Periudhën II</b>. Të dhënat ruhen lokalisht në këtë shfletues.</div>
       <div id="mdClassForm"></div><div class="md-card-grid">${classes.length?classes.map(renderClassCard).join(''):emptyState('👥','Nuk ka klasa','Shtoni klasën e parë për të filluar.')}</div>`;
   }
-  function renderClassCard(c){return `<div class="md-card"><div class="md-card-top"><span class="md-icon">👥</span><button class="md-icon-btn" onclick="deleteClass('${c.id}')">🗑️</button></div><h3>${esc(c.name)}</h3><p>${esc(c.grade||'Klasa pa përcaktim')} · ${esc(c.subject||'Lëndë të ndryshme')}</p><div class="md-mini-stat"><strong>${(c.students||[]).length}</strong><span>nxënës</span></div><div class="md-student-list">${(c.students||[]).slice(0,5).map((x,i)=>`<span>${i+1}. ${esc(x)}</span>`).join('')||'<span>Nuk ka nxënës ende.</span>'}</div><button class="md-secondary" onclick="manageClass('${c.id}')">Menaxho nxënësit</button></div>`;}
+  function renderClassCard(c){
+    const students=(c.students||[]).map(normalizeStudent);
+    const avgs=students.flatMap(s=>[gradeAverage(s.grades.p1),gradeAverage(s.grades.p2)]).filter(x=>x!=='—');
+    const avg=avgs.length?(avgs.reduce((a,b)=>a+Number(b),0)/avgs.length).toFixed(2):'—';
+    return `<div class="md-card md-class-pro-card"><div class="md-card-top"><span class="md-icon">👥</span><div><button class="md-icon-btn" onclick="editClass('${c.id}')">✏️</button><button class="md-icon-btn" onclick="deleteClass('${c.id}')">🗑️</button></div></div><h3>${esc(c.name)}</h3><p>${esc(c.grade||'Klasa pa përcaktim')} · ${esc(c.subject||'Lëndë të ndryshme')}</p><div class="md-class-kpis"><div><strong>${students.length}</strong><span>nxënës</span></div><div><strong>${avg}</strong><span>mesatare</span></div></div><div class="md-student-list">${students.slice(0,5).map((x,i)=>`<span>${i+1}. ${esc(studentDisplayName(x))}</span>`).join('')||'<span>Nuk ka nxënës ende.</span>'}</div><button class="md-secondary" onclick="manageClass('${c.id}')">👥 Menaxho nxënësit & notat</button></div>`;
+  }
   window.openClasses=()=>{openProPage('mdProPage');classesView();};
-  window.showClassForm=()=>{document.getElementById('mdClassForm').innerHTML=`<div class="md-form-card"><div class="md-form-grid"><input id="mdClassName" placeholder="Emri i klasës, p.sh. IX/1"><input id="mdClassGrade" placeholder="Klasa, p.sh. 9"><input id="mdClassSubject" placeholder="Lënda kryesore"><textarea id="mdClassStudents" placeholder="Nxënësit – një emër në rresht"></textarea></div><div class="md-actions"><button class="md-primary" onclick="saveClass()">Ruaj klasën</button><button class="md-secondary" onclick="document.getElementById('mdClassForm').innerHTML=''">Anulo</button></div></div>`;};
-  window.saveClass=()=>{const name=document.getElementById('mdClassName').value.trim();if(!name)return alert('Shkruani emrin e klasës.');const c={id:uid('class'),name,grade:document.getElementById('mdClassGrade').value.trim(),subject:document.getElementById('mdClassSubject').value.trim(),students:document.getElementById('mdClassStudents').value.split('\n').map(x=>x.trim()).filter(Boolean),createdAt:new Date().toISOString()};const a=read(PRO_KEYS.classes,[]);a.push(c);write(PRO_KEYS.classes,a);classesView();};
-  window.deleteClass=id=>{if(!confirm('A dëshironi ta fshini këtë klasë?'))return;write(PRO_KEYS.classes,read(PRO_KEYS.classes,[]).filter(x=>x.id!==id));classesView();};
-  window.manageClass=id=>{const a=read(PRO_KEYS.classes,[]),c=a.find(x=>x.id===id);if(!c)return;const names=prompt('Vendosni emrat e nxënësve, një për rresht:',(c.students||[]).join('\n'));if(names===null)return;c.students=names.split('\n').map(x=>x.trim()).filter(Boolean);write(PRO_KEYS.classes,a);classesView();};
+  window.showClassForm=()=>{document.getElementById('mdClassForm').innerHTML=`<div class="md-form-card"><h3>➕ Krijo klasë të re</h3><div class="md-form-grid"><input id="mdClassName" placeholder="Emri i klasës, p.sh. IX/1"><input id="mdClassGrade" placeholder="Klasa, p.sh. 9"><input id="mdClassSubject" placeholder="Lënda kryesore"><input id="mdClassYear" placeholder="Viti shkollor, p.sh. 2026/27"><textarea id="mdClassNotes" placeholder="Shënime për klasën"></textarea></div><div class="md-actions"><button class="md-primary" onclick="saveClass()">Ruaj klasën</button><button class="md-secondary" onclick="document.getElementById('mdClassForm').innerHTML=''">Anulo</button></div></div>`;};
+  window.saveClass=()=>{const name=document.getElementById('mdClassName').value.trim();if(!name)return alert('Shkruani emrin e klasës.');const c={id:uid('class'),name,grade:document.getElementById('mdClassGrade').value.trim(),subject:document.getElementById('mdClassSubject').value.trim(),academicYear:document.getElementById('mdClassYear').value.trim(),notes:document.getElementById('mdClassNotes').value.trim(),students:[],createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()};const a=read(PRO_KEYS.classes,[]);a.push(c);write(PRO_KEYS.classes,a);classesView();};
+  window.editClass=id=>{const a=read(PRO_KEYS.classes,[]),c=a.find(x=>x.id===id);if(!c)return;document.getElementById('mdClassForm').innerHTML=`<div class="md-form-card"><h3>✏️ Ndrysho klasën</h3><div class="md-form-grid"><input id="mdEditClassName" value="${esc(c.name)}"><input id="mdEditClassGrade" value="${esc(c.grade||'')}"><input id="mdEditClassSubject" value="${esc(c.subject||'')}"><input id="mdEditClassYear" value="${esc(c.academicYear||'')}"><textarea id="mdEditClassNotes">${esc(c.notes||'')}</textarea></div><div class="md-actions"><button class="md-primary" onclick="saveEditedClass('${id}')">Ruaj ndryshimet</button><button class="md-secondary" onclick="document.getElementById('mdClassForm').innerHTML=''">Anulo</button></div></div>`;window.scrollTo({top:document.getElementById('mdClassForm').getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'});};
+  window.saveEditedClass=id=>{const a=read(PRO_KEYS.classes,[]),c=a.find(x=>x.id===id);if(!c)return;c.name=document.getElementById('mdEditClassName').value.trim()||c.name;c.grade=document.getElementById('mdEditClassGrade').value.trim();c.subject=document.getElementById('mdEditClassSubject').value.trim();c.academicYear=document.getElementById('mdEditClassYear').value.trim();c.notes=document.getElementById('mdEditClassNotes').value.trim();c.updatedAt=new Date().toISOString();write(PRO_KEYS.classes,a);classesView();};
+  window.deleteClass=id=>{if(!confirm('A dëshironi ta fshini këtë klasë dhe të gjitha të dhënat e nxënësve/notave të saj?'))return;write(PRO_KEYS.classes,read(PRO_KEYS.classes,[]).filter(x=>x.id!==id));classesView();};
+  window.manageClass=id=>{const a=read(PRO_KEYS.classes,[]),c=a.find(x=>x.id===id);if(!c)return;normalizeClassStudents(c);write(PRO_KEYS.classes,a);document.getElementById('mdProContent').innerHTML=`<div class="md-section-head"><div><button class="md-back-link" onclick="classesView()">← Kthehu te klasat</button><span class="md-kicker">KLASA</span><h1>${esc(c.name)}</h1><p>${esc(c.grade||'')} · ${esc(c.subject||'')} ${c.academicYear?'· '+esc(c.academicYear):''}</p></div><button class="md-primary" onclick="showStudentForm('${c.id}')">＋ Shto nxënës</button></div><div class="md-class-toolbar"><div><strong>${c.students.length}</strong> nxënës</div><div>📊 Regjistri i notave: <b>Periudha I + Periudha II</b></div><button class="md-secondary" onclick="printClassRegister('${c.id}')">🖨️ Printo regjistrin</button></div><div id="mdStudentForm"></div><div class="md-student-pro-list">${c.students.length?c.students.map(st=>studentCard(c,st)).join(''):emptyState('👤','Nuk ka nxënës','Shtoni nxënësit e klasës për të filluar regjistrimin e notave.')}</div>`;};
+  window.showStudentForm=id=>{document.getElementById('mdStudentForm').innerHTML=`<div class="md-form-card"><h3>👤 Shto nxënës</h3><div class="md-form-grid"><input id="mdStudentName" placeholder="Emri"><input id="mdStudentSurname" placeholder="Mbiemri"><input id="mdStudentNumber" placeholder="Numri në listë, opsional"><textarea id="mdStudentNotes" placeholder="Shënime"></textarea></div><div class="md-actions"><button class="md-primary" onclick="saveStudent('${id}')">Ruaj nxënësin</button><button class="md-secondary" onclick="document.getElementById('mdStudentForm').innerHTML=''">Anulo</button></div></div>`;};
+  window.saveStudent=id=>{const a=read(PRO_KEYS.classes,[]),c=a.find(x=>x.id===id);if(!c)return;normalizeClassStudents(c);const name=document.getElementById('mdStudentName').value.trim();const surname=document.getElementById('mdStudentSurname').value.trim();if(!name)return alert('Shkruani emrin e nxënësit.');c.students.push({id:uid('student'),name,surname,number:document.getElementById('mdStudentNumber').value.trim(),notes:document.getElementById('mdStudentNotes').value.trim(),grades:{p1:[],p2:[],final:null}});c.updatedAt=new Date().toISOString();write(PRO_KEYS.classes,a);manageClass(id);};
+  window.editStudent=(cid,sid)=>{const a=read(PRO_KEYS.classes,[]),c=a.find(x=>x.id===cid);if(!c)return;normalizeClassStudents(c);const st=c.students.find(x=>x.id===sid);if(!st)return;document.getElementById('mdStudentForm').innerHTML=`<div class="md-form-card"><h3>✏️ Ndrysho nxënësin</h3><div class="md-form-grid"><input id="mdEditStudentName" value="${esc(st.name)}"><input id="mdEditStudentSurname" value="${esc(st.surname||'')}"><input id="mdEditStudentNumber" value="${esc(st.number||'')}"><textarea id="mdEditStudentNotes">${esc(st.notes||'')}</textarea></div><div class="md-actions"><button class="md-primary" onclick="saveEditedStudent('${cid}','${sid}')">Ruaj ndryshimet</button><button class="md-secondary" onclick="manageClass('${cid}')">Anulo</button></div></div>`;};
+  window.saveEditedStudent=(cid,sid)=>{const a=read(PRO_KEYS.classes,[]),c=a.find(x=>x.id===cid);if(!c)return;normalizeClassStudents(c);const st=c.students.find(x=>x.id===sid);if(!st)return;st.name=document.getElementById('mdEditStudentName').value.trim()||st.name;st.surname=document.getElementById('mdEditStudentSurname').value.trim();st.number=document.getElementById('mdEditStudentNumber').value.trim();st.notes=document.getElementById('mdEditStudentNotes').value.trim();c.updatedAt=new Date().toISOString();write(PRO_KEYS.classes,a);manageClass(cid);};
+  window.deleteStudent=(cid,sid)=>{if(!confirm('A dëshironi ta fshini këtë nxënës dhe notat e tij?'))return;const a=read(PRO_KEYS.classes,[]),c=a.find(x=>x.id===cid);if(!c)return;normalizeClassStudents(c);c.students=c.students.filter(x=>x.id!==sid);write(PRO_KEYS.classes,a);manageClass(cid);};
+  window.showGradeForm=(cid,sid,period)=>{const c=read(PRO_KEYS.classes,[]).find(x=>x.id===cid);if(!c)return;const st=(c.students||[]).map(normalizeStudent).find(x=>x.id===sid);if(!st)return;const label=period==='p1'?'Periudha I':'Periudha II';const el=document.getElementById('mdStudentDetail_'+sid);if(!el)return;el.innerHTML=`<div class="md-grade-form"><div class="md-form-grid"><select id="gradeValue_${sid}"><option value="">Zgjidh notën</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select><input type="date" id="gradeDate_${sid}" value="${new Date().toISOString().slice(0,10)}"><input id="gradeDesc_${sid}" placeholder="P.sh. Test, aktivitet, projekt..." maxlength="120"></div><div class="md-actions"><button class="md-primary" onclick="saveStudentGrade('${cid}','${sid}','${period}')">Ruaj notën – ${label}</button><button class="md-secondary" onclick="document.getElementById('mdStudentDetail_${sid}').innerHTML=''">Anulo</button></div></div>`;};
+  window.saveStudentGrade=(cid,sid,period)=>{const a=read(PRO_KEYS.classes,[]),c=a.find(x=>x.id===cid);if(!c)return;normalizeClassStudents(c);const st=c.students.find(x=>x.id===sid);if(!st)return;const value=Number(document.getElementById('gradeValue_'+sid).value);if(![1,2,3,4,5].includes(value))return alert('Zgjidhni një notë nga 1 deri në 5.');st.grades[period].push({id:uid('grade'),value,date:document.getElementById('gradeDate_'+sid).value||new Date().toISOString().slice(0,10),description:document.getElementById('gradeDesc_'+sid).value.trim()});c.updatedAt=new Date().toISOString();write(PRO_KEYS.classes,a);manageClass(cid);};
+  window.deleteStudentGrade=(cid,period,gid)=>{if(!confirm('A dëshironi ta fshini këtë notë?'))return;const a=read(PRO_KEYS.classes,[]),c=a.find(x=>x.id===cid);if(!c)return;normalizeClassStudents(c);const sid=(c.students.find(st=>['p1','p2'].some(p=>(st.grades[p]||[]).some(g=>g.id===gid)))||{}).id;if(!sid)return;const st=c.students.find(x=>x.id===sid);st.grades[period]=st.grades[period].filter(g=>g.id!==gid);write(PRO_KEYS.classes,a);manageClass(cid);};
+  window.showStudentGrades=(cid,sid)=>{const a=read(PRO_KEYS.classes,[]),c=a.find(x=>x.id===cid);if(!c)return;normalizeClassStudents(c);const st=c.students.find(x=>x.id===sid);if(!st)return;const el=document.getElementById('mdStudentDetail_'+sid);if(!el)return;const p1=gradeAverage(st.grades.p1),p2=gradeAverage(st.grades.p2);const overall=(p1==='—'&&p2==='—')?'—':((Number(p1==='—'?0:p1)+Number(p2==='—'?0:p2))/(p1==='—'||p2==='—'?1:2)).toFixed(2);el.innerHTML=`<div class="md-grade-panel"><div class="md-grade-panel-head"><strong>📊 Regjistri i ${esc(studentDisplayName(st))}</strong><button class="md-secondary" onclick="showGradeForm('${cid}','${sid}','p1')">＋ Shto notë</button></div><div class="md-period-grid"><div class="md-period-box"><h4>Periudha I <span>Mesatarja: ${p1}</span></h4><table><thead><tr><th>Data</th><th>Nota</th><th>Përshkrimi</th><th></th></tr></thead><tbody>${renderGradeRows(st,'p1')}</tbody></table></div><div class="md-period-box"><h4>Periudha II <span>Mesatarja: ${p2}</span></h4><table><thead><tr><th>Data</th><th>Nota</th><th>Përshkrimi</th><th></th></tr></thead><tbody>${renderGradeRows(st,'p2')}</tbody></table></div></div><div class="md-year-summary"><span>Mesatarja vjetore</span><strong>${overall}</strong><label>Nota përfundimtare</label><select onchange="setFinalGrade('${cid}','${sid}',this.value)"><option value="">Automatike</option>${[1,2,3,4,5].map(n=>`<option value="${n}" ${String(st.grades.final)===String(n)?'selected':''}>${n}</option>`).join('')}</select></div></div>`;};
+  window.setFinalGrade=(cid,sid,value)=>{const a=read(PRO_KEYS.classes,[]),c=a.find(x=>x.id===cid);if(!c)return;normalizeClassStudents(c);const st=c.students.find(x=>x.id===sid);if(!st)return;st.grades.final=value?Number(value):null;write(PRO_KEYS.classes,a);manageClass(cid);};
+  window.printClassRegister=cid=>{const c=read(PRO_KEYS.classes,[]).find(x=>x.id===cid);if(!c)return;normalizeClassStudents(c);const rows=c.students.map((st,i)=>{const p1=gradeAverage(st.grades.p1),p2=gradeAverage(st.grades.p2);const overall=(p1==='—'&&p2==='—')?'—':((Number(p1==='—'?0:p1)+Number(p2==='—'?0:p2))/(p1==='—'||p2==='—'?1:2)).toFixed(2);const final=st.grades.final??(overall==='—'?'—':Math.round(Number(overall)));return `<tr><td>${i+1}</td><td>${esc(studentDisplayName(st))}</td><td>${p1}</td><td>${p2}</td><td>${overall}</td><td>${final}</td></tr>`;}).join('');const w=window.open('','_blank','width=1000,height=700');if(!w)return alert('Lejo dritaret e reja (pop-ups) në shfletues.');w.document.write(`<!doctype html><html lang="sq"><head><meta charset="UTF-8"><title>Regjistri – ${esc(c.name)}</title><style>body{font-family:Arial,sans-serif;padding:30px;color:#111}h1{margin-bottom:4px}p{margin-top:4px;color:#555}table{width:100%;border-collapse:collapse;margin-top:25px}th,td{border:1px solid #999;padding:9px;text-align:center}th:nth-child(2),td:nth-child(2){text-align:left}th{background:#eee}@media print{button{display:none}}
+/* ===== NXËNËS & NOTA PRO ===== */
+.md-class-pro-card{position:relative;overflow:hidden}.md-class-pro-card:before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,#4f46e5,#06b6d4)}
+.md-class-kpis,.md-grade-summary{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px 0}.md-class-kpis div,.md-grade-summary div{background:#f7f9fc;border:1px solid #e6eaf0;border-radius:14px;padding:11px}.md-class-kpis strong,.md-grade-summary strong{display:block;font-size:20px}.md-class-kpis span,.md-grade-summary small{color:#687386;font-size:12px}.md-student-pro-list{display:grid;gap:16px}.md-student-pro-card{background:#fff;border:1px solid #e4e8ef;border-radius:20px;padding:18px;box-shadow:0 8px 24px rgba(25,35,55,.07)}.md-student-pro-head{display:flex;align-items:center;gap:12px}.md-student-avatar{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#4f46e5,#06b6d4);color:#fff;font-weight:800;font-size:19px}.md-student-pro-head h3{margin:0 0 3px}.md-student-pro-head span{font-size:12px;color:#748094}.md-student-actions{margin-left:auto;display:flex;gap:5px}.md-grade-summary{grid-template-columns:repeat(4,1fr)}.md-grade-summary div{text-align:center}.md-grade-actions{display:flex;flex-wrap:wrap;gap:8px}.md-secondary-primary{background:#eef4ff!important;color:#3448a8!important;border-color:#cfd9ff!important}.md-student-detail{margin-top:14px}.md-grade-form,.md-grade-panel{border:1px solid #dfe5ee;border-radius:16px;background:#f8fafc;padding:15px}.md-period-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.md-period-box{background:#fff;border:1px solid #e4e8ef;border-radius:14px;padding:12px;overflow:auto}.md-period-box h4{display:flex;justify-content:space-between;gap:10px;margin:0 0 10px}.md-period-box h4 span{font-size:12px;color:#4f46e5}.md-period-box table{width:100%;border-collapse:collapse;font-size:13px}.md-period-box th,.md-period-box td{padding:8px;border-bottom:1px solid #edf0f4;text-align:left}.md-grade-delete{border:0;background:#fff0f0;color:#c62828;border-radius:7px;width:26px;height:26px;cursor:pointer}.md-muted{color:#8a93a2;text-align:center!important}.md-year-summary{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px;padding:13px;background:#eef6ff;border-radius:12px}.md-year-summary strong{font-size:22px;color:#3148b7}.md-year-summary label{margin-left:auto;font-size:13px;font-weight:700}.md-year-summary select{padding:8px;border-radius:9px;border:1px solid #cfd6e2}.md-class-toolbar{display:flex;align-items:center;gap:18px;flex-wrap:wrap;background:linear-gradient(135deg,#f5f7ff,#f2fbff);border:1px solid #e0e7f3;border-radius:16px;padding:14px 16px;margin:0 0 18px}.md-class-toolbar div:first-child{font-size:16px}.md-back-link{border:0;background:none;padding:0;color:#4f46e5;font-weight:700;cursor:pointer;display:block;margin-bottom:8px}.md-form-card h3{margin-top:0}
+@media(max-width:800px){.md-grade-summary{grid-template-columns:repeat(2,1fr)}.md-period-grid{grid-template-columns:1fr}.md-grade-actions button{width:100%}.md-class-toolbar{align-items:flex-start}.md-year-summary label{margin-left:0}}
+
+/* PRO 2.4 — STATISTIKAT E NOTAVE */
+.md-stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:16px}.md-stats-card{background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:20px;box-shadow:0 5px 20px rgba(15,23,42,.04);margin-bottom:16px}.md-stats-wide{width:100%}.md-stats-card-head{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:16px}.md-stats-card-head h3{margin:0;color:#0f172a;font-size:16px}.md-stats-card-head span{color:#64748b;font-size:12px}.md-stat-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #eef2f7}.md-stat-row:last-child{border-bottom:0}.md-stat-row span{color:#475569;font-size:13px}.md-stat-row strong{font-size:18px;color:#111827}.md-grade-distribution{display:grid;gap:13px}.md-grade-dist-row{display:grid;grid-template-columns:130px 1fr;gap:14px;align-items:center}.md-grade-label{display:flex;align-items:center;gap:10px}.md-grade-label b{width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:9px;background:#eef2ff;color:#4338ca}.md-grade-label span{font-size:12px;color:#64748b}.md-grade-dist-track{height:12px;background:#eef2f7;border-radius:20px;overflow:hidden}.md-grade-dist-track span{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,#4f46e5,#8b5cf6)}.md-grade-bar-wrap{display:flex;align-items:center;gap:8px}.md-grade-bar{height:7px;flex:1;background:#eef2f7;border-radius:10px;overflow:hidden}.md-grade-bar span{display:block;height:100%;background:#4f46e5}.md-table-scroll{overflow-x:auto}.md-stats-note{background:#eef2ff;color:#3730a3;border:1px solid #c7d2fe;border-radius:14px;padding:14px 16px;margin-top:2px;line-height:1.5;font-size:13px}
+@media(max-width:700px){.md-stats-grid{grid-template-columns:1fr}.md-stats-card-head{align-items:flex-start;flex-direction:column}.md-grade-dist-row{grid-template-columns:105px 1fr}.md-pro-table{min-width:650px}}
+
+</style></head><body onload="setTimeout(function(){window.print()},300)"><h1>Regjistri i notave</h1><p><b>Klasa:</b> ${esc(c.name)} &nbsp; <b>Lënda:</b> ${esc(c.subject||'')} &nbsp; <b>Klasa:</b> ${esc(c.grade||'')}</p><table><thead><tr><th>#</th><th>Nxënësi</th><th>Periudha I</th><th>Periudha II</th><th>Mes. vjetore</th><th>Nota përfundimtare</th></tr></thead><tbody>${rows}</tbody></table></body></html>`);w.document.close();};
 
   function lessonsView(){const a=read(PRO_KEYS.lessons,[]);document.getElementById('mdProContent').innerHTML=`<div class="md-section-head"><div><span class="md-kicker">PLANIFIKUESI</span><h1>Planifikuesi i orës</h1><p>Ruani plane të shkurtra dhe të përdorshme për mësim.</p></div><button class="md-primary" onclick="showLessonForm()">＋ Plan i ri</button></div><div id="mdLessonForm"></div><div class="md-list">${a.length?a.slice().reverse().map(x=>`<article class="md-list-item"><div><span class="md-kicker">${esc(x.subject||'Lëndë')}</span><h3>${esc(x.title)}</h3><p><b>Objektivi:</b> ${esc(x.objective)}</p><p><b>Aktivitetet:</b> ${esc(x.activities)}</p><p><b>Detyra:</b> ${esc(x.homework||'—')}</p></div><button class="md-danger" onclick="deleteLesson('${x.id}')">Fshi</button></article>`).join(''):emptyState('📅','Nuk ka plane','Krijoni planin e parë të orës.')}</div>`;}
   window.openLessonPlanner=()=>{openProPage('mdProPage');lessonsView();};
