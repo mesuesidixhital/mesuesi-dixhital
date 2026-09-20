@@ -2159,6 +2159,74 @@ button{
 @media(max-width:1100px){.md-pro-stat-grid{grid-template-columns:repeat(3,1fr)}.md-pro-grid-3,.md-card-grid,.md-library-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:700px){.md-pro-content{padding:16px}.md-pro-hero,.md-section-head,.md-list-item{flex-direction:column;align-items:stretch}.md-pro-stat-grid,.md-pro-grid-3,.md-pro-ai-grid,.md-card-grid,.md-library-grid,.md-form-grid{grid-template-columns:1fr}.md-form-grid textarea{grid-column:auto}.md-pro-hero h1,.md-section-head h1{font-size:24px}}
 </style>
+<style>
+
+/* =========================================================
+   MËSUESI DIXHITAL 2.3 – MODERN UI LAYER
+========================================================= */
+:root{
+  --md-bg:#f4f7fb;
+  --md-surface:#ffffff;
+  --md-text:#172033;
+  --md-muted:#6b7280;
+  --md-primary:#2563eb;
+  --md-primary-2:#4f46e5;
+  --md-border:#e5e7eb;
+  --md-shadow:0 14px 38px rgba(15,23,42,.08);
+  --md-radius:18px;
+}
+body{background:var(--md-bg);color:var(--md-text);}
+button,input,select,textarea{font:inherit;}
+button{transition:transform .16s ease,box-shadow .16s ease,filter .16s ease,background .16s ease;}
+button:hover{transform:translateY(-1px);}
+.dashboard-page,.page{background:var(--md-bg);}
+.dashboard-layout{min-height:100vh;}
+.dashboard-sidebar{box-shadow:8px 0 30px rgba(15,23,42,.06);border-right:1px solid rgba(229,231,235,.9);}
+.dashboard-brand{padding:22px 20px!important;}
+.dashboard-menu button{border-radius:12px!important;margin:4px 10px!important;min-height:44px;}
+.dashboard-menu button:hover{background:rgba(37,99,235,.08)!important;}
+.dashboard-menu button.active{box-shadow:0 8px 22px rgba(37,99,235,.16)!important;}
+.dashboard-main{background:var(--md-bg);}
+.dashboard-topbar{background:rgba(255,255,255,.88)!important;backdrop-filter:blur(14px);border-bottom:1px solid var(--md-border)!important;}
+.dashboard-stats,.md-pro-stat-grid,.md-pro-kpi-grid{gap:16px!important;}
+.stat-card,.question-card,.create-test-card,.generated-test-paper,.saved-tests-panel,.quiz-settings-card,.quiz-progress-card,.quiz-question-card,.quiz-result-card,.result-item,.ai-generator-card,.ai-question-card,.results-empty{border:1px solid var(--md-border)!important;border-radius:var(--md-radius)!important;box-shadow:var(--md-shadow)!important;background:var(--md-surface)!important;}
+.stat-card{transition:transform .18s ease,box-shadow .18s ease;}
+.stat-card:hover,.question-card:hover,.result-item:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(15,23,42,.11)!important;}
+input,select,textarea{border:1px solid #d8dee9!important;border-radius:12px!important;background:#fff!important;min-height:44px;outline:none;transition:border .16s ease,box-shadow .16s ease;}
+textarea{padding:12px!important;}
+input:focus,select:focus,textarea:focus{border-color:var(--md-primary)!important;box-shadow:0 0 0 4px rgba(37,99,235,.10)!important;}
+.primary-button,.secondary-button,.quiz-start-button,.quiz-next-button,.results-clear-button,.ai-generate-button,.md-primary,.md-secondary,.md-danger{border-radius:12px!important;font-weight:700!important;}
+.primary-button,.quiz-start-button,.ai-generate-button,.md-primary{box-shadow:0 8px 20px rgba(37,99,235,.18)!important;}
+.quiz-header h1,.results-header-page h1{font-size:clamp(26px,3vw,38px)!important;letter-spacing:-.6px;}
+.quiz-settings-card{padding:24px!important;}
+.quiz-settings-title{font-size:20px!important;font-weight:800!important;margin-bottom:18px;}
+.quiz-settings-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px!important;}
+.quiz-setting-group{display:flex;flex-direction:column;gap:8px;}
+.quiz-setting-group label{font-size:13px;font-weight:750;color:#374151;}
+.quiz-start-area{display:flex!important;justify-content:flex-end!important;margin-top:20px!important;}
+.quiz-start-button{padding:13px 22px!important;min-width:190px;}
+.quiz-progress-top{gap:12px!important;align-items:center;flex-wrap:wrap;}
+.quiz-timer{font-weight:800!important;border-radius:999px!important;padding:8px 13px!important;background:#eef2ff!important;}
+.quiz-timer.warning{background:#fff7ed!important;color:#c2410c!important;}
+.quiz-timer.danger{background:#fef2f2!important;color:#dc2626!important;animation:mdPulse 1s infinite;}
+.quiz-option,.quiz-answer-option,.question-card-option{border-radius:12px!important;transition:all .15s ease;}
+.result-item{display:grid!important;grid-template-columns:minmax(0,1fr) auto auto auto;gap:16px;align-items:center;padding:18px!important;}
+.result-delete{border:0!important;border-radius:10px!important;padding:9px 12px!important;cursor:pointer;}
+.result-delete:hover{background:#fee2e2!important;color:#b91c1c!important;}
+.generated-test-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;}
+.generated-test-paper{overflow:hidden;}
+.md-pro-shell{background:var(--md-bg)!important;min-height:100vh;}
+.md-pro-topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9)!important;backdrop-filter:blur(16px);border-bottom:1px solid var(--md-border);box-shadow:0 8px 25px rgba(15,23,42,.05);}
+.md-pro-content{max-width:1400px!important;margin:0 auto!important;padding:28px!important;}
+.md-pro-hero{border-radius:24px!important;box-shadow:var(--md-shadow)!important;background:linear-gradient(135deg,#ffffff,#eef4ff)!important;border:1px solid #dfe7f5!important;}
+.md-pro-stat,.md-pro-tile,.md-card,.md-list-item,.md-form-card,.md-library-item{border:1px solid var(--md-border)!important;border-radius:16px!important;box-shadow:0 10px 28px rgba(15,23,42,.06)!important;background:#fff!important;}
+.md-pro-stat:hover,.md-pro-tile:hover,.md-card:hover,.md-list-item:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(15,23,42,.10)!important;}
+.md-pro-note{border-radius:14px!important;border:1px solid #dbeafe!important;background:#eff6ff!important;}
+@keyframes mdPulse{50%{transform:scale(1.03);}}
+@media(max-width:1000px){.quiz-settings-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.result-item{grid-template-columns:1fr 1fr}.result-delete{justify-self:start}}
+@media(max-width:640px){.quiz-settings-grid{grid-template-columns:1fr!important}.quiz-start-area{justify-content:stretch!important}.quiz-start-button{width:100%!important}.result-item{grid-template-columns:1fr}.md-pro-content{padding:16px!important}.dashboard-topbar{padding-left:16px!important;padding-right:16px!important}}
+
+</style>
 </head>
 
 <body>
@@ -3515,30 +3583,28 @@ class="quiz-settings-card">
 
 <div class="quiz-setting-group">
 
-<label>Numri i pyetjeve</label>
+<label for="quizQuestionCount">🔢 Numri i pyetjeve</label>
+
+<input id="quizQuestionCount" type="number" min="1" max="100" value="10" class="quiz-number-input">
+
+</div>
 
 <div class="quiz-setting-group">
 
-<label for="quizTimePerQuestion">
-⏱️ Koha për çdo pyetje
-</label>
+<label for="quizTimePerQuestion">⏱️ Koha për çdo pyetje</label>
 
 <select id="quizTimePerQuestion">
-
 <option value="15">15 sekonda</option>
 <option value="30" selected>30 sekonda</option>
 <option value="45">45 sekonda</option>
 <option value="60">60 sekonda</option>
 <option value="90">90 sekonda</option>
-    
 </select>
 
 </div>
 
-</div>
-
 <div
-id="quizInfoBox"
+ id="quizInfoBox"
 class="quiz-info-box">
 Kuizi do të përdorë pyetjet e ruajtura në Bankën e Pyetjeve.
 </div>
@@ -5619,9 +5685,52 @@ function deleteSavedTest(id){
 
 function printGeneratedTest(){
 
-    window.print();
+    const content = document.getElementById("generatedTestContent");
 
+    if(!content || !content.innerHTML.trim()){
+        alert("Nuk ka test të gjeneruar për printim.");
+        return;
+    }
+
+    const printWindow = window.open("", "_blank", "width=900,height=700");
+
+    if(!printWindow){
+        alert("Shfletuesi bllokoi dritaren e printimit. Lejoni pop-up për këtë faqe dhe provoni përsëri.");
+        return;
+    }
+
+    const title = document.title || "Mësuesi Dixhital";
+    const css = Array.from(document.querySelectorAll("style"))
+        .map(style => style.textContent)
+        .join("\n");
+
+    printWindow.document.open();
+    printWindow.document.write(`<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${escapeHTML(title)} – Printim</title>
+<style>
+${css}
+@page{size:A4;margin:9mm 11mm 10mm 11mm;}
+html,body{background:#fff!important;margin:0!important;padding:0!important;}
+body{font-family:Arial,Helvetica,sans-serif;}
+.generated-test-actions,.saved-tests-panel{display:none!important;}
+.generated-test-wrapper{padding:0!important;max-width:none!important;}
+.generated-test-paper{display:block!important;box-shadow:none!important;border:0!important;width:100%!important;margin:0!important;}
+</style>
+</head>
+<body>
+<div class="generated-test-wrapper">
+<div id="generatedTestContent" class="generated-test-paper">${content.innerHTML}</div>
+</div>
+<script>window.onload=function(){setTimeout(function(){window.print();setTimeout(function(){window.close();},400);},150);};<\/script>
+</body>
+</html>`);
+    printWindow.document.close();
 }
+
 
 
 async function downloadPDF(){
@@ -6068,9 +6177,70 @@ function downloadWord(){
         width: 100%;
     }
 }
-        </style>
+        
+/* =========================================================
+   MËSUESI DIXHITAL PRO 2.0 — RESPONSIVE / MOBILE / EXTENDED UI
+========================================================= */
+.md-pro-toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 20px}.md-pro-kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}.md-pro-kpi{background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:18px;box-shadow:0 5px 20px rgba(15,23,42,.04)}.md-pro-kpi strong{display:block;font-size:26px;color:#0f172a}.md-pro-kpi span{color:#64748b;font-size:13px}.md-pro-table{width:100%;border-collapse:collapse;background:#fff;border-radius:16px;overflow:hidden}.md-pro-table th,.md-pro-table td{padding:12px;border-bottom:1px solid #e2e8f0;text-align:left}.md-pro-table th{background:#f8fafc;color:#475569}.md-pro-note{padding:14px 16px;border-radius:14px;background:#eef2ff;color:#3730a3;margin-bottom:18px}.quiz-number-input{width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid #cbd5e1;border-radius:10px;font:inherit}
+@media (max-width:1100px){.md-pro-stat-grid{grid-template-columns:repeat(3,1fr)}.md-pro-grid-3{grid-template-columns:repeat(2,1fr)}.md-pro-kpi-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:700px){.md-pro-page .dashboard-layout{display:block}.md-pro-page .dashboard-sidebar{position:relative;width:100%;height:auto;min-height:0}.md-pro-page .dashboard-menu{display:flex;overflow-x:auto;gap:6px;padding:8px}.md-pro-page .dashboard-menu button{white-space:nowrap;flex:0 0 auto;font-size:12px;padding:9px 10px}.md-pro-page .dashboard-main{width:100%}.md-pro-page .dashboard-topbar{padding:14px 16px}.md-pro-content{padding:16px}.md-pro-hero{display:block;padding:20px}.md-pro-hero .md-primary{margin-top:16px;width:100%}.md-pro-stat-grid,.md-pro-grid-3,.md-pro-ai-grid,.md-pro-kpi-grid{grid-template-columns:1fr}.md-pro-hero h1,.md-section-head h1{font-size:24px}.md-form-grid{grid-template-columns:1fr!important}.md-list-item{display:block!important}.md-actions{flex-wrap:wrap}.md-actions button{width:100%}}
 
-        </head>
+/* PRO 2.1 — SINGLE PRO SHELL: prevents duplicate sidebars/menus */
+.md-pro-shell{min-height:100vh;background:#f6f8fc}.md-pro-topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:18px 28px;background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:0;z-index:20}.md-pro-brand{display:flex;align-items:center;gap:12px}.md-pro-brand-logo{width:42px;height:42px;border-radius:12px;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:22px}.md-pro-brand strong{display:block;color:#111827;font-size:16px}.md-pro-brand span{display:block;color:#64748b;font-size:12px;margin-top:2px}.md-pro-top-actions{display:flex;gap:8px}.md-pro-content-wrap{max-width:1400px;margin:0 auto;padding:26px}.md-pro-page .md-pro-content{padding:0}.md-pro-page .dashboard-layout{display:block}.md-pro-page .dashboard-sidebar{display:none}
+@media(max-width:700px){.md-pro-topbar{padding:12px 14px;align-items:flex-start}.md-pro-top-actions{flex-direction:column}.md-pro-content-wrap{padding:14px}.md-pro-brand span{display:none}}
+</style>
+
+        
+/* =========================================================
+   MËSUESI DIXHITAL 2.2 — MODERN UI
+========================================================= */
+:root{
+  --md-primary:#4f46e5;
+  --md-primary-2:#7c3aed;
+  --md-bg:#f4f7fb;
+  --md-card:#ffffff;
+  --md-text:#172033;
+  --md-muted:#64748b;
+  --md-border:#e6eaf0;
+  --md-shadow:0 12px 35px rgba(15,23,42,.08);
+  --md-radius:18px;
+}
+body{background:var(--md-bg);color:var(--md-text)}
+.dashboard-layout{min-height:100vh;background:linear-gradient(135deg,#f8fafc 0%,#eef2ff 100%)}
+.dashboard-sidebar{box-shadow:8px 0 30px rgba(15,23,42,.08);border-right:1px solid rgba(255,255,255,.5)}
+.dashboard-main{background:transparent}
+.dashboard-topbar{background:rgba(255,255,255,.88)!important;backdrop-filter:blur(14px);border-bottom:1px solid var(--md-border)!important;box-shadow:0 4px 20px rgba(15,23,42,.04)}
+.dashboard-menu button{border-radius:12px!important;margin:4px 10px!important;transition:.2s ease!important}
+.dashboard-menu button:hover{transform:translateX(3px)}
+.dashboard-menu button.active{box-shadow:0 7px 18px rgba(79,70,229,.18)}
+.dashboard-card,.stat-card,.question-bank-card,.quiz-settings-card,.quiz-progress-card,.quiz-question-card,.results-card,.saved-tests-panel,.create-test-card,.ai-generator-card,.generated-test-paper{border:1px solid var(--md-border)!important;border-radius:var(--md-radius)!important;box-shadow:var(--md-shadow)!important;background:rgba(255,255,255,.96)!important}
+.primary-button,.quiz-start-button,.quiz-next-button,.ai-save-one,.question-save-button{background:linear-gradient(135deg,var(--md-primary),var(--md-primary-2))!important;border:0!important;box-shadow:0 8px 18px rgba(79,70,229,.22)!important;transition:.2s ease!important}
+.primary-button:hover,.quiz-start-button:hover,.quiz-next-button:hover,.ai-save-one:hover,.question-save-button:hover{transform:translateY(-2px);filter:brightness(1.04)}
+.secondary-button{border:1px solid #dbe2ea!important;background:#fff!important;border-radius:12px!important;transition:.2s ease!important}
+.secondary-button:hover{background:#f8fafc!important;transform:translateY(-1px)}
+input,select,textarea{border:1px solid #d9e0ea!important;border-radius:12px!important;background:#fff!important;transition:.2s ease!important}
+input:focus,select:focus,textarea:focus{outline:none!important;border-color:#818cf8!important;box-shadow:0 0 0 4px rgba(99,102,241,.12)!important}
+.quiz-content,.question-bank-content,.create-test-content,.ai-generator-content,.results-content{max-width:1200px;margin:0 auto}
+.quiz-header,.page-header,.question-bank-header,.create-test-header,.ai-generator-header,.results-header{margin-bottom:24px}
+.quiz-header h1,.page-header h1,.question-bank-header h1,.create-test-header h1,.ai-generator-header h1,.results-header h1{font-size:32px;letter-spacing:-.02em}
+.quiz-settings-card{padding:28px!important}
+.quiz-settings-grid{gap:18px!important}
+.quiz-start-area{padding-top:8px!important}
+.quiz-start-button{padding:14px 26px!important;font-size:16px!important;border-radius:14px!important}
+.quiz-progress-card{overflow:hidden}
+.quiz-progress-fill{background:linear-gradient(90deg,#4f46e5,#8b5cf6)!important}
+.quiz-option{background:#fff!important;border:2px solid #e7eaf0!important;border-radius:14px!important;padding:16px!important;transition:.2s ease!important;box-shadow:0 4px 12px rgba(15,23,42,.03)}
+.quiz-option:hover{border-color:#a5b4fc!important;transform:translateY(-1px);box-shadow:0 8px 20px rgba(79,70,229,.10)}
+.quiz-option.correct{border-color:#22c55e!important;background:#f0fdf4!important}
+.quiz-option.selected{border-color:#6366f1!important;background:#eef2ff!important}
+.result-item{background:#fff!important;border:1px solid var(--md-border)!important;border-radius:16px!important;box-shadow:0 7px 22px rgba(15,23,42,.05)!important;transition:.2s ease}
+.result-item:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(15,23,42,.09)!important}
+.result-delete{border:1px solid #fecaca!important;border-radius:10px!important;background:#fff!important;color:#dc2626!important;cursor:pointer!important;padding:9px 13px!important;font-weight:700}
+.result-delete:hover{background:#fef2f2!important}
+@media(max-width:900px){.md-pro-stat-grid,.md-card-grid{grid-template-columns:repeat(2,1fr)!important}.dashboard-layout{display:block}.dashboard-sidebar{position:relative!important;width:100%!important}.dashboard-menu{display:flex;flex-wrap:wrap}.dashboard-menu button{flex:1 1 auto}.quiz-content,.question-bank-content,.create-test-content,.ai-generator-content,.results-content{padding:0 14px}}
+@media(max-width:600px){.md-pro-stat-grid,.md-card-grid{grid-template-columns:1fr!important}.dashboard-menu{display:grid}.dashboard-menu button{margin:3px!important}.dashboard-topbar{padding:14px!important}.quiz-header h1,.page-header h1,.question-bank-header h1,.create-test-header h1,.ai-generator-header h1,.results-header h1{font-size:25px}.quiz-settings-card{padding:18px!important}}
+
+</head>
 
         <body>
 
@@ -6748,7 +6918,7 @@ function saveAllAIQuestions(){
 
 window.quizState = {
 
-    questions,
+    questions: [],
 
     currentIndex:0,
 
@@ -6756,11 +6926,9 @@ window.quizState = {
 
     answered:false,
 
-    timePerQuestion:
-        timePerQuestion,
+    timePerQuestion: 30,
 
-    timeLeft:
-        timePerQuestion,
+    timeLeft: 30,
 
     timer:
         null,
@@ -6852,135 +7020,85 @@ function updateQuizAvailabilityInfo(){
 
 function startQuiz(){
 
-    const subject =
-        document.getElementById(
-            "quizSubject"
-        ).value;
+    if(!document.getElementById("quizPage")){
+        alert("Faqja e kuizit nuk u ngarkua siç duhet.");
+        return;
+    }
 
-    const grade =
-        document.getElementById(
-            "quizGrade"
-        ).value;
+    if(!document.getElementById("quizSettings") || !document.getElementById("quizGame")){
+        alert("Paneli i kuizit nuk u ngarkua siç duhet. Rifreskoni faqen.");
+        return;
+    }
 
-    const difficulty =
-        document.getElementById(
-            "quizDifficulty"
-        ).value;
-
-    const requested =
-        parseInt(
-            document.getElementById(
-                "quizQuestionCount"
-            ).value
-        ) || 0;
+    if(window.quizState && window.quizState.timer){
+        clearInterval(window.quizState.timer);
+        window.quizState.timer=null;
+    }
 
 
-    let questions =
-        getBankQuestions();
+    const subjectEl = document.getElementById("quizSubject");
+    const gradeEl = document.getElementById("quizGrade");
+    const difficultyEl = document.getElementById("quizDifficulty");
+    const countEl = document.getElementById("quizQuestionCount");
+    const timeEl = document.getElementById("quizTimePerQuestion");
 
+    if(!subjectEl || !gradeEl || !difficultyEl || !countEl || !timeEl){
+        alert("⚠️ Formulari i kuizit nuk u ngarkua siç duhet. Rifreskoni faqen.");
+        return;
+    }
 
-    questions =
-        questions.filter(function(q){
+    const subject = subjectEl.value || "";
+    const grade = gradeEl.value || "";
+    const difficulty = difficultyEl.value || "";
+    const requested = Math.max(1, parseInt(countEl.value || "10",10) || 10);
+    const timePerQuestion = Math.max(5, parseInt(timeEl.value || "30",10) || 30);
 
-            return (
-                (!subject || q.subject === subject) &&
-                (!grade || q.grade === grade) &&
-                (!difficulty || q.difficulty === difficulty)
-            );
+    let questions = Array.isArray(getBankQuestions()) ? getBankQuestions() : [];
 
-        });
-
+    questions = questions.filter(function(q){
+        return q &&
+            (!subject || String(q.subject || "") === subject) &&
+            (!grade || String(q.grade || "") === grade) &&
+            (!difficulty || String(q.difficulty || "") === difficulty);
+    });
 
     if(!questions.length){
-
-        alert(
-            "Nuk ka pyetje në Bankën e Pyetjeve që përputhen me zgjedhjet tuaja."
-        );
-
+        alert("Nuk ka pyetje në Bankën e Pyetjeve që përputhen me zgjedhjet tuaja. Shtoni pyetje ose ndryshoni filtrat.");
         return;
-
     }
 
-
-    const count =
-        Math.min(
-            requested,
-            questions.length
-        );
-
-
+    const count = Math.min(requested, questions.length);
     if(requested > questions.length){
-
-        alert(
-            "Kërkuat " +
-            requested +
-            " pyetje, por janë në dispozicion vetëm " +
-            questions.length +
-            ". Kuizi do të përdorë " +
-            questions.length +
-            " pyetje."
-        );
-
+        alert("Kërkuat " + requested + " pyetje, por janë në dispozicion vetëm " + questions.length + ". Kuizi do të përdorë " + questions.length + " pyetje.");
     }
 
-
-    questions =
-        shuffleArray(
-            questions
-        ).slice(
-            0,
-            count
-        );
-
+    questions = shuffleArray(questions).slice(0,count);
 
     window.quizState = {
-
-        questions,
-
-        currentIndex:0,
-
-        score:0,
-
-        answered:false,
-
-        correctAnswers:0,
-
-        wrongAnswers:0,
-
-        startedAt:
-            new Date().toISOString(),
-
-        subject:
-            subject || "Të gjitha lëndët",
-
-        grade:
-            grade
-            ? "Klasa " + grade
-            : "Të gjitha klasat",
-
-        difficulty:
-            difficulty || "Të gjitha"
-
+        questions: questions,
+        currentIndex: 0,
+        score: 0,
+        answered: false,
+        correctAnswers: 0,
+        wrongAnswers: 0,
+        timePerQuestion: timePerQuestion,
+        timeLeft: timePerQuestion,
+        timer: null,
+        startedAt: new Date().toISOString(),
+        subject: subject || "Të gjitha lëndët",
+        grade: grade ? "Klasa " + grade : "Të gjitha klasat",
+        difficulty: difficulty || "Të gjitha"
     };
 
+    const settings = document.getElementById("quizSettings");
+    const game = document.getElementById("quizGame");
+    const result = document.getElementById("quizResultCard");
 
-    document.getElementById(
-        "quizSettings"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "quizResultCard"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "quizGame"
-    ).style.display = "block";
-
+    if(settings) settings.style.display = "none";
+    if(result) result.style.display = "none";
+    if(game) game.style.display = "block";
 
     showQuizQuestion();
-
 }
 
 function startQuizTimer(){
@@ -7191,166 +7309,56 @@ function startQuizTimer(){
     
 function showQuizQuestion(){
 
-    const state =
-        window.quizState;
-
-
-    const question =
-        state.questions[
-            state.currentIndex
-        ];
-
-
-    if(!question){
-
-        finishQuiz();
-
+    const state = window.quizState;
+    if(!state || !Array.isArray(state.questions) || !state.questions.length){
+        alert("Nuk ka kuiz aktiv.");
         return;
-
     }
 
+    const question = state.questions[state.currentIndex];
+    if(!question){ finishQuiz(); return; }
 
     state.answered = false;
     startQuizTimer();
 
-    const total =
-        state.questions.length;
+    const total = state.questions.length;
+    const current = state.currentIndex + 1;
 
-    const current =
-        state.currentIndex + 1;
+    const progressText = document.getElementById("quizProgressText");
+    const scoreText = document.getElementById("quizScoreText");
+    const progressFill = document.getElementById("quizProgressFill");
+    const number = document.getElementById("quizQuestionNumber");
+    const title = document.getElementById("quizQuestionTitle");
+    const options = document.getElementById("quizOptions");
+    const feedback = document.getElementById("quizFeedback");
+    const next = document.getElementById("quizNextButton");
 
+    if(progressText) progressText.textContent = "Pyetja " + current + " nga " + total;
+    if(scoreText) scoreText.textContent = "Pikët: " + state.score;
+    if(progressFill) progressFill.style.width = (((current-1)/total)*100) + "%";
+    if(number) number.textContent = "PYETJA " + current;
+    if(title) title.textContent = question.question || "";
 
-    document.getElementById(
-        "quizProgressText"
-    ).textContent =
-        "Pyetja " +
-        current +
-        " nga " +
-        total;
-
-
-    document.getElementById(
-        "quizScoreText"
-    ).textContent =
-        "Pikët: " +
-        state.score;
-
-
-    document.getElementById(
-        "quizProgressFill"
-    ).style.width =
-        (
-            ((current - 1) / total) *
-            100
-        ) +
-        "%";
-
-
-    document.getElementById(
-        "quizQuestionNumber"
-    ).textContent =
-        "PYETJA " +
-        current;
-
-
-    document.getElementById(
-        "quizQuestionTitle"
-    ).textContent =
-        question.question || "";
-
-
-    const options =
-        document.getElementById(
-            "quizOptions"
-        );
-
+    if(!options){
+        alert("⚠️ Zona e pyetjeve të kuizit mungon. Rifreskoni faqen.");
+        return;
+    }
 
     options.innerHTML = "";
-
-
-    ["A","B","C","D"].forEach(
-        function(letter){
-
-            const button =
-                document.createElement(
-                    "button"
-                );
-
-            button.type = "button";
-
-            button.className =
-                "quiz-option";
-
-            button.dataset.letter =
-                letter;
-
-            button.innerHTML =
-                "<strong>" +
-                letter +
-                ".</strong> " +
-                escapeHTML(
-                    question.options?.[letter] || ""
-                );
-
-
-            button.addEventListener(
-                "click",
-                function(){
-
-                    answerQuiz(
-                        letter
-                    );
-
-                }
-            );
-
-
-            options.appendChild(
-                button
-            );
-
-        }
-    );
-
-
-    const feedback =
-        document.getElementById(
-            "quizFeedback"
-        );
-
-
-    feedback.className =
-        "quiz-feedback";
-
-    feedback.style.display =
-        "none";
-
-    feedback.innerHTML = "";
-
-
-    const next =
-        document.getElementById(
-            "quizNextButton"
-        );
-
-    next.style.display =
-        "none";
-
-    next.textContent =
-        current === total
-        ?
-        "Përfundo kuizin ✓"
-        :
-        "Pyetja tjetër →";
-
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
+    ["A","B","C","D"].forEach(function(letter){
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "quiz-option";
+        button.dataset.letter = letter;
+        button.innerHTML = "<strong>" + letter + ".</strong> " + escapeHTML(question.options && question.options[letter] || "");
+        button.addEventListener("click",function(){ answerQuiz(letter); });
+        options.appendChild(button);
     });
 
+    if(feedback){ feedback.className="quiz-feedback"; feedback.style.display="none"; feedback.innerHTML=""; }
+    if(next){ next.style.display="none"; next.textContent = current===total ? "Përfundo kuizin ✓" : "Pyetja tjetër →"; }
 }
-    
+
 function getQuizExplanation(question){
 
     if(!question){
@@ -7737,24 +7745,12 @@ function resetQuiz(){
 
 
 function resetQuizInterface(){
-
-    document.getElementById(
-        "quizSettings"
-    ).style.display =
-        "block";
-
-
-    document.getElementById(
-        "quizGame"
-    ).style.display =
-        "none";
-
-
-    document.getElementById(
-        "quizResultCard"
-    ).style.display =
-        "none";
-
+    const settings=document.getElementById("quizSettings");
+    const game=document.getElementById("quizGame");
+    const result=document.getElementById("quizResultCard");
+    if(settings) settings.style.display="block";
+    if(game) game.style.display="none";
+    if(result) result.style.display="none";
 }
 
 
@@ -7850,7 +7846,7 @@ function displayQuizResults(){
 
 
     list.innerHTML =
-        results.map(function(result){
+        results.map(function(result,index){
 
             return `
 
@@ -7907,7 +7903,7 @@ function displayQuizResults(){
 
                     <button
                         class="result-delete"
-                        onclick="deleteQuizResult('${escapeAttribute(result.id)}')">
+                        onclick="deleteQuizResult(${index})">
                         🗑️ Fshi
                     </button>
 
@@ -7920,36 +7916,28 @@ function displayQuizResults(){
 }
 
 
-function deleteQuizResult(id){
+function deleteQuizResult(index){
 
-    if(!confirm(
-        "A dëshironi ta fshini këtë rezultat?"
-    )) return;
+    const results = getQuizResults();
 
+    const numericIndex = Number(index);
 
-    let results =
-        getQuizResults();
+    if(!results.length || !Number.isInteger(numericIndex) || numericIndex < 0 || numericIndex >= results.length){
+        alert("Rezultati nuk u gjet.");
+        return;
+    }
 
+    if(!confirm("A dëshironi ta fshini këtë rezultat?")) return;
 
-    results =
-        results.filter(
-            result =>
-                result.id !== id
-        );
-
+    results.splice(numericIndex, 1);
 
     localStorage.setItem(
         "mesuesiDixhitalQuizResults",
-        JSON.stringify(
-            results
-        )
+        JSON.stringify(results)
     );
 
-
     displayQuizResults();
-
     updateDashboardStats();
-
 }
 
 
@@ -8049,6 +8037,21 @@ document.addEventListener(
     "DOMContentLoaded",
     function(){
 
+        // Fallback bindings: edhe nëse inline onclick nuk aktivizohet, butonat kryesorë punojnë.
+        const printBtn = document.querySelector('#generatedTestPage button[onclick*="printGeneratedTest"]');
+        if(printBtn) printBtn.addEventListener("click", function(e){ e.preventDefault(); printGeneratedTest(); });
+
+        const quizBtn = document.querySelector('#quizPage button[onclick*="startQuiz"]');
+        if(quizBtn) quizBtn.addEventListener("click", function(e){ e.preventDefault(); startQuiz(); });
+
+        // Normalizo rezultatet e vjetra pa ndryshuar të dhënat e tyre.
+        try{
+            const stored = JSON.parse(localStorage.getItem("mesuesiDixhitalQuizResults") || "[]");
+            if(Array.isArray(stored)){
+                localStorage.setItem("mesuesiDixhitalQuizResults", JSON.stringify(stored));
+            }
+        }catch(e){}
+
         updateTeacherInfo();
 
         updateDashboardStats();
@@ -8107,33 +8110,17 @@ document.addEventListener(
 
   function renderProShell(){
     if(document.getElementById('mdProPage')) return;
-    const nav = `
-      <aside class="dashboard-sidebar md-pro-sidebar">
-        <div class="dashboard-brand"><div class="dashboard-brand-logo">📚</div><div><strong>Mësuesi Dixhital</strong><span>Platformë profesionale</span></div></div>
-        <nav class="dashboard-menu">
-          <button onclick="openDashboard()">🏠 Dashboard</button>
-          <button onclick="openQuestionBank()">📚 Banka e pyetjeve</button>
-          <button onclick="openAIGenerator()">🤖 Gjenero pyetje</button>
-          <button onclick="openCreateTest()">📝 Krijo test</button>
-          <button onclick="openSavedTests()">📂 Testet e ruajtura</button>
-          <button onclick="openQuizzes()">🧩 Kuize</button>
-          <button onclick="openResults()">📊 Rezultatet</button>
-          <button class="md-pro-active" onclick="openProOverview()">✨ Qendra PRO</button>
-          <button onclick="openClasses()">👥 Nxënës & Klasa</button>
-          <button onclick="openLessonPlanner()">📅 Planifikuesi i orës</button>
-          <button onclick="openWorksheetGenerator()">📄 Fletë pune</button>
-          <button onclick="openTeacherLibrary()">🗂️ Biblioteka</button>
-          <button onclick="openTeacherProfile()">⚙️ Profili & Cilësimet</button>
-          <button onclick="logoutTeacher()">🚪 Dil</button>
-        </nav>
-      </aside>`;
-
     const page = document.createElement('section');
-    page.id='mdProPage'; page.className='page md-pro-page'; page.style.display='none';
-    page.innerHTML=`<div class="dashboard-layout">${nav}<main class="dashboard-main">
-      <div class="dashboard-topbar"><div><h2>Qendra PRO</h2><span class="md-pro-subtitle">Të gjitha mjetet e mësuesit në një vend</span></div><div class="teacher-profile"><div class="teacher-avatar" id="mdProAvatar">M</div><span id="mdProTeacherName">Mësues</span></div></div>
-      <div id="mdProContent" class="md-pro-content"></div>
-    </main></div></section>`;
+    page.id='mdProPage';
+    page.className='page md-pro-page';
+    page.style.display='none';
+    page.innerHTML=`<div class="md-pro-shell">
+      <div class="md-pro-topbar">
+        <div class="md-pro-brand"><div class="md-pro-brand-logo">📚</div><div><strong>Mësuesi Dixhital PRO</strong><span>Qendër profesionale për mësuesin</span></div></div>
+        <div class="md-pro-top-actions"><button class="md-secondary" onclick="openDashboard()">← Dashboard</button><button class="md-danger" onclick="logoutTeacher()">🚪 Dil</button></div>
+      </div>
+      <div class="md-pro-content-wrap"><div id="mdProContent" class="md-pro-content"></div></div>
+    </div>`;
     document.body.appendChild(page);
     renderOverview();
   }
@@ -8141,7 +8128,10 @@ document.addEventListener(
   function stats(){
     const q=typeof getBankQuestions==='function'?getBankQuestions():read('mesuesiDixhitalQuestions',[]);
     const t=read('mesuesiDixhitalTests',[]), r=read('mesuesiDixhitalQuizResults',[]), c=read(PRO_KEYS.classes,[]), l=read(PRO_KEYS.lessons,[]), w=read(PRO_KEYS.worksheets,[]);
-    return {q:q.length,t:t.length,r:r.length,c:c.length,l:l.length,w:w.length};
+    const students=c.reduce((n,x)=>n+(Array.isArray(x.students)?x.students.length:0),0);
+    const avg=r.length?Math.round(r.reduce((n,x)=>n+Number(x.percentage||0),0)/r.length):0;
+    const hard=q.filter(x=>x.difficulty==='I vështirë').length;
+    return {q:q.length,t:t.length,r:r.length,c:c.length,l:l.length,w:w.length,students,avg,hard};
   }
 
   function renderOverview(){
@@ -8151,12 +8141,20 @@ document.addEventListener(
       <div class="md-pro-stat-grid">
         ${proStat('📚',s.q,'Pyetje në bankë','openQuestionBank()')}${proStat('📝',s.t,'Teste të ruajtura','openSavedTests()')}${proStat('🧩',s.r,'Rezultate kuizesh','openResults()')}${proStat('👥',s.c,'Klasa','openClasses()')}${proStat('📅',s.l,'Plane mësimore','openLessonPlanner()')}${proStat('📄',s.w,'Fletë pune','openWorksheetGenerator()')}
       </div>
+      <div class="md-pro-kpi-grid">
+        <div class="md-pro-kpi"><strong>${s.students}</strong><span>👥 Nxënës gjithsej</span></div>
+        <div class="md-pro-kpi"><strong>${s.avg}%</strong><span>📈 Mesatarja e kuizeve</span></div>
+        <div class="md-pro-kpi"><strong>${s.hard}</strong><span>🔥 Pyetje të vështira</span></div>
+        <div class="md-pro-kpi"><strong>${s.q+s.t+s.r+s.l+s.w}</strong><span>📦 Materiale gjithsej</span></div>
+      </div>
+      <div class="md-pro-note">💾 Të dhënat e klasave, planeve, fletëve, profilit dhe statistikave ruhen lokalisht në këtë shfletues. Funksionet ekzistuese të Bankës, Testeve, Kuizeve dhe AI mbeten aktive.</div>
       <div class="md-pro-grid-3">
         ${proTile('🤖','AI PRO','Gjeneroni pyetje, teste, plane dhe fletë pune.','openAIWorkspace()')}
         ${proTile('👥','Nxënës & Klasa','Krijoni klasa dhe regjistroni nxënësit.','openClasses()')}
         ${proTile('📅','Planifikuesi i orës','Ruani objektivat, aktivitetet, detyrat dhe vlerësimin.','openLessonPlanner()')}
         ${proTile('📄','Fletë pune','Krijoni materiale të strukturuara për nxënësit.','openWorksheetGenerator()')}
         ${proTile('🗂️','Biblioteka','Një vend për testet, kuizet, planet dhe materialet.','openTeacherLibrary()')}
+        ${proTile('📊','Statistika të zgjeruara','Analizoni rezultatet dhe aktivitetin.','openExtendedStats()')}
         ${proTile('⚙️','Profili','Plotësoni të dhënat që shfaqen në materialet tuaja.','openTeacherProfile()')}
       </div>`;
     updateProHeader();
@@ -8207,21 +8205,36 @@ document.addEventListener(
   window.deleteWorksheet=id=>{write(PRO_KEYS.worksheets,read(PRO_KEYS.worksheets,[]).filter(x=>x.id!==id));worksheetsView();};
   window.copyWorksheet=id=>{const x=read(PRO_KEYS.worksheets,[]).find(x=>x.id===id);if(x)navigator.clipboard?.writeText(`${x.title}\n\n${x.instructions}\n\n${x.content}`).then(()=>alert('Fleta u kopjua.')).catch(()=>alert('Nuk u kopjua automatikisht.'));};
 
-  function libraryView(){const tests=read('mesuesiDixhitalTests',[]),lessons=read(PRO_KEYS.lessons,[]),ws=read(PRO_KEYS.worksheets,[]), results=read('mesuesiDixhitalQuizResults',[]);const items=[...tests.map(x=>({type:'Test',icon:'📝',title:x.title||x.name||'Test i ruajtur',date:x.createdAt||x.date})),...lessons.map(x=>({type:'Plan ore',icon:'📅',title:x.title,date:x.createdAt})),...ws.map(x=>({type:'Fletë pune',icon:'📄',title:x.title,date:x.createdAt})),...results.map(x=>({type:'Rezultat',icon:'📊',title:`${x.subject||'Kuiz'} – ${x.percentage??0}%`,date:x.date||x.createdAt}))];document.getElementById('mdProContent').innerHTML=`<div class="md-section-head"><div><span class="md-kicker">BIBLIOTEKA</span><h1>Biblioteka e mësuesit</h1><p>Materialet ekzistuese të platformës dhe modulet e reja shfaqen këtu.</p></div></div><div class="md-library-grid">${items.length?items.slice().reverse().map(x=>`<div class="md-library-item"><span>${x.icon}</span><div><strong>${esc(x.title)}</strong><small>${esc(x.type)} · ${x.date?new Date(x.date).toLocaleDateString('sq-AL'):''}</small></div></div>`).join(''):emptyState('🗂️','Biblioteka është bosh','Krijoni një test, plan ose fletë pune.')}</div>`;}
+  function libraryView(){const bank=typeof getBankQuestions==='function'?getBankQuestions():read('mesuesiDixhitalQuestions',[]), tests=read('mesuesiDixhitalTests',[]),lessons=read(PRO_KEYS.lessons,[]),ws=read(PRO_KEYS.worksheets,[]), results=read('mesuesiDixhitalQuizResults',[]);const ai=read('mesuesiDixhitalAIQuestions',[]);const items=[...bank.map(x=>({type:'Pyetje',icon:'❓',title:x.question||'Pyetje',date:x.createdAt||x.date})),...tests.map(x=>({type:'Test',icon:'📝',title:x.title||x.name||'Test i ruajtur',date:x.createdAt||x.date})),...lessons.map(x=>({type:'Plan ore',icon:'📅',title:x.title,date:x.createdAt})),...ws.map(x=>({type:'Fletë pune',icon:'📄',title:x.title,date:x.createdAt})),...ai.map(x=>({type:'AI',icon:'🤖',title:x.question||'Pyetje AI',date:x.createdAt||x.date})),...results.map(x=>({type:'Rezultat',icon:'📊',title:`${x.subject||'Kuiz'} – ${x.percentage??0}%`,date:x.date||x.createdAt}))];document.getElementById('mdProContent').innerHTML=`<div class="md-section-head"><div><span class="md-kicker">BIBLIOTEKA</span><h1>Biblioteka e mësuesit</h1><p>Materialet ekzistuese të platformës dhe modulet e reja shfaqen këtu.</p></div></div><div class="md-library-grid">${items.length?items.slice().reverse().map(x=>`<div class="md-library-item"><span>${x.icon}</span><div><strong>${esc(x.title)}</strong><small>${esc(x.type)} · ${x.date?new Date(x.date).toLocaleDateString('sq-AL'):''}</small></div></div>`).join(''):emptyState('🗂️','Biblioteka është bosh','Krijoni një test, plan ose fletë pune.')}</div>`;}
   window.openTeacherLibrary=()=>{openProPage('mdProPage');libraryView();};
 
   window.openTeacherProfile=()=>{openProPage('mdProPage');const p=getProfile();document.getElementById('mdProContent').innerHTML=`<div class="md-section-head"><div><span class="md-kicker">CILËSIMET</span><h1>Profili i mësuesit</h1><p>Këto të dhëna ruhen vetëm në pajisjen/shfletuesin tuaj.</p></div></div><div class="md-form-card"><div class="md-form-grid"><input id="mdProfileName" value="${esc(p.name)}" placeholder="Emri i mësuesit"><input id="mdProfileSchool" value="${esc(p.school)}" placeholder="Shkolla"><input id="mdProfileMunicipality" value="${esc(p.municipality)}" placeholder="Komuna"><input id="mdProfileSubjects" value="${esc(p.subjects)}" placeholder="Lëndët"><input id="mdProfileGrades" value="${esc(p.grades)}" placeholder="Klasat"><input id="mdProfileLogo" value="${esc(p.logo)}" placeholder="URL e logos, opsionale"></div><div class="md-actions"><button class="md-primary" onclick="saveTeacherProfile()">Ruaj profilin</button></div></div>`;};
   window.saveTeacherProfile=()=>{const p={name:document.getElementById('mdProfileName').value.trim()||teacherName(),school:document.getElementById('mdProfileSchool').value.trim(),municipality:document.getElementById('mdProfileMunicipality').value.trim(),subjects:document.getElementById('mdProfileSubjects').value.trim(),grades:document.getElementById('mdProfileGrades').value.trim(),logo:document.getElementById('mdProfileLogo').value.trim()};write(PRO_KEYS.profile,p);localStorage.setItem('mesuesiDixhitalTeacherName',p.name);updateProHeader();if(typeof updateTeacherInfo==='function')updateTeacherInfo();alert('Profili u ruajt.');};
 
+
+  window.openExtendedStats=()=>{openProPage('mdProPage');const s=stats();const r=read('mesuesiDixhitalQuizResults',[]);document.getElementById('mdProContent').innerHTML=`<div class="md-section-head"><div><span class="md-kicker">STATISTIKA</span><h1>Statistika të zgjeruara</h1><p>Përmbledhje e materialeve, klasave dhe performancës së kuizeve.</p></div></div><div class="md-pro-kpi-grid"><div class="md-pro-kpi"><strong>${s.q}</strong><span>Pyetje</span></div><div class="md-pro-kpi"><strong>${s.c}</strong><span>Klasa</span></div><div class="md-pro-kpi"><strong>${s.students}</strong><span>Nxënës</span></div><div class="md-pro-kpi"><strong>${s.avg}%</strong><span>Mesatare kuizesh</span></div></div><table class="md-pro-table"><thead><tr><th>Data</th><th>Lënda</th><th>Klasa</th><th>Saktë</th><th>Rezultati</th></tr></thead><tbody>${r.slice(0,50).map(x=>`<tr><td>${esc(x.date||'')}</td><td>${esc(x.subject||'')}</td><td>${esc(x.grade||'')}</td><td>${x.correct||0}/${x.total||0}</td><td><strong>${x.percentage||0}%</strong></td></tr>`).join('')||'<tr><td colspan="5">Nuk ka rezultate ende.</td></tr>'}</tbody></table>`;};
   function emptyState(icon,title,text){return `<div class="md-empty"><span>${icon}</span><h3>${title}</h3><p>${text}</p></div>`;}
 
   function addMenuButtons(){
-    document.querySelectorAll('.dashboard-sidebar').forEach(side=>{
-      const nav=side.querySelector('.dashboard-menu'); if(!nav||nav.dataset.proEnhanced)return;
+    document.querySelectorAll('.dashboard-sidebar:not(.md-pro-sidebar)').forEach(side=>{
+      const nav=side.querySelector('.dashboard-menu');
+      if(!nav || nav.dataset.proEnhanced==='1') return;
       nav.dataset.proEnhanced='1';
-      const buttons=[['✨ Qendra PRO','openProOverview()'],['👥 Nxënës & Klasa','openClasses()'],['📅 Planifikuesi i orës','openLessonPlanner()'],['📄 Fletë pune','openWorksheetGenerator()'],['🗂️ Biblioteka','openTeacherLibrary()'],['⚙️ Profili & Cilësimet','openTeacherProfile()']];
-      const logout=[...nav.querySelectorAll('button')].find(b=>b.textContent.includes('Dil'));
-      buttons.forEach(([label,fn])=>{const b=document.createElement('button');b.textContent=label;b.setAttribute('onclick',fn);logout?nav.insertBefore(b,logout):nav.appendChild(b);});
+      const buttons=[
+        ['✨ Qendra PRO','openProOverview()'],
+        ['👥 Nxënës & Klasa','openClasses()'],
+        ['📅 Planifikuesi i orës','openLessonPlanner()'],
+        ['📄 Fletë pune','openWorksheetGenerator()'],
+        ['🗂️ Biblioteka','openTeacherLibrary()'],
+        ['📊 Statistika','openExtendedStats()'],
+        ['⚙️ Profili & Cilësimet','openTeacherProfile()']
+      ];
+      const logout=[...nav.querySelectorAll('button')].find(b=>(b.textContent||'').includes('Dil'));
+      buttons.forEach(([label,fn])=>{
+        if([...nav.querySelectorAll('button')].some(b=>(b.textContent||'').trim()===label)) return;
+        const b=document.createElement('button'); b.textContent=label; b.setAttribute('onclick',fn);
+        logout ? nav.insertBefore(b,logout) : nav.appendChild(b);
+      });
     });
   }
 
